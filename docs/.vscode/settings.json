@@ -1,0 +1,39 @@
+{
+    "search.exclude": {
+        // Avoid polluting search results
+        "composer.lock": true,
+        "reports/": true,
+        "storage/": true,
+        "vendor/": true,
+        "pnpm-lock.yaml": true,
+        "node_modules/": true
+    },
+    // Ensure VSCode uses pnpm instead of npm
+    "npm.packageManager": "pnpm",
+    // For those using file-nesting, nest the new files. E.g.:
+    "explorer.fileNesting.patterns": {
+        "package.json": "pnpm-workspace.yaml, pnpm-lock.yaml"
+    },
+
+    // TODO Tree settings
+    "todo-tree.tree.showBadges": true,
+
+    // Tailwind
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+
+    // eslint fix
+    "eslint.useFlatConfig": true,
+    "eslint.options": {
+        "overrideConfigFile": "./eslint.config.js"
+    },
+
+    // Detect TypeScript version from workspace
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "Laravel.basePath": "laravel",
+
+    // Conventional commit
+    "conventionalCommits.scopes": ["client", "server"]
+}

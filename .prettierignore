@@ -1,0 +1,4 @@
+resources/views/mail/*
+
+composer.lock
+pnpm-lock.yaml

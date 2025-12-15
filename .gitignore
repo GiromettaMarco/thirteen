@@ -1,0 +1,58 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/.pnpm-store
+/node_modules
+/vendor
+
+# eslint
+.eslintcache
+
+# testing
+*storybook.log
+storybook-static
+.phpunit.result.cache
+/.phpunit.cache
+/coverage
+/reports
+
+# environment
+.env
+.env.backup
+.env.production
+.env.test
+
+# public
+/public/build
+/public/hot
+/public/storage
+
+# storage and logs
+*.log
+/storage/*.key
+/storage/pail
+
+# wayfinder
+/resources/js/actions
+/resources/js/routes
+/resources/js/wayfinder
+
+# build
+/bootstrap/ssr
+
+# IDE
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+
+# misc
+.DS_Store
+*.pem
+.phpactor.json
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/auth.json

@@ -1,0 +1,22 @@
+{
+    "recommendations": [
+        "ryanluker.vscode-coverage-gutters",
+        "editorconfig.editorconfig",
+        "laravel.vscode-laravel",
+        "mehedidracula.php-constructor",
+        "xdebug.php-debug",
+        "neilbrayfield.php-docblocker",
+        "bmewburn.vscode-intelephense-client",
+        "mehedidracula.php-namespace-resolver",
+        "st-pham.php-refactor-tool",
+        "recca0120.vscode-phpunit",
+        "dbaeumer.vscode-eslint",
+        "unifiedjs.vscode-mdx",
+        "esbenp.prettier-vscode",
+        "vitest.explorer",
+        "redhat.vscode-yaml",
+        "actboy168.tasks",
+        "bradlc.vscode-tailwindcss",
+        "gruntfuggly.todo-tree"
+    ]
+}
