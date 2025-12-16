@@ -4,9 +4,36 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "$(debug-alt-small)",
+            "label": "Laravel $(debug-alt-small)",
+            "hide": true,
+            "type": "shell",
+            "command": "php artisan serve",
+            "options": {
+                "statusbar": {
+                    "detail": "laravel dev server",
+                    "color": "#22C1D6"
+                }
+            }
+        },
+        {
+            "label": "Vite $(debug-alt-small)",
+            "hide": true,
             "type": "shell",
             "command": "pnpm run dev",
+            "options": {
+                "statusbar": {
+                    "detail": "dev server",
+                    "color": "#22C1D6"
+                }
+            }
+        },
+        {
+            "label": "$(debug-alt-small)",
+            "dependsOn": [
+                "Laravel $(debug-alt-small)",
+                "Vite $(debug-alt-small)"
+            ],
+            "type": "shell",
             "options": {
                 "statusbar": {
                     "detail": "dev server",
