@@ -1,0 +1,333 @@
+import type translation from '@/locales/en/translation'
+
+export default {
+  account: 'Account',
+  add: 'Aggiungi',
+  assignedTo: 'Asseganto a',
+  cancel: 'Annulla',
+  close: 'Chiudi',
+  cookieMessage: {
+    deleteAccount: {
+      success: {
+        title: 'Account cancellato',
+        description: 'Il tuo account e tutti i suoi dati sono stati rimossi.'
+      }
+    },
+    resetPassword: {
+      success: {
+        title: 'La tua password è stata reimpostata.'
+      }
+    },
+    verify: {
+      success: {
+        title: 'Il tuo indirizzo email è stato verificato.'
+      },
+      fail: {
+        title: 'Link di verifica scaduto o invalido.',
+        description:
+          "Invia una nuova email di verifica o contatta l'assistenza se il problema persiste."
+      }
+    }
+  },
+  confirmNewPassword: 'Conferma nuova password',
+  confirmPassword: 'Conferma password',
+  currentPassword: 'Password attuale',
+  dark: 'Scuro',
+  dashboard: 'Dashboard',
+  date: 'Data',
+  dateCreated: 'Date creazione',
+  dateModified: 'Ultima modifica',
+  delete: 'Elimina',
+  deleteAccount: {
+    title: 'Elimina account',
+    description: 'Elimina il tuo account e tutte le sue risorse',
+    info: 'Si prega di procedere con cautela, questa operazione non può essere annullata.',
+    dialog: {
+      trigger: 'Elimina account',
+      title: 'Sei sicuro di voler eliminare il tuo account?',
+      description:
+        'Una volta eliminato il tuo account, anche tutte le sue risorse e i suoi dati verranno eliminati definitivamente. Inserisci la tua password per confermare che desideri eliminare definitivamente il tuo account.'
+    }
+  },
+  description: 'Descrizione',
+  edit: 'Modifica',
+  emailAddress: 'Indirizzo email',
+  employee_one: 'Impiegato',
+  employee_other: 'Impiegati',
+  employment: 'Impiego',
+  forgotPassword: {
+    title: 'Password dimenticata',
+    description:
+      'Inserisci la tua email per ricevere un link di reset password',
+    returnTo: 'Oppure, ritorna al <1>log in</1>',
+    submit: 'Invia link di reset password'
+  },
+  fullName: 'Nome completo',
+  help: 'Chiedi Aiuto',
+  homepage: 'Pagina iniziale',
+  invitation_one: 'Invito',
+  invitation_other: 'Inviti',
+  invitations: {
+    pending: {
+      title: 'Inviti pendenti',
+      description:
+        'Lista degli utenti che non hanno ancora accettato il loro invito.'
+    },
+    renew: 'Rinnova',
+    send: {
+      title: 'Invita un nuovo utente',
+      description: "Crea un nuovo utente ed invia una email d'invito."
+    }
+  },
+  label: 'Etichetta',
+  labelValue: {
+    bug: 'Bug',
+    documentation: 'Documentazione',
+    feature: 'Feature',
+    none: 'nessuna'
+  },
+  language: 'Lingua',
+  light: 'Chiaro',
+  loading: 'Caricamento...',
+  login: {
+    title: 'Accedi al tuo account',
+    description: 'Inserisci la tua email e la password qui sotto per accedere',
+    registerCTA: 'Non hai un account?',
+    forgotPasswordCTA: 'Hai dimenticato la password?',
+    rememberMe: 'Ricordati di me'
+  },
+  logIn: 'Log In',
+  logout: 'Log out',
+  management: 'Gestione',
+  manager: 'Manager',
+  manageTeams: 'Gestisci i Team',
+  name: 'Nome',
+  newPasword: 'Nuova password',
+  noCurrentTeam: {
+    dashboard:
+      'Non hai ancora un "team corrente". Puoi creare nuovi team e impostare il tuo team corrente nella sezione Teams.',
+    description: 'Devi creare un team prima di poter gestire i progetti',
+    title: 'Nessun team'
+  },
+  notifications: 'Notifiche',
+  openMenu: 'Apri menu',
+  password: 'Password',
+  priority: 'Priorità',
+  priorityValue: {
+    high: 'Alta',
+    low: 'Bassa',
+    medium: 'Media'
+  },
+  profile: 'Profilo',
+  project_one: 'Progetto',
+  project_other: 'Progetti',
+  projects: {
+    addEmployees: {
+      description: 'Assegna un membro del team al progetto.',
+      title: 'Aggiungi nuovi impiegati'
+    },
+    chartText: 'Compiti raggruppati per stato e priorità',
+    createInstructions: 'Inizia un nuovo progetto.',
+    createProject: 'Crea Progetto',
+    deadline: 'Deadline',
+    deadlineIn_zero: 'Deadline oggi',
+    deadlineIn_one: 'Deadline domani',
+    deadlineIn_other: 'Deadline in {{count}} giorni',
+    deadlineBy_zero: 'Deadline oggi',
+    deadlineBy_one: 'Deadline scaduta ieri',
+    deadlineBy_other: 'Deadline scaduta {{count}} giorni fa',
+    defaultName: 'Nuovo progetto',
+    descriptionPlaceholder:
+      'Facoltativo, breve testo descrittivo del progetto.',
+    editEmployee: 'Modifica impiego e permessi.',
+    emptyTable: {
+      line1: 'Non hai ancora creato alcun progetto.',
+      line2: 'Inizia creando il tuo primo progetto.',
+      title: 'Ancora nessun progetto'
+    },
+    leave: 'Abbandona',
+    namePlaceholder: 'Nome del progetto',
+    newProject: 'Nuovo progetto',
+    projectDescription: 'Descrizione del progetto'
+  },
+  register: {
+    title: 'Crea un account',
+    description: 'Inserisci i tuoi dettagli per creare il tuo account',
+    loginCTA: 'Hai già un account? <1>Log in</1>',
+    submit: 'Crea account'
+  },
+  remove: 'Rimuovi',
+  reset: 'Reset',
+  resetPassword: {
+    title: 'Reimposta la password',
+    description: 'Inserisci la tua nuova password qui sotto',
+    submit: 'Reset Password'
+  },
+  role: 'Ruolo',
+  save: 'Salva',
+  search: 'Cerca',
+  select: 'Seleziona',
+  sessions: {
+    description:
+      'Gestisci e disconnetti le tue sessioni attive su altri browser e dispositivi.',
+    dialog: {
+      description:
+        'Inserisci la tua password per confermare che desideri disconnetterti dalle altre sessioni del browser su tutti i tuoi dispositivi.',
+      title: 'Eliminare le altre sessioni del browser?',
+      trigger: 'Disconnetti altre sessioni del browser'
+    },
+    lastActive: 'Ultima attività',
+    info: 'Se necessario, puoi disconnetterti da tutte le altre sessioni del browser su tutti i tuoi dispositivi. Questo elenco potrebbe non essere esaustivo. Se ritieni che il tuo account sia stato compromesso, dovresti anche aggiornare la password.',
+    thisDevice: 'Questo dispositivo',
+    title: 'Sessioni del Browser'
+  },
+  settings: 'Impostazioni',
+  signup: 'Iscriviti',
+  status: 'Stato',
+  statusValue: {
+    backlog: 'Backlog',
+    canceled: 'Cancellato',
+    done: 'Fatto',
+    inProgress: 'In Corso',
+    todo: 'Da Fare'
+  },
+  submit: 'Invia',
+  system: 'Sistema',
+  table: {
+    Asc: 'Asc',
+    asc: 'asc',
+    clearFilters: 'Rimuovi filtri',
+    columns: 'Colonne',
+    Desc: 'Disc',
+    desc: 'disc',
+    filterSelected_one: '{{count}} selezionato',
+    filterSelected_other: '{{count}} selezionati',
+    goToFirst: 'Vai alla prima pagina',
+    goToLast: "Vai all'ultima pagina",
+    goToNext: 'Vai alla prossima pagina',
+    goToPrevious: 'Vai alla prossima pagina',
+    noResults: 'Nessun risultato.',
+    pageOf: 'Pagina {{page}} di {{total}}',
+    rowsPerPage: 'Righe per pagina',
+    search: 'Ricerca...',
+    searchByName: 'Ricerca per nome...',
+    selectAll: 'Seleziona tutto',
+    selectedRows_one: '{{count}} di {{total}} righe selezionate.',
+    selectedRows_other: '{{count}} di {{total}} righe selezionate.',
+    selectRow: 'Seleziona riga',
+    sorting: 'Ordinamento'
+  },
+  task_one: 'Compito',
+  task_other: 'Compiti',
+  tasks: {
+    assignToMember: 'Assegna ad un membro del team',
+    createInstructions: 'Aggiungi un nuovo compito per questo progetto.',
+    createTask: 'Crea Compito',
+    defaultName: 'Nuovo compito',
+    descriptionPlaceholder:
+      "Facoltativo, breve testo descrittivo dell'attività.",
+    emptyTable: {
+      line1: 'Non hai ancora creato alcun compito.',
+      line2: 'Inizia creando il tuo primo compito.',
+      title: 'Ancora nessun compito'
+    },
+    filterTasks: 'Filtra compiti...',
+    namePlaceholder: 'Nome del compito',
+    newTask: 'New task',
+    selectLabel: 'Seleziona una etichetta',
+    selectPriority: 'Seleziona una priorità',
+    selectStatus: 'Seleziona uno stato',
+    selectUser: 'Seleziona un membro del team',
+    taskDescription: 'Descrizione del compito'
+  },
+  team_one: 'Team',
+  team_other: 'Teams',
+  teams: {
+    addMembers: {
+      description: 'Cerca e aggiungi nuovi utenti per nome o indirizzo email.',
+      instructions:
+        'Cerca un utente, poi clicca sul suo nome per selezionarlo.',
+      nameOrEmail: 'Nome o email',
+      title: 'Aggiungi nuovi membri al team'
+    },
+    createInstructions: 'Crea un nuovo team.',
+    createTeam: 'Crea Team',
+    defaultName: 'Nuovo team',
+    descriptionPlaceholder: 'Facoltativo, breve testo descrittivo del team.',
+    emptyTable: {
+      line1: 'Non hai ancora creato alcun team.',
+      line2: 'Inizia creando il tuo primo team.',
+      title: 'Ancora nessun team'
+    },
+    leave: 'Abbandona',
+    namePlaceholder: 'Nome del team',
+    newTeam: 'Nuovo team',
+    teamDescription: 'Descrizione del team',
+    teamMembers: 'Membri del team'
+  },
+  updateAccount: {
+    title: 'Aggiorna account',
+    description: "Cambia il nome utente e l'indirizzo email del tuo account",
+    info: 'Dopo aver inserito un nuovo indirizzo email, devrai verificarlo prima di poter procedere nella dashboard.'
+  },
+  updateAppearance: {
+    title: 'Impostazioni aspetto',
+    description:
+      "Scegli il tema dell'applicazione o utilizza lo stesso tema del tuo sistema.",
+    select: 'Seleziona aspetto'
+  },
+  updateLanguage: {
+    title: 'Impostazioni della lingua',
+    description: "Imposta la lingua dell'applicazione.",
+    select: 'Seleziona una lingua'
+  },
+  updatePassword: {
+    title: 'Aggiorna la password',
+    description: 'Cambia la password del tuo account',
+    submit: 'Aggiorna'
+  },
+  user_one: 'Utente',
+  user_other: 'Utenti',
+  users: {
+    deleteUser: 'Cancella Utente',
+    profile: {
+      activity: {
+        description: "Dati relativi all'attività dell'utente.",
+        title: 'Attività'
+      },
+      joined_one: 'Iscritto 1 giorno fa',
+      joined_other: 'Iscritto {{count}} giorni fa',
+      project_one: 'Impiegato in 1 progetto',
+      project_other: 'Impiegato in {{count}} progetti',
+      task_one: 'Ha 1 compito assegnato in totale',
+      task_other: 'Ha {{count}} compiti assegnati in totale',
+      taskDone_one: 'Ha completato 1 compito',
+      taskDone_other: 'Ha completato {{count}} compiti',
+      taskInProgress_one: 'Sta lavorando a 1 compito',
+      taskInProgress_other: 'Sta lavorando a {{count}} compiti',
+      taskTodo_one: 'Ha 1 compito in programma',
+      taskTodo_other: 'Ha {{count}} compiti in programma',
+      team_one: 'Attualmente membro di 1 team',
+      team_other: 'Attualmente membro di {{count}} team',
+      totalTasks: 'Compiti totali',
+      userProfile: {
+        description: 'Informazioni profilo di {{name}}',
+        title: 'Profilo utente'
+      }
+    },
+    roles: {
+      admin: 'Admin',
+      editor: 'Editore',
+      reader: 'Lettore',
+      worker: 'Worker'
+    },
+    selectRole: 'Seleziona un ruolo'
+  },
+  verifyEmail: {
+    title: 'Verifica la tua email',
+    description:
+      'Verifica il tuo indirizzo email cliccando sul link che ti abbiamo appena inviato.',
+    submit: "Invia nuovamente l'email di verifica"
+  },
+  welcome: 'Welcome to {{appName}}'
+} satisfies typeof translation
