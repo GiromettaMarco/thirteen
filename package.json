@@ -38,7 +38,7 @@
         "vite-tsconfig-paths": "^5.1.4"
     },
     "dependencies": {
-        "@inertiajs/react": "^2.1.0",
+        "@inertiajs/react": "^2.3.2",
         "@tailwindcss/vite": "^4.1.11",
         "@types/react": "^19.2.0",
         "@types/react-dom": "^19.2.0",
