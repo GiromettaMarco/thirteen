@@ -323,4 +323,4 @@ export default {
     submit: 'Resend verification email'
   },
   welcome: 'Welcome to {{appName}}'
-}
+} as const

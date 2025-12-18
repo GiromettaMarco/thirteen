@@ -1,5 +1,3 @@
-import type validations from '@/locales/en/validations'
-
 export default {
   array: 'Il campo deve essere un array.',
   confirmPassword: {
@@ -42,4 +40,4 @@ export default {
   token: {
     required: 'Il campo Token è obbligatorio.'
   }
-} satisfies typeof validations
+} as const

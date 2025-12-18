@@ -40,4 +40,4 @@ export default {
   token: {
     required: 'The Token field is required.'
   }
-}
+} as const

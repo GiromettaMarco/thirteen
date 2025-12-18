@@ -1,5 +1,3 @@
-import type translation from '@/locales/en/translation'
-
 export default {
   account: 'Account',
   add: 'Aggiungi',
@@ -330,4 +328,4 @@ export default {
     submit: "Invia nuovamente l'email di verifica"
   },
   welcome: 'Welcome to {{appName}}'
-} satisfies typeof translation
+} as const
