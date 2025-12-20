@@ -32,7 +32,6 @@
     // Detect TypeScript version from workspace
     "typescript.tsdk": "./node_modules/typescript/lib",
     "typescript.enablePromptUseWorkspaceTsdk": true,
-    "Laravel.basePath": "laravel",
 
     // Conventional commit
     "conventionalCommits.scopes": ["client", "server"]
