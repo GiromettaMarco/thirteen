@@ -1,5 +1,9 @@
+export type Appearance = 'dark' | 'light' | 'system'
+
+export type Theme = 'dark' | 'light'
+
 export interface Auth {
-  user: User
+  user: User | null
 }
 
 export interface SharedData {

@@ -1,3 +1,4 @@
+import { AppearanceContext } from '@/providers/appearance-provider'
 import {
   CircleCheckIcon,
   InfoIcon,
@@ -5,15 +6,15 @@ import {
   OctagonXIcon,
   TriangleAlertIcon
 } from 'lucide-react'
-import { useTheme } from 'next-themes'
+import { useContext } from 'react'
 import { Toaster as Sonner, type ToasterProps } from 'sonner'
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  const { theme } = useTheme()
+  const { theme } = useContext(AppearanceContext)
 
   return (
     <Sonner
-      theme={theme as ToasterProps['theme']}
+      theme={theme}
       className="toaster group pointer-events-auto"
       icons={{
         success: <CircleCheckIcon className="size-4" />,

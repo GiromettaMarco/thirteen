@@ -1,6 +1,15 @@
 export default {
   account: 'Account',
   add: 'Add',
+  appearance: {
+    appearance: 'Appearance',
+    change: 'Change appearance',
+    dark: 'Dark',
+    light: 'Light',
+    theme: 'Theme',
+    select: 'Select appearance',
+    system: 'System'
+  },
   assignedTo: 'Assigned to',
   cancel: 'Cancel',
   close: 'Close',
@@ -30,7 +39,6 @@ export default {
   confirmNewPassword: 'Confirm new password',
   confirmPassword: 'Confirm password',
   currentPassword: 'Current password',
-  dark: 'Dark',
   dashboard: 'Dashboard',
   date: 'Date',
   dateCreated: 'Date created',
@@ -83,7 +91,6 @@ export default {
     none: 'none'
   },
   language: 'Language',
-  light: 'Light',
   loading: 'Loading...',
   login: {
     title: 'Log in to your account',
@@ -187,7 +194,6 @@ export default {
     todo: 'To Do'
   },
   submit: 'Submit',
-  system: 'System',
   table: {
     Asc: 'Asc',
     asc: 'asc',

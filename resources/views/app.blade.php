@@ -4,6 +4,18 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        {{-- Inline script to detect system dark mode preference and apply it immediately --}}
+        <script>
+            (function() {
+                if (
+                    '{{ $appearance ?? "system" }}' === 'system' &&
+                    window.matchMedia('(prefers-color-scheme: dark)').matches
+                ) {
+                    document.documentElement.classList.add('dark');
+                }
+            })();
+        </script>
+
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         <link rel="icon" href="/favicon.ico" sizes="any">

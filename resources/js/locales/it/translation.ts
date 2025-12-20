@@ -1,6 +1,15 @@
 export default {
   account: 'Account',
   add: 'Aggiungi',
+  appearance: {
+    appearance: 'Aspetto',
+    change: 'Cambia aspetto',
+    dark: 'Scuro',
+    light: 'Chiaro',
+    theme: 'Tema',
+    select: 'Select appearance',
+    system: 'Sistema'
+  },
   assignedTo: 'Asseganto a',
   cancel: 'Annulla',
   close: 'Chiudi',
@@ -30,7 +39,6 @@ export default {
   confirmNewPassword: 'Conferma nuova password',
   confirmPassword: 'Conferma password',
   currentPassword: 'Password attuale',
-  dark: 'Scuro',
   dashboard: 'Dashboard',
   date: 'Data',
   dateCreated: 'Date creazione',
@@ -85,7 +93,6 @@ export default {
     none: 'nessuna'
   },
   language: 'Lingua',
-  light: 'Chiaro',
   loading: 'Caricamento...',
   login: {
     title: 'Accedi al tuo account',
@@ -190,7 +197,6 @@ export default {
     todo: 'Da Fare'
   },
   submit: 'Invia',
-  system: 'Sistema',
   table: {
     Asc: 'Asc',
     asc: 'asc',

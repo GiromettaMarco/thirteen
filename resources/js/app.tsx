@@ -1,6 +1,7 @@
 import '../css/app.css'
 
 import AppContainer from '@/app-container'
+import type { Appearance } from '@/types'
 import { createInertiaApp } from '@inertiajs/react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createRoot, hydrateRoot } from 'react-dom/client'
@@ -17,12 +18,25 @@ createInertiaApp({
     ),
 
   setup({ el, App, props }) {
+    const appearance = props.initialPage.props.appearance as Appearance
+
     if (import.meta.env.SSR) {
       // SSR
-      hydrateRoot(el, <AppContainer children={<App {...props} />} />)
+      hydrateRoot(
+        el,
+        <AppContainer
+          appearance={appearance}
+          children={<App {...props} />}
+        />
+      )
     } else {
       // CSR
-      createRoot(el).render(<AppContainer children={<App {...props} />} />)
+      createRoot(el).render(
+        <AppContainer
+          appearance={appearance}
+          children={<App {...props} />}
+        />
+      )
     }
   },
 

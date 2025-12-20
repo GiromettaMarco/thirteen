@@ -1,4 +1,5 @@
 import AppContainer from '@/app-container'
+import type { Appearance } from '@/types'
 import { createInertiaApp } from '@inertiajs/react'
 import createServer from '@inertiajs/react/server'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
@@ -20,6 +21,11 @@ createServer((page) =>
         import.meta.glob('./pages/**/*.tsx')
       ),
 
-    setup: ({ App, props }) => <AppContainer children={<App {...props} />} />
+    setup: ({ App, props }) => (
+      <AppContainer
+        appearance={props.initialPage.props.appearance as Appearance}
+        children={<App {...props} />}
+      />
+    )
   })
 )
