@@ -19,3 +19,9 @@ export interface User {
   updated_at: string
   [key: string]: unknown // This allows for additional properties...
 }
+
+export interface FlashMessage {
+  title: string
+  description: string | null
+  level: 'success' | 'info' | 'warning' | 'error' | null
+}
