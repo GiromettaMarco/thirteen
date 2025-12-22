@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "484bf24317c61b63d1d6bfe7c57e9277",
+    "content-hash": "22d3c912c73cb08ac58d83e71a90ce39",
     "packages": [
         {
             "name": "brick/math",
@@ -3537,6 +3537,58 @@
                 "source": "https://github.com/ramsey/uuid/tree/4.9.2"
             },
             "time": "2025-12-14T04:43:48+00:00"
+        },
+        {
+            "name": "sliver/flash-format",
+            "version": "v0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GiromettaMarco/flash-format.git",
+                "reference": "90a01ad89c0da5e206ae83aad5bf25b34f1e0dcb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GiromettaMarco/flash-format/zipball/90a01ad89c0da5e206ae83aad5bf25b34f1e0dcb",
+                "reference": "90a01ad89c0da5e206ae83aad5bf25b34f1e0dcb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "vimeo/psalm": "^7.0@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sliver\\Format\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Girometta",
+                    "email": "girometta.marco@gmail.com",
+                    "homepage": "https://github.com/GiromettaMarco"
+                }
+            ],
+            "description": "Code snippet to provide a standard format for flash messages.",
+            "homepage": "https://github.com/GiromettaMarco/flash-format",
+            "keywords": [
+                "flash",
+                "format",
+                "message",
+                "snippet",
+                "standard"
+            ],
+            "support": {
+                "issues": "https://github.com/GiromettaMarco/flash-format/issues",
+                "source": "https://github.com/GiromettaMarco/flash-format/tree/v0.0.1"
+            },
+            "time": "2025-12-21T02:25:22+00:00"
         },
         {
             "name": "symfony/clock",
