@@ -61,6 +61,7 @@ class HandleLocale
      */
     protected function setLocaleByCookie(Request $request): bool
     {
+        /** @var string|null $cookie_locale */
         $cookie_locale = $request->cookie(Config::get('cookie.locale', 'locale'));
 
         if ($cookie_locale) {
@@ -89,11 +90,11 @@ class HandleLocale
             }
 
             $parsed_language[] = ['q' => $q, 'lang' => $qLangArr[0]];
-
-            usort($parsed_language, function ($a, $b) {
-                return $a < $b;
-            });
         }
+
+        usort($parsed_language, function ($a, $b) {
+            return ($a['q'] < $b['q']) ? -1 : 1;
+        });
 
         foreach ($parsed_language as $lang) {
             if ($this->setAppLocale($lang['lang'])) {
