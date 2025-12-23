@@ -75,12 +75,34 @@
             }
         },
         {
-            "label": "$(github-inverted)",
+            "label": "$(github-alt)",
             "type": "shell",
             "command": "act -W '.github/workflows/tests.yml' --artifact-server-path /tmp/artifacts",
             "options": {
                 "statusbar": {
                     "detail": "act",
+                    "color": "#22C1D6"
+                }
+            }
+        },
+        {
+            "label": "$(paintcan)",
+            "type": "shell",
+            "command": "./vendor/bin/pint --dirty",
+            "options": {
+                "statusbar": {
+                    "detail": "pint",
+                    "color": "#22C1D6"
+                }
+            }
+        },
+        {
+            "label": "$(search-fuzzy)",
+            "type": "shell",
+            "command": "./vendor/bin/phpstan analyse",
+            "options": {
+                "statusbar": {
+                    "detail": "phpstan",
                     "color": "#22C1D6"
                 }
             }
