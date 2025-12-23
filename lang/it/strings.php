@@ -3,5 +3,8 @@
 declare(strict_types=1);
 
 return [
-    'employment_default' => 'Manager',
+    'auth' => [
+        'failed' => 'Credenziali non valide.',
+    ],
+    'throttle' => 'Troppi tentativi. Riprova tra :seconds secondi.',
 ];
