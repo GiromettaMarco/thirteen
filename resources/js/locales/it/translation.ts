@@ -11,34 +11,16 @@ export default {
     system: 'Sistema'
   },
   assignedTo: 'Asseganto a',
+  auth: {
+    confirmNewPassword: 'Conferma nuova password',
+    confirmPassword: 'Conferma password',
+    currentPassword: 'Password attuale',
+    login: 'Login',
+    newPasword: 'Nuova password',
+    password: 'Password'
+  },
   cancel: 'Annulla',
   close: 'Chiudi',
-  cookieMessage: {
-    deleteAccount: {
-      success: {
-        title: 'Account cancellato',
-        description: 'Il tuo account e tutti i suoi dati sono stati rimossi.'
-      }
-    },
-    resetPassword: {
-      success: {
-        title: 'La tua password è stata reimpostata.'
-      }
-    },
-    verify: {
-      success: {
-        title: 'Il tuo indirizzo email è stato verificato.'
-      },
-      fail: {
-        title: 'Link di verifica scaduto o invalido.',
-        description:
-          "Invia una nuova email di verifica o contatta l'assistenza se il problema persiste."
-      }
-    }
-  },
-  confirmNewPassword: 'Conferma nuova password',
-  confirmPassword: 'Conferma password',
-  currentPassword: 'Password attuale',
   dashboard: 'Dashboard',
   date: 'Data',
   dateCreated: 'Date creazione',
@@ -95,19 +77,18 @@ export default {
   language: 'Lingua',
   loading: 'Caricamento...',
   login: {
-    title: 'Accedi al tuo account',
-    description: 'Inserisci la tua email e la password qui sotto per accedere',
-    registerCTA: 'Non hai un account?',
     forgotPasswordCTA: 'Hai dimenticato la password?',
-    rememberMe: 'Ricordati di me'
+    h1: 'Accedi al tuo account',
+    p: 'Inserisci la tua email e la password qui sotto per accedere',
+    registerCTA: 'Non hai un account?',
+    rememberMe: 'Ricordati di me',
+    title: 'Login'
   },
-  logIn: 'Log In',
   logout: 'Log out',
   management: 'Gestione',
   manager: 'Manager',
   manageTeams: 'Gestisci i Team',
   name: 'Nome',
-  newPasword: 'Nuova password',
   noCurrentTeam: {
     dashboard:
       'Non hai ancora un "team corrente". Puoi creare nuovi team e impostare il tuo team corrente nella sezione Teams.',
@@ -116,7 +97,6 @@ export default {
   },
   notifications: 'Notifiche',
   openMenu: 'Apri menu',
-  password: 'Password',
   priority: 'Priorità',
   priorityValue: {
     high: 'Alta',
@@ -156,10 +136,11 @@ export default {
     projectDescription: 'Descrizione del progetto'
   },
   register: {
-    title: 'Crea un account',
-    description: 'Inserisci i tuoi dettagli per creare il tuo account',
+    h1: 'Crea un account',
     loginCTA: 'Hai già un account? <1>Log in</1>',
-    submit: 'Crea account'
+    p: 'Inserisci i tuoi dettagli per creare il tuo account',
+    submit: 'Crea account',
+    title: 'Registrazione'
   },
   remove: 'Rimuovi',
   reset: 'Reset',

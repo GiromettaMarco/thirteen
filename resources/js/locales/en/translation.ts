@@ -11,34 +11,16 @@ export default {
     system: 'System'
   },
   assignedTo: 'Assigned to',
+  auth: {
+    confirmNewPassword: 'Confirm new password',
+    confirmPassword: 'Confirm password',
+    currentPassword: 'Current password',
+    login: 'Login',
+    newPasword: 'New password',
+    password: 'Password'
+  },
   cancel: 'Cancel',
   close: 'Close',
-  cookieMessage: {
-    deleteAccount: {
-      success: {
-        title: 'Account deleted',
-        description: 'Your account and all its data have been removed.'
-      }
-    },
-    resetPassword: {
-      success: {
-        title: 'Your password has been reset.'
-      }
-    },
-    verify: {
-      success: {
-        title: 'Your email address has been verified.'
-      },
-      fail: {
-        title: 'Verification link expired or invalid.',
-        description:
-          'Send a new verification email or contact assistance if the problem persists.'
-      }
-    }
-  },
-  confirmNewPassword: 'Confirm new password',
-  confirmPassword: 'Confirm password',
-  currentPassword: 'Current password',
   dashboard: 'Dashboard',
   date: 'Date',
   dateCreated: 'Date created',
@@ -93,19 +75,18 @@ export default {
   language: 'Language',
   loading: 'Loading...',
   login: {
-    title: 'Log in to your account',
-    description: 'Enter your email and password below to log in',
-    registerCTA: "Don't have an account?",
     forgotPasswordCTA: 'Forgot your password?',
-    rememberMe: 'Remember me'
+    h1: 'Log in to your account',
+    p: 'Enter your email and password below to log in',
+    registerCTA: "Don't have an account?",
+    rememberMe: 'Remember me',
+    title: 'Login'
   },
-  logIn: 'Log In',
   logout: 'Log out',
   management: 'Management',
   manager: 'Manager',
   manageTeams: 'Manage Teams',
   name: 'Name',
-  newPasword: 'New password',
   noCurrentTeam: {
     dashboard:
       'You don\'t have a "current team" yet. You can create new teams and set your current team in the Teams section.',
@@ -114,7 +95,6 @@ export default {
   },
   notifications: 'Notifications',
   openMenu: 'Open menu',
-  password: 'Password',
   priority: 'Priority',
   priorityValue: {
     high: 'High',
@@ -153,10 +133,11 @@ export default {
     projectDescription: 'Project description'
   },
   register: {
-    title: 'Create an account',
-    description: 'Enter your details below to create your account',
+    h1: 'Create an account',
     loginCTA: 'Already have an account? <1>Log in</1>',
-    submit: 'Create account'
+    p: 'Enter your details below to create your account',
+    submit: 'Create account',
+    title: 'Register'
   },
   remove: 'Remove',
   reset: 'Reset',
