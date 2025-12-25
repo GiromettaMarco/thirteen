@@ -74,14 +74,6 @@ export default {
   },
   language: 'Language',
   loading: 'Loading...',
-  login: {
-    forgotPasswordCTA: 'Forgot your password?',
-    h1: 'Log in to your account',
-    p: 'Enter your email and password below to log in',
-    registerCTA: "Don't have an account?",
-    rememberMe: 'Remember me',
-    title: 'Login'
-  },
   logout: 'Log out',
   management: 'Management',
   manager: 'Manager',
@@ -95,6 +87,25 @@ export default {
   },
   notifications: 'Notifications',
   openMenu: 'Open menu',
+  pages: {
+    auth: {
+      login: {
+        forgotPasswordCTA: 'Forgot your password?',
+        h1: 'Log in to your account',
+        p: 'Enter your email and password below to log in',
+        registerCTA: "Don't have an account? <1>Sign Up</1>",
+        rememberMe: 'Remember me',
+        title: 'Login'
+      },
+      register: {
+        h1: 'Create an account',
+        loginCTA: 'Already have an account? <1>Log in</1>',
+        p: 'Enter your details below to create your account',
+        submit: 'Create account',
+        title: 'Register'
+      }
+    }
+  },
   priority: 'Priority',
   priorityValue: {
     high: 'High',
@@ -132,13 +143,6 @@ export default {
     newProject: 'New project',
     projectDescription: 'Project description'
   },
-  register: {
-    h1: 'Create an account',
-    loginCTA: 'Already have an account? <1>Log in</1>',
-    p: 'Enter your details below to create your account',
-    submit: 'Create account',
-    title: 'Register'
-  },
   remove: 'Remove',
   reset: 'Reset',
   resetPassword: {
@@ -165,7 +169,6 @@ export default {
     title: 'Browser Sessions'
   },
   settings: 'Settings',
-  signup: 'Sign up',
   status: 'Status',
   statusValue: {
     backlog: 'Backlog',

@@ -2,8 +2,8 @@ export type Appearance = 'dark' | 'light' | 'system'
 
 export type Theme = 'dark' | 'light'
 
-export interface Auth {
-  user: User | null
+export interface Auth<TWithUser extends boolean = false> {
+  user: TWithUser extends true ? User : User | null
 }
 
 export interface SharedData {
