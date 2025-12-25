@@ -77,6 +77,10 @@
         "!(**/*.php)resources/**/*": [
             "prettier --write",
             "eslint --cache --fix"
+        ],
+        "**/*.php": [
+            "php ./vendor/bin/pint",
+            "php ./vendor/bin/phpstan analyse"
         ]
     }
 }
