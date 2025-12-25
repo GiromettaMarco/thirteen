@@ -66,10 +66,21 @@
         {
             "label": "$(test-view-icon)",
             "type": "shell",
-            "command": "php artisan test --coverage",
+            "command": "pnpm run build && php artisan test --exclude-group=browser",
             "options": {
                 "statusbar": {
-                    "detail": "run php tests",
+                    "detail": "php tests",
+                    "color": "#22C1D6"
+                }
+            }
+        },
+        {
+            "label": "$(test-view-icon)",
+            "type": "shell",
+            "command": "pnpm run build && php artisan test --group=browser --no-coverage",
+            "options": {
+                "statusbar": {
+                    "detail": "e2e tests",
                     "color": "#22C1D6"
                 }
             }

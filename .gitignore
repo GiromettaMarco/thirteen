@@ -11,10 +11,8 @@
 # testing
 *storybook.log
 storybook-static
-.phpunit.result.cache
-/.phpunit.cache
-/coverage
 /reports
+tests/Browser/Screenshots
 
 # environment
 .env
