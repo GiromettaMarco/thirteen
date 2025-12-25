@@ -1,31 +1,21 @@
 import { Button } from '@/components/ui/button'
 import ButtonLoader from '@/components/ui/button-loader'
+import type { ComponentProps } from 'react'
 
 export function Submit({
-  className,
   label,
   loading = false,
   type = 'submit',
-  variant = 'default'
-}: {
-  className?: string
+  ...props
+}: ComponentProps<typeof Button> & {
   label?: string
   loading?: boolean
-  type?: 'reset' | 'submit' | 'button'
-  variant?:
-    | 'default'
-    | 'destructive'
-    | 'outline'
-    | 'secondary'
-    | 'ghost'
-    | 'link'
 }) {
   return (
     <Button
-      className={className}
       disabled={loading}
       type={type}
-      variant={variant}
+      {...props}
     >
       <ButtonLoader loading={loading}>{label}</ButtonLoader>
     </Button>
