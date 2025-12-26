@@ -21,7 +21,7 @@ function Brand(props: SVGAttributes<SVGElement>) {
 }
 
 function Logo(props: ComponentProps<'span'>) {
-  return <span {...props}>Thirteen</span>
+  return <span {...props}>{import.meta.env.VITE_APP_NAME}</span>
 }
 
 function BrandAndLogo({
@@ -30,7 +30,7 @@ function BrandAndLogo({
   logoClassName
 }: {
   brandClassName?: string
-  className?: string | undefined
+  className?: string
   href?: string
   logoClassName?: string
 }) {
