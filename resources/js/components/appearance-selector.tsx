@@ -51,7 +51,7 @@ export function AppearanceSelector() {
   )
 }
 
-export default function AppearanceSelect(props: ComponentProps<'div'>) {
+export function AppearanceSelect(props: ComponentProps<'div'>) {
   // i18n
   const { t } = useTranslation()
 
