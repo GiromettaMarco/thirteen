@@ -35,18 +35,10 @@ function BrandAndLogo({
   logoClassName?: string
 }) {
   return (
-    <div className={cn('flex flex-col p-8 text-center', className)}>
+    <div className={className}>
+      <Brand className={brandClassName} />
       <Logo
-        className={cn(
-          'text-brand translate-y-0 text-6xl font-bold opacity-100 transition-all delay-300 duration-750 starting:translate-y-4 starting:opacity-0',
-          logoClassName
-        )}
-      />
-      <Brand
-        className={cn(
-          'translate-y-0 opacity-100 transition-all duration-750 starting:translate-y-4 starting:opacity-0',
-          brandClassName
-        )}
+        className={cn('text-brand text-2xl font-semibold', logoClassName)}
       />
     </div>
   )
