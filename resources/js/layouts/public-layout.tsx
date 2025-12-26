@@ -1,8 +1,8 @@
 import { AppearanceSelector } from '@/components/appearance-selector'
 import { LanguageSelector } from '@/components/language-selector'
 import { BrandAndLogo } from '@/components/ui/brand'
+import { GitHub } from '@/components/ui/brand-icons'
 import { Button } from '@/components/ui/button'
-import GitHub from '@/components/ui/icons/github'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -13,10 +13,22 @@ import {
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu'
 import { Separator } from '@/components/ui/separator'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger
+} from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
-import { dashboard } from '@/routes'
+import { dashboard, home } from '@/routes'
 import { Link } from '@inertiajs/react'
-import { Circle, CircleCheck, CircleHelp, Menu, X } from 'lucide-react'
+import {
+  Circle,
+  CircleCheck,
+  CircleHelp,
+  Menu,
+  UserRound,
+  X
+} from 'lucide-react'
 import {
   useEffect,
   useState,
@@ -47,10 +59,12 @@ function MobileMenu({
       )}
     >
       <div className="flex justify-between">
-        <BrandAndLogo
-          className="flex flex-initial items-center gap-4"
-          brandClassName="size-10"
-        />
+        <Link href={home()}>
+          <BrandAndLogo
+            className="flex flex-initial items-center gap-4"
+            brandClassName="size-10"
+          />
+        </Link>
 
         <Button
           variant="ghost"
@@ -396,10 +410,12 @@ export default function PublicLayout({ children }: PropsWithChildren) {
                   </Button>
                 </div>
 
-                <BrandAndLogo
-                  className="flex flex-initial items-center gap-4 pe-2"
-                  brandClassName="size-10"
-                />
+                <Link href={home()}>
+                  <BrandAndLogo
+                    className="flex flex-initial items-center gap-4 pe-2"
+                    brandClassName="size-10"
+                  />
+                </Link>
 
                 <div className="grow" />
               </div>
@@ -408,23 +424,27 @@ export default function PublicLayout({ children }: PropsWithChildren) {
                 <PublicMenu />
               </div>
 
-              <div className="flex flex-1 items-end justify-end gap-2">
-                <NavigationMenu className="hidden sm:block">
-                  <NavigationMenuList>
-                    <NavigationMenuItem>
-                      <NavigationMenuLink
-                        asChild
-                        className={navigationMenuTriggerStyle()}
-                      >
-                        <Link href={dashboard()}>{t(($) => $.dashboard)}</Link>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                  </NavigationMenuList>
-                </NavigationMenu>
+              <div className="flex flex-1 items-center justify-end gap-4">
+                <LanguageSelector variant="ghost" />
 
-                <LanguageSelector />
+                <AppearanceSelector variant="ghost" />
 
-                <AppearanceSelector />
+                <Tooltip>
+                  <TooltipTrigger className="hidden lg:block">
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="icon"
+                    >
+                      <Link href={dashboard()}>
+                        <UserRound />
+                      </Link>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <span>{t(($) => $.dashboard)}</span>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </div>
           </div>
@@ -440,20 +460,20 @@ export default function PublicLayout({ children }: PropsWithChildren) {
           <div className="w-full border-t border-dashed">
             <div className="container mx-auto flex h-14 items-center justify-between gap-8 border-x border-dashed px-4 text-sm sm:px-6">
               <a
+                href="https://github.com/GiromettaMarco"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <GitHub className="size-7" />
+              </a>
+
+              <a
                 className="hover:underline"
                 href="https://github.com/GiromettaMarco/Mono/blob/master/LICENSE.md"
                 rel="noreferrer"
                 target="_blank"
               >
                 © 2025 Marco Girometta
-              </a>
-
-              <a
-                href="https://github.com/GiromettaMarco"
-                rel="noreferrer"
-                target="_blank"
-              >
-                <GitHub className="size-7" />
               </a>
             </div>
           </div>

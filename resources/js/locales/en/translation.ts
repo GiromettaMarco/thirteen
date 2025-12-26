@@ -51,7 +51,6 @@ export default {
   },
   fullName: 'Full name',
   help: 'Get Help',
-  homepage: 'Homepage',
   invitation_one: 'Invitation',
   invitation_other: 'Invitations',
   invitations: {
@@ -114,6 +113,15 @@ export default {
       e404: {
         description: 'The resource you were looking for could not be found.',
         title: 'Page not found'
+      }
+    },
+    public: {
+      home: {
+        CTA: "Let's get started!",
+        h1: 'Welcome to {{appName}}',
+        p: 'This is the starting point for the next project.',
+        stack: 'The stack:',
+        title: 'Laravel 13 example application'
       }
     }
   },
@@ -322,6 +330,5 @@ export default {
     description:
       'Please verify your email address by clicking on the link we just emailed to you.',
     submit: 'Resend verification email'
-  },
-  welcome: 'Welcome to {{appName}}'
+  }
 } as const

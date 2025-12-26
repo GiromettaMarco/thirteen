@@ -52,7 +52,6 @@ export default {
   },
   fullName: 'Nome completo',
   help: 'Chiedi Aiuto',
-  homepage: 'Pagina iniziale',
   invitation_one: 'Invito',
   invitation_other: 'Inviti',
   invitations: {
@@ -117,6 +116,15 @@ export default {
         description:
           'Non è stato possibile trovare la risorsa che stavi cercando.',
         title: 'Pagina non trovata'
+      }
+    },
+    public: {
+      home: {
+        CTA: 'Iniziamo!',
+        h1: 'Benvenuto su {{appName}}',
+        p: 'Questo è il punto di partenza per il prossimo progetto.',
+        stack: 'Lo stack:',
+        title: 'Applicazione di esempio con Laravel 13'
       }
     }
   },
@@ -328,6 +336,5 @@ export default {
     description:
       'Verifica il tuo indirizzo email cliccando sul link che ti abbiamo appena inviato.',
     submit: "Invia nuovamente l'email di verifica"
-  },
-  welcome: 'Welcome to {{appName}}'
+  }
 } as const
