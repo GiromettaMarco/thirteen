@@ -93,7 +93,7 @@ class HandleLocale
         }
 
         usort($parsed_language, function ($a, $b) {
-            return ($a['q'] < $b['q']) ? -1 : 1;
+            return ($a['q'] > $b['q']) ? -1 : 1;
         });
 
         foreach ($parsed_language as $lang) {
