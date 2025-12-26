@@ -6,6 +6,11 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger
+} from '@/components/ui/tooltip'
 import { setClientCookie } from '@/lib/cookie'
 import type { Locale } from '@/types'
 import type { Callback, TFunction } from 'i18next'
@@ -22,7 +27,11 @@ function changeLocale(
   setClientCookie(import.meta.env.VITE_COOKIE_LOCALE, locale)
 }
 
-export function LanguageSelector() {
+export function LanguageSelector({
+  variant = 'outline'
+}: {
+  variant?: 'default' | 'outline' | 'secondary' | 'ghost'
+}) {
   // i18n
   const { i18n, t } = useTranslation()
 
@@ -40,14 +49,21 @@ export function LanguageSelector() {
   }
 
   return (
-    <Button
-      variant="outline"
-      size="icon"
-      onClick={languageSwitch}
-    >
-      <span className="uppercase">{i18n.language}</span>
-      <span className="sr-only">{t(($) => $.language.change)}</span>
-    </Button>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          variant={variant}
+          size="icon"
+          onClick={languageSwitch}
+        >
+          <span className="uppercase">{i18n.language}</span>
+          <span className="sr-only">{t(($) => $.language.change)}</span>
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <span>{t(($) => $.language.change)}</span>
+      </TooltipContent>
+    </Tooltip>
   )
 }
 
