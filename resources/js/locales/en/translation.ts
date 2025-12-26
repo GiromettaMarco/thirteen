@@ -72,7 +72,12 @@ export default {
     feature: 'Feature',
     none: 'none'
   },
-  language: 'Language',
+  language: {
+    change: 'Change language',
+    language: 'Language',
+    select: 'Select language',
+    system: 'System'
+  },
   loading: 'Loading...',
   logout: 'Log out',
   management: 'Management',

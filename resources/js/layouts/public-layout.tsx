@@ -1,4 +1,5 @@
 import { AppearanceSelector } from '@/components/appearance-selector'
+import { LanguageSelector } from '@/components/language-selector'
 import { BrandAndLogo } from '@/components/ui/brand'
 import { Button } from '@/components/ui/button'
 import GitHub from '@/components/ui/icons/github'
@@ -407,7 +408,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
                 <PublicMenu />
               </div>
 
-              <div className="flex flex-1 items-end justify-end gap-8">
+              <div className="flex flex-1 items-end justify-end gap-2">
                 <NavigationMenu className="hidden sm:block">
                   <NavigationMenuList>
                     <NavigationMenuItem>
@@ -420,6 +421,8 @@ export default function PublicLayout({ children }: PropsWithChildren) {
                     </NavigationMenuItem>
                   </NavigationMenuList>
                 </NavigationMenu>
+
+                <LanguageSelector />
 
                 <AppearanceSelector />
               </div>

@@ -74,7 +74,12 @@ export default {
     feature: 'Feature',
     none: 'nessuna'
   },
-  language: 'Lingua',
+  language: {
+    change: 'Cambia lingua',
+    language: 'Lingua',
+    select: 'Seleziona lingua',
+    system: 'Sistema'
+  },
   loading: 'Caricamento...',
   logout: 'Log out',
   management: 'Gestione',

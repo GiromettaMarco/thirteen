@@ -2,6 +2,8 @@ export type Appearance = 'dark' | 'light' | 'system'
 
 export type Theme = 'dark' | 'light'
 
+export type Locale = 'en' | 'it'
+
 export interface Auth<TWithUser extends boolean = false> {
   user: TWithUser extends true ? User : User | null
 }
