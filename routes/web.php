@@ -10,9 +10,8 @@ Route::get('/', function () {
 require __DIR__.'/auth.php';
 require __DIR__.'/dashboard.php';
 
-// @TODO add 404 page
-// Route::fallback(function () {
-//     return Inertia::render('errors/404')
-//         ->toResponse(request())
-//         ->setStatusCode(404);
-// });
+Route::fallback(function () {
+    return Inertia::render('errors/404')
+        ->toResponse(request())
+        ->setStatusCode(404);
+});

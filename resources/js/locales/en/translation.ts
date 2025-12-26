@@ -104,6 +104,12 @@ export default {
         submit: 'Create account',
         title: 'Register'
       }
+    },
+    errors: {
+      e404: {
+        description: 'The resource you were looking for could not be found.',
+        title: 'Page not found'
+      }
     }
   },
   priority: 'Priority',

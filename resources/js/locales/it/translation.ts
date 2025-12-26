@@ -106,6 +106,13 @@ export default {
         submit: 'Crea account',
         title: 'Registrazione'
       }
+    },
+    errors: {
+      e404: {
+        description:
+          'Non è stato possibile trovare la risorsa che stavi cercando.',
+        title: 'Pagina non trovata'
+      }
     }
   },
   priority: 'Priorità',
