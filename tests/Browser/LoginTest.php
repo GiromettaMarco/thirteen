@@ -16,7 +16,7 @@ it('may sign in the user', function () {
 
     $page = visit('/')->on()->mobile();
 
-    $page->click('Login')
+    $page->click("Let's get started!")
         ->assertUrlIs('*/login')
         ->assertSee('Log in to your account')
         ->fill('email', 'nuno@laravel.com')
