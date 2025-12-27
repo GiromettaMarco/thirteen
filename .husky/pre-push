@@ -1,3 +1,4 @@
+pnpm types
 pnpm run build
 php artisan test --exclude-group=browser
 php artisan test --group=browser --no-coverage
