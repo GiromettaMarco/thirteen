@@ -52,6 +52,7 @@ export default {
   },
   fullName: 'Nome completo',
   help: 'Chiedi Aiuto',
+  homepage: 'Pagina iniziale',
   invitation_one: 'Invito',
   invitation_other: 'Inviti',
   invitations: {

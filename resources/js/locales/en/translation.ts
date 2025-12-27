@@ -51,6 +51,7 @@ export default {
   },
   fullName: 'Full name',
   help: 'Get Help',
+  homepage: 'Homepage',
   invitation_one: 'Invitation',
   invitation_other: 'Invitations',
   invitations: {
