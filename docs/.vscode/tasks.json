@@ -4,39 +4,12 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Laravel $(debug-alt-small)",
-            "hide": true,
-            "type": "shell",
-            "command": "php artisan serve",
-            "options": {
-                "statusbar": {
-                    "detail": "laravel dev server",
-                    "color": "#22C1D6"
-                }
-            }
-        },
-        {
-            "label": "Vite $(debug-alt-small)",
-            "hide": true,
-            "type": "shell",
-            "command": "pnpm run dev",
-            "options": {
-                "statusbar": {
-                    "detail": "dev server",
-                    "color": "#22C1D6"
-                }
-            }
-        },
-        {
             "label": "$(debug-alt-small)",
-            "dependsOn": [
-                "Laravel $(debug-alt-small)",
-                "Vite $(debug-alt-small)"
-            ],
             "type": "shell",
+            "command": "composer run-script dev",
             "options": {
                 "statusbar": {
-                    "detail": "dev server",
+                    "detail": "dev",
                     "color": "#22C1D6"
                 }
             }
@@ -44,10 +17,10 @@
         {
             "label": "$(play)",
             "type": "shell",
-            "command": "pnpm run build:ssr && php artisan inertia:start-ssr",
+            "command": "composer run-script dev:ssr",
             "options": {
                 "statusbar": {
-                    "detail": "prod server",
+                    "detail": "dev:ssr",
                     "color": "#22C1D6"
                 }
             }
@@ -66,10 +39,10 @@
         {
             "label": "$(test-view-icon)",
             "type": "shell",
-            "command": "pnpm run build && php artisan test --exclude-group=browser",
+            "command": "composer run-script test",
             "options": {
                 "statusbar": {
-                    "detail": "php tests",
+                    "detail": "test",
                     "color": "#22C1D6"
                 }
             }
@@ -77,10 +50,10 @@
         {
             "label": "$(test-view-icon)",
             "type": "shell",
-            "command": "pnpm run build && php artisan test --group=browser --no-coverage",
+            "command": "composer run-script test:browser",
             "options": {
                 "statusbar": {
-                    "detail": "e2e tests",
+                    "detail": "test:browser",
                     "color": "#22C1D6"
                 }
             }

@@ -16,6 +16,7 @@
         "redhat.vscode-yaml",
         "actboy168.tasks",
         "bradlc.vscode-tailwindcss",
-        "gruntfuggly.todo-tree"
+        "gruntfuggly.todo-tree",
+        "devsense.composer-php-vscode"
     ]
 }
