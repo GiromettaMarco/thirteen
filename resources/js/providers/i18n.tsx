@@ -1,6 +1,6 @@
 import resources from '@/locales/resources'
 import i18n from 'i18next'
-import LanguageDetector from 'i18next-browser-languageDetector'
+import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
 // @NOTE change translations serving strategy based on the application purpose.
