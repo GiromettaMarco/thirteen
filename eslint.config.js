@@ -45,7 +45,7 @@ export default defineConfig([
       'node_modules',
       'public',
       'bootstrap/ssr',
-      'tailwind.config.js'
+      'reports'
     ]
   },
 
