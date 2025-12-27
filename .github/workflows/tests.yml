@@ -3,12 +3,13 @@ name: tests
 on:
   push:
     branches:
-      - develop
-      - main
+      - 1.x
+      - master
   pull_request:
     branches:
-      - develop
-      - main
+      - 1.x
+      - master
+  workflow_dispatch:
 
 jobs:
   ci:
@@ -22,29 +23,38 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.4
+          extensions: json, dom, curl, libxml, mbstring
           tools: composer:v2
           coverage: xdebug
 
-      - name: Setup Node
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node with cache
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
+          node-version: 22
+          cache: 'pnpm'
 
-      - name: Install Node Dependencies
-        run: npm ci
+      - name: Setup with Composer
+        run: composer run-script setup
 
-      - name: Install Dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
 
-      - name: Copy Environment File
-        run: cp .env.example .env
+      - name: PHP Tests
+        run: ./vendor/bin/pest --exclude-group=browser --parallel
 
-      - name: Generate Application Key
-        run: php artisan key:generate
+      - name: Browser Tests
+        run: ./vendor/bin/pest --group=browser --no-coverage --parallel
 
-      - name: Build Assets
-        run: npm run build
+      # - name: Update PHP Coverage Badge
+      #   run: bin/php-coverage
 
-      - name: Tests
-        run: ./vendor/bin/pest
+      # - name: Commit Changes
+      #   uses: stefanzweifel/git-auto-commit-action@v5
+      #   with:
+      #     commit_message: 'docs: update coverage badges'
+      #     commit_options: '--no-verify'
