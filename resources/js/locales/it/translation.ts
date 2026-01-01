@@ -119,10 +119,19 @@ export default {
       }
     },
     errors: {
+      e403: {
+        description: "Non hai l'autorizzazione per accedere a questa risorsa.",
+        title: 'Accesso vietato'
+      },
       e404: {
         description:
           'Non è stato possibile trovare la risorsa che stavi cercando.',
         title: 'Pagina non trovata'
+      },
+      unknown: {
+        description:
+          'Si è verificato un errore inaspettato, riprova più tardi.',
+        title: 'Errore sconosciuto'
       }
     },
     public: {

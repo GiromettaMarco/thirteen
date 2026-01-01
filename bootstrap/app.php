@@ -7,6 +7,10 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Sliver\Format\FlashMessage;
+use Symfony\Component\HttpFoundation\Response;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -28,5 +32,19 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
+            if ($response->getStatusCode() === 403) {
+                return Inertia::render('errors/403', ['message' => $exception->getMessage() ?: null])
+                    ->toResponse($request)
+                    ->setStatusCode(403);
+            }
+
+            if ($response->getStatusCode() === 419) {
+                Inertia::flash('toast', new FlashMessage($exception->getMessage() ?: __('http-statuses.419'), 'error'));
+
+                return back();
+            }
+
+            return $response;
+        });
     })->create();

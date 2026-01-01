@@ -118,9 +118,17 @@ export default {
       }
     },
     errors: {
+      e403: {
+        description: "You don't have authorization to access this resource.",
+        title: 'Forbidden'
+      },
       e404: {
         description: 'The resource you were looking for could not be found.',
         title: 'Page not found'
+      },
+      unknown: {
+        description: 'An unknown error occurred, please try again later.',
+        title: 'Unknown error'
       }
     },
     public: {
