@@ -93,7 +93,7 @@ export default function Login({
               <Submit
                 className="mt-4 w-full"
                 data-test="login-submit"
-                label={t(($) => $.auth.login)}
+                label={t(($) => $.auth.signIn)}
                 loading={loading}
               />
             </>

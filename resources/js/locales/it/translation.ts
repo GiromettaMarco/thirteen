@@ -15,9 +15,10 @@ export default {
     confirmNewPassword: 'Conferma nuova password',
     confirmPassword: 'Conferma password',
     currentPassword: 'Password attuale',
-    login: 'Login',
     newPasword: 'Nuova password',
-    password: 'Password'
+    password: 'Password',
+    signIn: 'Accedi',
+    signOut: 'Esci'
   },
   cancel: 'Annulla',
   close: 'Chiudi',
@@ -116,6 +117,12 @@ export default {
         p: 'Inserisci la tua nuova password qui sotto',
         submit: 'Cambia password',
         title: 'Reimposta la password'
+      },
+      verifyEmail: {
+        h1: 'Verifica la tua email',
+        p: 'Verifica il tuo indirizzo email cliccando sul link che ti abbiamo appena inviato.',
+        title: 'Verifica email',
+        submit: "Invia nuovamente l'email di verifica"
       }
     },
     errors: {
@@ -184,11 +191,6 @@ export default {
   },
   remove: 'Rimuovi',
   reset: 'Reset',
-  resetPassword: {
-    title: 'Reimposta la password',
-    description: 'Inserisci la tua nuova password qui sotto',
-    submit: 'Reset Password'
-  },
   role: 'Ruolo',
   save: 'Salva',
   search: 'Cerca',
@@ -346,11 +348,5 @@ export default {
       worker: 'Worker'
     },
     selectRole: 'Seleziona un ruolo'
-  },
-  verifyEmail: {
-    title: 'Verifica la tua email',
-    description:
-      'Verifica il tuo indirizzo email cliccando sul link che ti abbiamo appena inviato.',
-    submit: "Invia nuovamente l'email di verifica"
   }
 } as const

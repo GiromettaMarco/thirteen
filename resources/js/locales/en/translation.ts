@@ -15,9 +15,10 @@ export default {
     confirmNewPassword: 'Confirm new password',
     confirmPassword: 'Confirm password',
     currentPassword: 'Current password',
-    login: 'Login',
     newPasword: 'New password',
-    password: 'Password'
+    password: 'Password',
+    signIn: 'Sign In',
+    signOut: 'Sign Out'
   },
   cancel: 'Cancel',
   close: 'Close',
@@ -73,7 +74,6 @@ export default {
     system: 'System'
   },
   loading: 'Loading...',
-  logout: 'Log out',
   management: 'Management',
   manager: 'Manager',
   manageTeams: 'Manage Teams',
@@ -115,6 +115,12 @@ export default {
         p: 'Please enter your new password below',
         submit: 'Reset password',
         title: 'Reset password'
+      },
+      verifyEmail: {
+        h1: 'Verify email',
+        p: 'Please verify your email address by clicking on the link we just emailed to you.',
+        title: 'Email verification',
+        submit: 'Resend verification email'
       }
     },
     errors: {
@@ -180,11 +186,6 @@ export default {
   },
   remove: 'Remove',
   reset: 'Reset',
-  resetPassword: {
-    title: 'Reset password',
-    description: 'Please enter your new password below',
-    submit: 'Reset Password'
-  },
   role: 'Role',
   save: 'Save',
   search: 'Search',
@@ -340,11 +341,5 @@ export default {
       worker: 'Worker'
     },
     selectRole: 'Select a role'
-  },
-  verifyEmail: {
-    title: 'Verify email',
-    description:
-      'Please verify your email address by clicking on the link we just emailed to you.',
-    submit: 'Resend verification email'
   }
 } as const
