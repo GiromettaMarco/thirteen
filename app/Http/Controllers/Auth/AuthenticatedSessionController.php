@@ -8,6 +8,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -18,7 +19,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('auth/login');
+        return Inertia::render('auth/login', [
+            'canRegister' => Config::get('custom.auth.register'),
+            'canReset' => Config::get('custom.auth.reset'),
+        ]);
     }
 
     /**

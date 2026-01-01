@@ -15,9 +15,11 @@ import { Controller } from 'react-hook-form'
 import { Trans, useTranslation } from 'react-i18next'
 
 export default function Login({
-  canRegister = true
+  canRegister = false,
+  canReset = false
 }: {
   canRegister?: boolean
+  canReset?: boolean
 }) {
   // i18n
   const { t } = useTranslation()
@@ -63,12 +65,14 @@ export default function Login({
                           {t(($) => $.auth.password)}
                         </FieldLabel>
 
-                        <TextLink
-                          className="ms-auto text-sm"
-                          href={request()}
-                        >
-                          {t(($) => $.pages.auth.login.forgotPasswordCTA)}
-                        </TextLink>
+                        {canReset && (
+                          <TextLink
+                            className="ms-auto text-sm"
+                            href={request()}
+                          >
+                            {t(($) => $.pages.auth.login.forgotPasswordCTA)}
+                          </TextLink>
+                        )}
                       </div>
                     </div>
 

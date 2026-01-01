@@ -3,11 +3,20 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 
 class NewPasswordRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return Config::get('custom.auth.reset');
+    }
+
     /**
      * Prepare the data for validation.
      */

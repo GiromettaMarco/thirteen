@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\PasswordEmailRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Config;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -15,6 +16,10 @@ class PasswordResetLinkController extends Controller
      */
     public function create(): Response
     {
+        if (! Config::get('custom.auth.reset')) {
+            abort(403);
+        }
+
         return Inertia::render('auth/forgot-password');
     }
 

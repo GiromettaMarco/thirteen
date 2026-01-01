@@ -6,6 +6,7 @@ use App\Http\Requests\ThrottledRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -19,7 +20,7 @@ class RegisterRequest extends ThrottledRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Config::get('custom.auth.register');
     }
 
     /**

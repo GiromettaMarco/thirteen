@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\ThrottledRequest;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Sliver\Format\FlashMessage;
@@ -14,7 +15,7 @@ class PasswordEmailRequest extends ThrottledRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Config::get('custom.auth.reset');
     }
 
     /**
