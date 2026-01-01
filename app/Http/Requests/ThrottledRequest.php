@@ -40,7 +40,7 @@ abstract class ThrottledRequest extends FormRequest
 
         Inertia::flash('toast', new FlashMessage(__('strings.throttle', [
             'seconds' => $seconds,
-            'minutes' => ceil($seconds / 60),
+            'minutes' => ceil($seconds / $this->decaySeconds),
         ]), 'error'));
 
         return true;
