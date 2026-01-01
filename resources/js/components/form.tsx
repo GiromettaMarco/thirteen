@@ -190,12 +190,14 @@ export function PasswordField<TFieldValues extends FieldValues = FieldValues>({
 
 export function HiddenField<TFieldValues extends FieldValues = FieldValues>({
   autoComplete = 'off',
+  className,
   type = 'hidden',
   ...props
 }: ComponentProps<typeof InputField<TFieldValues>>) {
   return (
     <InputField
       autoComplete={autoComplete}
+      className={cn('hidden', className)}
       type={type}
       {...props}
     />
