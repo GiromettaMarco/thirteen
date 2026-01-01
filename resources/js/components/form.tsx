@@ -174,6 +174,34 @@ export function EmailField<TFieldValues extends FieldValues = FieldValues>({
   )
 }
 
+export function PasswordField<TFieldValues extends FieldValues = FieldValues>({
+  autoComplete = 'off',
+  type = 'password',
+  ...props
+}: ComponentProps<typeof InputField<TFieldValues>>) {
+  return (
+    <InputField
+      autoComplete={autoComplete}
+      type={type}
+      {...props}
+    />
+  )
+}
+
+export function HiddenField<TFieldValues extends FieldValues = FieldValues>({
+  autoComplete = 'off',
+  type = 'hidden',
+  ...props
+}: ComponentProps<typeof InputField<TFieldValues>>) {
+  return (
+    <InputField
+      autoComplete={autoComplete}
+      type={type}
+      {...props}
+    />
+  )
+}
+
 export function CheckboxField<TFieldValues extends FieldValues = FieldValues>({
   control,
   inputId,
@@ -215,22 +243,6 @@ export function CheckboxField<TFieldValues extends FieldValues = FieldValues>({
           {fieldState.invalid && <FieldErrorI18n errors={[fieldState.error]} />}
         </Field>
       )}
-    />
-  )
-}
-
-export default function PasswordField<
-  TFieldValues extends FieldValues = FieldValues
->({
-  autoComplete = 'off',
-  type = 'password',
-  ...props
-}: ComponentProps<typeof InputField<TFieldValues>>) {
-  return (
-    <InputField
-      autoComplete={autoComplete}
-      type={type}
-      {...props}
     />
   )
 }

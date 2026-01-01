@@ -1,4 +1,4 @@
-import PasswordField, { EmailField, TextField } from '@/components/form'
+import { EmailField, PasswordField, TextField } from '@/components/form'
 import type { Control, FieldPath } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
