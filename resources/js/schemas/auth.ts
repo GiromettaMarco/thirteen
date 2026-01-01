@@ -4,9 +4,7 @@ import { TsvMessage } from '@/lib/tsv/message'
 import { Schema } from '@/lib/tsv/schema'
 import { email, name } from '@/schemas/misc'
 
-// ======================================================================
-//#region FIELDS
-// ======================================================================
+//#region Fields
 
 export const current_password = new InputTextRule({
   minChars: 8,
@@ -31,10 +29,9 @@ export const password_confirmation = new InputTextRule({
     required: 'confirmPassword.required'
   }
 })
+//#endregion
 
-// ======================================================================
-//#region POST VALIDATION
-// ======================================================================
+//#region Post Validation
 
 export const passwordMatch = {
   addTo: 'password_confirmation' as const,
@@ -52,10 +49,9 @@ export const passwordMatch = {
     return new TsvMessage('confirmPassword.match')
   }
 }
+//#endregion
 
-// ======================================================================
-//#region SCHEMAS
-// ======================================================================
+//#region Schemas
 
 export const loginSchema = new Schema({
   email,
@@ -74,3 +70,24 @@ export const registerSchema = new Schema(
     postValidation: [passwordMatch]
   }
 )
+
+export const forgotPasswordSchema = new Schema({
+  email
+})
+
+export const resetPasswordSchema = new Schema(
+  {
+    email,
+    password,
+    password_confirmation,
+    token: new InputTextRule({
+      messages: {
+        required: 'token.required'
+      }
+    })
+  },
+  {
+    postValidation: [passwordMatch]
+  }
+)
+//#endregion

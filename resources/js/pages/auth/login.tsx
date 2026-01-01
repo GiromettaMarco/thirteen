@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Submit } from '@/components/ui/submit'
 import AuthLayout from '@/layouts/auth-layout'
 import { register } from '@/routes'
+import { request } from '@/routes/password'
 import { loginSchema } from '@/schemas/auth'
 import { Head } from '@inertiajs/react'
 import { Controller } from 'react-hook-form'
@@ -64,8 +65,7 @@ export default function Login({
 
                         <TextLink
                           className="ms-auto text-sm"
-                          // @TODO add href route
-                          href="/forgot-password"
+                          href={request()}
                         >
                           {t(($) => $.pages.auth.login.forgotPasswordCTA)}
                         </TextLink>

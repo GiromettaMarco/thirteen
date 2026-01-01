@@ -43,13 +43,6 @@ export default {
   employee_one: 'Impiegato',
   employee_other: 'Impiegati',
   employment: 'Impiego',
-  forgotPassword: {
-    title: 'Password dimenticata',
-    description:
-      'Inserisci la tua email per ricevere un link di reset password',
-    returnTo: 'Oppure, ritorna al <1>log in</1>',
-    submit: 'Invia link di reset password'
-  },
   fullName: 'Nome completo',
   help: 'Chiedi Aiuto',
   homepage: 'Pagina iniziale',
@@ -96,6 +89,13 @@ export default {
   openMenu: 'Apri menu',
   pages: {
     auth: {
+      forgotPassword: {
+        h1: 'Password dimenticata',
+        loginCTA: 'Oppure, ritorna al <1>log in</1>',
+        p: 'Inserisci la tua email per ricevere un link di reset password',
+        submit: 'Invia link di reset password',
+        title: 'Password dimenticata'
+      },
       login: {
         forgotPasswordCTA: 'Hai dimenticato la password?',
         h1: 'Accedi al tuo account',
@@ -110,6 +110,12 @@ export default {
         p: 'Inserisci i tuoi dettagli per creare il tuo account',
         submit: 'Crea account',
         title: 'Registrazione'
+      },
+      resetPassword: {
+        h1: 'Reimposta la password',
+        p: 'Inserisci la tua nuova password qui sotto',
+        submit: 'Cambia password',
+        title: 'Reimposta la password'
       }
     },
     errors: {

@@ -43,12 +43,6 @@ export default {
   employee_one: 'Employee',
   employee_other: 'Employees',
   employment: 'Employment',
-  forgotPassword: {
-    title: 'Forgot password',
-    description: 'Enter your email to receive a password reset link',
-    returnTo: 'Or, return to <1>log in</1>',
-    submit: 'Invia link di reset password'
-  },
   fullName: 'Full name',
   help: 'Get Help',
   homepage: 'Homepage',
@@ -94,6 +88,13 @@ export default {
   openMenu: 'Open menu',
   pages: {
     auth: {
+      forgotPassword: {
+        h1: 'Forgot password',
+        loginCTA: 'Or, return to <1>log in</1>',
+        p: 'Enter your email to receive a password reset link',
+        submit: 'Send password reset link',
+        title: 'Forgot password'
+      },
       login: {
         forgotPasswordCTA: 'Forgot your password?',
         h1: 'Log in to your account',
@@ -108,6 +109,12 @@ export default {
         p: 'Enter your details below to create your account',
         submit: 'Create account',
         title: 'Register'
+      },
+      resetPassword: {
+        h1: 'Reset password',
+        p: 'Please enter your new password below',
+        submit: 'Reset password',
+        title: 'Reset password'
       }
     },
     errors: {
