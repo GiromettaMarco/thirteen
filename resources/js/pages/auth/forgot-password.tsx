@@ -40,9 +40,10 @@ export default function ForgotPassword() {
         </Form>
 
         <div className="text-muted-foreground text-center text-sm">
-          <Trans i18nKey={($) => $.pages.auth.forgotPassword.loginCTA}>
-            Or, return to <TextLink href={login()}>log in</TextLink>
-          </Trans>
+          <Trans
+            components={{ a: <TextLink href={login()} /> }}
+            i18nKey={($) => $.pages.auth.forgotPassword.loginCTA}
+          />
         </div>
       </div>
     </AuthLayout>

@@ -56,9 +56,10 @@ export default function Register() {
         </Form>
 
         <div className="text-muted-foreground text-center text-sm">
-          <Trans i18nKey={($) => $.pages.auth.register.loginCTA}>
-            Already have an account? <TextLink href={login()}>Log in</TextLink>
-          </Trans>
+          <Trans
+            components={{ a: <TextLink href={login()} /> }}
+            i18nKey={($) => $.pages.auth.register.loginCTA}
+          />
         </div>
       </div>
     </AuthLayout>

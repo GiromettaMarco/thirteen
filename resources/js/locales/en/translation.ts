@@ -90,7 +90,7 @@ export default {
     auth: {
       forgotPassword: {
         h1: 'Forgot password',
-        loginCTA: 'Or, return to <1>log in</1>',
+        loginCTA: 'Or, return to <a>log in</a>',
         p: 'Enter your email to receive a password reset link',
         submit: 'Send password reset link',
         title: 'Forgot password'
@@ -99,13 +99,13 @@ export default {
         forgotPasswordCTA: 'Forgot your password?',
         h1: 'Log in to your account',
         p: 'Enter your email and password below to log in',
-        registerCTA: "Don't have an account? <1>Sign Up</1>",
+        registerCTA: "Don't have an account? <a>Sign Up</a>",
         rememberMe: 'Remember me',
         title: 'Login'
       },
       register: {
         h1: 'Create an account',
-        loginCTA: 'Already have an account? <1>Log in</1>',
+        loginCTA: 'Already have an account? <a>Log in</a>',
         p: 'Enter your details below to create your account',
         submit: 'Create account',
         title: 'Register'

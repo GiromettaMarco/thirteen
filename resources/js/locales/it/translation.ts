@@ -91,7 +91,7 @@ export default {
     auth: {
       forgotPassword: {
         h1: 'Password dimenticata',
-        loginCTA: 'Oppure, ritorna al <1>log in</1>',
+        loginCTA: 'Oppure, ritorna al <a>log in</a>',
         p: 'Inserisci la tua email per ricevere un link di reset password',
         submit: 'Invia link di reset password',
         title: 'Password dimenticata'
@@ -100,13 +100,13 @@ export default {
         forgotPasswordCTA: 'Hai dimenticato la password?',
         h1: 'Accedi al tuo account',
         p: 'Inserisci la tua email e la password qui sotto per accedere',
-        registerCTA: 'Non hai un account? <1>Iscriviti</1>',
+        registerCTA: 'Non hai un account? <a>Iscriviti</a>',
         rememberMe: 'Ricordati di me',
         title: 'Login'
       },
       register: {
         h1: 'Crea un account',
-        loginCTA: 'Hai già un account? <1>Log in</1>',
+        loginCTA: 'Hai già un account? <a>Log in</a>',
         p: 'Inserisci i tuoi dettagli per creare il tuo account',
         submit: 'Crea account',
         title: 'Registrazione'
