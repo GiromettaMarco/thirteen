@@ -62,7 +62,7 @@ class HandleLocale
     protected function setLocaleByCookie(Request $request): bool
     {
         /** @var string|null $cookie_locale */
-        $cookie_locale = $request->cookie(Config::get('cookie.locale', 'locale'));
+        $cookie_locale = $request->cookie(Config::get('custom.cookie.locale', 'locale'));
 
         if ($cookie_locale) {
             return $this->setAppLocale($cookie_locale);

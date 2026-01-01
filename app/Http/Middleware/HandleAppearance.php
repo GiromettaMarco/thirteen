@@ -18,7 +18,7 @@ class HandleAppearance
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $cookie = $request->cookie(Config::get('cookie.appearance', 'appearance'));
+        $cookie = $request->cookie(Config::get('custom.cookie.appearance', 'appearance'));
 
         $appearance = in_array($cookie, ['light', 'dark']) ? $cookie : 'system';
 
