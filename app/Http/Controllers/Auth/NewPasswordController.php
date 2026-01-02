@@ -46,18 +46,20 @@ class NewPasswordController extends Controller
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function (User $user) use ($request) {
                 // Verify the user email if set in config
-                $verifyEmail = Config::get('custom.verify_on_reset', true) && ! $user->hasVerifiedEmail();
+                $verify_email = Config::get('custom.auth.verification') &&
+                    Config::get('custom.auth.verify_on_reset') &&
+                    ! $user->hasVerifiedEmail();
 
                 $saved = $user->forceFill([
                     'password' => Hash::make($request->password),
                     'remember_token' => Str::random(60),
-                    ...($verifyEmail ? ['email_verified_at' => $user->freshTimestamp()] : []),
+                    ...($verify_email ? ['email_verified_at' => $user->freshTimestamp()] : []),
                 ])->save();
 
                 if ($saved) {
                     event(new PasswordReset($user));
 
-                    if ($verifyEmail) {
+                    if ($verify_email) {
                         event(new Verified($user));
                     }
                 }
