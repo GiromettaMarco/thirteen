@@ -9,8 +9,6 @@ export default function AppContainer({
   appearance,
   children
 }: PropsWithChildren<{ appearance: Appearance }>) {
-  console.log('rendering AppContainer')
-
   return (
     <I18nextProvider i18n={i18n}>
       <AppearanceProvider appearance={appearance}>
