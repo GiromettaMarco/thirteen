@@ -132,6 +132,11 @@ export default {
         description: 'The resource you were looking for could not be found.',
         title: 'Page not found'
       },
+      e429: {
+        description:
+          'You have exceeded the maximum number of requests. Please try again later.',
+        title: 'Too Many Requests'
+      },
       unknown: {
         description: 'An unknown error occurred, please try again later.',
         title: 'Unknown error'

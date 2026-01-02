@@ -135,6 +135,11 @@ export default {
           'Non è stato possibile trovare la risorsa che stavi cercando.',
         title: 'Pagina non trovata'
       },
+      e429: {
+        description:
+          'Hai superato il numero massimo di richieste. Riprova più tardi.',
+        title: 'Troppe richieste'
+      },
       unknown: {
         description:
           'Si è verificato un errore inaspettato, riprova più tardi.',

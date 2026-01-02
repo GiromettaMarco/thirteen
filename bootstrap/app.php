@@ -25,10 +25,11 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->web(append: [
-            HandleLocale::class,
             HandleAppearance::class,
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
+        ], prepend: [
+            HandleLocale::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
@@ -37,6 +38,12 @@ return Application::configure(basePath: dirname(__DIR__))
                 return Inertia::render('errors/403', ['message' => $exception->getMessage() ?: null])
                     ->toResponse($request)
                     ->setStatusCode(403);
+            }
+
+            if ($response->getStatusCode() === 429) {
+                return Inertia::render('errors/429')
+                    ->toResponse($request)
+                    ->setStatusCode(429);
             }
 
             if ($response->getStatusCode() === 419) {
