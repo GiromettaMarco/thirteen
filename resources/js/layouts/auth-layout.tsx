@@ -1,8 +1,7 @@
 import { Brand } from '@/components/ui/brand'
-import { flashMessages } from '@/lib/flash'
 import { home } from '@/routes'
-import { Link, router } from '@inertiajs/react'
-import { useEffect, type PropsWithChildren } from 'react'
+import { Link } from '@inertiajs/react'
+import { type PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export default function AuthLayout({
@@ -15,12 +14,6 @@ export default function AuthLayout({
 }>) {
   // i18n
   const { t } = useTranslation()
-
-  useEffect(() => {
-    return router.on('flash', (event) => {
-      flashMessages(event.detail.flash.toast)
-    })
-  }, [])
 
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
