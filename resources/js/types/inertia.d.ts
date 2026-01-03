@@ -9,7 +9,7 @@ declare module '@inertiajs/core' {
     sharedPageProps: {
       appearance: Appearance
       auth: Auth
-      name: string
+      sidebarOpen: boolean
     }
   }
 }

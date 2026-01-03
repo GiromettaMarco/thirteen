@@ -38,6 +38,7 @@ return [
     'cookie' => [
         'appearance' => env('COOKIE_APPEARANCE', 'appearance'),
         'locale' => env('COOKIE_LOCALE', 'locale'),
+        'sidebar' => env('COOKIE_SIDEBAR', 'sidebar'),
     ],
 
 ];

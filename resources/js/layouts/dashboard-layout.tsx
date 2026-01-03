@@ -34,7 +34,7 @@ import { dashboard, home, logout, settings } from '@/routes'
 import { index as invitationsIndex } from '@/routes/invitations'
 import { index as projectsIndex } from '@/routes/projects'
 import { index as teamsIndex, show as teamsShow } from '@/routes/teams'
-import type { Auth, Permissions } from '@/types'
+import type { Permissions } from '@/types'
 import type { RouteDefinition } from '@/wayfinder'
 import { Link, usePage } from '@inertiajs/react'
 import {
@@ -287,19 +287,21 @@ function ProfileDropdown({
 
 //#region Layout
 export default function DashboardLayout({
-  auth,
   button,
   breadcrumbs = [],
   children,
-  sidebarOpen,
   title
 }: PropsWithChildren<{
-  auth: Auth<true>
   button?: ReactNode
   breadcrumbs?: BreadcrumbLink[]
-  sidebarOpen?: boolean
   title?: string
 }>) {
+  const { auth, sidebarOpen } = usePage().props
+
+  if (!auth.user) {
+    throw new Error('The dashboard layout requires "user" to be set.')
+  }
+
   return (
     <SidebarProvider
       defaultOpen={sidebarOpen}

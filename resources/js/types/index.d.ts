@@ -18,13 +18,6 @@ export interface Auth<TWithUser extends boolean = false> {
   user: TWithUser extends true ? User : User | null
 }
 
-export interface SharedData {
-  name: string
-  quote: { message: string; author: string }
-  auth: Auth
-  [key: string]: unknown
-}
-
 export interface User {
   id: number
   name: string

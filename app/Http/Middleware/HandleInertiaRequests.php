@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use App\Helpers\Permissions;
-use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -37,13 +37,10 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
-
         return [
             ...parent::share($request),
-            'name' => config('app.name'),
-            'quote' => ['message' => trim($message), 'author' => trim($author)],
             'auth' => Permissions::getAuth(),
+            'sidebarOpen' => $request->cookie(Config::get('custom.cookie.sidebar', 'sidebar'), 'true') === 'true',
         ];
     }
 }
