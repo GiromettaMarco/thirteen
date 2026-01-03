@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Permission;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +14,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Permissions
+        $view_users = Permission::create(['name' => 'view-users']);
+        $edit_users = Permission::create(['name' => 'edit-users']);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::factory()
+            ->hasAttached($view_users)
+            ->hasAttached($edit_users)
+            ->create([
+                'name' => 'Test User',
+                'email' => 'test@example.com',
+            ]);
     }
 }

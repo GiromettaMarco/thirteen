@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -44,5 +45,25 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Many To Many Relationship.
+     */
+    public function permissions(): BelongsToMany
+    {
+        return $this->belongsToMany(Permission::class)->withTimestamps();
+    }
+
+    /**
+     * Check an app permission by name.
+     */
+    public function hasPermission(string $permission): bool
+    {
+        return $this->permissions->contains(
+            function (Permission $permissionModel) use (&$permission) {
+                return $permissionModel->name === $permission;
+            }
+        );
     }
 }

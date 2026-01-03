@@ -4,7 +4,17 @@ export type Theme = 'dark' | 'light'
 
 export type Locale = 'en' | 'it'
 
+export interface UsersPermissions {
+  edit: boolean
+  view: boolean
+}
+
+export interface Permissions {
+  users: UsersPermissions
+}
+
 export interface Auth<TWithUser extends boolean = false> {
+  permissions: Permissions
   user: TWithUser extends true ? User : User | null
 }
 
