@@ -14,7 +14,7 @@ import {
 import { setClientCookie } from '@/lib/cookie'
 import type { Locale } from '@/types'
 import type { Callback, TFunction } from 'i18next'
-import { Globe } from 'lucide-react'
+import { Languages } from 'lucide-react'
 import { type ComponentProps } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -97,7 +97,7 @@ export function LanguageSelect(props: ComponentProps<'div'>) {
         >
           <SelectValue placeholder={t(($) => $.language.select)}>
             <div className="flex items-center gap-2">
-              <Globe />
+              <Languages />
               <span>{langs[i18n.language]}</span>
             </div>
           </SelectValue>
