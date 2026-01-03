@@ -138,6 +138,11 @@ export default {
         }
       },
       settings: {
+        appearanceDescription:
+          "Scegli il tema dell'applicazione o utilizza lo stesso tema del tuo sistema.",
+        appearanceTitle: 'Impostazioni aspetto',
+        languageDescription: "Imposta la lingua dell'applicazione.",
+        languageTitle: 'Impostazioni della lingua',
         title: 'Impostazioni'
       },
       teams: {
@@ -321,17 +326,6 @@ export default {
     title: 'Aggiorna account',
     description: "Cambia il nome utente e l'indirizzo email del tuo account",
     info: 'Dopo aver inserito un nuovo indirizzo email, devrai verificarlo prima di poter procedere nella dashboard.'
-  },
-  updateAppearance: {
-    title: 'Impostazioni aspetto',
-    description:
-      "Scegli il tema dell'applicazione o utilizza lo stesso tema del tuo sistema.",
-    select: 'Seleziona aspetto'
-  },
-  updateLanguage: {
-    title: 'Impostazioni della lingua',
-    description: "Imposta la lingua dell'applicazione.",
-    select: 'Seleziona una lingua'
   },
   updatePassword: {
     title: 'Aggiorna la password',

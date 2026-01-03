@@ -139,6 +139,11 @@ export default {
         }
       },
       settings: {
+        appearanceDescription:
+          "Choose the application's theme or use the same theme as your system.",
+        appearanceTitle: 'Appearance settings',
+        languageDescription: 'Set the language of the application.',
+        languageTitle: 'Language settings',
         title: 'Settings'
       },
       teams: {
@@ -317,17 +322,6 @@ export default {
     title: 'Update account',
     description: 'Change username and email of your account',
     info: 'After submitting a new email address, you will need to verify it before proceeding further in the dashboard.'
-  },
-  updateAppearance: {
-    title: 'Appearance settings',
-    description:
-      "Choose the application's theme or use the same theme as your system.",
-    select: 'Select appearance'
-  },
-  updateLanguage: {
-    title: 'Language settings',
-    description: 'Set the language of the application.',
-    select: 'Select a language'
   },
   updatePassword: {
     title: 'Update password',
