@@ -68,6 +68,17 @@
                     "color": "#22C1D6"
                 }
             }
+        },
+        {
+            "label": "$(type-hierarchy)",
+            "type": "shell",
+            "command": "php artisan wayfinder:generate",
+            "options": {
+                "statusbar": {
+                    "detail": "wayfinder",
+                    "color": "#22C1D6"
+                }
+            }
         }
     ]
 }
