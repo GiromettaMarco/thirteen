@@ -77,6 +77,7 @@ export default {
   management: 'Management',
   manager: 'Manager',
   manageTeams: 'Manage Teams',
+  more: 'More',
   name: 'Name',
   noCurrentTeam: {
     dashboard:
@@ -121,6 +122,29 @@ export default {
         p: 'Please verify your email address by clicking on the link we just emailed to you.',
         title: 'Email verification',
         submit: 'Resend verification email'
+      }
+    },
+    dashboard: {
+      index: {
+        title: 'Dashboard'
+      },
+      invitations: {
+        index: {
+          title: 'Invitations'
+        }
+      },
+      projects: {
+        index: {
+          title: 'Projects'
+        }
+      },
+      settings: {
+        title: 'Settings'
+      },
+      teams: {
+        index: {
+          title: 'Teams management'
+        }
       }
     },
     errors: {

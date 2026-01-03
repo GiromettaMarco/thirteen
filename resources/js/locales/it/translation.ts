@@ -79,6 +79,7 @@ export default {
   management: 'Gestione',
   manager: 'Manager',
   manageTeams: 'Gestisci i Team',
+  more: 'Altro',
   name: 'Nome',
   noCurrentTeam: {
     dashboard:
@@ -123,6 +124,26 @@ export default {
         p: 'Verifica il tuo indirizzo email cliccando sul link che ti abbiamo appena inviato.',
         title: 'Verifica email',
         submit: "Invia nuovamente l'email di verifica"
+      }
+    },
+    dashboard: {
+      invitations: {
+        index: {
+          title: 'Inviti'
+        }
+      },
+      projects: {
+        index: {
+          title: 'Progetti'
+        }
+      },
+      settings: {
+        title: 'Impostazioni'
+      },
+      teams: {
+        index: {
+          title: 'Gestione dei team'
+        }
       }
     },
     errors: {
