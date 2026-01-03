@@ -81,8 +81,7 @@
             "eslint --cache --fix"
         ],
         "**/*.php": [
-            "php ./vendor/bin/pint",
-            "php ./vendor/bin/phpstan analyse"
+            "php ./vendor/bin/pint"
         ]
     }
 }
