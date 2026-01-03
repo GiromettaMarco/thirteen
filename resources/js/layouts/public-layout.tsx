@@ -469,7 +469,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
 
               <a
                 className="hover:underline"
-                href="https://github.com/GiromettaMarco/Mono/blob/master/LICENSE.md"
+                href="https://github.com/GiromettaMarco/thirteen/blob/master/LICENSE.md"
                 rel="noreferrer"
                 target="_blank"
               >
