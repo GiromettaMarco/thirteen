@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\NewPasswordRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -46,8 +47,8 @@ class NewPasswordController extends Controller
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function (User $user) use ($request) {
                 // Verify the user email if set in config
-                $verify_email = Config::get('custom.auth.verification') &&
-                    Config::get('custom.auth.verify_on_reset') &&
+                $verify_email = Config::get('custom.auth.verify_on_reset') &&
+                    $user instanceof MustVerifyEmail &&
                     ! $user->hasVerifiedEmail();
 
                 $saved = $user->forceFill([

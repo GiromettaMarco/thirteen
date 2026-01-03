@@ -12,10 +12,9 @@ return [
     | - reset: Allow registered users to reset their password using the forgot
     |   password form.
     | - verification: Require email verification for new users. Remember to
-    |   add/remove the MustVerifyEmail contract from the User model and the
-    |   'verified' middleware from the dashboard route group.
-    | - verify_on_reset: Verify the user email when they complete a password
-    |   reset (does nothing if email verification is disabled).
+    |   add/remove the MustVerifyEmail contract to the User model and the
+    |   'verified' middleware to the dashboard route group.
+    | - verify_on_reset: Verify the user email after a password reset.
     |
     */
 
