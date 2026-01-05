@@ -3,9 +3,11 @@ import type { Control, FieldPath } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
 export function NameFieldPreset<TFieldValues extends { name: string }>({
-  control
+  control,
+  placeholder = true
 }: {
   control: Control<TFieldValues>
+  placeholder?: boolean
 }) {
   // i18n
   const { t } = useTranslation()
@@ -16,15 +18,17 @@ export function NameFieldPreset<TFieldValues extends { name: string }>({
       inputId="name"
       inputName={'name' as FieldPath<TFieldValues>}
       label={t(($) => $.name)}
-      placeholder={t(($) => $.fullName)}
+      placeholder={placeholder ? t(($) => $.fullName) : undefined}
     />
   )
 }
 
 export function EmailFieldPreset<TFieldValues extends { email: string }>({
-  control
+  control,
+  placeholder = true
 }: {
   control: Control<TFieldValues>
+  placeholder?: boolean
 }) {
   // i18n
   const { t } = useTranslation()
@@ -35,15 +39,17 @@ export function EmailFieldPreset<TFieldValues extends { email: string }>({
       inputId="email"
       inputName={'email' as FieldPath<TFieldValues>}
       label={t(($) => $.emailAddress)}
-      placeholder={'email@example.com'}
+      placeholder={placeholder ? 'email@example.com' : undefined}
     />
   )
 }
 
 export function PasswordFieldPreset<TFieldValues extends { password: string }>({
-  control
+  control,
+  placeholder = true
 }: {
   control: Control<TFieldValues>
+  placeholder?: boolean
 }) {
   // i18n
   const { t } = useTranslation()
@@ -54,14 +60,20 @@ export function PasswordFieldPreset<TFieldValues extends { password: string }>({
       inputId="password"
       inputName={'password' as FieldPath<TFieldValues>}
       label={t(($) => $.auth.password)}
-      placeholder={t(($) => $.auth.password)}
+      placeholder={placeholder ? t(($) => $.auth.password) : undefined}
     />
   )
 }
 
 export function ConfirmPasswordFieldPreset<
   TFieldValues extends { password_confirmation: string }
->({ control }: { control: Control<TFieldValues> }) {
+>({
+  control,
+  placeholder = true
+}: {
+  control: Control<TFieldValues>
+  placeholder?: boolean
+}) {
   // i18n
   const { t } = useTranslation()
 
@@ -71,7 +83,7 @@ export function ConfirmPasswordFieldPreset<
       inputId="confirm-password"
       inputName={'password_confirmation' as FieldPath<TFieldValues>}
       label={t(($) => $.auth.confirmPassword)}
-      placeholder={t(($) => $.auth.confirmPassword)}
+      placeholder={placeholder ? t(($) => $.auth.confirmPassword) : undefined}
     />
   )
 }
