@@ -10,12 +10,10 @@ export default {
     select: 'Select appearance',
     system: 'Sistema'
   },
-  assignedTo: 'Asseganto a',
+  assignedTo: 'Assegnato a',
   auth: {
-    confirmNewPassword: 'Conferma nuova password',
     confirmPassword: 'Conferma password',
     currentPassword: 'Password attuale',
-    newPasword: 'Nuova password',
     password: 'Password',
     signIn: 'Accedi',
     signOut: 'Esci'
@@ -27,17 +25,6 @@ export default {
   dateCreated: 'Date creazione',
   dateModified: 'Ultima modifica',
   delete: 'Elimina',
-  deleteAccount: {
-    title: 'Elimina account',
-    description: 'Elimina il tuo account e tutte le sue risorse',
-    info: 'Si prega di procedere con cautela, questa operazione non può essere annullata.',
-    dialog: {
-      trigger: 'Elimina account',
-      title: 'Sei sicuro di voler eliminare il tuo account?',
-      description:
-        'Una volta eliminato il tuo account, anche tutte le sue risorse e i suoi dati verranno eliminati definitivamente. Inserisci la tua password per confermare che desideri eliminare definitivamente il tuo account.'
-    }
-  },
   description: 'Descrizione',
   edit: 'Modifica',
   emailAddress: 'Indirizzo email',
@@ -127,6 +114,45 @@ export default {
       }
     },
     dashboard: {
+      account: {
+        delete: {
+          description: 'Elimina il tuo account e tutte le sue risorse',
+          dialog: {
+            description:
+              'Una volta eliminato il tuo account, anche tutte le sue risorse e i suoi dati verranno eliminati definitivamente. Inserisci la tua password per confermare che desideri eliminare definitivamente il tuo account.',
+            title: 'Sei sicuro di voler eliminare il tuo account?',
+            trigger: 'Elimina account'
+          },
+          info: 'Si prega di procedere con cautela, questa operazione non può essere annullata.',
+          title: 'Elimina account'
+        },
+        password: {
+          description: 'Cambia la password del tuo account',
+          submit: 'Aggiorna',
+          title: 'Aggiorna la password'
+        },
+        sessions: {
+          description:
+            'Gestisci e disconnetti le tue sessioni attive su altri browser e dispositivi.',
+          dialog: {
+            description:
+              'Inserisci la tua password per confermare che desideri disconnetterti dalle altre sessioni del browser su tutti i tuoi dispositivi.',
+            title: 'Eliminare le altre sessioni del browser?',
+            trigger: 'Disconnetti altre sessioni del browser'
+          },
+          info: 'Se necessario, puoi disconnetterti da tutte le altre sessioni del browser su tutti i tuoi dispositivi. Questo elenco potrebbe non essere esaustivo. Se ritieni che il tuo account sia stato compromesso, dovresti anche aggiornare la password.',
+          lastActive: 'Ultima attività',
+          thisDevice: 'Questo dispositivo',
+          title: 'Sessioni del Browser'
+        },
+        title: 'Aggiorna account',
+        update: {
+          description:
+            "Cambia il nome utente e l'indirizzo email del tuo account",
+          info: 'Dopo aver inserito un nuovo indirizzo email, dovrai verificarlo prima di poter procedere nella dashboard.',
+          title: 'Aggiorna account'
+        }
+      },
       invitations: {
         index: {
           title: 'Inviti'
@@ -226,20 +252,6 @@ export default {
   save: 'Salva',
   search: 'Cerca',
   select: 'Seleziona',
-  sessions: {
-    description:
-      'Gestisci e disconnetti le tue sessioni attive su altri browser e dispositivi.',
-    dialog: {
-      description:
-        'Inserisci la tua password per confermare che desideri disconnetterti dalle altre sessioni del browser su tutti i tuoi dispositivi.',
-      title: 'Eliminare le altre sessioni del browser?',
-      trigger: 'Disconnetti altre sessioni del browser'
-    },
-    lastActive: 'Ultima attività',
-    info: 'Se necessario, puoi disconnetterti da tutte le altre sessioni del browser su tutti i tuoi dispositivi. Questo elenco potrebbe non essere esaustivo. Se ritieni che il tuo account sia stato compromesso, dovresti anche aggiornare la password.',
-    thisDevice: 'Questo dispositivo',
-    title: 'Sessioni del Browser'
-  },
   settings: 'Impostazioni',
   status: 'Stato',
   statusValue: {
@@ -321,16 +333,6 @@ export default {
     newTeam: 'Nuovo team',
     teamDescription: 'Descrizione del team',
     teamMembers: 'Membri del team'
-  },
-  updateAccount: {
-    title: 'Aggiorna account',
-    description: "Cambia il nome utente e l'indirizzo email del tuo account",
-    info: 'Dopo aver inserito un nuovo indirizzo email, devrai verificarlo prima di poter procedere nella dashboard.'
-  },
-  updatePassword: {
-    title: 'Aggiorna la password',
-    description: 'Cambia la password del tuo account',
-    submit: 'Aggiorna'
   },
   user_one: 'Utente',
   user_other: 'Utenti',

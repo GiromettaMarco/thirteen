@@ -12,10 +12,8 @@ export default {
   },
   assignedTo: 'Assigned to',
   auth: {
-    confirmNewPassword: 'Confirm new password',
     confirmPassword: 'Confirm password',
     currentPassword: 'Current password',
-    newPasword: 'New password',
     password: 'Password',
     signIn: 'Sign In',
     signOut: 'Sign Out'
@@ -27,17 +25,6 @@ export default {
   dateCreated: 'Date created',
   dateModified: 'Date modified',
   delete: 'Delete',
-  deleteAccount: {
-    title: 'Delete account',
-    description: 'Delete your account and all of its resources',
-    info: 'Please proceed with caution, this cannot be undone.',
-    dialog: {
-      trigger: 'Delete account',
-      title: 'Are you sure you want to delete your account?',
-      description:
-        'Once your account is deleted, all of its resources and data will also be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.'
-    }
-  },
   description: 'Description',
   edit: 'Edit',
   emailAddress: 'Email address',
@@ -125,6 +112,44 @@ export default {
       }
     },
     dashboard: {
+      account: {
+        delete: {
+          description: 'Delete your account and all of its resources',
+          dialog: {
+            description:
+              'Once your account is deleted, all of its resources and data will also be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.',
+            title: 'Are you sure you want to delete your account?',
+            trigger: 'Delete account'
+          },
+          info: 'Please proceed with caution, this cannot be undone.',
+          title: 'Delete account'
+        },
+        password: {
+          description: 'Change the password of your account',
+          submit: 'Update password',
+          title: 'Update password'
+        },
+        sessions: {
+          description:
+            'Manage and log out your active sessions on other browsers and devices.',
+          dialog: {
+            description:
+              'Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.',
+            title: 'Delete other browser sessions?',
+            trigger: 'Log Out Other Browser Sessions'
+          },
+          info: 'If necessary, you may log out of all of your other browser sessions across all of your devices. This list may not be exhaustive. If you feel your account has been compromised, you should also update your password.',
+          lastActive: 'Last active',
+          thisDevice: 'This device',
+          title: 'Browser Sessions'
+        },
+        title: 'Update account',
+        update: {
+          description: 'Change username and email of your account',
+          info: 'After submitting a new email address, you will need to verify it before proceeding further in the dashboard.',
+          title: 'Update account'
+        }
+      },
       index: {
         title: 'Dashboard'
       },
@@ -224,20 +249,6 @@ export default {
   save: 'Save',
   search: 'Search',
   select: 'Select',
-  sessions: {
-    description:
-      'Manage and log out your active sessions on other browsers and devices.',
-    dialog: {
-      description:
-        'Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.',
-      title: 'Delete other browser sessions?',
-      trigger: 'Log Out Other Browser Sessions'
-    },
-    info: 'If necessary, you may log out of all of your other browser sessions across all of your devices. This list may not be exhaustive. If you feel your account has been compromised, you should also update your password.',
-    lastActive: 'Last active',
-    thisDevice: 'This device',
-    title: 'Browser Sessions'
-  },
   settings: 'Settings',
   status: 'Status',
   statusValue: {
@@ -318,16 +329,6 @@ export default {
     teamDescription: 'Team description',
     teamMembers: 'Team members'
   },
-  updateAccount: {
-    title: 'Update account',
-    description: 'Change username and email of your account',
-    info: 'After submitting a new email address, you will need to verify it before proceeding further in the dashboard.'
-  },
-  updatePassword: {
-    title: 'Update password',
-    description: 'Change the password of your account',
-    submit: 'Update password'
-  },
   user_one: 'User',
   user_other: 'Users',
   users: {
@@ -353,7 +354,7 @@ export default {
       team_other: 'Currently member of {{count}} teams',
       totalTasks: 'Total Tasks',
       userProfile: {
-        description: 'Informations about {{name}}',
+        description: 'Information about {{name}}',
         title: 'User profile'
       }
     },

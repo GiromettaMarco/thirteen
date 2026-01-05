@@ -31,6 +31,7 @@ import {
 import { UserInfo } from '@/components/ui/user-info'
 import { cn } from '@/lib/utils'
 import { dashboard, home, logout, settings } from '@/routes'
+import { edit as accountEdit } from '@/routes/account'
 import { index as invitationsIndex } from '@/routes/invitations'
 import { index as projectsIndex } from '@/routes/projects'
 import { index as teamsIndex, show as teamsShow } from '@/routes/teams'
@@ -245,10 +246,9 @@ function ProfileDropdown({
             <DropdownMenuGroup>
               <DropdownMenuItem
                 asChild
-                className="text-muted-foreground"
+                className="cursor-pointer"
               >
-                {/* <Link href={route('account')}> */}
-                <Link href="#">
+                <Link href={accountEdit()}>
                   <CircleUser />
                   {t(($) => $.account)}
                 </Link>

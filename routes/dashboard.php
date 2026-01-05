@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Account\AccountController;
+use App\Http\Controllers\Account\OtherSessionsController;
+use App\Http\Controllers\Account\PasswordController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TeamController;
@@ -10,6 +13,7 @@ use Inertia\Inertia;
 Route::prefix('dashboard')
     ->middleware(['auth', 'verified'])
     ->group(function () {
+        // Dashboard
         Route::get('/', function () {
             return Inertia::render('dashboard/index');
         })->name('dashboard');
@@ -18,6 +22,18 @@ Route::prefix('dashboard')
         Route::get('/settings', function () {
             return Inertia::render('dashboard/settings');
         })->name('settings');
+
+        // Account
+        Route::get('/account', [AccountController::class, 'edit'])
+            ->name('account.edit');
+        Route::put('/account', [AccountController::class, 'update'])
+            ->name('account.update');
+        Route::put('/account/password', [PasswordController::class, 'update'])
+            ->name('password.update');
+        Route::delete('/account/sessions', [OtherSessionsController::class, 'destroy'])
+            ->name('sessions.destroy');
+        Route::delete('/account', [AccountController::class, 'destroy'])
+            ->name('account.destroy');
 
         // Invitations
         Route::get('/invitations', [InvitationController::class, 'index'])

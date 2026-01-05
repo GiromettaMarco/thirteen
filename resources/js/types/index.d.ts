@@ -34,3 +34,16 @@ export interface FlashMessage {
   description?: string | null
   level?: 'success' | 'info' | 'warning' | 'error' | null
 }
+
+export interface UserAgent {
+  browser: string
+  is_desktop: boolean
+  platform: string
+}
+
+export interface Session {
+  agent: UserAgent
+  ip_address: string
+  is_current_device: boolean
+  last_active: string
+}

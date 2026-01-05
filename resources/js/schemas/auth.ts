@@ -71,6 +71,10 @@ export const registerSchema = new Schema(
   }
 )
 
+export const passwordConfirmSchema = new Schema({
+  password
+})
+
 export const forgotPasswordSchema = new Schema({
   email
 })

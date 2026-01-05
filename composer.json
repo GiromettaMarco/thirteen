@@ -15,6 +15,7 @@
         "laravel/telescope": "^5.16",
         "laravel/tinker": "^2.10.1",
         "laravel/wayfinder": "^0.1.11",
+        "mobiledetect/mobiledetectlib": "^4.8",
         "sliver/flash-format": "^0.0.1"
     },
     "require-dev": {
