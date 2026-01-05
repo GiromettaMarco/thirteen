@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
-import ButtonLoader from '@/components/ui/button-loader'
+import { Spinner } from '@/components/ui/spinner'
+import { cn } from '@/lib/utils'
 import type { ComponentProps } from 'react'
 
 export function Submit({
@@ -17,7 +18,15 @@ export function Submit({
       type={type}
       {...props}
     >
-      <ButtonLoader loading={loading}>{label}</ButtonLoader>
+      <div className="relative">
+        <span className={cn({ invisible: loading })}>{label}</span>
+        <Spinner
+          className={cn(
+            'trans absolute top-1/2 left-1/2 hidden -translate-x-1/2 -translate-y-1/2',
+            { block: loading }
+          )}
+        />
+      </div>
     </Button>
   )
 }
