@@ -16,14 +16,14 @@ export default function Settings() {
 
       <Container className="grid gap-6 md:gap-12">
         <Format
-          descriprion={t(($) => $.pages.dashboard.settings.languageDescription)}
+          description={t(($) => $.pages.dashboard.settings.languageDescription)}
           title={t(($) => $.pages.dashboard.settings.languageTitle)}
         >
           <LanguageSelect className="max-w-96" />
         </Format>
 
         <Format
-          descriprion={t(
+          description={t(
             ($) => $.pages.dashboard.settings.appearanceDescription
           )}
           title={t(($) => $.pages.dashboard.settings.appearanceTitle)}
