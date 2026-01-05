@@ -1,15 +1,14 @@
 import '../css/app.css'
 
 import AppContainer from '@/app-container'
+import { APP_NAME } from '@/config'
 import type { Appearance } from '@/types'
 import { createInertiaApp } from '@inertiajs/react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
-
 createInertiaApp({
-  title: (title) => (title ? `${title} - ${appName}` : appName),
+  title: (title) => (title ? `${title} - ${APP_NAME}` : APP_NAME),
 
   resolve: (name) =>
     resolvePageComponent(

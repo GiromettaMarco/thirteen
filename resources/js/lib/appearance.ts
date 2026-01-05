@@ -1,3 +1,4 @@
+import { COOKIE_APPEARANCE } from '@/config'
 import {
   deleteClientCookie,
   getClientCookie,
@@ -18,9 +19,7 @@ export function getAppearanceCookie(): Appearance | undefined {
     return undefined
   }
 
-  const appearanceCookie = getClientCookie(
-    import.meta.env.VITE_COOKIE_APPEARANCE
-  )
+  const appearanceCookie = getClientCookie(COOKIE_APPEARANCE)
 
   if (isAppearance(appearanceCookie)) {
     return appearanceCookie
@@ -33,12 +32,12 @@ export function setAppearanceCookie(value: Appearance) {
   switch (value) {
     case 'dark':
     case 'light':
-      setClientCookie(import.meta.env.VITE_COOKIE_APPEARANCE, value)
+      setClientCookie(COOKIE_APPEARANCE, value)
       break
 
     case 'system':
     default:
-      deleteClientCookie(import.meta.env.VITE_COOKIE_APPEARANCE)
+      deleteClientCookie(COOKIE_APPEARANCE)
       break
   }
 }

@@ -16,6 +16,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from '@/components/ui/tooltip'
+import { COOKIE_SIDEBAR } from '@/config'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { cn } from '@/lib/utils'
 import { Slot } from '@radix-ui/react-slot'
@@ -23,7 +24,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { PanelLeftIcon } from 'lucide-react'
 import * as React from 'react'
 
-const SIDEBAR_COOKIE_NAME = import.meta.env.VITE_COOKIE_SIDEBAR
+const SIDEBAR_COOKIE_NAME = COOKIE_SIDEBAR
 const SIDEBAR_COOKIE_MAX_AGE = 604800 // 1 week
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b'
 

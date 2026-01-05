@@ -1,3 +1,4 @@
+import { APP_NAME } from '@/config'
 import { cn } from '@/lib/utils'
 import type { ComponentProps, SVGAttributes } from 'react'
 
@@ -21,7 +22,7 @@ function Brand(props: SVGAttributes<SVGElement>) {
 }
 
 function Logo(props: ComponentProps<'span'>) {
-  return <span {...props}>{import.meta.env.VITE_APP_NAME}</span>
+  return <span {...props}>{APP_NAME}</span>
 }
 
 function BrandAndLogo({

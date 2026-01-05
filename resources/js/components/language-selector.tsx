@@ -11,6 +11,7 @@ import {
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
+import { COOKIE_LOCALE } from '@/config'
 import { setClientCookie } from '@/lib/cookie'
 import type { Locale } from '@/types'
 import type { Callback, TFunction } from 'i18next'
@@ -24,7 +25,7 @@ function changeLocale(
 ) {
   changeLanguage(locale)
 
-  setClientCookie(import.meta.env.VITE_COOKIE_LOCALE, locale)
+  setClientCookie(COOKIE_LOCALE, locale)
 }
 
 export function LanguageSelector({
