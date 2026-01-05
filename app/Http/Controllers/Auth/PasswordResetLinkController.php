@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Config;
 use Inertia\Inertia;
 use Inertia\Response;
+use Sliver\Format\FlashMessage;
 
 class PasswordResetLinkController extends Controller
 {
@@ -31,6 +32,8 @@ class PasswordResetLinkController extends Controller
     public function store(PasswordEmailRequest $request): RedirectResponse
     {
         $request->sendLink();
+
+        Inertia::flash('toast', new FlashMessage(__('strings.auth.password_email'), 'success'));
 
         return back();
     }

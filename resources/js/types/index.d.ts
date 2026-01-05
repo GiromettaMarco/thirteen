@@ -31,6 +31,6 @@ export interface User {
 
 export interface FlashMessage {
   title: string
-  description: string | null
-  level: 'success' | 'info' | 'warning' | 'error' | null
+  description?: string | null
+  level?: 'success' | 'info' | 'warning' | 'error' | null
 }

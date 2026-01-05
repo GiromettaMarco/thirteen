@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Config;
 use Inertia\Inertia;
 use Inertia\Response;
+use Sliver\Format\FlashMessage;
 
 class RegisteredUserController extends Controller
 {
@@ -30,10 +31,10 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterRequest $request): RedirectResponse
     {
-        if ($request->register()) {
-            return to_route('dashboard');
-        }
+        $request->register();
 
-        return back();
+        Inertia::flash('toast', new FlashMessage(__('strings.auth.registered'), 'success'));
+
+        return to_route('dashboard');
     }
 }

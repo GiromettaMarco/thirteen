@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
-use Sliver\Format\FlashMessage;
 
 class RegisterRequest extends ThrottledRequest
 {
@@ -66,19 +65,14 @@ class RegisterRequest extends ThrottledRequest
     public int $maxAttempts = 5;
 
     /**
-     * Attempt to register a new user with the provided input and add a flash
-     * message to the Inertia session.
+     * Attempt to register a new user with the provided input.
      *
-     * @return bool `true` on success, `false` otherwise.
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function register()
     {
-        // Rate limiter
-        if ($this->limiterReached()) {
-            return false;
-        }
+        $this->ensureIsNotRateLimited();
 
-        // Register
         $user = User::create([
             'name' => $this->validated('name'),
             'email' => $this->validated('email'),
@@ -89,9 +83,6 @@ class RegisterRequest extends ThrottledRequest
 
         Auth::login($user);
 
-        // Increase limiter
-        $this->limiterHit(new FlashMessage(__('strings.auth.registered'), 'success'));
-
-        return true;
+        $this->limiterHit();
     }
 }

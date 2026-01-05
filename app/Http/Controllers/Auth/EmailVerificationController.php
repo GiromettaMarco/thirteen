@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Inertia\Inertia;
 use Inertia\Response;
+use Sliver\Format\FlashMessage;
 
 class EmailVerificationController extends Controller
 {
@@ -36,6 +37,12 @@ class EmailVerificationController extends Controller
         }
 
         $request->sendEmail();
+
+        Inertia::flash('toast', new FlashMessage([
+            'title' => __('strings.email_sent'),
+            'description' => __('strings.auth.verify_email'),
+            'level' => 'success',
+        ]));
 
         return back();
     }

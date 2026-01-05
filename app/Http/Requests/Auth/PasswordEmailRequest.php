@@ -6,7 +6,6 @@ use App\Http\Requests\ThrottledRequest;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
-use Sliver\Format\FlashMessage;
 
 class PasswordEmailRequest extends ThrottledRequest
 {
@@ -57,29 +56,20 @@ class PasswordEmailRequest extends ThrottledRequest
     public int $decaySeconds = 120;
 
     /**
-     * Attempt to send a password reset link to the authenticated user and add a
-     * flash message communicating the outcome.
+     * Attempt to send a password reset link to the authenticated user.
+     *
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function sendLink()
     {
-        // Rate limiter
-        if ($this->limiterReached()) {
-            return false;
-        }
+        $this->ensureIsNotRateLimited();
 
-        // Try to send the email
         $status = Password::sendResetLink($this->only('email'));
 
-        // Success
         if ($status == Password::RESET_LINK_SENT || $status == Password::INVALID_USER) {
-            $this->limiterHit(new FlashMessage(__('strings.auth.password_email'), 'success'));
-
-            return true;
+            $this->limiterHit();
+        } else {
+            $this->limiterHit(__($status));
         }
-
-        // Fail
-        $this->limiterHit(new FlashMessage(__($status), 'error'));
-
-        return false;
     }
 }

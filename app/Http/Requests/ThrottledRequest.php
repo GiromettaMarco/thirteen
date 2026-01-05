@@ -4,8 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\RateLimiter;
-use Inertia\Inertia;
-use Sliver\Format\FlashMessage;
+use Illuminate\Validation\ValidationException;
 
 abstract class ThrottledRequest extends FormRequest
 {
@@ -25,25 +24,28 @@ abstract class ThrottledRequest extends FormRequest
     abstract public function throttleKey(): string;
 
     /**
-     * Check for the related rate limiter and in case of failure add a flash
-     * message to the Inertia session.
+     * Ensure the request is not rate limited.
      *
-     * @return bool Whether the rate limit has been reached.
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function limiterReached(): bool
+    public function ensureIsNotRateLimited(?callable $callback = null): void
     {
         if (! RateLimiter::tooManyAttempts($this->throttleKey(), $this->maxAttempts)) {
-            return false;
+            return;
+        }
+
+        if (! is_null($callback)) {
+            $callback();
         }
 
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
-        Inertia::flash('toast', new FlashMessage(__('strings.throttle', [
-            'seconds' => $seconds,
-            'minutes' => ceil($seconds / $this->decaySeconds),
-        ]), 'error'));
-
-        return true;
+        throw ValidationException::withMessages([
+            'root' => __('strings.throttle', [
+                'seconds' => $seconds,
+                'minutes' => ceil($seconds / $this->decaySeconds),
+            ]),
+        ]);
     }
 
     /**
@@ -55,15 +57,19 @@ abstract class ThrottledRequest extends FormRequest
     }
 
     /**
-     * Increase the rate limiter count and flash a message to the Inertia
-     * session if provided.
+     * Increase the rate limiter count and throw a validation exception if a
+     * message is provided.
+     *
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function limiterHit(?FlashMessage $message = null): void
+    public function limiterHit(?string $message = null): void
     {
         RateLimiter::hit($this->throttleKey(), $this->decaySeconds);
 
         if (! is_null($message)) {
-            Inertia::flash('toast', $message);
+            throw ValidationException::withMessages([
+                'root' => $message,
+            ]);
         }
     }
 }

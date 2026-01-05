@@ -2,11 +2,18 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { FieldErrorI18n } from '@/components/ui/field-i18n'
 import { Input } from '@/components/ui/input'
+import { flashMessage } from '@/lib/flash'
 import { useTsvResolver, type InferSchema } from '@/lib/tsv/hookform'
 import type { Schema } from '@/lib/tsv/schema'
 import type { Ruleset } from '@/lib/tsv/types'
 import { cn } from '@/lib/utils'
 import type { RouteDefinition } from '@/wayfinder'
+import type {
+  CancelTokenCallback,
+  Errors,
+  GlobalEventCallback,
+  RequestPayload
+} from '@inertiajs/core'
 import { useForm as useInertiaForm } from '@inertiajs/react'
 import type {
   ComponentProps,
@@ -45,12 +52,36 @@ export function Form<
   children,
   className,
   defaults,
+  onBefore,
+  onBeforeUpdate,
+  onCancel,
+  onCancelToken,
+  onError,
+  onFinish,
+  onFlash,
+  onPrefetched,
+  onPrefetching,
+  onProgress,
+  onStart,
+  onSuccess,
   route,
   schema
 }: {
   children: RenderFN<TValues>
   className?: string
   defaults: DefaultValues<TValues>
+  onBefore?: GlobalEventCallback<'before', RequestPayload>
+  onBeforeUpdate?: GlobalEventCallback<'beforeUpdate', RequestPayload>
+  onCancel?: GlobalEventCallback<'cancel', RequestPayload>
+  onCancelToken?: CancelTokenCallback
+  onError?: GlobalEventCallback<'error', RequestPayload>
+  onFinish?: GlobalEventCallback<'finish', RequestPayload>
+  onFlash?: GlobalEventCallback<'flash', RequestPayload>
+  onPrefetched?: GlobalEventCallback<'prefetched', RequestPayload>
+  onPrefetching?: GlobalEventCallback<'prefetching', RequestPayload>
+  onProgress?: GlobalEventCallback<'progress', RequestPayload>
+  onStart?: GlobalEventCallback<'start', RequestPayload>
+  onSuccess?: GlobalEventCallback<'success', RequestPayload>
   route: RouteDefinition<Method>
   schema: Schema<TRuleset>
 }) {
@@ -63,10 +94,38 @@ export function Form<
   // Inertia
   const inertiaForm = useInertiaForm<object>(defaults)
 
+  /**
+   * Add a toast notification for root level errors.
+   *
+   * @param errors
+   */
+  function onErrorWithToast(errors: Errors) {
+    if (errors.root) {
+      flashMessage({ title: errors.root, level: 'error' })
+    }
+
+    if (onError) {
+      onError(errors)
+    }
+  }
+
   // Submit handler
-  async function onSubmit(values: TValues) {
+  function onSubmit(values: TValues) {
     inertiaForm.transform(() => values)
-    inertiaForm[route.method](route.url)
+    inertiaForm[route.method](route.url, {
+      onBefore,
+      onBeforeUpdate,
+      onCancel,
+      onCancelToken,
+      onError: onErrorWithToast,
+      onFinish,
+      onFlash,
+      onPrefetched,
+      onPrefetching,
+      onProgress,
+      onStart,
+      onSuccess
+    })
   }
 
   // Add inertia (server) errors to react form.

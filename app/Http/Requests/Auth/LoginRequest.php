@@ -6,7 +6,6 @@ use App\Http\Requests\ThrottledRequest;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Sliver\Format\FlashMessage;
 
 class LoginRequest extends ThrottledRequest
 {
@@ -47,30 +46,20 @@ class LoginRequest extends ThrottledRequest
     }
 
     /**
-     * Attempt to authenticate the request's credentials and add a flash message
-     * to the Inertia session in case of error.
+     * Attempt to authenticate the request's credentials.
      *
-     * @return bool `true` on success, `false` otherwise.
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function authenticate(): bool
+    public function authenticate(): void
     {
-        // Rate limiter
-        if ($this->limiterReached()) {
+        $this->ensureIsNotRateLimited(function () {
             event(new Lockout($this));
+        });
 
-            return false;
+        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+            $this->limiterHit(__('strings.auth.failed'));
         }
 
-        // Authenticate
-        if (Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            $this->limiterClear();
-
-            return true;
-        }
-
-        // Failed
-        $this->limiterHit(new FlashMessage(__('strings.auth.failed'), 'error'));
-
-        return false;
+        $this->limiterClear();
     }
 }

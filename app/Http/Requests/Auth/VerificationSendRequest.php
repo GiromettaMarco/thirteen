@@ -4,7 +4,6 @@ namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\ThrottledRequest;
 use Illuminate\Support\Facades\Config;
-use Sliver\Format\FlashMessage;
 
 class VerificationSendRequest extends ThrottledRequest
 {
@@ -30,27 +29,16 @@ class VerificationSendRequest extends ThrottledRequest
     public int $maxAttempts = 2;
 
     /**
-     * Attempt to register a new user with the provided input and add a flash
-     * message to the Inertia session.
+     * Send an email verification notification to the user.
      *
-     * @return bool `true` on success, `false` otherwise.
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function sendEmail()
     {
-        // Rate limiter
-        if ($this->limiterReached()) {
-            return false;
-        }
+        $this->ensureIsNotRateLimited();
 
         $this->user()->sendEmailVerificationNotification();
 
-        // Increase limiter
-        $this->limiterHit(new FlashMessage([
-            'title' => __('strings.email_sent'),
-            'description' => __('strings.auth.verify_email'),
-            'level' => 'success',
-        ]));
-
-        return true;
+        $this->limiterHit();
     }
 }
