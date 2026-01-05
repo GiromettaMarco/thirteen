@@ -12,6 +12,8 @@ import type {
   CancelTokenCallback,
   Errors,
   GlobalEventCallback,
+  Page,
+  PageProps,
   RequestPayload
 } from '@inertiajs/core'
 import { useForm as useInertiaForm } from '@inertiajs/react'
@@ -64,8 +66,11 @@ export function Form<
   onProgress,
   onStart,
   onSuccess,
+  preserveScroll = true,
+  resetOnSuccess = true,
   route,
-  schema
+  schema,
+  setDefaultsOnSuccess = false
 }: {
   children: RenderFN<TValues>
   className?: string
@@ -82,8 +87,11 @@ export function Form<
   onProgress?: GlobalEventCallback<'progress', RequestPayload>
   onStart?: GlobalEventCallback<'start', RequestPayload>
   onSuccess?: GlobalEventCallback<'success', RequestPayload>
+  preserveScroll?: boolean
+  resetOnSuccess?: boolean
   route: RouteDefinition<Method>
   schema: Schema<TRuleset>
+  setDefaultsOnSuccess?: boolean
 }) {
   // React Hook Form
   const reactForm = userReactForm<TValues>({
@@ -109,6 +117,22 @@ export function Form<
     }
   }
 
+  function onSuccessWithReset(page: Page<PageProps>) {
+    if (setDefaultsOnSuccess) {
+      inertiaForm.setDefaults()
+      reactForm.reset(reactForm.getValues())
+    }
+
+    if (resetOnSuccess) {
+      inertiaForm.reset()
+      reactForm.reset()
+    }
+
+    if (onSuccess) {
+      onSuccess(page)
+    }
+  }
+
   // Submit handler
   function onSubmit(values: TValues) {
     inertiaForm.transform(() => values)
@@ -124,7 +148,8 @@ export function Form<
       onPrefetching,
       onProgress,
       onStart,
-      onSuccess
+      onSuccess: onSuccessWithReset,
+      preserveScroll
     })
   }
 
