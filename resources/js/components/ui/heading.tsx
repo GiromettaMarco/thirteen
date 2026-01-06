@@ -15,16 +15,16 @@ const headingVariants = cva(undefined, {
 })
 
 export function Heading({
-  description,
-  Tag = 'h2',
-  title,
+  h,
+  p,
+  tag: Tag = 'h2',
   variant = 'default',
   ...props
 }: ComponentProps<'header'> &
   VariantProps<typeof headingVariants> & {
-    description?: string
-    Tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-    title: string
+    h: string
+    p?: string
+    tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   }) {
   return (
     <header {...props}>
@@ -32,11 +32,9 @@ export function Heading({
         className={cn(headingVariants({ variant }))}
         data-variant={variant}
       >
-        {title}
+        {h}
       </Tag>
-      {description && (
-        <p className="text-muted-foreground text-sm">{description}</p>
-      )}
+      {p && <p className="text-muted-foreground text-sm">{p}</p>}
     </header>
   )
 }

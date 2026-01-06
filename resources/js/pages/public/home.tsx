@@ -51,9 +51,9 @@ export default function Home() {
         <div className="flex w-full max-w-83.75 flex-col-reverse lg:max-w-4xl lg:flex-row">
           <div className="flex flex-1 flex-col gap-6 rounded-br-lg rounded-bl-lg bg-white p-6 shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:justify-between lg:rounded-tl-lg lg:rounded-br-none lg:p-20 dark:bg-[#161615] dark:text-[#EDEDEC] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
             <Heading
-              description={t(($) => $.pages.public.home.p)}
-              Tag="h1"
-              title={t(($) => $.pages.public.home.h1, { appName: APP_NAME })}
+              h={t(($) => $.pages.public.home.h1, { appName: APP_NAME })}
+              p={t(($) => $.pages.public.home.p)}
+              tag="h1"
             />
 
             <div className="grid gap-2">

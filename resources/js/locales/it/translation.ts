@@ -121,41 +121,39 @@ export default {
     dashboard: {
       account: {
         delete: {
-          description: 'Elimina il tuo account e tutte le sue risorse',
           dialog: {
             description:
               'Una volta eliminato il tuo account, anche tutte le sue risorse e i suoi dati verranno eliminati definitivamente. Inserisci la tua password per confermare che desideri eliminare definitivamente il tuo account.',
             title: 'Sei sicuro di voler eliminare il tuo account?',
             trigger: 'Elimina account'
           },
+          h2: 'Elimina account',
           info: 'Si prega di procedere con cautela, questa operazione non può essere annullata.',
-          title: 'Elimina account'
+          p: 'Elimina il tuo account e tutte le sue risorse'
         },
         password: {
-          description: 'Cambia la password del tuo account',
-          submit: 'Aggiorna',
-          title: 'Aggiorna la password'
+          h2: 'Aggiorna la password',
+          p: 'Cambia la password del tuo account',
+          submit: 'Aggiorna'
         },
         sessions: {
-          description:
-            'Gestisci e disconnetti le tue sessioni attive su altri browser e dispositivi.',
           dialog: {
             description:
               'Inserisci la tua password per confermare che desideri disconnetterti dalle altre sessioni del browser su tutti i tuoi dispositivi.',
             title: 'Eliminare le altre sessioni del browser?',
             trigger: 'Disconnetti altre sessioni del browser'
           },
+          h2: 'Sessioni del Browser',
           info: 'Se necessario, puoi disconnetterti da tutte le altre sessioni del browser su tutti i tuoi dispositivi. Questo elenco potrebbe non essere esaustivo. Se ritieni che il tuo account sia stato compromesso, dovresti anche aggiornare la password.',
           lastActive: 'Ultima attività',
-          thisDevice: 'Questo dispositivo',
-          title: 'Sessioni del Browser'
+          p: 'Gestisci e disconnetti le tue sessioni attive su altri browser e dispositivi.',
+          thisDevice: 'Questo dispositivo'
         },
         title: 'Aggiorna account',
         update: {
-          description:
-            "Cambia il nome utente e l'indirizzo email del tuo account",
+          h2: 'Aggiorna account',
           info: 'Dopo aver inserito un nuovo indirizzo email, dovrai verificarlo prima di poter procedere nella dashboard.',
-          title: 'Aggiorna account'
+          p: "Cambia il nome utente e l'indirizzo email del tuo account"
         }
       },
       invitations: {
@@ -169,11 +167,14 @@ export default {
         }
       },
       settings: {
-        appearanceDescription:
-          "Scegli il tema dell'applicazione o utilizza lo stesso tema del tuo sistema.",
-        appearanceTitle: 'Impostazioni aspetto',
-        languageDescription: "Imposta la lingua dell'applicazione.",
-        languageTitle: 'Impostazioni della lingua',
+        appearance: {
+          h2: 'Impostazioni aspetto',
+          p: "Scegli il tema dell'applicazione o utilizza lo stesso tema del tuo sistema."
+        },
+        language: {
+          h2: 'Impostazioni della lingua',
+          p: "Imposta la lingua dell'applicazione."
+        },
         title: 'Impostazioni'
       },
       teams: {
@@ -184,22 +185,23 @@ export default {
     },
     errors: {
       e403: {
-        description: "Non hai l'autorizzazione per accedere a questa risorsa.",
-        title: 'Accesso vietato'
+        h1: 'Accesso vietato',
+        p: "Non hai l'autorizzazione per accedere a questa risorsa.",
+        title: '403 Forbidden'
       },
       e404: {
-        description:
-          'Non è stato possibile trovare la risorsa che stavi cercando.',
-        title: 'Pagina non trovata'
+        h1: 'Pagina non trovata',
+        p: 'Non è stato possibile trovare la risorsa che stavi cercando.',
+        title: '404 Page Not Found'
       },
       e429: {
-        description:
-          'Hai superato il numero massimo di richieste. Riprova più tardi.',
-        title: 'Troppe richieste'
+        h1: 'Troppe richieste',
+        p: 'Hai superato il numero massimo di richieste. Riprova più tardi.',
+        title: '429 Too Many Requests'
       },
       unknown: {
-        description:
-          'Si è verificato un errore inaspettato, riprova più tardi.',
+        h1: 'Errore sconosciuto',
+        p: 'Si è verificato un errore inaspettato, riprova più tardi.',
         title: 'Errore sconosciuto'
       }
     },

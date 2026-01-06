@@ -5,12 +5,12 @@ import type { ComponentProps } from 'react'
 export function Format({
   children,
   className,
-  description,
-  title,
+  p,
+  h2,
   ...props
 }: ComponentProps<'div'> & {
-  description?: string
-  title: string
+  p?: string
+  h2: string
 }) {
   return (
     <section
@@ -22,8 +22,8 @@ export function Format({
     >
       <Heading
         className="lg:col-span-3 2xl:col-start-2"
-        description={description}
-        title={title}
+        p={p}
+        h={h2}
         variant="small"
       />
 

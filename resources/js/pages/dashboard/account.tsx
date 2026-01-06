@@ -45,8 +45,8 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
 
   return (
     <Format
-      description={t(($) => $.pages.dashboard.account.sessions.description)}
-      title={t(($) => $.pages.dashboard.account.sessions.title)}
+      h2={t(($) => $.pages.dashboard.account.sessions.h2)}
+      p={t(($) => $.pages.dashboard.account.sessions.p)}
     >
       <Infobox variant="info">
         <p>{t(($) => $.pages.dashboard.account.sessions.info)}</p>
@@ -145,8 +145,8 @@ function UpdateAccount({ email, name }: { email: string; name: string }) {
 
   return (
     <Format
-      description={t(($) => $.pages.dashboard.account.update.description)}
-      title={t(($) => $.pages.dashboard.account.update.title)}
+      h2={t(($) => $.pages.dashboard.account.update.h2)}
+      p={t(($) => $.pages.dashboard.account.update.p)}
     >
       <Infobox variant="info">
         <p>{t(($) => $.pages.dashboard.account.update.info)}</p>
@@ -185,8 +185,8 @@ function UpdatePassword() {
 
   return (
     <Format
-      description={t(($) => $.pages.dashboard.account.password.description)}
-      title={t(($) => $.pages.dashboard.account.password.title)}
+      p={t(($) => $.pages.dashboard.account.password.p)}
+      h2={t(($) => $.pages.dashboard.account.password.h2)}
     >
       <Form
         className="gap-3"
@@ -238,8 +238,8 @@ function DeleteAccount() {
 
   return (
     <Format
-      description={t(($) => $.pages.dashboard.account.delete.description)}
-      title={t(($) => $.pages.dashboard.account.delete.title)}
+      p={t(($) => $.pages.dashboard.account.delete.p)}
+      h2={t(($) => $.pages.dashboard.account.delete.h2)}
     >
       <Infobox variant="info">
         <p>{t(($) => $.pages.dashboard.account.delete.info)}</p>

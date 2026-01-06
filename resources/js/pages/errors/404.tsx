@@ -1,5 +1,6 @@
 import { Heading } from '@/components/ui/heading'
 import PublicLayout from '@/layouts/public-layout'
+import { Head } from '@inertiajs/react'
 import { useTranslation } from 'react-i18next'
 
 export default function Error404() {
@@ -8,11 +9,13 @@ export default function Error404() {
 
   return (
     <PublicLayout>
+      <Head title={t(($) => $.pages.errors.e404.title)} />
+
       <Heading
-        title={t(($) => $.pages.errors.e404.title)}
-        description={t(($) => $.pages.errors.e404.description)}
-        Tag="h1"
         className="lg:px-24 lg:py-20"
+        h={t(($) => $.pages.errors.e404.h1)}
+        p={t(($) => $.pages.errors.e404.p)}
+        tag="h1"
       />
     </PublicLayout>
   )

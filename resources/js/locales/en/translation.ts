@@ -119,40 +119,39 @@ export default {
     dashboard: {
       account: {
         delete: {
-          description: 'Delete your account and all of its resources',
           dialog: {
             description:
               'Once your account is deleted, all of its resources and data will also be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.',
             title: 'Are you sure you want to delete your account?',
             trigger: 'Delete account'
           },
+          h2: 'Delete account',
           info: 'Please proceed with caution, this cannot be undone.',
-          title: 'Delete account'
+          p: 'Delete your account and all of its resources'
         },
         password: {
-          description: 'Change the password of your account',
-          submit: 'Update password',
-          title: 'Update password'
+          h2: 'Update password',
+          p: 'Change the password of your account',
+          submit: 'Update password'
         },
         sessions: {
-          description:
-            'Manage and log out your active sessions on other browsers and devices.',
           dialog: {
             description:
               'Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.',
             title: 'Delete other browser sessions?',
             trigger: 'Log Out Other Browser Sessions'
           },
+          h2: 'Browser Sessions',
           info: 'If necessary, you may log out of all of your other browser sessions across all of your devices. This list may not be exhaustive. If you feel your account has been compromised, you should also update your password.',
           lastActive: 'Last active',
-          thisDevice: 'This device',
-          title: 'Browser Sessions'
+          p: 'Manage and log out your active sessions on other browsers and devices.',
+          thisDevice: 'This device'
         },
         title: 'Update account',
         update: {
-          description: 'Change username and email of your account',
+          h2: 'Update account',
           info: 'After submitting a new email address, you will need to verify it before proceeding further in the dashboard.',
-          title: 'Update account'
+          p: 'Change username and email of your account'
         }
       },
       index: {
@@ -169,11 +168,14 @@ export default {
         }
       },
       settings: {
-        appearanceDescription:
-          "Choose the application's theme or use the same theme as your system.",
-        appearanceTitle: 'Appearance settings',
-        languageDescription: 'Set the language of the application.',
-        languageTitle: 'Language settings',
+        appearance: {
+          h2: 'Appearance settings',
+          p: "Choose the application's theme or use the same theme as your system."
+        },
+        language: {
+          h2: 'Language settings',
+          p: 'Set the language of the application.'
+        },
         title: 'Settings'
       },
       teams: {
@@ -184,21 +186,24 @@ export default {
     },
     errors: {
       e403: {
-        description: "You don't have authorization to access this resource.",
-        title: 'Forbidden'
+        h1: 'Forbidden',
+        p: "You don't have authorization to access this resource.",
+        title: '403 Forbidden'
       },
       e404: {
-        description: 'The resource you were looking for could not be found.',
-        title: 'Page not found'
+        h1: 'Page not found',
+        p: 'The resource you were looking for could not be found.',
+        title: '404 Page Not Found'
       },
       e429: {
-        description:
-          'You have exceeded the maximum number of requests. Please try again later.',
-        title: 'Too Many Requests'
+        h1: 'Too Many Requests',
+        p: 'You have exceeded the maximum number of requests. Please try again later.',
+        title: '429 Too Many Requests'
       },
       unknown: {
-        description: 'An unknown error occurred, please try again later.',
-        title: 'Unknown error'
+        h1: 'Unknown error',
+        p: 'An unknown error occurred, please try again later.',
+        title: 'Unknown Error'
       }
     },
     public: {
