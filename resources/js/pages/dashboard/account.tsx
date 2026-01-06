@@ -36,7 +36,6 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 //#region ManageSessions
-// @TODO use password_confirmed_at
 function ManageSessions({ sessions }: { sessions: Session[] }) {
   // i18n
   const { t } = useTranslation()

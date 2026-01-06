@@ -14,6 +14,7 @@ export interface Permissions {
 }
 
 export interface Auth<TWithUser extends boolean = false> {
+  passwordConfirmedAt: number | null
   permissions: Permissions
   user: TWithUser extends true ? User : User | null
 }

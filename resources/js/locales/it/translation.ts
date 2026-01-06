@@ -78,6 +78,11 @@ export default {
   openMenu: 'Apri menu',
   pages: {
     auth: {
+      confirmPassword: {
+        h1: 'Conferma la tua password',
+        p: "Questa è un'area protetta dell'applicazione. Conferma la password prima di continuare.",
+        title: 'Conferma password'
+      },
       forgotPassword: {
         h1: 'Password dimenticata',
         loginCTA: 'Oppure, ritorna al <a>log in</a>',

@@ -14,8 +14,6 @@ class OtherSessionsController extends Controller
 {
     /**
      * Delete all of the account's sessions different from the current one.
-     *
-     * @TODO use ConfirmablePasswordController
      */
     public function destroy(DestroyOtherSessionsRequest $request): RedirectResponse
     {

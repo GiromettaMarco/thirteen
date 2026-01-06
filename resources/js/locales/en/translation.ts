@@ -76,6 +76,11 @@ export default {
   openMenu: 'Open menu',
   pages: {
     auth: {
+      confirmPassword: {
+        h1: 'Confirm your password',
+        p: 'This is a secure area of the application. Please confirm your password before continuing.',
+        title: 'Confirm password'
+      },
       forgotPassword: {
         h1: 'Forgot password',
         loginCTA: 'Or, return to <a>log in</a>',

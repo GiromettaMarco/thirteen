@@ -46,6 +46,7 @@ class Permissions
     public static function getAuth(?array $resource = null)
     {
         return [
+            'passwordConfirmedAt' => session()->get('auth.password_confirmed_at'),
             'permissions' => self::getPermissions($resource),
             'user' => Auth::user(),
         ];
