@@ -17,6 +17,60 @@
 
     // TODO Tree settings
     "todo-tree.tree.showBadges": true,
+    "todo-tree.highlights.defaultHighlight": {
+        "icon": "alert",
+        "type": "tag",
+        "opacity": 0,
+        "iconColour": "#0000FF",
+        "gutterIcon": true
+    },
+    "todo-tree.highlights.customHighlight": {
+        "TODO": {
+            "icon": "check",
+            "background": "#FFFF00",
+            "iconColour": "#FFFF00"
+        },
+        "NOTE": {
+            "icon": "note",
+            "background": "#6495ED",
+            "iconColour": "#6495ED"
+        },
+        "LEARN": {
+            "icon": "note",
+            "background": "#FF69B4",
+            "iconColour": "#FF69B4"
+        },
+        "FIXME": {
+            "background": "#DEB887",
+            "iconColour": "#DEB887"
+        },
+        "BUG": {
+            "background": "#DC143C",
+            "iconColour": "#DC143C"
+        },
+        "[ ]": {
+            "icon": "check",
+            "background": "#FFFFFF",
+            "iconColour": "#FFFF00"
+        },
+        "[x]": {
+            "icon": "check",
+            "background": "#008000",
+            "iconColour": "#008000"
+        }
+    },
+    "todo-tree.general.tags": [
+        "TODO",
+        "NOTE",
+        "LEARN",
+        "FIXME",
+        "BUG",
+        "[ ]",
+        "[x]"
+    ],
+    "todo-tree.regex.regex": "(\\*|//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*@($TAGS).*(\\n\\s*//\\s{2,}.*)*",
+    "todo-tree.regex.regexCaseSensitive": false,
+    "todo-tree.tree.scanMode": "workspace only",
 
     // Tailwind
     "files.associations": {
@@ -34,5 +88,20 @@
     "typescript.enablePromptUseWorkspaceTsdk": true,
 
     // Conventional commit
-    "conventionalCommits.scopes": ["client", "server"]
+    "conventionalCommits.scopes": ["client", "server"],
+
+    // Spell check
+    "cSpell.language": "en,it",
+    "cSpell.ignorePaths": [
+        "package-lock.json",
+        "node_modules",
+        "vscode-extension",
+        ".git/{info,lfs,logs,refs,objects}/**",
+        ".git/{index,*refs,*HEAD}",
+        ".vscode",
+        ".vscode-insiders",
+        "composer.json",
+        "package.json"
+    ],
+    "cSpell.words": ["disconnetti", "inertiajs", "Infobox", "Laravel"]
 }
