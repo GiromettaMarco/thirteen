@@ -112,7 +112,10 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
             >
               {({ form, loading }) => (
                 <>
-                  <PasswordFieldPreset control={form.control} />
+                  <PasswordFieldPreset
+                    control={form.control}
+                    placeholder={false}
+                  />
 
                   <DialogFooter className="items-center">
                     <DialogClose asChild>
@@ -267,7 +270,10 @@ function DeleteAccount() {
           >
             {({ form, loading }) => (
               <>
-                <PasswordFieldPreset control={form.control} />
+                <PasswordFieldPreset
+                  control={form.control}
+                  placeholder={false}
+                />
 
                 <DialogFooter className="items-center">
                   <DialogClose asChild>
@@ -305,10 +311,6 @@ export default function Account({
       <Head title={t(($) => $.pages.dashboard.account.title)} />
 
       <Container className="grid gap-6">
-        <ManageSessions sessions={sessions} />
-
-        <Separator />
-
         <UpdateAccount
           email={auth.user.email}
           name={auth.user.name}
@@ -317,6 +319,10 @@ export default function Account({
         <Separator />
 
         <UpdatePassword />
+
+        <Separator />
+
+        <ManageSessions sessions={sessions} />
 
         <Separator />
 
