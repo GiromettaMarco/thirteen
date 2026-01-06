@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::prefix('dashboard')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'auth.session', 'verified'])
     ->group(function () {
         // Dashboard
         Route::get('/', function () {

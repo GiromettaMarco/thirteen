@@ -33,7 +33,7 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('verify-email', [EmailVerificationController::class, 'create'])
         ->name('verification.notice');
 
@@ -48,6 +48,5 @@ Route::middleware('auth')->group(function () {
         ->name('password.confirm');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-        ->middleware(['auth.session'])
         ->name('logout');
 });
