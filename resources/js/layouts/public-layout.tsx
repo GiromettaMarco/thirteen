@@ -407,6 +407,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
                     onClick={() => setOpen(true)}
                   >
                     <Menu />
+                    <span className="sr-only">{t(($) => $.openMenu)}</span>
                   </Button>
                 </div>
 
