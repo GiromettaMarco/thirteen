@@ -59,6 +59,17 @@
             }
         },
         {
+            "label": "$(remote-explorer-documentation)",
+            "type": "shell",
+            "command": "pnpm run storybook",
+            "options": {
+                "statusbar": {
+                    "detail": "storybook",
+                    "color": "#22C1D6"
+                }
+            }
+        },
+        {
             "label": "$(github-alt)",
             "type": "shell",
             "command": "act -W '.github/workflows/tests.yml' --artifact-server-path /tmp/artifacts",

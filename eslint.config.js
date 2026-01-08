@@ -1,9 +1,9 @@
 import prettier from 'eslint-config-prettier'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
+import storybook from 'eslint-plugin-storybook'
 import { defineConfig } from 'eslint/config'
 import typescript from 'typescript-eslint'
-// import storybook from 'eslint-plugin-storybook'
 
 export default defineConfig([
   // Typescript
@@ -36,7 +36,7 @@ export default defineConfig([
   prettier,
 
   // Storybook
-  //   ...storybook.configs['flat/recommended'],
+  ...storybook.configs['flat/recommended'],
 
   // Ignores
   {

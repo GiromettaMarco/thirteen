@@ -113,9 +113,10 @@
         },
         "jsx": "react-jsx"
     },
+    /* @see https://github.com/microsoft/TypeScript/issues/49555 */
     "include": [
-        "resources/js/**/*.ts",
-        "resources/js/**/*.d.ts",
-        "resources/js/**/*.tsx"
+        ".storybook/**/*",
+        "resources/js",
+        "stories"
     ]
 }
