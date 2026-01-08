@@ -37,9 +37,9 @@
     </php>
     <coverage>
         <report>
-            <clover outputFile="reports/clover.xml"/>
-            <html outputDirectory="reports"/>
-            <xml outputDirectory="reports"/>
+            <clover outputFile="reports/php/clover.xml"/>
+            <html outputDirectory="reports/php"/>
+            <xml outputDirectory="reports/php"/>
         </report>
     </coverage>
 </phpunit>
