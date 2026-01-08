@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-vite'
+import alias from './alias.ts'
 
 const config: StorybookConfig = {
   stories: [
@@ -15,6 +16,15 @@ const config: StorybookConfig = {
   core: {
     disableTelemetry: true
   },
-  staticDirs: ['../public']
+  staticDirs: ['../public'],
+  viteFinal: async (config) => {
+    if (config.resolve) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        ...alias
+      }
+    }
+    return config
+  }
 }
 export default config

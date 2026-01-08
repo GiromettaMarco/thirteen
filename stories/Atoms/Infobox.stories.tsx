@@ -6,7 +6,13 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  argTypes: {
+    variant: {
+      control: 'radio',
+      options: ['success', 'info', 'warning', 'error']
+    }
+  }
 } satisfies Meta<typeof Infobox>
 
 export default meta
