@@ -403,8 +403,9 @@ export default function PublicLayout({ children }: PropsWithChildren) {
               <div className="flex flex-1 items-center gap-4">
                 <div className="flex-initial lg:hidden">
                   <Button
-                    variant="ghost"
+                    data-test="open-mobile-menu"
                     onClick={() => setOpen(true)}
+                    variant="ghost"
                   >
                     <Menu />
                     <span className="sr-only">{t(($) => $.openMenu)}</span>
@@ -413,8 +414,8 @@ export default function PublicLayout({ children }: PropsWithChildren) {
 
                 <Link href={home()}>
                   <BrandAndLogo
-                    className="flex flex-initial items-center gap-4 pe-2"
                     brandClassName="size-10"
+                    className="flex flex-initial items-center gap-4 pe-2"
                   />
                 </Link>
 
@@ -434,8 +435,8 @@ export default function PublicLayout({ children }: PropsWithChildren) {
                   <TooltipTrigger className="hidden lg:block">
                     <Button
                       asChild
-                      variant="outline"
                       size="icon"
+                      variant="outline"
                     >
                       <Link href={dashboard()}>
                         <UserRound />
