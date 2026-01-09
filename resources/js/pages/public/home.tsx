@@ -146,7 +146,7 @@ export default function Home() {
             <BrandAndLogo
               className="flex flex-col-reverse p-8 text-center"
               brandClassName="translate-y-0 opacity-100 transition-all duration-750 starting:translate-y-4 starting:opacity-0"
-              logoClassName="text-brand translate-y-0 text-6xl font-bold opacity-100 transition-all delay-300 duration-750 starting:translate-y-4 starting:opacity-0"
+              logoClassName="text-brand select-none translate-y-0 text-6xl font-bold opacity-100 transition-all delay-300 duration-750 starting:translate-y-4 starting:opacity-0"
             />
             <div className="absolute inset-0 rounded-t-lg shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] lg:rounded-t-none lg:rounded-r-lg dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]" />
           </div>

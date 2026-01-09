@@ -185,8 +185,8 @@ function UpdatePassword() {
 
   return (
     <Format
-      p={t(($) => $.pages.dashboard.account.password.p)}
       h2={t(($) => $.pages.dashboard.account.password.h2)}
+      p={t(($) => $.pages.dashboard.account.password.p)}
     >
       <Form
         className="gap-3"
@@ -238,10 +238,10 @@ function DeleteAccount() {
 
   return (
     <Format
-      p={t(($) => $.pages.dashboard.account.delete.p)}
       h2={t(($) => $.pages.dashboard.account.delete.h2)}
+      p={t(($) => $.pages.dashboard.account.delete.p)}
     >
-      <Infobox variant="info">
+      <Infobox variant="error">
         <p>{t(($) => $.pages.dashboard.account.delete.info)}</p>
       </Infobox>
 
