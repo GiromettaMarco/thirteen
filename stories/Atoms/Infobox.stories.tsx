@@ -21,34 +21,50 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    children: <p>This is an infobox with default options.</p>
+    children: (
+      <p>
+        If necessary, you may log out of all of your other browser sessions
+        across all of your devices. This list may not be exhaustive. If you feel
+        your account has been compromised, you should also update your password.
+      </p>
+    )
   }
 }
 
 export const Success: Story = {
   args: {
-    children: <p>Whatever you did was a success.</p>,
+    children: <p>Your email address has been verified.</p>,
     variant: 'success'
   }
 }
 
 export const Info: Story = {
   args: {
-    children: <p>Just so you know, this is some information.</p>,
+    children: (
+      <p>
+        After submitting a new email address, you will need to verify it before
+        proceeding further in the dashboard.
+      </p>
+    ),
     variant: 'info'
   }
 }
 
 export const Warning: Story = {
   args: {
-    children: <p>Tread lightly.</p>,
+    children: (
+      <p>
+        You don't have a "current team" yet. You can create new teams and set
+        your current team in the Teams section.
+      </p>
+    ),
     variant: 'warning'
   }
 }
 
 export const Error: Story = {
   args: {
-    children: <p>This section is very dangerous.</p>,
+    children: <p>Please proceed with caution, this cannot be undone.</p>,
     variant: 'error'
   }
 }
