@@ -260,6 +260,11 @@ export default {
   search: 'Cerca',
   select: 'Seleziona',
   settings: 'Impostazioni',
+  sidebar: {
+    mobile: 'Visualizza la sidebar mobile.',
+    sidebar: 'Sidebar',
+    toggle: 'Attiva/disattiva Sidebar'
+  },
   status: 'Stato',
   statusValue: {
     backlog: 'Backlog',

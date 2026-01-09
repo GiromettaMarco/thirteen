@@ -23,6 +23,7 @@ import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { PanelLeftIcon } from 'lucide-react'
 import * as React from 'react'
+import { useTranslation } from 'react-i18next'
 
 const SIDEBAR_COOKIE_NAME = COOKIE_SIDEBAR
 const SIDEBAR_COOKIE_MAX_AGE = 604800 // 1 week
@@ -151,6 +152,9 @@ function Sidebar({
   variant?: 'sidebar' | 'floating' | 'inset'
   collapsible?: 'offcanvas' | 'icon' | 'none'
 }) {
+  // i18n
+  const { t } = useTranslation()
+
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
 
   if (collapsible === 'none') {
@@ -183,8 +187,8 @@ function Sidebar({
           side={side}
         >
           <SheetHeader className="sr-only">
-            <SheetTitle>Sidebar</SheetTitle>
-            <SheetDescription>Displays the mobile sidebar.</SheetDescription>
+            <SheetTitle>{t(($) => $.sidebar.sidebar)}</SheetTitle>
+            <SheetDescription>{t(($) => $.sidebar.mobile)}</SheetDescription>
           </SheetHeader>
           <div className="flex h-full w-full flex-col">{children}</div>
         </SheetContent>
@@ -245,12 +249,16 @@ function SidebarTrigger({
   onClick,
   ...props
 }: React.ComponentProps<typeof Button>) {
+  // i18n
+  const { t } = useTranslation()
+
   const { toggleSidebar } = useSidebar()
 
   return (
     <Button
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
+      data-test="toggle-sidebar"
       variant="ghost"
       size="icon"
       className={cn('size-7', className)}
@@ -261,7 +269,7 @@ function SidebarTrigger({
       {...props}
     >
       <PanelLeftIcon />
-      <span className="sr-only">Toggle Sidebar</span>
+      <span className="sr-only">{t(($) => $.sidebar.toggle)}</span>
     </Button>
   )
 }
