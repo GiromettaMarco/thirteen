@@ -8,9 +8,12 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
 
 class RegisterRequest extends ThrottledRequest
 {
@@ -45,7 +48,6 @@ class RegisterRequest extends ThrottledRequest
                 'required',
                 'email',
                 'max:255',
-                Rule::unique(User::class),
             ],
             'password' => ['required', Password::default(), 'confirmed'],
         ];
@@ -62,7 +64,38 @@ class RegisterRequest extends ThrottledRequest
     /**
      * Maximum number of attempts.
      */
-    public int $maxAttempts = 5;
+    public int $maxAttempts = 1;
+
+    /**
+     * Ensure the request is not rate limited.
+     *
+     * Check rate limiter for both 'register' and 'register-email'.
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function ensureIsNotRateLimited(?callable $callback = null): void
+    {
+        parent::ensureIsNotRateLimited($callback);
+
+        $throttle_key = 'register-email|'.$this->ip();
+
+        if (! RateLimiter::tooManyAttempts($throttle_key, 2)) {
+            return;
+        }
+
+        if (! is_null($callback)) {
+            $callback();
+        }
+
+        $seconds = RateLimiter::availableIn($throttle_key);
+
+        throw ValidationException::withMessages([
+            'root' => __('strings.throttle', [
+                'seconds' => $seconds,
+                'minutes' => ceil($seconds / 60),
+            ]),
+        ]);
+    }
 
     /**
      * Attempt to register a new user with the provided input.
@@ -72,6 +105,18 @@ class RegisterRequest extends ThrottledRequest
     public function register()
     {
         $this->ensureIsNotRateLimited();
+
+        $validator = Validator::make($this->all(), [
+            'email' => Rule::unique(User::class),
+        ]);
+
+        if ($validator->fails()) {
+            RateLimiter::hit('register-email|'.$this->ip());
+
+            throw ValidationException::withMessages([
+                'email' => __('strings.auth.email_taken'),
+            ]);
+        }
 
         $user = User::create([
             'name' => $this->validated('name'),

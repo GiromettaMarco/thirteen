@@ -13,6 +13,7 @@ return [
         'updated' => 'Account aggiornato',
     ],
     'auth' => [
+        'email_taken' => 'Questa email è già stata utilizzata.',
         'failed' => 'Credenziali non valide.',
         'password_email' => "Verrà inviato un link per il reset della password, se l'account esiste.",
         'registered' => 'Benvenuto!',
