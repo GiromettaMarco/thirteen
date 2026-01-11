@@ -440,6 +440,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
                     >
                       <Link href={dashboard()}>
                         <UserRound />
+                        <span className="sr-only">{t(($) => $.dashboard)}</span>
                       </Link>
                     </Button>
                   </TooltipTrigger>
