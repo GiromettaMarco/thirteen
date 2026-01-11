@@ -203,7 +203,7 @@ function UpdatePassword() {
           <>
             <PasswordField
               control={form.control}
-              inputId="password"
+              inputId="current-password"
               inputName="current_password"
               label={t(($) => $.auth.currentPassword)}
             />
