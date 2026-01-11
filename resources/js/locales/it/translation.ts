@@ -134,7 +134,7 @@ export default {
         password: {
           h2: 'Aggiorna la password',
           p: 'Cambia la password del tuo account',
-          submit: 'Aggiorna'
+          submit: 'Cambia password'
         },
         sessions: {
           dialog: {
@@ -149,7 +149,7 @@ export default {
           p: 'Gestisci e disconnetti le tue sessioni attive su altri browser e dispositivi.',
           thisDevice: 'Questo dispositivo'
         },
-        title: 'Aggiorna account',
+        title: 'Account',
         update: {
           h2: 'Aggiorna account',
           info: 'Dopo aver inserito un nuovo indirizzo email, dovrai verificarlo prima di poter procedere nella dashboard.',

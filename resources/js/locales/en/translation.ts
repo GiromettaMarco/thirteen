@@ -132,7 +132,7 @@ export default {
         password: {
           h2: 'Update password',
           p: 'Change the password of your account',
-          submit: 'Update password'
+          submit: 'Change password'
         },
         sessions: {
           dialog: {
@@ -147,7 +147,7 @@ export default {
           p: 'Manage and log out your active sessions on other browsers and devices.',
           thisDevice: 'This device'
         },
-        title: 'Update account',
+        title: 'Account',
         update: {
           h2: 'Update account',
           info: 'After submitting a new email address, you will need to verify it before proceeding further in the dashboard.',
