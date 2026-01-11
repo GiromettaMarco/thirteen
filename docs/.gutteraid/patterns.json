@@ -1,0 +1,26 @@
+{
+    "version": "0.0.1",
+    "matchers": [
+        {
+            "filePattern": "tests/**/*.php",
+            "taskPattern": "^it\\('(.+)'",
+            "scripts": [
+                [
+                    "./vendor/bin/pest",
+                    "--no-coverage",
+                    "--filter '${group:1}'"
+                ],
+                [
+                    "./vendor/bin/pest",
+                    "--debug",
+                    "--no-coverage",
+                    "--filter '${group:1}'"
+                ],
+                [
+                    "./vendor/bin/pest",
+                    "--filter '${group:1}'"
+                ]
+            ]
+        }
+    ]
+}

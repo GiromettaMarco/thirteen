@@ -40,6 +40,7 @@ tests/Browser/Screenshots
 
 # IDE
 /.fleet
+/.gutteraid
 /.idea
 /.nova
 /.vscode
