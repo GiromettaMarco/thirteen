@@ -248,8 +248,9 @@ function DeleteAccount() {
       <Dialog>
         <DialogTrigger asChild>
           <Button
-            variant="destructive"
             className="w-36"
+            data-test="delete-account"
+            variant="destructive"
           >
             {t(($) => $.pages.dashboard.account.delete.dialog.trigger)}
           </Button>
