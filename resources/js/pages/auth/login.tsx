@@ -33,11 +33,6 @@ export default function Login({
 
       <div className="grid gap-6">
         <Form
-          defaults={{
-            email: '',
-            password: '',
-            remember: ''
-          }}
           route={store()}
           schema={loginSchema}
         >

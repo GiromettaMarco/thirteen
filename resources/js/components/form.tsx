@@ -53,7 +53,7 @@ export function Form<
 >({
   children,
   className,
-  defaults,
+  defaults = {},
   onBefore,
   onBeforeUpdate,
   onCancel,
@@ -74,7 +74,7 @@ export function Form<
 }: {
   children: RenderFN<TValues>
   className?: string
-  defaults: DefaultValues<TValues>
+  defaults?: Partial<DefaultValues<TValues>>
   onBefore?: GlobalEventCallback<'before', RequestPayload>
   onBeforeUpdate?: GlobalEventCallback<'beforeUpdate', RequestPayload>
   onCancel?: GlobalEventCallback<'cancel', RequestPayload>
@@ -93,14 +93,18 @@ export function Form<
   schema: Schema<TRuleset>
   setDefaultsOnSuccess?: boolean
 }) {
+  const defaultValues = Object.fromEntries(
+    Object.keys(schema.ruleset).map((field) => [field, defaults[field] ?? ''])
+  ) as DefaultValues<TValues>
+
   // React Hook Form
   const reactForm = userReactForm<TValues>({
     resolver: useTsvResolver(schema),
-    defaultValues: defaults
+    defaultValues
   })
 
   // Inertia
-  const inertiaForm = useInertiaForm<object>(defaults)
+  const inertiaForm = useInertiaForm<object>(defaultValues)
 
   /**
    * Add a toast notification for root level errors.

@@ -27,12 +27,6 @@ export default function Register() {
 
       <div className="grid gap-6">
         <Form
-          defaults={{
-            name: '',
-            email: '',
-            password: '',
-            password_confirmation: ''
-          }}
           route={store()}
           schema={registerSchema}
         >

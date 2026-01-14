@@ -22,7 +22,6 @@ export default function ForgotPassword() {
 
       <div className="grid gap-6">
         <Form
-          defaults={{ email: '' }}
           route={email()}
           schema={forgotPasswordSchema}
         >

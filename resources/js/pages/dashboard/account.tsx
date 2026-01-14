@@ -105,7 +105,6 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
             </DialogDescription>
 
             <Form
-              defaults={{ password: '' }}
               onSuccess={() => setOpen(false)}
               route={destroySessions()}
               schema={passwordConfirmSchema}
@@ -190,11 +189,6 @@ function UpdatePassword() {
     >
       <Form
         className="gap-3"
-        defaults={{
-          current_password: '',
-          password: '',
-          password_confirmation: ''
-        }}
         resetOnSuccess={true}
         route={passwordUpdate()}
         schema={updatePasswordSchema}
@@ -265,7 +259,6 @@ function DeleteAccount() {
           </DialogDescription>
 
           <Form
-            defaults={{ password: '' }}
             route={destroyAccount()}
             schema={passwordConfirmSchema}
           >

@@ -22,15 +22,12 @@
     "scope": "javascriptreact,typescriptreact",
     "body": [
       "<Form$1",
-      "  defaults={{",
-      "    $4",
-      "  }}",
       "  route={$2}",
       "  schema={$3}",
       ">",
       "  {({ form, loading }) => (",
       "    <>",
-      "      $5",
+      "      $4",
       "    </>",
       "  )}",
       "</Form>"

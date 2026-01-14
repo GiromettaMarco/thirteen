@@ -19,7 +19,6 @@ export default function ConfirmPassword() {
       <Head title={t(($) => $.pages.auth.confirmPassword.title)} />
 
       <Form
-        defaults={{ password: '' }}
         route={store()}
         schema={passwordConfirmSchema}
       >

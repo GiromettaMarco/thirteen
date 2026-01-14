@@ -28,12 +28,7 @@ export default function ResetPassword({
       <Head title={t(($) => $.pages.auth.resetPassword.title)} />
 
       <Form
-        defaults={{
-          email,
-          password: '',
-          password_confirmation: '',
-          token
-        }}
+        defaults={{ email, token }}
         route={store()}
         schema={resetPasswordSchema}
       >
