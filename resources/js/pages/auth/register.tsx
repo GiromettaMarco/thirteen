@@ -1,4 +1,3 @@
-import { store } from '@/actions/App/Http/Controllers/Auth/RegisteredUserController'
 import {
   ConfirmPasswordFieldPreset,
   EmailFieldPreset,
@@ -10,6 +9,7 @@ import { TextLink } from '@/components/text-link'
 import { Submit } from '@/components/ui/submit'
 import AuthLayout from '@/layouts/auth-layout'
 import { login } from '@/routes'
+import { store } from '@/routes/register'
 import { registerSchema } from '@/schemas/auth'
 import { Head } from '@inertiajs/react'
 import { Trans, useTranslation } from 'react-i18next'
