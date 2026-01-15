@@ -45,10 +45,10 @@ jobs:
         run: pnpm exec playwright install --with-deps
 
       - name: PHP Tests
-        run: ./vendor/bin/pest --exclude-group=browser --parallel
+        run: composer run-script test
 
       - name: Browser Tests
-        run: ./vendor/bin/pest --group=browser --no-coverage --parallel
+        run: composer run-script test:browser
 
       # - name: Update PHP Coverage Badge
       #   run: bin/php-coverage
