@@ -14,16 +14,6 @@ it('may reach the account page from the dashboard homepage')
     ->click('Account')
     ->assertTitleContains('Account');
 
-it('may update the user name')
-    ->defer(fn () => actingAs(User::first()))
-    ->visit('/dashboard/account')
-    ->on()
-    ->mobile()
-    ->assertSee('Update account')
-    ->fill('name', 'John Smith')
-    ->click('Save')
-    ->assertSee('Account updated');
-
 it('may update the user email and require email verification to proceed')
     ->defer(fn () => actingAs(User::first()))
     ->visit('/dashboard/account')

@@ -13,25 +13,13 @@ it('may display the account page', function () {
         ->assertOk();
 });
 
-it('may accept an account update request with the same email', function () {
-    $user = User::first();
-
-    actingAs($user)
-        ->put(route('account.update', absolute: false), [
-            'name' => 'John Smith',
-            'email' => $user->email,
-        ])
-        ->assertSessionHasNoErrors();
-});
-
-it('may accept an account update request with a new email', function () {
+it('may accept an email update request', function () {
     Notification::fake();
 
     $user = User::first();
 
     actingAs($user)
         ->put(route('account.update', absolute: false), [
-            'name' => 'John Smith',
             'email' => 'johnsmith@example.com',
         ])
         ->assertSessionHasNoErrors();
@@ -39,13 +27,12 @@ it('may accept an account update request with a new email', function () {
     Notification::assertSentTo($user, VerifyEmail::class);
 });
 
-it('may validate an account update request', function () {
-    /** @var User $user */
+it('may validate an email update request', function () {
+    /** @var User */
     $user = User::factory()->createOne();
 
     actingAs($user)
         ->put(route('account.update', absolute: false), [
-            'name' => 'Test User',
             'email' => 'test@example.com',
         ])
         ->assertSessionHasErrors('email');

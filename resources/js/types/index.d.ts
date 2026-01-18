@@ -13,21 +13,26 @@ export interface Permissions {
   users: UsersPermissions
 }
 
-export interface Auth<TWithUser extends boolean = false> {
-  passwordConfirmedAt: number | null
-  permissions: Permissions
-  user: TWithUser extends true ? User : User | null
+export interface Profile {
+  name: string
+  public: boolean
 }
 
 export interface User {
-  id: number
-  name: string
-  email: string
   avatar?: string
-  email_verified_at: string | null
   created_at: string
+  email: string
+  email_verified_at: string | null
+  id: number
   updated_at: string
   [key: string]: unknown // This allows for additional properties...
+}
+
+export interface Auth<TWithUser extends boolean = false> {
+  passwordConfirmedAt: number | null
+  permissions: Permissions
+  profile: TWithUser extends true ? Profile : Profile | null
+  user: TWithUser extends true ? User : User | null
 }
 
 export interface FlashMessage {

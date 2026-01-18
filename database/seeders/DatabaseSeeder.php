@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
         User::factory()
             ->hasAttached($view_users)
             ->hasAttached($edit_users)
+            ->withProfile('Test User')
             ->create([
-                'name' => 'Test User',
                 'email' => 'test@example.com',
             ]);
     }

@@ -31,41 +31,24 @@ class AccountController extends Controller
     }
 
     /**
-     * Update the given verified user's profile information and send a new email
-     * verification notification.
-     *
-     * @param  array<string, string>  $input
-     */
-    protected function updateVerifiedUser(User $user, array $input): void
-    {
-        $user->forceFill([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'email_verified_at' => null,
-        ])->save();
-
-        $user->sendEmailVerificationNotification();
-    }
-
-    /**
      * Update the user's profile information.
      */
     public function update(UpdateAccountRequest $request): RedirectResponse
     {
-        $validated = $request->validated();
+        /** @var User $user */
         $user = $request->user();
 
-        if (
-            $validated['email'] !== $user->email &&
-            $user instanceof MustVerifyEmail
-        ) {
-            $this->updateVerifiedUser($user, $validated);
-        } else {
+        $user->email = $request->validated('email');
+
+        if ($user->isDirty() && $user instanceof MustVerifyEmail) {
             $user->forceFill([
-                'name' => $validated['name'],
-                'email' => $validated['email'],
-            ])->save();
+                'email_verified_at' => null,
+            ]);
+
+            $user->sendEmailVerificationNotification();
         }
+
+        $user->save();
 
         Inertia::flash('toast', new FlashMessage(__('strings.account.updated'), 'success'));
 

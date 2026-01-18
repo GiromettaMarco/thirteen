@@ -119,9 +119,12 @@ class RegisterRequest extends ThrottledRequest
         }
 
         $user = User::create([
-            'name' => $this->validated('name'),
             'email' => $this->validated('email'),
             'password' => Hash::make($this->validated('password')),
+        ]);
+
+        $user->profile()->create([
+            'name' => $this->validated('name'),
         ]);
 
         event(new Registered($user));

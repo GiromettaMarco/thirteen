@@ -129,6 +129,11 @@ export default {
           info: 'Please proceed with caution, this cannot be undone.',
           p: 'Delete your account and all of its resources'
         },
+        email: {
+          h2: 'Update email',
+          info: 'After submitting a new email address, you will need to verify it before proceeding further in the dashboard.',
+          p: 'Change the email of your account'
+        },
         password: {
           h2: 'Update password',
           p: 'Change the password of your account',
@@ -147,12 +152,7 @@ export default {
           p: 'Manage and log out your active sessions on other browsers and devices.',
           thisDevice: 'This device'
         },
-        title: 'Account',
-        update: {
-          h2: 'Update account',
-          info: 'After submitting a new email address, you will need to verify it before proceeding further in the dashboard.',
-          p: 'Change username and email of your account'
-        }
+        title: 'Account'
       },
       index: {
         title: 'Dashboard'

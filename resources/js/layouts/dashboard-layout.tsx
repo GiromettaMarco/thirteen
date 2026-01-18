@@ -302,6 +302,10 @@ export default function DashboardLayout({
     throw new Error('The dashboard layout requires "user" to be set.')
   }
 
+  if (!auth.profile) {
+    throw new Error('The dashboard layout requires "profile" to be set.')
+  }
+
   return (
     <SidebarProvider
       defaultOpen={sidebarOpen}
@@ -344,7 +348,7 @@ export default function DashboardLayout({
           <ProfileDropdown
             email={auth.user.email}
             id={auth.user.id}
-            name={auth.user.name}
+            name={auth.profile.name}
           />
         </SidebarFooter>
       </Sidebar>

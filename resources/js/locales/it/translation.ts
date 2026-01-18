@@ -131,6 +131,11 @@ export default {
           info: 'Si prega di procedere con cautela, questa operazione non può essere annullata.',
           p: 'Elimina il tuo account e tutte le sue risorse'
         },
+        email: {
+          h2: 'Aggiorna email',
+          info: 'Dopo aver inserito un nuovo indirizzo email, dovrai verificarlo prima di poter procedere nella dashboard.',
+          p: "Cambia l'indirizzo email del tuo account"
+        },
         password: {
           h2: 'Aggiorna la password',
           p: 'Cambia la password del tuo account',
@@ -149,12 +154,7 @@ export default {
           p: 'Gestisci e disconnetti le tue sessioni attive su altri browser e dispositivi.',
           thisDevice: 'Questo dispositivo'
         },
-        title: 'Account',
-        update: {
-          h2: 'Aggiorna account',
-          info: 'Dopo aver inserito un nuovo indirizzo email, dovrai verificarlo prima di poter procedere nella dashboard.',
-          p: "Cambia il nome utente e l'indirizzo email del tuo account"
-        }
+        title: 'Account'
       },
       invitations: {
         index: {

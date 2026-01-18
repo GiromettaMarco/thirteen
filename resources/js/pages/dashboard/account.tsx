@@ -1,7 +1,6 @@
 import {
   ConfirmPasswordFieldPreset,
   EmailFieldPreset,
-  NameFieldPreset,
   PasswordFieldPreset
 } from '@/components/auth/fields'
 import { Form, PasswordField } from '@/components/form'
@@ -137,31 +136,29 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
 }
 //#endregion
 
-//#region UpdateAccount
-function UpdateAccount({ email, name }: { email: string; name: string }) {
+//#region UpdateEmail
+function UpdateEmail({ email }: { email: string }) {
   // i18n
   const { t } = useTranslation()
 
   return (
     <Format
-      h2={t(($) => $.pages.dashboard.account.update.h2)}
-      p={t(($) => $.pages.dashboard.account.update.p)}
+      h2={t(($) => $.pages.dashboard.account.email.h2)}
+      p={t(($) => $.pages.dashboard.account.email.p)}
     >
       <Infobox variant="info">
-        <p>{t(($) => $.pages.dashboard.account.update.info)}</p>
+        <p>{t(($) => $.pages.dashboard.account.email.info)}</p>
       </Infobox>
 
       <Form
         className="gap-3"
-        defaults={{ email, name }}
+        defaults={{ email }}
         route={accountUpdate()}
         schema={updateAccountSchema}
         setDefaultsOnSuccess
       >
         {({ form, loading }) => (
           <>
-            <NameFieldPreset control={form.control} />
-
             <EmailFieldPreset control={form.control} />
 
             <Submit
@@ -305,10 +302,7 @@ export default function Account({
       <Head title={t(($) => $.pages.dashboard.account.title)} />
 
       <Container className="grid gap-6">
-        <UpdateAccount
-          email={auth.user.email}
-          name={auth.user.name}
-        />
+        <UpdateEmail email={auth.user.email} />
 
         <Separator />
 

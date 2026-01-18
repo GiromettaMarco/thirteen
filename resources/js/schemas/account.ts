@@ -5,11 +5,10 @@ import {
   password_confirmation,
   passwordMatch
 } from '@/schemas/auth'
-import { email, name } from '@/schemas/misc'
+import { email } from '@/schemas/misc'
 
 export const updateAccountSchema = new Schema({
-  email,
-  name
+  email
 })
 
 export const updatePasswordSchema = new Schema(

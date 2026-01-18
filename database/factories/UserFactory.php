@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -11,6 +12,11 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
+    /**
+     * The user name being used by the factory.
+     */
+    protected static ?string $name;
+
     /**
      * The current password being used by the factory.
      */
@@ -24,12 +30,33 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
+    }
+
+    /**
+     * Add a related profile model.
+     */
+    public function withProfile(string $name): Factory
+    {
+        static::$name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Configure the model factory.
+     */
+    public function configure(): static
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->profile()->create([
+                'name' => static::$name ??= fake()->name(),
+            ]);
+        });
     }
 
     /**

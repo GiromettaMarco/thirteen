@@ -25,12 +25,12 @@ class Permissions
             ],
         ];
 
-        if (is_a($user, User::class)) {
+        if ($user instanceof User) {
             $permissions['users']['edit'] = $user->can('create', User::class);
             $permissions['users']['view'] = $user->can('viewAny', User::class);
         }
 
-        if (! is_null($resource)) {
+        if ($resource != null) {
             $permissions['resource'] = $resource;
         }
 
@@ -48,8 +48,44 @@ class Permissions
         return [
             'passwordConfirmedAt' => session()->get('auth.password_confirmed_at'),
             'permissions' => self::getPermissions($resource),
-            'user' => Auth::user(),
+            'profile' => self::getProfile(),
+            'user' => self::getUser(),
         ];
+    }
+
+    public static function getProfile()
+    {
+        $user = Auth::user();
+
+        if ($user instanceof User) {
+            return [
+                'id' => $user->profile->id,
+                'name' => $user->profile->name,
+                'public' => $user->profile->public,
+            ];
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the authenticated user data.
+     */
+    public static function getUser()
+    {
+        $user = Auth::user();
+
+        if ($user instanceof User) {
+            return [
+                'created_at' => $user->created_at,
+                'email' => $user->email,
+                'email_verified_at' => $user->email_verified_at,
+                'id' => $user->id,
+                'updated_at' => $user->updated_at,
+            ];
+        }
+
+        return null;
     }
 
     // /**
