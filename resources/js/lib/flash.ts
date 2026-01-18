@@ -5,28 +5,28 @@ export function flashMessage(message: FlashMessage) {
   switch (message.level) {
     case 'success':
       toast.success(message.title, {
-        classNames: { icon: 'text-success' },
+        classNames: { icon: 'text-success-foreground' },
         description: message.description
       })
       break
 
     case 'info':
       toast.info(message.title, {
-        classNames: { icon: 'text-info' },
+        classNames: { icon: 'text-info-foreground' },
         description: message.description
       })
       break
 
     case 'warning':
       toast.warning(message.title, {
-        classNames: { icon: 'text-warning' },
+        classNames: { icon: 'text-warning-foreground' },
         description: message.description
       })
       break
 
     case 'error':
       toast.error(message.title, {
-        classNames: { icon: 'text-error' },
+        classNames: { icon: 'text-error-foreground' },
         description: message.description
       })
       break

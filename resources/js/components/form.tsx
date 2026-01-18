@@ -378,13 +378,13 @@ export function InfoCheckboxField<
           {...props}
         >
           <Label
-            className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 has-aria-checked:border-blue-600 has-aria-checked:bg-blue-50 dark:has-aria-checked:border-blue-900 dark:has-aria-checked:bg-blue-950"
+            className="hover:bg-accent/50 has-aria-checked:border-info-foreground has-aria-checked:bg-info flex items-start gap-3 rounded-lg border p-3"
             data-slot="field-label"
           >
             <Checkbox
               aria-invalid={fieldState.invalid}
               checked={field.value === value}
-              className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
+              className="data-[state=checked]:border-info-foreground data-[state=checked]:bg-info-foreground dark:data-[state=checked]:border-info-foreground dark:data-[state=checked]:bg-info-foreground data-[state=checked]:text-white"
               disabled={field.disabled}
               id={inputId}
               name={field.name}

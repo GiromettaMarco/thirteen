@@ -20,10 +20,12 @@ const boxVariants = cva(
   {
     variants: {
       variant: {
-        error: 'border-error bg-error/10 [&>svg]:text-error',
-        info: 'border-info bg-info/10 [&>svg]:text-info',
-        success: 'border-success bg-success/10 [&>svg]:text-success',
-        warning: 'border-warning bg-warning/10 [&>svg]:text-warning'
+        error: 'border-error-foreground bg-error [&>svg]:text-error-foreground',
+        info: 'border-info-foreground bg-info [&>svg]:text-info-foreground',
+        success:
+          'border-success-foreground bg-success [&>svg]:text-success-foreground',
+        warning:
+          'border-warning-foreground bg-warning [&>svg]:text-warning-foreground'
       }
     },
     defaultVariants: {

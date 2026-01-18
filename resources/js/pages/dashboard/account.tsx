@@ -69,7 +69,7 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
                 <div className="text-muted-foreground text-xs">
                   {session.ip_address},{' '}
                   {session.is_current_device ? (
-                    <span className="text-success font-semibold">
+                    <span className="text-success-foreground font-semibold">
                       {t(($) => $.pages.dashboard.account.sessions.thisDevice)}
                     </span>
                   ) : (
