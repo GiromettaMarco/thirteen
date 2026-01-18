@@ -2,6 +2,8 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { FieldErrorI18n } from '@/components/ui/field-i18n'
 import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Switch } from '@/components/ui/switch'
 import { flashMessage } from '@/lib/flash'
 import { useTsvResolver, type InferSchema } from '@/lib/tsv/hookform'
 import type { Schema } from '@/lib/tsv/schema'
@@ -298,12 +300,16 @@ export function CheckboxField<TFieldValues extends FieldValues = FieldValues>({
   inputName,
   label,
   orientation = 'horizontal',
+  uncheckedValue = '',
+  value = 'true',
   ...props
 }: ComponentProps<typeof Field> & {
   control: Control<TFieldValues>
   inputId?: string
   inputName: FieldPath<TFieldValues>
   label?: string
+  uncheckedValue?: string
+  value?: string
 }) {
   return (
     <Controller
@@ -317,15 +323,134 @@ export function CheckboxField<TFieldValues extends FieldValues = FieldValues>({
         >
           <Checkbox
             aria-invalid={fieldState.invalid}
-            checked={!!field.value}
+            checked={field.value === value}
             disabled={field.disabled}
             id={inputId}
             name={field.name}
             onBlur={field.onBlur}
             onCheckedChange={(checked) =>
-              field.onChange(checked === true ? 'true' : '')
+              field.onChange(checked === true ? value : uncheckedValue)
             }
             ref={field.ref}
+            value={value}
+          />
+
+          {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
+
+          {fieldState.invalid && <FieldErrorI18n errors={[fieldState.error]} />}
+        </Field>
+      )}
+    />
+  )
+}
+
+export function InfoCheckboxField<
+  TFieldValues extends FieldValues = FieldValues
+>({
+  className,
+  control,
+  inputId,
+  inputName,
+  label,
+  orientation = 'horizontal',
+  text,
+  uncheckedValue = '',
+  value = 'true',
+  ...props
+}: ComponentProps<typeof Field> & {
+  control: Control<TFieldValues>
+  inputId?: string
+  inputName: FieldPath<TFieldValues>
+  label?: string
+  text?: string
+  uncheckedValue?: string
+  value?: string
+}) {
+  return (
+    <Controller
+      control={control}
+      name={inputName}
+      render={({ field, fieldState }) => (
+        <Field
+          className={cn('block', className)}
+          data-invalid={fieldState.invalid}
+          orientation={orientation}
+          {...props}
+        >
+          <Label
+            className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 has-aria-checked:border-blue-600 has-aria-checked:bg-blue-50 dark:has-aria-checked:border-blue-900 dark:has-aria-checked:bg-blue-950"
+            data-slot="field-label"
+          >
+            <Checkbox
+              aria-invalid={fieldState.invalid}
+              checked={field.value === value}
+              className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
+              disabled={field.disabled}
+              id={inputId}
+              name={field.name}
+              onBlur={field.onBlur}
+              onCheckedChange={(checked) =>
+                field.onChange(checked === true ? value : uncheckedValue)
+              }
+              ref={field.ref}
+              value={value}
+            />
+
+            <div className="grid gap-1.5 font-normal">
+              <p className="text-sm leading-none font-medium">{label}</p>
+
+              <p className="text-muted-foreground text-sm">{text}</p>
+
+              {fieldState.invalid && (
+                <FieldErrorI18n errors={[fieldState.error]} />
+              )}
+            </div>
+          </Label>
+        </Field>
+      )}
+    />
+  )
+}
+
+export function SwitchField<TFieldValues extends FieldValues = FieldValues>({
+  control,
+  inputId,
+  inputName,
+  label,
+  orientation = 'horizontal',
+  uncheckedValue = '',
+  value = 'true',
+  ...props
+}: ComponentProps<typeof Field> & {
+  control: Control<TFieldValues>
+  inputId?: string
+  inputName: FieldPath<TFieldValues>
+  label?: string
+  uncheckedValue?: string
+  value?: string
+}) {
+  return (
+    <Controller
+      control={control}
+      name={inputName}
+      render={({ field, fieldState }) => (
+        <Field
+          data-invalid={fieldState.invalid}
+          orientation={orientation}
+          {...props}
+        >
+          <Switch
+            aria-invalid={fieldState.invalid}
+            checked={field.value === value}
+            disabled={field.disabled}
+            id={inputId}
+            name={field.name}
+            onBlur={field.onBlur}
+            onCheckedChange={(checked) =>
+              field.onChange(checked === true ? value : uncheckedValue)
+            }
+            ref={field.ref}
+            value={value}
           />
 
           {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
