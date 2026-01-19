@@ -46,26 +46,10 @@ class Permissions
     public static function getAuth(?array $resource = null)
     {
         return [
-            'passwordConfirmedAt' => session()->get('auth.password_confirmed_at'),
+            'password_confirmed_at' => session()->get('auth.password_confirmed_at'),
             'permissions' => self::getPermissions($resource),
-            'profile' => self::getProfile(),
             'user' => self::getUser(),
         ];
-    }
-
-    public static function getProfile()
-    {
-        $user = Auth::user();
-
-        if ($user instanceof User) {
-            return [
-                'id' => $user->profile->id,
-                'name' => $user->profile->name,
-                'public' => $user->profile->public,
-            ];
-        }
-
-        return null;
     }
 
     /**
@@ -81,6 +65,8 @@ class Permissions
                 'email' => $user->email,
                 'email_verified_at' => $user->email_verified_at,
                 'id' => $user->id,
+                'name' => $user->profile->name,
+                'profile_id' => $user->profile->id,
                 'updated_at' => $user->updated_at,
             ];
         }

@@ -33,6 +33,7 @@ import { cn } from '@/lib/utils'
 import { dashboard, home, logout, settings } from '@/routes'
 import { edit as accountEdit } from '@/routes/account'
 import { index as invitationsIndex } from '@/routes/invitations'
+import { show as profileShow } from '@/routes/profile'
 import { index as projectsIndex } from '@/routes/projects'
 import { index as teamsIndex, show as teamsShow } from '@/routes/teams'
 import type { Permissions } from '@/types'
@@ -43,7 +44,6 @@ import {
   Folder,
   Gauge,
   HelpCircle,
-  Home,
   LogOut,
   Mail,
   Settings,
@@ -193,13 +193,13 @@ function Navigation({
 function ProfileDropdown({
   avatar,
   email,
-  // id,
-  name
+  profileId,
+  profileName
 }: {
   avatar?: string
   email: string
-  id: number
-  name: string
+  profileId: number
+  profileName: string
 }) {
   // i18n
   const { t } = useTranslation()
@@ -214,14 +214,14 @@ function ProfileDropdown({
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground cursor-pointer"
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <UserInfo
                 avatar={avatar}
                 className="w-full"
                 dots={true}
                 email={email}
-                name={name}
+                name={profileName}
               />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
@@ -237,7 +237,7 @@ function ProfileDropdown({
                 avatar={avatar}
                 className="px-1"
                 email={email}
-                name={name}
+                name={profileName}
               />
             </DropdownMenuLabel>
 
@@ -256,10 +256,9 @@ function ProfileDropdown({
 
               <DropdownMenuItem
                 asChild
-                className="text-muted-foreground"
+                className="cursor-pointer"
               >
-                {/* <Link href={route('users.show', { user: id })}> */}
-                <Link href="#">
+                <Link href={profileShow(profileId)}>
                   <UserRound />
                   {t(($) => $.profile)}
                 </Link>
@@ -302,10 +301,6 @@ export default function DashboardLayout({
     throw new Error('The dashboard layout requires "user" to be set.')
   }
 
-  if (!auth.profile) {
-    throw new Error('The dashboard layout requires "profile" to be set.')
-  }
-
   return (
     <SidebarProvider
       defaultOpen={sidebarOpen}
@@ -328,8 +323,7 @@ export default function DashboardLayout({
                 className="data-[slot=sidebar-menu-button]:p-1.5!"
               >
                 <Link href={home()}>
-                  <Home />
-                  <Logo className="text-base font-semibold" />
+                  <Logo className="text-brand text-base font-semibold" />
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -347,8 +341,8 @@ export default function DashboardLayout({
         <SidebarFooter>
           <ProfileDropdown
             email={auth.user.email}
-            id={auth.user.id}
-            name={auth.profile.name}
+            profileId={auth.user.profile_id}
+            profileName={auth.user.name}
           />
         </SidebarFooter>
       </Sidebar>
