@@ -150,6 +150,7 @@ export default function Profile({
         <Button variant="outline">XXX</Button>
 
         <p>{profile.name}</p>
+        <p>{profile.role}</p>
         <p>{profile.public ? 'public' : 'private'}</p>
       </Container>
     </DashboardLayout>

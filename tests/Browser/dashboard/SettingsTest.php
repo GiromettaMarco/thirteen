@@ -31,5 +31,5 @@ it('may change appearance from the settings page')
     ->assertSee('Appearance settings')
     ->click('System')
     ->click('Dark')
-    // @NOTE currently assertAttribute doesn't support tag names
+    // @NOTE currently pest selectors don't support tag names
     ->assertSourceHas('<html lang="en" class="dark">');
