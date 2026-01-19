@@ -1,8 +1,15 @@
 import { Checkbox } from '@/components/ui/checkbox'
-import { Field, FieldError, FieldLabel } from '@/components/ui/field'
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+  FieldSet
+} from '@/components/ui/field'
 import { FieldErrorI18n } from '@/components/ui/field-i18n'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Switch } from '@/components/ui/switch'
 import { flashMessage } from '@/lib/flash'
 import { useTsvResolver, type InferSchema } from '@/lib/tsv/hookform'
@@ -21,8 +28,10 @@ import type {
 import { useForm as useInertiaForm } from '@inertiajs/react'
 import type {
   ComponentProps,
+  FC,
   HTMLInputAutoCompleteAttribute,
-  HTMLInputTypeAttribute
+  HTMLInputTypeAttribute,
+  SVGProps
 } from 'react'
 import { useEffect, type ReactNode } from 'react'
 import type {
@@ -457,6 +466,79 @@ export function SwitchField<TFieldValues extends FieldValues = FieldValues>({
 
           {fieldState.invalid && <FieldErrorI18n errors={[fieldState.error]} />}
         </Field>
+      )}
+    />
+  )
+}
+
+export function FancyRadioField<
+  TFieldValues extends FieldValues = FieldValues
+>({
+  control,
+  defaultValue,
+  description,
+  groupId,
+  inputName,
+  items,
+  label,
+  ...props
+}: ComponentProps<typeof FieldSet> & {
+  control: Control<TFieldValues>
+  defaultValue: string
+  description?: string
+  groupId?: string
+  inputName: FieldPath<TFieldValues>
+  items: Array<{
+    Icon?: FC<SVGProps<SVGSVGElement>>
+    id?: string
+    label: string
+    value: string
+  }>
+  label?: string
+}) {
+  return (
+    <Controller
+      control={control}
+      name={inputName}
+      render={({ field, fieldState }) => (
+        <FieldSet
+          data-invalid={fieldState.invalid}
+          {...props}
+        >
+          {label && <FieldLabel htmlFor={groupId}>{label}</FieldLabel>}
+
+          {description && <FieldDescription>{description}</FieldDescription>}
+
+          {fieldState.invalid && <FieldErrorI18n errors={[fieldState.error]} />}
+
+          <RadioGroup
+            defaultValue={defaultValue}
+            disabled={field.disabled}
+            id={groupId}
+            name={inputName}
+            onBlur={field.onBlur}
+            onValueChange={(value) => field.onChange(value)}
+            ref={field.ref}
+          >
+            {items.map((item) => (
+              <Label
+                className="hover:bg-accent/50 ring-ring/50 rounded-md border transition-all has-focus-visible:ring-[3px]"
+                data-slot="field-label"
+                key={item.value + item.id}
+              >
+                <div className="has-aria-checked:border-ring flex w-full items-center gap-3 rounded-md p-3 transition-all has-aria-checked:border-l-8">
+                  <RadioGroupItem
+                    className="hidden"
+                    id={item.id}
+                    value={item.value}
+                  />
+                  {item.Icon && <item.Icon />}
+                  <span>{item.label}</span>
+                </div>
+              </Label>
+            ))}
+          </RadioGroup>
+        </FieldSet>
       )}
     />
   )
