@@ -20,5 +20,8 @@ return [
         'verify_email' => 'A new verification link has been sent to the email address you provided during registration.',
     ],
     'email_sent' => 'Email sent',
+    'profile' => [
+        'updated' => 'Profile updated',
+    ],
     'throttle' => 'Too many attempts. Please try again in :seconds seconds.',
 ];

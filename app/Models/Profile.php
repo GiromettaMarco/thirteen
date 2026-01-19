@@ -14,6 +14,8 @@ class Profile extends Model
      */
     protected $fillable = [
         'name',
+        'public',
+        'role',
     ];
 
     /**

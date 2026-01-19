@@ -162,6 +162,12 @@ export default {
           title: 'Invitations'
         }
       },
+      profile: {
+        info: 'By setting your profile as public, you allow other users to discover and read your profile information.',
+        public: 'Public profile',
+        title: '{{name}} profile',
+        update: 'Update your profile'
+      },
       projects: {
         index: {
           title: 'Projects'
@@ -256,6 +262,12 @@ export default {
   remove: 'Remove',
   reset: 'Reset',
   role: 'Role',
+  roles: {
+    designer: 'Designer',
+    developer: 'Developer',
+    guest: 'Guest',
+    manager: 'Project Manager'
+  },
   save: 'Save',
   search: 'Search',
   select: 'Select',

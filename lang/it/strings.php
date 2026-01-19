@@ -20,5 +20,8 @@ return [
         'verify_email' => "Un nuovo link di verifica è stato inviato all'indirizzo email che hai fornito durante la registrazione",
     ],
     'email_sent' => 'Email inviata',
+    'profile' => [
+        'updated' => 'Profilo aggiornato',
+    ],
     'throttle' => 'Troppi tentativi. Riprova tra :seconds secondi.',
 ];

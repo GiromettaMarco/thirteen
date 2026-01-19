@@ -161,6 +161,12 @@ export default {
           title: 'Inviti'
         }
       },
+      profile: {
+        info: 'Pubblicando il tuo profilo, consentirai agli altri utenti di trovare e leggere le informazioni in esso contenute.',
+        public: 'Profilo pubblico',
+        title: 'Profilo di {{name}}',
+        update: 'Aggiorna il tuo profilo'
+      },
       projects: {
         index: {
           title: 'Progetti'
@@ -256,6 +262,12 @@ export default {
   remove: 'Rimuovi',
   reset: 'Reset',
   role: 'Ruolo',
+  roles: {
+    designer: 'Designer',
+    developer: 'Sviluppatore',
+    guest: 'Ospite',
+    manager: 'Project Manager'
+  },
   save: 'Salva',
   search: 'Cerca',
   select: 'Seleziona',

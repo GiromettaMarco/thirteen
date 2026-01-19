@@ -54,4 +54,14 @@ export interface Session {
   is_current_device: boolean
   last_active: string
 }
+
+export type ProfileRole = 'guest' | 'developer' | 'designer' | 'manager'
+
+export interface Profile {
+  id: number
+  name: string
+  public: boolean
+  role: ProfileRole
+  user_id: number
+}
 //#endregion

@@ -4,6 +4,7 @@ use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Account\OtherSessionsController;
 use App\Http\Controllers\Account\PasswordController;
 use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TeamController;
 use App\Models\User;
@@ -34,6 +35,14 @@ Route::prefix('dashboard')
             ->name('sessions.destroy');
         Route::delete('/account', [AccountController::class, 'destroy'])
             ->name('account.destroy');
+
+        // Profile and Users
+        Route::get('/profile/{profile}', [ProfileController::class, 'show'])
+            ->can('view', 'profile')
+            ->name('profile.show');
+        Route::put('/profile/{profile}', [ProfileController::class, 'update'])
+            ->can('update', 'profile')
+            ->name('profile.update');
 
         // Invitations
         Route::get('/invitations', [InvitationController::class, 'index'])
