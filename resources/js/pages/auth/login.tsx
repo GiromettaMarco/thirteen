@@ -81,7 +81,7 @@ export default function Login({
               <CheckboxField
                 control={form.control}
                 inputId="rememberMe"
-                inputName={'remember'}
+                inputName="remember"
                 label={t(($) => $.pages.auth.login.rememberMe)}
               />
 
