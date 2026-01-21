@@ -269,7 +269,7 @@ function ProfileDropdown({
 
             <DropdownMenuItem
               asChild
-              className="w-full cursor-pointer"
+              className="w-full"
             >
               <Link href={logout()}>
                 <LogOut />
