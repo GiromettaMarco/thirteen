@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -73,5 +74,28 @@ class User extends Authenticatable implements MustVerifyEmail
                 return $permissionModel->name === $permission;
             }
         );
+    }
+
+    /**
+     * One to Many (inverse) relationship
+     */
+    public function currentTeam(): BelongsTo
+    {
+        return $this->belongsTo(Team::class, 'current_team_id');
+    }
+
+    /**
+     * Many to Many relationship.
+     */
+    public function teams(): BelongsToMany
+    {
+        return $this
+            ->belongsToMany(Team::class)
+            ->withPivot([
+                'admin',
+                'can_edit',
+                'can_delete',
+            ])
+            ->withTimestamps();
     }
 }

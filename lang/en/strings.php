@@ -19,9 +19,20 @@ return [
         'registered' => 'Welcome!',
         'verify_email' => 'A new verification link has been sent to the email address you provided during registration.',
     ],
+    'current_team' => [
+        'updated' => [
+            'title' => 'Current team changed',
+            'description' => 'All team references have been updated.',
+        ],
+    ],
     'email_sent' => 'Email sent',
     'profile' => [
         'updated' => 'Profile updated',
+    ],
+    'team' => [
+        'updated' => 'Team updated',
+        'deleted' => 'Team deleted',
+        'created' => 'Team created',
     ],
     'throttle' => 'Too many attempts. Please try again in :seconds seconds.',
 ];

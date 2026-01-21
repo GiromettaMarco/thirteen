@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Team\StoreTeamRequest;
+use App\Models\Team;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Sliver\Format\FlashMessage;
 
 class TeamController extends Controller
 {
@@ -13,7 +17,17 @@ class TeamController extends Controller
      */
     public function index(Request $request): Response
     {
-        return Inertia::render('dashboard/teams/index');
+        /** @var User */
+        $user = $request->user();
+
+        return Inertia::render('dashboard/teams/index', [
+            'teams' => $user
+                ->teams()
+                ->withCount(['users'])
+                ->orderBy('updated_at', 'DESC')
+                ->get(),
+            // 'views' => $user->getViews(),
+        ]);
     }
 
     /**
@@ -22,5 +36,58 @@ class TeamController extends Controller
     public function show(Request $request): Response
     {
         return Inertia::render('dashboard/teams/show');
+    }
+
+    /**
+     * Store a new team.
+     */
+    public function store(StoreTeamRequest $request): RedirectResponse
+    {
+        /** @var User */
+        $user = $request->user();
+
+        /** @var Team */
+        $team = $user->teams()->create(
+            $request->validated(),
+            [
+                'admin' => true,
+                'can_edit' => true,
+                'can_delete' => true,
+            ]
+        );
+
+        // Set current team if missing
+        if ($user->current_team_id === null) {
+            $user->currentTeam()->associate($team->id);
+            $user->save();
+        }
+
+        Inertia::flash('toast', new FlashMessage(__('strings.team.created'), 'success'));
+
+        return back();
+    }
+
+    /**
+     * Update an existing team.
+     */
+    public function update(StoreTeamRequest $request, Team $team): RedirectResponse
+    {
+        $team->update($request->validated());
+
+        Inertia::flash('toast', new FlashMessage(__('strings.team.updated'), 'success'));
+
+        return back();
+    }
+
+    /**
+     * Delete a team.
+     */
+    public function destroy(Request $request, Team $team): RedirectResponse
+    {
+        $team->delete();
+
+        Inertia::flash('toast', new FlashMessage(__('strings.team.deleted'), 'success'));
+
+        return back();
     }
 }

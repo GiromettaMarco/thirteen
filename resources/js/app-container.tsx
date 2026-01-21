@@ -1,3 +1,4 @@
+import AppContextProvider from '@/providers/app-context-provider'
 import AppearanceProvider from '@/providers/appearance-provider'
 import FlashNotifications from '@/providers/flash-notifications'
 import i18n from '@/providers/i18n'
@@ -14,7 +15,7 @@ export default function AppContainer({
       <AppearanceProvider appearance={appearance}>
         <FlashNotifications />
 
-        {children}
+        <AppContextProvider>{children}</AppContextProvider>
       </AppearanceProvider>
     </I18nextProvider>
   )

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('role')->default('guest');
-            $table->boolean('public')->default('false');
+            $table->boolean('public')->default(false);
             $table->timestamps();
             $table->foreignId('user_id')
                 ->index()

@@ -62,6 +62,7 @@ class Permissions
         if ($user instanceof User) {
             return [
                 'created_at' => $user->created_at,
+                'current_team_id' => $user->current_team_id,
                 'email' => $user->email,
                 'email_verified_at' => $user->email_verified_at,
                 'id' => $user->id,

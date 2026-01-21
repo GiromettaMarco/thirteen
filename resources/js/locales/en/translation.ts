@@ -163,10 +163,12 @@ export default {
         }
       },
       profile: {
+        drawerDescription:
+          'Set your display name, role and profile visibility.',
+        drawerTitle: 'Update your profile',
         info: 'By setting your profile as public, you allow other users to discover and read your profile information.',
         public: 'Public profile',
-        title: '{{name}} profile',
-        update: 'Update your profile'
+        title: '{{name}} profile'
       },
       projects: {
         index: {
@@ -183,11 +185,6 @@ export default {
           p: 'Set the language of the application.'
         },
         title: 'Settings'
-      },
-      teams: {
-        index: {
-          title: 'Teams management'
-        }
       }
     },
     errors: {
@@ -334,27 +331,33 @@ export default {
   },
   team_one: 'Team',
   team_other: 'Teams',
+  // teams: {
+  //   addMembers: {
+  //     description: 'Search and add users by name or email address.',
+  //     instructions: 'Search a for a user, then click on its name to select it.',
+  //     nameOrEmail: 'Name or email',
+  //     title: 'Add new team members'
+  //   },
+  //   descriptionPlaceholder: 'Optional, short text describing the team.',
+  //   leave: 'Leave',
+  //   namePlaceholder: 'Team name',
+  //   teamDescription: 'Team description',
+  //   teamMembers: 'Team members'
+  // },
   teams: {
-    addMembers: {
-      description: 'Search and add users by name or email address.',
-      instructions: 'Search a for a user, then click on its name to select it.',
-      nameOrEmail: 'Name or email',
-      title: 'Add new team members'
-    },
-    createInstructions: 'Make a new team.',
+    createDesc: 'Insert the team name to create a new team.',
     createTeam: 'Create Team',
+    createTitle: 'New team',
     defaultName: 'New team',
-    descriptionPlaceholder: 'Optional, short text describing the team.',
-    emptyTable: {
-      line1: "You haven't created any team yet.",
-      line2: 'Get started by creating your first team.',
-      title: 'No Teams yet'
-    },
-    leave: 'Leave',
-    namePlaceholder: 'Team name',
-    newTeam: 'New team',
-    teamDescription: 'Team description',
-    teamMembers: 'Team members'
+    deleteDesc1: 'You are about to delete the  "{{team}}" team.',
+    deleteDesc2:
+      'Any related resource (projects, tasks...) will be lost forever.',
+    deleteTitle: 'Are you sure you want to delete the team?',
+    emptyDesc1: "You haven't created any team yet.",
+    emptyDesc2: 'Get started by creating your first team.',
+    emptyTitle: 'No Teams yet',
+    title: 'Teams management',
+    updateDesc: 'Update the team information'
   },
   user_one: 'User',
   user_other: 'Users',

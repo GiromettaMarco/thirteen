@@ -3,6 +3,7 @@
 use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Account\OtherSessionsController;
 use App\Http\Controllers\Account\PasswordController;
+use App\Http\Controllers\CurrentTeamController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -50,10 +51,20 @@ Route::prefix('dashboard')
             ->name('invitations.index');
 
         // Teams
+        Route::put('/current-team', [CurrentTeamController::class, 'update'])
+            ->name('current-team.update');
         Route::get('/teams', [TeamController::class, 'index'])
             ->name('teams.index');
         Route::get('/teams/{team}', [TeamController::class, 'show'])
             ->name('teams.show');
+        Route::post('/teams', [TeamController::class, 'store'])
+            ->name('teams.store');
+        Route::put('/teams/{team}', [TeamController::class, 'update'])
+            ->can('update', 'team')
+            ->name('teams.update');
+        Route::delete('/teams/{team}', [TeamController::class, 'destroy'])
+            ->can('delete', 'team')
+            ->name('teams.destroy');
 
         // Projects
         Route::get('/teams/{team}/projects', [ProjectController::class, 'index'])
