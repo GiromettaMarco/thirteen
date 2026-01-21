@@ -6,6 +6,7 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle
@@ -64,8 +65,11 @@ function UpdateProfileDrawer({ profile }: { profile: Profile }) {
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>
-            {t(($) => $.pages.dashboard.profile.update)}
+            {t(($) => $.pages.dashboard.profile.drawerTitle)}
           </DrawerTitle>
+          <DrawerDescription>
+            {t(($) => $.pages.dashboard.profile.drawerDescription)}
+          </DrawerDescription>
         </DrawerHeader>
 
         <Form
