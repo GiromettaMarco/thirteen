@@ -40,7 +40,7 @@ import { Schema } from '@/lib/tsv/schema'
 import { AppContext } from '@/providers/app-context-provider'
 import { update } from '@/routes/current-team'
 import { destroy, show } from '@/routes/teams'
-import type { UsersTeam } from '@/types'
+import type { Team, UsersTeam } from '@/types'
 import { Link, useForm, usePage } from '@inertiajs/react'
 import type { ColumnDef } from '@tanstack/react-table'
 import {
@@ -59,32 +59,39 @@ import { useTranslation } from 'react-i18next'
 //#region TeamsTableCurrent
 function TeamsTableCurrent({
   currentTeamId,
-  teamId
+  team
 }: {
   currentTeamId?: number | null
-  teamId: number
+  team: Team
 }) {
+  // i18n
+  const { t } = useTranslation()
+
   const { submit } = useForm({
-    id: teamId
+    id: team.id
   })
 
   function setCurrentTeam() {
-    if (currentTeamId != teamId) {
+    if (currentTeamId != team.id) {
       submit(update())
     }
   }
 
   return (
-    <div
+    <button
       className="flex justify-center"
-      id={teamId.toString()}
+      data-test={`set-current-team-${team.id}`}
       onClick={setCurrentTeam}
+      type="button"
     >
       <Star
         className="hover:text-brand size-4"
-        fill={teamId === currentTeamId ? 'currentColor' : undefined}
+        fill={team.id === currentTeamId ? 'currentColor' : 'none'}
       />
-    </div>
+      <span className="sr-only">
+        {t(($) => $.teams.setCurrent, { team: team.name })}
+      </span>
+    </button>
   )
 }
 //#endregion
@@ -178,11 +185,14 @@ function TeamsTableActions({
         <DropdownMenuTrigger asChild>
           <Button
             className="data-[state=open]:bg-muted text-muted-foreground flex size-8"
+            data-test={`team-${team.id}-actions`}
             size="icon"
             variant="ghost"
           >
             <EllipsisVertical />
-            <span className="sr-only">{t(($) => $.openMenu)}</span>
+            <span className="sr-only">
+              {t(($) => $.teams.actions, { team: team.name })}
+            </span>
           </Button>
         </DropdownMenuTrigger>
 
@@ -328,7 +338,7 @@ export function TeamsTable({
         cell: ({ row }) => (
           <TeamsTableCurrent
             currentTeamId={user?.current_team_id}
-            teamId={row.original.id}
+            team={row.original}
           />
         ),
         enableHiding: false

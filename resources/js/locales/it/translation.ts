@@ -349,6 +349,7 @@ export default {
   //   teamMembers: 'Membri del team'
   // },
   teams: {
+    actions: 'Azioni del team "{{team}}"',
     createDesc: 'Inserisci il nome del team per creare un nuovo team.',
     createTeam: 'Crea Team',
     createTitle: 'Nuovo team',
@@ -360,6 +361,7 @@ export default {
     emptyDesc1: 'Non hai ancora creato alcun team.',
     emptyDesc2: 'Inizia creando il tuo primo team.',
     emptyTitle: 'Ancora nessun team',
+    setCurrent: 'Imposta "{{team}}" come team corrente',
     title: 'Gestione dei team',
     updateDesc: 'Aggiorna le informazioni del team'
   },
