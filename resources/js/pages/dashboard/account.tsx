@@ -123,6 +123,7 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
                     <Submit
                       label={t(($) => $.delete)}
                       loading={loading}
+                      variant="destructive"
                     />
                   </DialogFooter>
                 </>
@@ -274,6 +275,7 @@ function DeleteAccount() {
                   <Submit
                     label={t(($) => $.delete)}
                     loading={loading}
+                    variant="destructive"
                   />
                 </DialogFooter>
               </>
