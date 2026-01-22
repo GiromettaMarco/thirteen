@@ -1,5 +1,5 @@
 {
-    "version": "0.0.1",
+    "version": "0.0.2",
     "matchers": [
         {
             "filePattern": "tests/**/*.php",
@@ -8,17 +8,20 @@
                 [
                     "./vendor/bin/pest",
                     "--no-coverage",
-                    "--filter '${group:1}'"
+                    "--filter",
+                    "${group:1}"
                 ],
                 [
                     "./vendor/bin/pest",
                     "--debug",
                     "--no-coverage",
-                    "--filter '${group:1}'"
+                    "--filter",
+                    "${group:1}"
                 ],
                 [
                     "./vendor/bin/pest",
-                    "--filter '${group:1}'"
+                    "--filter",
+                    "${group:1}"
                 ]
             ]
         }
