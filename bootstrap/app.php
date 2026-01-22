@@ -41,6 +41,12 @@ return Application::configure(basePath: dirname(__DIR__))
                     ->setStatusCode(403);
             }
 
+            if ($response->getStatusCode() === 404) {
+                return Inertia::render('errors/404')
+                    ->toResponse($request)
+                    ->setStatusCode(404);
+            }
+
             if ($response->getStatusCode() === 429) {
                 return Inertia::render('errors/429')
                     ->toResponse($request)
