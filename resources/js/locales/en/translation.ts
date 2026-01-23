@@ -340,9 +340,6 @@ export default {
   //   },
   //   descriptionPlaceholder: 'Optional, short text describing the team.',
   //   leave: 'Leave',
-  //   namePlaceholder: 'Team name',
-  //   teamDescription: 'Team description',
-  //   teamMembers: 'Team members'
   // },
   teams: {
     actions: 'Team "{{team}}" actions',
@@ -357,7 +354,9 @@ export default {
     emptyDesc1: "You haven't created any team yet.",
     emptyDesc2: 'Get started by creating your first team.',
     emptyTitle: 'No Teams yet',
+    namePlaceholder: 'Team name',
     setCurrent: 'Set "{{team}}" as current team',
+    teamMembers: 'Team members',
     title: 'Teams management',
     updateDesc: 'Update the team information'
   },

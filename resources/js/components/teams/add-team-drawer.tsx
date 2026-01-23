@@ -1,5 +1,4 @@
-import { NameFieldPreset } from '@/components/auth/fields'
-import { Form } from '@/components/form'
+import { Form, TextField } from '@/components/form'
 import { Button } from '@/components/ui/button'
 import {
   Drawer,
@@ -67,7 +66,13 @@ export function AddTeamDrawer() {
           {({ form, loading }) => (
             <>
               <div className="flex flex-col gap-6 overflow-y-auto px-4">
-                <NameFieldPreset control={form.control} />
+                <TextField
+                  control={form.control}
+                  inputId="name"
+                  inputName="name"
+                  label={t(($) => $.name)}
+                  placeholder={t(($) => $.teams.namePlaceholder)}
+                />
               </div>
 
               <DrawerFooter>
