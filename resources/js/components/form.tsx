@@ -26,6 +26,7 @@ import type {
   RequestPayload
 } from '@inertiajs/core'
 import { useForm as useInertiaForm } from '@inertiajs/react'
+import type { CheckedState } from '@radix-ui/react-checkbox'
 import type {
   ComponentProps,
   FC,
@@ -198,6 +199,7 @@ export function Form<
 export function InputField<TFieldValues extends FieldValues = FieldValues>({
   autoComplete,
   control,
+  disabled,
   inputId,
   inputName,
   label,
@@ -207,6 +209,7 @@ export function InputField<TFieldValues extends FieldValues = FieldValues>({
 }: ComponentProps<typeof Field> & {
   autoComplete?: HTMLInputAutoCompleteAttribute
   control: Control<TFieldValues>
+  disabled?: boolean
   inputId?: string
   inputName: FieldPath<TFieldValues>
   label?: string
@@ -216,6 +219,7 @@ export function InputField<TFieldValues extends FieldValues = FieldValues>({
   return (
     <Controller
       control={control}
+      disabled={disabled}
       name={inputName}
       render={({ field, fieldState }) => (
         <Field
@@ -304,28 +308,39 @@ export function HiddenField<TFieldValues extends FieldValues = FieldValues>({
 }
 
 export function CheckboxField<TFieldValues extends FieldValues = FieldValues>({
+  'aria-readonly': ariaReadonly,
+  className,
   control,
+  disabled,
   inputId,
   inputName,
   label,
+  onCheckedChange,
   orientation = 'horizontal',
+  readonly,
   uncheckedValue = '',
   value = 'true',
   ...props
 }: ComponentProps<typeof Field> & {
   control: Control<TFieldValues>
+  disabled?: boolean
   inputId?: string
   inputName: FieldPath<TFieldValues>
   label?: string
+  onCheckedChange?: (checked: CheckedState) => void
+  readonly?: boolean
   uncheckedValue?: string
   value?: string
 }) {
   return (
     <Controller
       control={control}
+      disabled={disabled}
       name={inputName}
       render={({ field, fieldState }) => (
         <Field
+          aria-readonly={readonly || ariaReadonly}
+          className={cn('aria-readonly:opacity-50', className)}
           data-invalid={fieldState.invalid}
           orientation={orientation}
           {...props}
@@ -337,9 +352,15 @@ export function CheckboxField<TFieldValues extends FieldValues = FieldValues>({
             id={inputId}
             name={field.name}
             onBlur={field.onBlur}
-            onCheckedChange={(checked) =>
-              field.onChange(checked === true ? value : uncheckedValue)
-            }
+            onCheckedChange={(checked) => {
+              if (!readonly) {
+                field.onChange(checked === true ? value : uncheckedValue)
+
+                if (onCheckedChange) {
+                  onCheckedChange(checked)
+                }
+              }
+            }}
             ref={field.ref}
             value={value}
           />
@@ -356,21 +377,28 @@ export function CheckboxField<TFieldValues extends FieldValues = FieldValues>({
 export function InfoCheckboxField<
   TFieldValues extends FieldValues = FieldValues
 >({
+  'aria-readonly': ariaReadonly,
   className,
   control,
+  disabled,
   inputId,
   inputName,
   label,
+  onCheckedChange,
   orientation = 'horizontal',
+  readonly,
   text,
   uncheckedValue = '',
   value = 'true',
   ...props
 }: ComponentProps<typeof Field> & {
   control: Control<TFieldValues>
+  disabled?: boolean
   inputId?: string
   inputName: FieldPath<TFieldValues>
   label?: string
+  onCheckedChange?: (checked: CheckedState) => void
+  readonly?: boolean
   text?: string
   uncheckedValue?: string
   value?: string
@@ -378,10 +406,12 @@ export function InfoCheckboxField<
   return (
     <Controller
       control={control}
+      disabled={disabled}
       name={inputName}
       render={({ field, fieldState }) => (
         <Field
-          className={cn('block', className)}
+          aria-readonly={readonly || ariaReadonly}
+          className={cn('block aria-readonly:opacity-50', className)}
           data-invalid={fieldState.invalid}
           orientation={orientation}
           {...props}
@@ -398,9 +428,15 @@ export function InfoCheckboxField<
               id={inputId}
               name={field.name}
               onBlur={field.onBlur}
-              onCheckedChange={(checked) =>
-                field.onChange(checked === true ? value : uncheckedValue)
-              }
+              onCheckedChange={(checked) => {
+                if (!readonly) {
+                  field.onChange(checked === true ? value : uncheckedValue)
+
+                  if (onCheckedChange) {
+                    onCheckedChange(checked)
+                  }
+                }
+              }}
               ref={field.ref}
               value={value}
             />
@@ -422,28 +458,39 @@ export function InfoCheckboxField<
 }
 
 export function SwitchField<TFieldValues extends FieldValues = FieldValues>({
+  'aria-readonly': ariaReadonly,
+  className,
   control,
+  disabled,
   inputId,
   inputName,
   label,
+  onCheckedChange,
   orientation = 'horizontal',
+  readonly,
   uncheckedValue = '',
   value = 'true',
   ...props
 }: ComponentProps<typeof Field> & {
   control: Control<TFieldValues>
+  disabled?: boolean
   inputId?: string
   inputName: FieldPath<TFieldValues>
   label?: string
+  onCheckedChange?: (checked: CheckedState) => void
+  readonly?: boolean
   uncheckedValue?: string
   value?: string
 }) {
   return (
     <Controller
       control={control}
+      disabled={disabled}
       name={inputName}
       render={({ field, fieldState }) => (
         <Field
+          aria-readonly={readonly || ariaReadonly}
+          className={cn('aria-readonly:opacity-50', className)}
           data-invalid={fieldState.invalid}
           orientation={orientation}
           {...props}
@@ -455,9 +502,15 @@ export function SwitchField<TFieldValues extends FieldValues = FieldValues>({
             id={inputId}
             name={field.name}
             onBlur={field.onBlur}
-            onCheckedChange={(checked) =>
-              field.onChange(checked === true ? value : uncheckedValue)
-            }
+            onCheckedChange={(checked) => {
+              if (!readonly) {
+                field.onChange(checked === true ? value : uncheckedValue)
+
+                if (onCheckedChange) {
+                  onCheckedChange(checked)
+                }
+              }
+            }}
             ref={field.ref}
             value={value}
           />
@@ -477,6 +530,7 @@ export function FancyRadioField<
   control,
   defaultValue,
   description,
+  disabled,
   groupId,
   inputName,
   items,
@@ -486,6 +540,7 @@ export function FancyRadioField<
   control: Control<TFieldValues>
   defaultValue: string
   description?: string
+  disabled?: boolean
   groupId?: string
   inputName: FieldPath<TFieldValues>
   items: Array<{
@@ -499,6 +554,7 @@ export function FancyRadioField<
   return (
     <Controller
       control={control}
+      disabled={disabled}
       name={inputName}
       render={({ field, fieldState }) => (
         <FieldSet
