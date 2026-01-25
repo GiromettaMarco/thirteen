@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('team_user', function (Blueprint $table) {
+        Schema::create('profile_team', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('team_id')
+            $table->foreignId('profile_id')
                 ->index()
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignId('user_id')
+            $table->foreignId('team_id')
                 ->index()
                 ->constrained()
                 ->cascadeOnDelete()
@@ -26,6 +26,9 @@ return new class extends Migration
             $table->boolean('admin')->default(false);
             $table->boolean('can_edit')->default(false);
             $table->boolean('can_delete')->default(false);
+            $table->boolean('can_add_members')->default(false);
+            $table->boolean('can_edit_members')->default(false);
+            $table->boolean('can_remove_members')->default(false);
             $table->timestamps();
         });
     }
@@ -35,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('team_user');
+        Schema::dropIfExists('profile_team');
     }
 };

@@ -34,5 +34,8 @@ return [
         'deleted' => 'Team eliminato',
         'updated' => 'Team aggiornato',
     ],
+    'team_member' => [
+        'updated' => 'Membro del team aggiornato',
+    ],
     'throttle' => 'Troppi tentativi. Riprova tra :seconds secondi.',
 ];

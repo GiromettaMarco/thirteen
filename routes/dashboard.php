@@ -8,6 +8,7 @@ use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TeamMemberController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -65,6 +66,15 @@ Route::prefix('dashboard')
         Route::delete('/teams/{team}', [TeamController::class, 'destroy'])
             ->can('delete', 'team')
             ->name('teams.destroy');
+
+        // Team members
+        Route::get('/teams/{team}/member/{profile}', [TeamMemberController::class, 'show'])
+            ->scopeBindings()
+            ->name('members.show');
+        Route::put('/teams/{team}/member/{profile}', [TeamMemberController::class, 'update'])
+            ->scopeBindings()
+            ->can('editMembers', 'team')
+            ->name('members.update');
 
         // Projects
         Route::get('/teams/{team}/projects', [ProjectController::class, 'index'])

@@ -3,8 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\TeamDeleting;
+use App\Models\Profile;
 // use App\Events\TeamMemberRemoved;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class CurrentTeamFallback
@@ -60,15 +60,20 @@ class CurrentTeamFallback
      */
     protected function onTeamDeleting(TeamDeleting $event): void
     {
-        $event->team->loadMissing('users', 'users.teams');
+        $event->team->loadMissing([
+            'profiles',
+            'profiles.user',
+            'profiles.teams',
+        ]);
 
         DB::transaction(function () use ($event) {
-            // For each related user
-            $event->team->users->each(function (User $user) use ($event) {
+            $event->team->profiles->each(function (Profile $profile) use ($event) {
+                $user = $profile->user;
+
                 // If team was current
                 if ($event->team->id === $user->current_team_id) {
                     // Search for a team different from the one being deleted
-                    $another_team = $user
+                    $another_team = $profile
                         ->teams
                         ->firstWhere('id', '<>', $event->team->id);
 

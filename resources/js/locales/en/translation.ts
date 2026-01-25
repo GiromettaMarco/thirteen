@@ -64,6 +64,8 @@ export default {
   management: 'Management',
   manager: 'Manager',
   manageTeams: 'Manage Teams',
+  member_one: 'Member',
+  member_other: 'Members',
   more: 'More',
   name: 'Name',
   noCurrentTeam: {
@@ -331,6 +333,14 @@ export default {
   },
   team_one: 'Team',
   team_other: 'Teams',
+  teamPermissions: {
+    admin: 'Administrator',
+    canEdit: 'Can edit the team',
+    canDelete: 'Can delete the team',
+    canAddMembers: 'Can add new team members',
+    canEditMembers: 'Can edit existing team members',
+    canRemoveMembers: 'Can remove team members'
+  },
   // teams: {
   //   addMembers: {
   //     description: 'Search and add users by name or email address.',

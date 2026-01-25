@@ -22,7 +22,7 @@ class RelatedTeam implements ValidationRule
             abort(401);
         }
 
-        if (! $user->teams->contains($value)) {
+        if (! $user->profile->teams->contains($value)) {
             $fail('validation.related_team')->translate();
         }
     }

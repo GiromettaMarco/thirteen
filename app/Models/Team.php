@@ -42,7 +42,7 @@ class Team extends Model
         $user = Auth::user();
 
         if ($user instanceof User) {
-            return $user->teams()->findOrFail($id);
+            return $user->profile->teams()->findOrFail($id);
         }
 
         abort(401, 'Unauthenticated.');
@@ -51,14 +51,17 @@ class Team extends Model
     /**
      * Many to Many relationship.
      */
-    public function users(): BelongsToMany
+    public function profiles(): BelongsToMany
     {
         return $this
-            ->belongsToMany(User::class)
+            ->belongsToMany(Profile::class)
             ->withPivot([
                 'admin',
                 'can_edit',
                 'can_delete',
+                'can_add_members',
+                'can_edit_members',
+                'can_remove_members',
             ])
             ->withTimestamps();
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Team\StoreTeamRequest;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -22,8 +23,9 @@ class TeamController extends Controller
 
         return Inertia::render('dashboard/teams/index', [
             'teams' => $user
+                ->profile
                 ->teams()
-                ->withCount(['users'])
+                ->withCount(['profiles'])
                 ->orderBy('updated_at', 'DESC')
                 ->get(),
             // 'views' => $user->getViews(),
@@ -33,9 +35,22 @@ class TeamController extends Controller
     /**
      * Show the team with related projects and users.
      */
-    public function show(Request $request): Response
+    public function show(Request $request, Team $team): Response
     {
-        return Inertia::render('dashboard/teams/show');
+        return Inertia::render('dashboard/teams/show', [
+            'profiles' => $team
+                ->profiles()
+                // ->withCount([
+                //     'projects' => function ($query) use ($team) {
+                //         $query->where('team_id', $team->id);
+                //     },
+                //     'tasks' => function ($query) use ($team) {
+                //         $query->where('team_id', $team->id);
+                //     },
+                // ])
+                ->get(),
+            'team' => $team,
+        ]);
     }
 
     /**
@@ -47,7 +62,7 @@ class TeamController extends Controller
         $user = $request->user();
 
         /** @var Team */
-        $team = $user->teams()->create(
+        $team = $user->profile->teams()->create(
             $request->validated(),
             [
                 'admin' => true,

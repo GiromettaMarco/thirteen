@@ -28,6 +28,16 @@ class TeamPolicy
             : Response::deny();
     }
 
+    /**
+     * Determine whether the user can update team members.
+     */
+    public function editMembers(User $user, Team $team): Response
+    {
+        return $team->pivot->can_edit_members
+            ? Response::allow()
+            : Response::deny();
+    }
+
     // /**
     //  * Determine whether the user can edit related projects.
     //  */

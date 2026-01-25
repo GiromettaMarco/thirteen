@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Profile;
+use App\Models\Team;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
+use Sliver\Format\FlashMessage;
+
+class TeamMemberController extends Controller
+{
+    /**
+     * Show the team with related projects and users.
+     */
+    public function show(
+        Request $request,
+        Team $team,
+        Profile $profile
+    ): Response {
+        return Inertia::render('dashboard/teams/members/show', [
+            'profile' => $profile,
+            'team' => $team,
+        ]);
+    }
+
+    /**
+     * Update an existing team member.
+     */
+    public function update(
+        Request $request,
+        Team $team,
+        Profile $profile
+    ): RedirectResponse {
+        $admin = $request->boolean('admin');
+
+        $data = [
+            'admin' => $admin,
+            'can_edit' => $admin || $request->boolean('can_edit'),
+            'can_delete' => $admin || $request->boolean('can_delete'),
+            'can_add_members' => $admin || $request->boolean('can_add_members'),
+            'can_edit_members' => $admin || $request->boolean('can_edit_members'),
+            'can_remove_members' => $admin || $request->boolean('can_remove_members'),
+        ];
+
+        $team->profiles()->updateExistingPivot($profile, $data);
+
+        Inertia::flash('toast', new FlashMessage(__('strings.team_member.updated'), 'success'));
+
+        return back();
+    }
+}

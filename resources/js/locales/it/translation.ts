@@ -66,6 +66,8 @@ export default {
   management: 'Gestione',
   manager: 'Manager',
   manageTeams: 'Gestisci i Team',
+  member_one: 'Membro',
+  member_other: 'Membri',
   more: 'Altro',
   name: 'Nome',
   noCurrentTeam: {

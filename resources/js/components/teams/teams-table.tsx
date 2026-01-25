@@ -40,7 +40,7 @@ import { Schema } from '@/lib/tsv/schema'
 import { AppContext } from '@/providers/app-context-provider'
 import { update } from '@/routes/current-team'
 import { destroy, show } from '@/routes/teams'
-import type { Team, UsersTeam } from '@/types'
+import type { Team, WithTeamPermissions } from '@/types'
 import { Link, useForm, usePage } from '@inertiajs/react'
 import type { ColumnDef } from '@tanstack/react-table'
 import {
@@ -104,7 +104,7 @@ function TeamsTableActions({
   team
 }: {
   // userId?: number
-  team: UsersTeam
+  team: Team & WithTeamPermissions
 }) {
   // i18n
   const { t } = useTranslation()
@@ -278,11 +278,13 @@ function TeamsTableEmpty() {
 //#endregion
 
 //#region TeamsTable
+type TeamRow = Team & WithTeamPermissions & { profiles_count: number }
+
 export function TeamsTable({
   teams
   // view
 }: {
-  teams: UsersTeam[]
+  teams: TeamRow[]
   // view?: View
 }) {
   // i18n
@@ -330,7 +332,7 @@ export function TeamsTable({
     [t]
   )
 
-  const columns: ColumnDef<UsersTeam>[] = useMemo(
+  const columns: ColumnDef<TeamRow>[] = useMemo(
     () => [
       {
         id: 'current',
@@ -360,11 +362,11 @@ export function TeamsTable({
       },
 
       {
-        accessorKey: 'users_count',
+        accessorKey: 'profiles_count',
         header: ({ column }) => (
           <SortableColumnHeader
             column={column}
-            title={t(($) => $.user, { count: 2 })}
+            title={t(($) => $.member, { count: 2 })}
           />
         )
       },

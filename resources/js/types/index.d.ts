@@ -76,14 +76,20 @@ export interface Team extends WithTimestamps {
   name: string
 }
 
-export interface UsersTeam extends Team {
-  pivot: {
-    can_delete: boolean
-    can_edit: boolean
-    created_at: string
-    team_id: number
-    updated_at: string
-    user_id: number
-  }
+export interface TeamPermissions {
+  admin: boolean
+  can_delete: boolean
+  can_edit: boolean
+  can_add_members: boolean
+  can_edit_members: boolean
+  can_remove_members: boolean
+}
+
+export interface WithTeamPermissions {
+  pivot: TeamPermissions &
+    WithTimestamps & {
+      profile_id: number
+      team_id: number
+    }
 }
 //#endregion
