@@ -36,7 +36,7 @@ it('may accept a create team request', function () {
         ->post(route('teams.store'), ['name' => 'New Team'])
         ->assertSessionHasNoErrors();
 
-    expect($user->teams->where('name', 'New Team')->first())
+    expect($user->profile->teams->where('name', 'New Team')->first())
         ->not()
         ->toBeNull();
 });
@@ -51,7 +51,7 @@ it('may auto assign current team on create if missing', function () {
     $user->refresh();
 
     expect($user->current_team_id)
-        ->toBe(3);
+        ->toBe(4);
 });
 
 it('may accept an update team request', function () {
@@ -63,7 +63,7 @@ it('may accept an update team request', function () {
         ])
         ->assertSessionHasNoErrors();
 
-    expect($user->teams->where('name', 'Name Changed Team')->first())
+    expect($user->profile->teams->where('name', 'Name Changed Team')->first())
         ->not()
         ->toBeNull();
 });
@@ -83,7 +83,7 @@ it('may accept a delete team request and fallback current team', function () {
         ->delete(route('teams.destroy', ['team' => 1]))
         ->assertSessionHasNoErrors();
 
-    expect($user->teams->find(1))
+    expect($user->profile->teams->find(1))
         ->toBeNull();
 
     $user->refresh();
