@@ -73,7 +73,7 @@ function UpdateProfileDrawer({ profile }: { profile: Profile }) {
         </DrawerHeader>
 
         <Form
-          className="h-full"
+          className="h-full overflow-y-auto"
           defaults={{
             name: profile.name,
             public: profile.public ? '1' : '0',
@@ -86,7 +86,7 @@ function UpdateProfileDrawer({ profile }: { profile: Profile }) {
         >
           {({ form, loading }) => (
             <>
-              <div className="flex flex-col gap-6 overflow-y-auto px-4">
+              <div className="flex flex-col gap-6 px-4">
                 <NameFieldPreset control={form.control} />
 
                 <FancyRadioField

@@ -51,7 +51,7 @@ export default function UpdateTeamDrawer({
 
         {team && (
           <Form
-            className="h-full"
+            className="h-full overflow-y-auto"
             defaults={{
               name: team.name
             }}
@@ -61,7 +61,7 @@ export default function UpdateTeamDrawer({
           >
             {({ form, loading }) => (
               <>
-                <div className="flex flex-col gap-6 overflow-y-auto px-4">
+                <div className="flex flex-col gap-6 px-4">
                   <TextField
                     control={form.control}
                     inputId="name"

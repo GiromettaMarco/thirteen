@@ -55,7 +55,7 @@ export function AddTeamDrawer() {
         </DrawerHeader>
 
         <Form
-          className="h-full"
+          className="h-full overflow-y-auto"
           defaults={{
             name: t(($) => $.teams.defaultName)
           }}
@@ -65,7 +65,7 @@ export function AddTeamDrawer() {
         >
           {({ form, loading }) => (
             <>
-              <div className="flex flex-col gap-6 overflow-y-auto px-4">
+              <div className="flex flex-col gap-6 px-4">
                 <TextField
                   control={form.control}
                   inputId="name"
