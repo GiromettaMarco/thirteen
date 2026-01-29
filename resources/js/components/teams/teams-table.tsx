@@ -324,7 +324,7 @@ export function TeamsTable({
     setData(() => teams)
   }, [setData, teams])
 
-  const labels: Record<string, string> = useMemo(
+  const labels = useMemo<Record<string, string>>(
     () => ({
       users_count: t(($) => $.user, { count: 2 })
       // projectsCount: t(($) => $.project, { count: 2 })
@@ -332,7 +332,7 @@ export function TeamsTable({
     [t]
   )
 
-  const columns: ColumnDef<TeamRow>[] = useMemo(
+  const columns = useMemo<ColumnDef<TeamRow>[]>(
     () => [
       {
         id: 'current',

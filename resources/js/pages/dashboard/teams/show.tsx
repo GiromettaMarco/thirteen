@@ -23,7 +23,7 @@ export default function TeamsShow({
   // i18n
   const { t } = useTranslation()
 
-  const breadcrumbs: BreadcrumbLink[] = useMemo(
+  const breadcrumbs = useMemo<BreadcrumbLink[]>(
     () => [
       { key: 1, href: dashboard(), label: t(($) => $.dashboard) },
       { key: 2, href: index(), label: t(($) => $.team, { count: 2 }) }
