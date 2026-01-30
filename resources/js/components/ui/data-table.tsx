@@ -735,9 +735,11 @@ export function getSelectColDef<T extends object>() {
 export function TableToolbar<TData>({
   children,
   className,
+  columnId = 'name',
   table
 }: PropsWithChildren<{
   className?: string
+  columnId?: string
   table: TanstackTable<TData>
 }>) {
   // @NOTE prevent this function from being optimized by React Compiler.
@@ -755,9 +757,9 @@ export function TableToolbar<TData>({
     <div className={cn('grid items-center gap-2 xl:flex', className)}>
       <Input
         placeholder={t(($) => $.table.searchByName)}
-        value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
+        value={(table.getColumn(columnId)?.getFilterValue() as string) ?? ''}
         onChange={(event) =>
-          table.getColumn('name')?.setFilterValue(event.target.value)
+          table.getColumn(columnId)?.setFilterValue(event.target.value)
         }
         className="h-8 w-full 2xl:w-64"
       />
