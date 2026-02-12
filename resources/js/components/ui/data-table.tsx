@@ -41,6 +41,11 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger
+} from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import {
   flexRender,
@@ -542,19 +547,34 @@ export function FacetedFilter<TData, TValue>({
 }
 
 //#region SortableColumnHeader
-interface SortableColumnHeaderProps<
-  TData,
-  TValue
-> extends React.HTMLAttributes<HTMLDivElement> {
+function SortableColumnIcon<TData, TValue>({
+  column
+}: {
   column: Column<TData, TValue>
-  title: string
+}) {
+  switch (column.getIsSorted()) {
+    case 'asc':
+      return <ArrowDown />
+
+    case 'desc':
+      return <ArrowUp />
+
+    default:
+      return <ChevronsUpDown />
+  }
 }
 
 export function SortableColumnHeader<TData, TValue>({
+  className,
   column,
   title,
-  className
-}: SortableColumnHeaderProps<TData, TValue>) {
+  tooltip
+}: {
+  className?: string
+  column: Column<TData, TValue>
+  title: string
+  tooltip?: string
+}) {
   // i18n
   const { t } = useTranslation()
 
@@ -563,25 +583,39 @@ export function SortableColumnHeader<TData, TValue>({
   }
 
   return (
-    <div className={cn('flex items-center space-x-2', className)}>
+    <div className={cn('-mx-1.5', className)}>
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            className="h-8 has-[>svg]:px-1.5"
-            size="sm"
-            variant="ghost"
-          >
-            <span>{title}</span>
-
-            {column.getIsSorted() === 'desc' ? (
-              <ArrowDown />
-            ) : column.getIsSorted() === 'asc' ? (
-              <ArrowUp />
-            ) : (
-              <ChevronsUpDown />
-            )}
-          </Button>
-        </DropdownMenuTrigger>
+        {tooltip ? (
+          <Tooltip>
+            <TooltipTrigger
+              asChild
+              className="focus-visible:border-ring focus-visible:ring-ring/50 rounded-md outline-none focus-visible:ring-3"
+            >
+              <DropdownMenuTrigger asChild>
+                <Button
+                  className="h-8 has-[>svg]:px-1.5"
+                  size="sm"
+                  variant="ghost"
+                >
+                  <span>{title}</span>
+                  <SortableColumnIcon column={column} />
+                </Button>
+              </DropdownMenuTrigger>
+            </TooltipTrigger>
+            <TooltipContent>{tooltip}</TooltipContent>
+          </Tooltip>
+        ) : (
+          <DropdownMenuTrigger asChild>
+            <Button
+              className="h-8 has-[>svg]:px-1.5"
+              size="sm"
+              variant="ghost"
+            >
+              <span>{title}</span>
+              <SortableColumnIcon column={column} />
+            </Button>
+          </DropdownMenuTrigger>
+        )}
 
         <DropdownMenuContent align="start">
           <DropdownMenuItem onClick={() => column.toggleSorting(false, true)}>
