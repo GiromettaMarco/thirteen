@@ -91,7 +91,6 @@ export function SelectionMonitor<TData>({
     </div>
   )
 }
-//#endregion
 
 //#region SortingMonitor
 export function SortingMonitor({
@@ -125,7 +124,6 @@ export function SortingMonitor({
     </div>
   )
 }
-//#endregion
 
 //#region TablePagination
 export function TablePagination<TData>({
@@ -235,7 +233,6 @@ export function TablePagination<TData>({
     </div>
   )
 }
-//#endregion
 
 //#region AfterTable
 export function AfterTable<TData>({
@@ -330,7 +327,6 @@ export function AfterTable<TData>({
     </div>
   )
 }
-//#endregion
 
 //#region ColumnsVisibility
 export function ColumnsVisibility<TData>({
@@ -387,7 +383,6 @@ export function ColumnsVisibility<TData>({
     </DropdownMenu>
   )
 }
-//#endregion
 
 //#region FacetedFilter
 interface FacetedFilterProps<TData, TValue> {
@@ -545,7 +540,6 @@ export function FacetedFilter<TData, TValue>({
     </div>
   )
 }
-//#endregion
 
 //#region SortableColumnHeader
 interface SortableColumnHeaderProps<
@@ -573,11 +567,12 @@ export function SortableColumnHeader<TData, TValue>({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
-            variant="ghost"
+            className="h-8 has-[>svg]:px-1.5"
             size="sm"
-            className="-ml-1.5 h-8 has-[>svg]:px-1.5"
+            variant="ghost"
           >
             <span>{title}</span>
+
             {column.getIsSorted() === 'desc' ? (
               <ArrowDown />
             ) : column.getIsSorted() === 'asc' ? (
@@ -610,7 +605,6 @@ export function SortableColumnHeader<TData, TValue>({
     </div>
   )
 }
-//#endregion
 
 //#region TableMain
 export default function TableMain<TData>({
@@ -678,7 +672,6 @@ export default function TableMain<TData>({
     </div>
   )
 }
-//#endregion
 
 //#region TableSelect
 export function SelectHeader<T extends object>({
@@ -686,39 +679,55 @@ export function SelectHeader<T extends object>({
 }: {
   table: TanstackTable<T>
 }) {
+  // @NOTE prevent this function from being optimized by React Compiler.
+  // @see https://github.com/TanStack/table/issues/5567
+  // @see https://github.com/TanStack/table/discussions/5834
+  // @see https://github.com/TanStack/table/discussions/5595
+  'use no memo'
+
   // i18n
   const { t } = useTranslation()
 
   return (
-    <div className="flex w-4 items-center justify-center ps-2">
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && 'indeterminate')
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label={t(($) => $.table.selectAll)}
-      />
-    </div>
+    <Checkbox
+      checked={
+        table.getIsAllPageRowsSelected() ||
+        (table.getIsSomePageRowsSelected() && 'indeterminate')
+      }
+      className="translate-y-0.5"
+      onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+      aria-label={t(($) => $.table.selectAll)}
+    />
   )
 }
 
 export function SelectCell<T extends object>({ row }: { row: Row<T> }) {
+  // @NOTE prevent this function from being optimized by React Compiler.
+  // @see https://github.com/TanStack/table/issues/5567
+  // @see https://github.com/TanStack/table/discussions/5834
+  // @see https://github.com/TanStack/table/discussions/5595
+  'use no memo'
+
   // i18n
   const { t } = useTranslation()
 
   return (
-    <div className="flex w-4 items-center justify-center ps-2">
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label={t(($) => $.table.selectRow)}
-      />
-    </div>
+    <Checkbox
+      checked={row.getIsSelected()}
+      className="translate-y-0.5"
+      onCheckedChange={(value) => row.toggleSelected(!!value)}
+      aria-label={t(($) => $.table.selectRow)}
+    />
   )
 }
 
 export function getSelectColDef<T extends object>() {
+  // @NOTE prevent this function from being optimized by React Compiler.
+  // @see https://github.com/TanStack/table/issues/5567
+  // @see https://github.com/TanStack/table/discussions/5834
+  // @see https://github.com/TanStack/table/discussions/5595
+  'use no memo'
+
   return {
     cell: ({ row }: { row: Row<T> }) => <SelectCell row={row} />,
     enableHiding: false,
@@ -729,7 +738,6 @@ export function getSelectColDef<T extends object>() {
     id: 'select'
   }
 }
-//#endregion
 
 //#region TableToolbar
 export function TableToolbar<TData>({
@@ -783,4 +791,3 @@ export function TableToolbar<TData>({
     </div>
   )
 }
-//#endregion
