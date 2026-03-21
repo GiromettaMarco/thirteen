@@ -22,8 +22,8 @@ import type {
   Errors,
   GlobalEventCallback,
   Page,
-  PageProps,
-  RequestPayload
+  RequestPayload,
+  SharedPageProps
 } from '@inertiajs/core'
 import { useForm as useInertiaForm } from '@inertiajs/react'
 import type { CheckedState } from '@radix-ui/react-checkbox'
@@ -133,7 +133,7 @@ export function Form<
     }
   }
 
-  function onSuccessWithReset(page: Page<PageProps>) {
+  function onSuccessWithReset(page: Page<SharedPageProps>) {
     if (setDefaultsOnSuccess) {
       inertiaForm.setDefaults()
       reactForm.reset(reactForm.getValues())
