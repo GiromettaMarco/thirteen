@@ -2,6 +2,7 @@
 import type { Team } from '@/types'
 import {
   createContext,
+  useEffect,
   useState,
   type Dispatch,
   type PropsWithChildren,
@@ -17,6 +18,7 @@ export const AppContext = createContext<{
   // addProjectOpen: boolean
   // addTaskOpen: boolean
   addTeamOpen: boolean
+  isTouch: boolean | undefined
   // setActiveEmployee: Dispatch<SetStateAction<EmployeeData | undefined>>
   // setActiveProject: Dispatch<SetStateAction<Project | undefined>>
   // setActiveTask: Dispatch<SetStateAction<TaskWithUser | undefined>>
@@ -52,6 +54,7 @@ export const AppContext = createContext<{
   // setActiveTask: () => {
   //   console.error('setActiveTask must be used within an AppContext provider')
   // },
+  isTouch: undefined,
   setActiveTeam: () => {
     console.error('setActiveTeam must be used within an AppContext provider')
   },
@@ -107,10 +110,26 @@ export default function AppContextProvider({ children }: PropsWithChildren) {
   // const [addProjectOpen, setAddProjectOpen] = useState(false)
   // const [addTaskOpen, setAddTaskOpen] = useState(false)
   const [addTeamOpen, setAddTeamOpen] = useState(false)
+  const [isTouch, setIsTouch] = useState<boolean | undefined>(undefined)
   // const [updateEmployeeOpen, setUpdateEmployeeOpen] = useState(false)
   // const [updateProjectOpen, setUpdateProjectOpen] = useState(false)
   // const [updateTaskOpen, setUpdateTaskOpen] = useState(false)
   const [updateTeamOpen, setUpdateTeamOpen] = useState(false)
+
+  // Add touch media query
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(pointer: coarse)')
+
+    function update() {
+      setIsTouch(mediaQuery.matches)
+    }
+
+    update()
+
+    mediaQuery.addEventListener('change', update)
+
+    return () => mediaQuery.removeEventListener('change', update)
+  }, [])
 
   return (
     <AppContext
@@ -123,6 +142,7 @@ export default function AppContextProvider({ children }: PropsWithChildren) {
         // addProjectOpen,
         // addTaskOpen,
         addTeamOpen,
+        isTouch,
         // setActiveEmployee,
         // setActiveProject,
         // setActiveTask,
