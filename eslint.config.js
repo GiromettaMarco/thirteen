@@ -52,8 +52,7 @@ export default defineConfig([
   // Custom Rules
   {
     rules: {
-      'react-hooks/incompatible-library': 'off',
-      'react-hooks/set-state-in-effect': 'off'
+      'react-hooks/incompatible-library': 'off'
     }
   }
 ])
