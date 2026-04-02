@@ -1,4 +1,5 @@
 /// <reference types="vitest/config" />
+// import inertia from '@inertiajs/vite'
 import { wayfinder } from '@laravel/vite-plugin-wayfinder'
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin'
 import tailwindcss from '@tailwindcss/vite'
@@ -8,7 +9,6 @@ import laravel from 'laravel-vite-plugin'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
-import tsconfigPaths from 'vite-tsconfig-paths'
 import alias from './.storybook/alias'
 
 const dirname =
@@ -28,22 +28,23 @@ export default defineConfig({
           refresh: true
         })
       : undefined,
+    // inertia(),
     react({
       babel: {
         plugins: ['babel-plugin-react-compiler']
       }
     }),
     tailwindcss(),
-    !testing ? wayfinder() : undefined,
-    tsconfigPaths()
+    !testing ? wayfinder() : undefined
   ],
-  esbuild: {
-    jsx: 'automatic'
+
+  resolve: {
+    tsconfigPaths: true
   },
 
-  // ,server: {
+  // server: {
   //   host: true
-  // }
+  // },
 
   test: {
     reporters: ['default'],

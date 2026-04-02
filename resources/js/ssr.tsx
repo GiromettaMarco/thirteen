@@ -4,6 +4,7 @@ import type { Appearance } from '@/types'
 import { createInertiaApp } from '@inertiajs/react'
 import createServer from '@inertiajs/react/server'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+import type { ReactComponent } from 'node_modules/@inertiajs/react/types/types'
 import ReactDOMServer from 'react-dom/server'
 
 createServer((page) =>
@@ -17,7 +18,7 @@ createServer((page) =>
     resolve: (name) =>
       resolvePageComponent(
         `./pages/${name}.tsx`,
-        import.meta.glob('./pages/**/*.tsx')
+        import.meta.glob<ReactComponent>('./pages/**/*.tsx')
       ),
 
     setup: ({ App, props }) => (

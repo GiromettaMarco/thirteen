@@ -91,7 +91,7 @@ export function SelectionMonitor<TData>({
     >
       {t(($) => $.table.selectedRows, {
         count: table.getFilteredSelectedRowModel().rows.length,
-        total: table.getFilteredRowModel().rows.length
+        total: table.getFilteredRowModel().rows.length.toString()
       })}
     </div>
   )
@@ -186,8 +186,8 @@ export function TablePagination<TData>({
 
       <div className="flex w-fit items-center justify-center text-sm font-medium">
         {t(($) => $.table.pageOf, {
-          page: table.getState().pagination.pageIndex + 1,
-          total: table.getPageCount()
+          page: (table.getState().pagination.pageIndex + 1).toString(),
+          total: table.getPageCount().toString()
         })}
       </div>
 

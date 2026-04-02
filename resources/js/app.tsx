@@ -5,6 +5,7 @@ import { APP_NAME } from '@/config'
 import type { Appearance } from '@/types'
 import { createInertiaApp } from '@inertiajs/react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+import type { ReactComponent } from 'node_modules/@inertiajs/react/types/types'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 
 createInertiaApp({
@@ -13,7 +14,7 @@ createInertiaApp({
   resolve: (name) =>
     resolvePageComponent(
       `./pages/${name}.tsx`,
-      import.meta.glob('./pages/**/*.tsx')
+      import.meta.glob<ReactComponent>('./pages/**/*.tsx')
     ),
 
   setup({ el, App, props }) {
