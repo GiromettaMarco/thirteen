@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -13,13 +16,13 @@
 
 pest()->group('unit')->in('Unit');
 
-pest()->extend(Tests\TestCase::class)
-    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+pest()->extend(TestCase::class)
+    ->use(RefreshDatabase::class)
     ->group('feature')
     ->in('Feature');
 
-pest()->extend(Tests\TestCase::class)
-    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+pest()->extend(TestCase::class)
+    ->use(RefreshDatabase::class)
     ->group('browser')
     ->in('Browser');
 
@@ -53,3 +56,20 @@ function something()
 {
     // ..
 }
+
+/*
+|--------------------------------------------------------------------------
+| Browser Tests - Workaround Bug Pest v4.0.3
+|--------------------------------------------------------------------------
+|
+| Chrome processes are not properly closed between tests, causing memory
+| accumulation and timeouts when running in parallel.
+| @see https://github.com/pestphp/pest/issues/1480
+|
+*/
+
+uses()->afterEach(function () {
+    if (isset($this->page)) {
+        $this->page->page()->close();
+    }
+})->in('Browser');
