@@ -13,25 +13,22 @@ import {
 import { cn } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
 import {
-  PopoverContentProps,
-  PopoverProps,
-  PopoverTriggerProps
-} from '@radix-ui/react-popover'
-import {
-  TooltipContentProps,
-  TooltipProps,
-  TooltipTriggerProps
-} from '@radix-ui/react-tooltip'
+  Popover as PopoverPrimitive,
+  Tooltip as TooltipPrimitive
+} from 'radix-ui'
 import { useContext } from 'react'
 
-export function HybridTooltip(props: TooltipProps & PopoverProps) {
+export function HybridTooltip(
+  props: TooltipPrimitive.TooltipProps & PopoverPrimitive.PopoverProps
+) {
   const { isTouch } = useContext(AppContext)
 
   return isTouch ? <Popover {...props} /> : <Tooltip {...props} />
 }
 
 export function HybridTooltipTrigger(
-  props: TooltipTriggerProps & PopoverTriggerProps
+  props: TooltipPrimitive.TooltipTriggerProps &
+    PopoverPrimitive.PopoverTriggerProps
 ) {
   const { isTouch } = useContext(AppContext)
 
@@ -41,7 +38,8 @@ export function HybridTooltipTrigger(
 export function HybridTooltipContent({
   className,
   ...props
-}: TooltipContentProps & PopoverContentProps) {
+}: TooltipPrimitive.TooltipContentProps &
+  PopoverPrimitive.PopoverContentProps) {
   const { isTouch } = useContext(AppContext)
 
   return isTouch ? (
