@@ -8,8 +8,21 @@ import {
 } from '@/components/ui/field'
 import { FieldErrorI18n } from '@/components/ui/field-i18n'
 import { Input } from '@/components/ui/input'
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput
+} from '@/components/ui/input-group'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select'
 import { Switch } from '@/components/ui/switch'
 import { flashMessage } from '@/lib/flash'
 import { useTsvResolver, type InferSchema } from '@/lib/tsv/hookform'
@@ -26,7 +39,8 @@ import type {
   SharedPageProps
 } from '@inertiajs/core'
 import { useForm as useInertiaForm } from '@inertiajs/react'
-import type { CheckedState } from '@radix-ui/react-checkbox'
+import { Minus, Plus } from 'lucide-react'
+import type { Checkbox as CheckboxPrimitive } from 'radix-ui'
 import type {
   ComponentProps,
   FC,
@@ -39,6 +53,7 @@ import type {
   DefaultValues,
   FieldValues,
   Path,
+  FieldError as RHFFieldError,
   UseFormReturn
 } from 'react-hook-form'
 import {
@@ -196,6 +211,18 @@ export function Form<
   )
 }
 
+export function ErrorMonitor({ error }: { error?: RHFFieldError }) {
+  if (!error) {
+    return null
+  }
+
+  if (error.type === 'tsv') {
+    return <FieldErrorI18n errors={[error]} />
+  }
+
+  return <FieldError errors={[error]} />
+}
+
 export function InputField<TFieldValues extends FieldValues = FieldValues>({
   autoComplete,
   control,
@@ -237,12 +264,7 @@ export function InputField<TFieldValues extends FieldValues = FieldValues>({
             {...field}
           />
 
-          {fieldState.error &&
-            (fieldState.error.type === 'tsv' ? (
-              <FieldErrorI18n errors={[fieldState.error]} />
-            ) : (
-              <FieldError errors={[fieldState.error]} />
-            ))}
+          <ErrorMonitor error={fieldState.error} />
         </Field>
       )}
     />
@@ -307,6 +329,87 @@ export function HiddenField<TFieldValues extends FieldValues = FieldValues>({
   )
 }
 
+export function NumericField<TFieldValues extends FieldValues = FieldValues>({
+  autoComplete,
+  control,
+  disabled,
+  inputId,
+  inputName,
+  label,
+  onMinusClick,
+  onPlusClick,
+  placeholder,
+  type,
+  ui = true,
+  uiMinus = 'Decrease',
+  uiPlus = 'Increase',
+  ...props
+}: ComponentProps<typeof Field> & {
+  autoComplete?: HTMLInputAutoCompleteAttribute
+  control: Control<TFieldValues>
+  disabled?: boolean
+  inputId?: string
+  inputName: FieldPath<TFieldValues>
+  label?: string
+  onMinusClick?: (value: string) => void
+  onPlusClick?: (value: string) => void
+  placeholder?: string
+  type?: HTMLInputTypeAttribute
+  ui?: boolean
+  uiMinus?: string
+  uiPlus?: string
+}) {
+  return (
+    <Controller
+      control={control}
+      disabled={disabled}
+      name={inputName}
+      render={({ field, fieldState }) => (
+        <Field
+          data-invalid={fieldState.invalid}
+          {...props}
+        >
+          {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
+
+          <InputGroup>
+            <InputGroupInput
+              aria-invalid={fieldState.invalid}
+              autoComplete={autoComplete}
+              id={inputId}
+              inputMode="numeric"
+              placeholder={placeholder}
+              type={type}
+              {...field}
+            />
+
+            {ui && (
+              <InputGroupAddon align="inline-end">
+                <InputGroupButton
+                  onClick={() => onMinusClick && onMinusClick(field.value)}
+                  size="icon-xs"
+                >
+                  <Minus />
+                  <span className="sr-only">{uiMinus}</span>
+                </InputGroupButton>
+
+                <InputGroupButton
+                  onClick={() => onPlusClick && onPlusClick(field.value)}
+                  size="icon-xs"
+                >
+                  <Plus />
+                  <span className="sr-only">{uiPlus}</span>
+                </InputGroupButton>
+              </InputGroupAddon>
+            )}
+          </InputGroup>
+
+          <ErrorMonitor error={fieldState.error} />
+        </Field>
+      )}
+    />
+  )
+}
+
 export function CheckboxField<TFieldValues extends FieldValues = FieldValues>({
   'aria-readonly': ariaReadonly,
   className,
@@ -327,7 +430,7 @@ export function CheckboxField<TFieldValues extends FieldValues = FieldValues>({
   inputId?: string
   inputName: FieldPath<TFieldValues>
   label?: string
-  onCheckedChange?: (checked: CheckedState) => void
+  onCheckedChange?: (checked: CheckboxPrimitive.CheckedState) => void
   readonly?: boolean
   uncheckedValue?: string
   value?: string
@@ -367,7 +470,7 @@ export function CheckboxField<TFieldValues extends FieldValues = FieldValues>({
 
           {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
 
-          {fieldState.invalid && <FieldErrorI18n errors={[fieldState.error]} />}
+          <ErrorMonitor error={fieldState.error} />
         </Field>
       )}
     />
@@ -397,7 +500,7 @@ export function InfoCheckboxField<
   inputId?: string
   inputName: FieldPath<TFieldValues>
   label?: string
-  onCheckedChange?: (checked: CheckedState) => void
+  onCheckedChange?: (checked: CheckboxPrimitive.CheckedState) => void
   readonly?: boolean
   text?: string
   uncheckedValue?: string
@@ -446,9 +549,7 @@ export function InfoCheckboxField<
 
               <p className="text-muted-foreground text-sm">{text}</p>
 
-              {fieldState.invalid && (
-                <FieldErrorI18n errors={[fieldState.error]} />
-              )}
+              <ErrorMonitor error={fieldState.error} />
             </div>
           </Label>
         </Field>
@@ -477,7 +578,7 @@ export function SwitchField<TFieldValues extends FieldValues = FieldValues>({
   inputId?: string
   inputName: FieldPath<TFieldValues>
   label?: string
-  onCheckedChange?: (checked: CheckedState) => void
+  onCheckedChange?: (checked: CheckboxPrimitive.CheckedState) => void
   readonly?: boolean
   uncheckedValue?: string
   value?: string
@@ -517,7 +618,7 @@ export function SwitchField<TFieldValues extends FieldValues = FieldValues>({
 
           {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
 
-          {fieldState.invalid && <FieldErrorI18n errors={[fieldState.error]} />}
+          <ErrorMonitor error={fieldState.error} />
         </Field>
       )}
     />
@@ -565,7 +666,7 @@ export function FancyRadioField<
 
           {description && <FieldDescription>{description}</FieldDescription>}
 
-          {fieldState.invalid && <FieldErrorI18n errors={[fieldState.error]} />}
+          <ErrorMonitor error={fieldState.error} />
 
           <RadioGroup
             defaultValue={defaultValue}
@@ -584,7 +685,7 @@ export function FancyRadioField<
               >
                 <div className="has-aria-checked:border-ring flex w-full items-center gap-3 rounded-md p-3 transition-all has-aria-checked:border-l-8">
                   <RadioGroupItem
-                    className="hidden"
+                    className="sr-only"
                     id={item.id}
                     value={item.value}
                   />
@@ -595,6 +696,81 @@ export function FancyRadioField<
             ))}
           </RadioGroup>
         </FieldSet>
+      )}
+    />
+  )
+}
+
+interface SelectOption {
+  key?: string | number
+  label: ReactNode
+  value: string
+}
+
+export function SelectField<TFieldValues extends FieldValues = FieldValues>({
+  autoComplete,
+  control,
+  description,
+  disabled,
+  inputId,
+  inputName,
+  label,
+  options,
+  placeholder,
+  ...props
+}: ComponentProps<typeof Field> & {
+  autoComplete?: HTMLInputAutoCompleteAttribute
+  control: Control<TFieldValues>
+  description?: string
+  disabled?: boolean
+  inputId?: string
+  inputName: FieldPath<TFieldValues>
+  label?: string
+  options: SelectOption[]
+  placeholder?: string
+  type?: HTMLInputTypeAttribute
+}) {
+  return (
+    <Controller
+      control={control}
+      disabled={disabled}
+      name={inputName}
+      render={({ field, fieldState }) => (
+        <Field
+          data-invalid={fieldState.invalid}
+          {...props}
+        >
+          {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
+
+          <Select
+            autoComplete={autoComplete}
+            disabled={field.disabled}
+            name={field.name}
+            onValueChange={field.onChange}
+            value={field.value}
+          >
+            <SelectTrigger
+              aria-invalid={fieldState.invalid}
+              id={inputId}
+            >
+              <SelectValue placeholder={placeholder} />
+            </SelectTrigger>
+            <SelectContent>
+              {options.map((option) => (
+                <SelectItem
+                  key={option.key ?? option.value}
+                  value={option.value}
+                >
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          {description && <FieldDescription>{description}</FieldDescription>}
+
+          <ErrorMonitor error={fieldState.error} />
+        </Field>
       )}
     />
   )
