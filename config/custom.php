@@ -40,4 +40,14 @@ return [
         'sidebar' => env('COOKIE_SIDEBAR', 'sidebar'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Roles
+    |--------------------------------------------------------------------------
+    |
+    | List of user available roles.
+    |
+    */
+
+    'roles' => ['guest', 'developer', 'designer', 'manager'],
 ];

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Validation\Rule;
 
 class UpdateProfileRequest extends FormRequest
@@ -21,7 +22,7 @@ class UpdateProfileRequest extends FormRequest
             'role' => [
                 'required',
                 'string',
-                Rule::in(['guest', 'developer', 'designer', 'manager']),
+                Rule::in(Config::get('custom.roles')),
             ],
         ];
     }
