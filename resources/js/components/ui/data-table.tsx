@@ -65,10 +65,11 @@ import {
   ChevronsRight,
   ChevronsUpDown,
   Columns2,
+  EllipsisVertical,
   PlusCircle,
   X
 } from 'lucide-react'
-import type { PropsWithChildren } from 'react'
+import type { ComponentProps, PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
 
 //#region SelectionMonitor
@@ -823,5 +824,32 @@ export function TableToolbar<TData>({
         </div>
       )}
     </div>
+  )
+}
+
+//#region ActionsButton
+export function ActionsButton({
+  className,
+  label,
+  size = 'icon',
+  variant = 'ghost'
+}: ComponentProps<typeof Button> & { label?: string }) {
+  // i18n
+  const { t } = useTranslation()
+
+  return (
+    <DropdownMenuTrigger asChild>
+      <Button
+        className={cn(
+          'data-[state=open]:bg-muted text-muted-foreground size-8',
+          className
+        )}
+        size={size}
+        variant={variant}
+      >
+        <EllipsisVertical />
+        <span className="sr-only">{label || t(($) => $.openMenu)}</span>
+      </Button>
+    </DropdownMenuTrigger>
   )
 }

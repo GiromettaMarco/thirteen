@@ -6,6 +6,7 @@ import {
 import UpdateTeamDrawer from '@/components/teams/update-team-drawer'
 import { Button } from '@/components/ui/button'
 import TableMain, {
+  ActionsButton,
   AfterTable,
   ColumnsVisibility,
   SortableColumnHeader,
@@ -23,8 +24,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuSeparator
 } from '@/components/ui/dropdown-menu'
 import {
   Empty,
@@ -52,7 +52,7 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
-import { EllipsisVertical, Star, UserStar } from 'lucide-react'
+import { Star, UserStar } from 'lucide-react'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -182,19 +182,10 @@ function TeamsTableActions({
       </Dialog>
 
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            className="data-[state=open]:bg-muted text-muted-foreground flex size-8"
-            data-test={`team-${team.id}-actions`}
-            size="icon"
-            variant="ghost"
-          >
-            <EllipsisVertical />
-            <span className="sr-only">
-              {t(($) => $.teams.actions, { team: team.name })}
-            </span>
-          </Button>
-        </DropdownMenuTrigger>
+        <ActionsButton
+          data-test={`team-${team.id}-actions`}
+          label={t(($) => $.teams.actions, { team: team.name })}
+        />
 
         <DropdownMenuContent
           align="end"
