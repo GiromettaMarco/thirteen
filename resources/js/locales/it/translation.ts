@@ -36,18 +36,6 @@ export default {
   homepage: 'Pagina iniziale',
   invitation_one: 'Invito',
   invitation_other: 'Inviti',
-  invitations: {
-    pending: {
-      title: 'Inviti pendenti',
-      description:
-        'Lista degli utenti che non hanno ancora accettato il loro invito.'
-    },
-    renew: 'Rinnova',
-    send: {
-      title: 'Invita un nuovo utente',
-      description: "Crea un nuovo utente ed invia una email d'invito."
-    }
-  },
   label: 'Etichetta',
   labelValue: {
     bug: 'Bug',
@@ -159,9 +147,20 @@ export default {
         title: 'Account'
       },
       invitations: {
-        index: {
-          title: 'Inviti'
-        }
+        first: 'Primo invito',
+        last: 'Ultimo invito',
+        pending: {
+          h2: 'Inviti pendenti',
+          p: 'Lista degli utenti che non hanno ancora accettato il loro invito.'
+        },
+        renew: 'Rinnova',
+        revoke: 'Revoca',
+        send: {
+          h2: 'Invita un nuovo utente',
+          p: "Crea un nuovo utente ed invia una email d'invito.",
+          role: 'Seleziona un ruolo'
+        },
+        title: 'Inviti'
       },
       profile: {
         drawerDescription:
@@ -270,6 +269,7 @@ export default {
   save: 'Salva',
   search: 'Cerca',
   select: 'Seleziona',
+  send: 'Invia',
   settings: 'Impostazioni',
   sidebar: {
     mobile: 'Visualizza la sidebar mobile.',

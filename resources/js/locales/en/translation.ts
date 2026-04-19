@@ -36,17 +36,6 @@ export default {
   homepage: 'Homepage',
   invitation_one: 'Invitation',
   invitation_other: 'Invitations',
-  invitations: {
-    pending: {
-      title: 'Pending invitations',
-      description: 'List of users who have not yet accepted their invitation.'
-    },
-    renew: 'Renew',
-    send: {
-      title: 'Invite a new user',
-      description: 'Create a new user and send an invitation email.'
-    }
-  },
   label: 'Label',
   labelValue: {
     bug: 'Bug',
@@ -160,9 +149,20 @@ export default {
         title: 'Dashboard'
       },
       invitations: {
-        index: {
-          title: 'Invitations'
-        }
+        first: 'First invitation',
+        last: 'Last invitation',
+        pending: {
+          h2: 'Pending invitations',
+          p: 'List of users who have not yet accepted their invitation.'
+        },
+        renew: 'Renew',
+        revoke: 'Revoke',
+        send: {
+          h2: 'Invite a new user',
+          p: 'Create a new user and send an invitation email.',
+          role: 'Select a role'
+        },
+        title: 'Invitations'
       },
       profile: {
         drawerDescription:
@@ -270,6 +270,7 @@ export default {
   save: 'Save',
   search: 'Search',
   select: 'Select',
+  send: 'Send',
   settings: 'Settings',
   sidebar: {
     mobile: 'Displays the mobile sidebar.',

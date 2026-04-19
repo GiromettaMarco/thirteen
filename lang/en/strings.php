@@ -26,13 +26,18 @@ return [
         ],
     ],
     'email_sent' => 'Email sent',
+    'invitation' => [
+        'deleted' => 'Invitation revoked',
+        'created' => 'Invitation sent',
+        'updated' => 'Invitation renewed',
+    ],
     'profile' => [
         'updated' => 'Profile updated',
     ],
     'team' => [
-        'updated' => 'Team updated',
         'deleted' => 'Team deleted',
         'created' => 'Team created',
+        'updated' => 'Team updated',
     ],
     'team_member' => [
         'updated' => 'Team member updated',

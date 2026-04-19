@@ -26,6 +26,11 @@ return [
         ],
     ],
     'email_sent' => 'Email inviata',
+    'invitation' => [
+        'deleted' => 'Invito revocato',
+        'created' => 'Invito spedito',
+        'updated' => 'Invito rinnovato',
+    ],
     'profile' => [
         'updated' => 'Profilo aggiornato',
     ],

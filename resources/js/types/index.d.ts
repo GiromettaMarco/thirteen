@@ -68,6 +68,12 @@ export interface Profile {
   role: ProfileRole
   user_id: number
 }
+
+export interface Invitation extends WithTimestamps {
+  id: number
+  user: AuthUser & { profile: Profile }
+  user_id: number
+}
 //#endregion
 
 //#region Team

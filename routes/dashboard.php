@@ -50,6 +50,15 @@ Route::prefix('dashboard')
         Route::get('/invitations', [InvitationController::class, 'index'])
             ->can('viewAny', User::class)
             ->name('invitations.index');
+        Route::post('/invitations', [InvitationController::class, 'store'])
+            ->can('create', User::class)
+            ->name('invitations.store');
+        Route::put('/invitations/{invitation}', [InvitationController::class, 'update'])
+            ->can('update', User::class)
+            ->name('invitations.update');
+        Route::delete('/invitations/{invitation}', [InvitationController::class, 'destroy'])
+            ->can('delete', User::class)
+            ->name('invitations.destroy');
 
         // Teams
         Route::put('/current-team', [CurrentTeamController::class, 'update'])
