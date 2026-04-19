@@ -71,7 +71,7 @@ class RegisterRequest extends ThrottledRequest
      *
      * Check rate limiter for both 'register' and 'register-email'.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function ensureIsNotRateLimited(?callable $callback = null): void
     {
@@ -100,7 +100,7 @@ class RegisterRequest extends ThrottledRequest
     /**
      * Attempt to register a new user with the provided input.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function register()
     {

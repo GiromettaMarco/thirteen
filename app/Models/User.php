@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Notifications\Invitation as NotificationsInvitation;
+use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,10 +11,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Password;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -65,6 +68,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * One to One relationship.
+     */
+    public function invitation(): HasOne
+    {
+        return $this->hasOne(Invitation::class);
+    }
+
+    /**
      * Check an app permission by name.
      */
     public function hasPermission(string $permission): bool
@@ -82,5 +93,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function currentTeam(): BelongsTo
     {
         return $this->belongsTo(Team::class, 'current_team_id');
+    }
+
+    /**
+     * Send a new invitation notification.
+     */
+    public function invite()
+    {
+        $this->notify(
+            new NotificationsInvitation(Password::createToken($this))
+        );
     }
 }

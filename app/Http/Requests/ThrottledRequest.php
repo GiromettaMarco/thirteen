@@ -26,7 +26,7 @@ abstract class ThrottledRequest extends FormRequest
     /**
      * Ensure the request is not rate limited.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function ensureIsNotRateLimited(?callable $callback = null): void
     {
@@ -60,7 +60,7 @@ abstract class ThrottledRequest extends FormRequest
      * Increase the rate limiter count and throw a validation exception if a
      * message is provided.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function limiterHit(?string $message = null): void
     {

@@ -35,7 +35,7 @@ class Team extends Model
      *
      * @param  int  $id
      * @param  string|null  $field
-     * @return \Illuminate\Database\Eloquent\Model|null
+     * @return Model|null
      */
     public function resolveRouteBinding($id, $field = null)
     {

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\ThrottledRequest;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Validation\ValidationException;
 
 class VerificationSendRequest extends ThrottledRequest
 {
@@ -31,7 +32,7 @@ class VerificationSendRequest extends ThrottledRequest
     /**
      * Send an email verification notification to the user.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function sendEmail()
     {

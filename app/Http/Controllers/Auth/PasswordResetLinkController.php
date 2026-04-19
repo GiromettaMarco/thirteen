@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\PasswordEmailRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 use Sliver\Format\FlashMessage;
@@ -27,7 +28,7 @@ class PasswordResetLinkController extends Controller
     /**
      * Handle an incoming password reset link request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(PasswordEmailRequest $request): RedirectResponse
     {

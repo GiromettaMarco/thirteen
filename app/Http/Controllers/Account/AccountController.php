@@ -11,6 +11,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -78,7 +79,7 @@ class AccountController extends Controller
     /**
      * Get active sessions for the authenticated user.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function sessions(Request $request)
     {
@@ -113,7 +114,7 @@ class AccountController extends Controller
      * Create a new agent instance from the given session.
      *
      * @param  mixed  $session
-     * @return \App\Helpers\Agent
+     * @return Agent
      */
     protected function createAgent($session)
     {

@@ -6,6 +6,7 @@ use App\Http\Requests\ThrottledRequest;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class PasswordEmailRequest extends ThrottledRequest
 {
@@ -58,7 +59,7 @@ class PasswordEmailRequest extends ThrottledRequest
     /**
      * Attempt to send a password reset link to the authenticated user.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function sendLink()
     {
