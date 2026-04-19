@@ -29,8 +29,10 @@ class UserPolicy
 
     /**
      * Determine whether the user can update the model.
+     *
+     * User $model is unused.
      */
-    public function update(User $user, User $model): Response
+    public function update(User $user): Response
     {
         return $user->hasPermission('edit-users')
             ? Response::allow()
