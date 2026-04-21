@@ -1,11 +1,13 @@
 import { EmailField, Form, SelectField, TextField } from '@/components/form'
 import { Submit } from '@/components/ui/submit'
+import { MultipleCheckboxField } from '@/components/uncontrolled-inputs'
 import { store } from '@/routes/invitations'
 import { createInvitationSchema } from '@/schemas/invitations'
+import type { Team } from '@/types'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export function SendInvitationForm() {
+export function SendInvitationForm({ teams }: { teams: Team[] }) {
   // i18n
   const { t } = useTranslation()
 
@@ -26,6 +28,12 @@ export function SendInvitationForm() {
   return (
     <Form
       className="grid gap-3"
+      defaults={{
+        email: '',
+        name: '',
+        role: 'guest',
+        teams: '[]'
+      }}
       route={store()}
       schema={createInvitationSchema}
     >
@@ -57,6 +65,23 @@ export function SendInvitationForm() {
             placeholder={t(($) => $.pages.dashboard.invitations.send.role)}
             options={roles}
           />
+
+          {teams && (
+            <MultipleCheckboxField
+              className="gap-3 [&_legend]:mb-1"
+              description={t(($) => $.pages.dashboard.invitations.teams)}
+              items={teams.map((team) => ({
+                id: team.id.toString(),
+                label: team.name,
+                value: team.id.toString()
+              }))}
+              legend={t(($) => $.team, { count: 2 })}
+              name="teams"
+              onValueChange={(values) =>
+                form.setValue('teams', JSON.stringify(values))
+              }
+            />
+          )}
 
           <Submit
             className="mt-4 w-36"

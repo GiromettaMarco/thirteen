@@ -160,6 +160,7 @@ export default {
           p: "Crea un nuovo utente ed invia una email d'invito.",
           role: 'Seleziona un ruolo'
         },
+        teams: 'Puoi già assegnare il nuovo utente ai seguenti team:',
         title: 'Inviti'
       },
       profile: {

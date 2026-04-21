@@ -162,6 +162,7 @@ export default {
           p: 'Create a new user and send an invitation email.',
           role: 'Select a role'
         },
+        teams: 'You may already assign the new user to the following teams:',
         title: 'Invitations'
       },
       profile: {

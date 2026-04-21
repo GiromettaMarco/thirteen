@@ -41,6 +41,7 @@ class StoreInvitationRequest extends FormRequest
                 'required',
                 Rule::in(Config::get('custom.roles')),
             ],
+            'teams' => ['required', 'string', 'json'],
         ];
     }
 }

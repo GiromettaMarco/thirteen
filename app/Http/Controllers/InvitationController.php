@@ -16,12 +16,17 @@ class InvitationController extends Controller
     /**
      * Show all invitations.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        /** @var User */
+        $user = $request->user();
+
         return Inertia::render('dashboard/invitations/index', [
             'invitations' => Invitation::with(['user', 'user.profile'])
                 ->orderBy('created_at', 'DESC')
                 ->get(),
+            // @TODO add can_add_members policy check for each team
+            'teams' => $user->profile->teams,
         ]);
     }
 
@@ -43,6 +48,15 @@ class InvitationController extends Controller
             'role' => $validated['role'],
         ]);
 
+        // Attach teams
+        $teams = json_decode($validated['teams']);
+
+        if (is_array($teams)) {
+            // @TODO add can_add_members policy check for each team
+            $user->profile->teams()->attach($teams);
+        }
+
+        // Invite
         $user->invitation()->create();
 
         $user->invite();

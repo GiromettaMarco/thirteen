@@ -4,14 +4,16 @@ import { Container } from '@/components/ui/container'
 import { Format } from '@/components/ui/format'
 import { Separator } from '@/components/ui/separator'
 import DashboardLayout from '@/layouts/dashboard-layout'
-import type { Invitation } from '@/types'
+import type { Invitation, Team } from '@/types'
 import { Head } from '@inertiajs/react'
 import { useTranslation } from 'react-i18next'
 
 export default function InvitationsIndex({
-  invitations
+  invitations,
+  teams
 }: {
   invitations: Invitation[]
+  teams: Team[]
 }) {
   // i18n
   const { t } = useTranslation()
@@ -25,7 +27,7 @@ export default function InvitationsIndex({
           h2={t(($) => $.pages.dashboard.invitations.send.h2)}
           p={t(($) => $.pages.dashboard.invitations.send.p)}
         >
-          <SendInvitationForm />
+          <SendInvitationForm teams={teams} />
         </Format>
 
         <Separator />
