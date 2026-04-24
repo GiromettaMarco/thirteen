@@ -4,16 +4,19 @@ import { Container } from '@/components/ui/container'
 import { Format } from '@/components/ui/format'
 import { Separator } from '@/components/ui/separator'
 import DashboardLayout from '@/layouts/dashboard-layout'
-import type { Invitation, Team } from '@/types'
+import { parseView } from '@/lib/utils'
+import type { Invitation, RawView, Team } from '@/types'
 import { Head } from '@inertiajs/react'
 import { useTranslation } from 'react-i18next'
 
 export default function InvitationsIndex({
   invitations,
-  teams
+  teams,
+  views
 }: {
   invitations: Invitation[]
   teams: Team[]
+  views: { invitations: RawView | null }
 }) {
   // i18n
   const { t } = useTranslation()
@@ -36,7 +39,10 @@ export default function InvitationsIndex({
           h2={t(($) => $.pages.dashboard.invitations.pending.h2)}
           p={t(($) => $.pages.dashboard.invitations.pending.p)}
         >
-          <InvitationsTable invitations={invitations} />
+          <InvitationsTable
+            invitations={invitations}
+            view={parseView(views.invitations)}
+          />
         </Format>
       </Container>
     </DashboardLayout>

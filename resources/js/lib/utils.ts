@@ -1,8 +1,45 @@
+import type { RawView, View } from '@/types'
 import { type ClassValue, clsx } from 'clsx'
 import type { Locale } from 'date-fns'
 import { format as originalFormat } from 'date-fns'
 import { it } from 'date-fns/locale'
 import { twMerge } from 'tailwind-merge'
+
+/**
+ * Default values for a table view.
+ */
+export const viewDefaults = {
+  filters: [],
+  pagination: { pageIndex: 0, pageSize: 10 },
+  sorting: [],
+  visibility: {}
+}
+
+/**
+ * Transform raw view data from the database to a JS object.
+ */
+export function parseView(view: RawView | null, fallback?: View): View {
+  if (view === null) {
+    return fallback ?? viewDefaults
+  }
+
+  // @NOTE replace import.meta.env.DEV with APP_DEBUG ?
+
+  try {
+    return {
+      filters: JSON.parse(view.filters),
+      pagination: JSON.parse(view.pagination),
+      sorting: JSON.parse(view.sorting),
+      visibility: JSON.parse(view.visibility)
+    }
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      console.error('Invalid view format.', error)
+    }
+  }
+
+  return fallback ?? viewDefaults
+}
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))

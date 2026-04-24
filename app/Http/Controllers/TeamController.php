@@ -28,7 +28,17 @@ class TeamController extends Controller
                 ->withCount(['profiles'])
                 ->orderBy('updated_at', 'DESC')
                 ->get(),
-            // 'views' => $user->getViews(),
+            'views' => [
+                'teams' => $user->views()->where([
+                    ['page', 'teams.index'],
+                    ['table', 'teams'],
+                ])->first([
+                    'filters',
+                    'pagination',
+                    'sorting',
+                    'visibility',
+                ]),
+            ],
         ]);
     }
 

@@ -1,3 +1,6 @@
+import { viewDefaults } from '@/lib/utils'
+import { store } from '@/routes/views'
+import type { View, ViewStore } from '@/types'
 import type {
   ColumnFiltersState,
   PaginationState,
@@ -9,23 +12,20 @@ import type {
 import { useMemo, useState } from 'react'
 
 export default function UseTableStates<TData extends RowData>({
-  // action,
-  data: initialData
-  // submit,
-  // view
+  data: initialData,
+  view,
+  viewStore
 }: {
-  // action?: string
   data: TData[]
-  // submit?: FetcherSubmitFunction
-  // view?: View
+  view?: View
+  viewStore?: ViewStore
 }) {
   // Table data
   const [data, setData] = useState<TData[]>(() => initialData)
 
   // Column filters
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
-    () => []
-    // () => view?.filters ?? []
+    () => view?.filters ?? viewDefaults.filters
   )
 
   /**
@@ -35,42 +35,40 @@ export default function UseTableStates<TData extends RowData>({
    */
   const onColumnFiltersChange = useMemo(
     () => (updater: Updater<ColumnFiltersState>) => {
-      // if (action && submit) {
-      //   const newFilters =
-      //     updater instanceof Function ? updater(columnFilters) : updater
-      //   const newFiltersWithoutName: ColumnFiltersState = []
+      if (viewStore) {
+        const newFilters =
+          updater instanceof Function ? updater(columnFilters) : updater
+        const newFiltersWithoutName: ColumnFiltersState = []
 
-      //   for (const columnFilter of newFilters) {
-      //     if (columnFilter.id !== 'name') {
-      //       newFiltersWithoutName.push(columnFilter)
-      //     }
-      //   }
+        for (const columnFilter of newFilters) {
+          if (columnFilter.id !== 'name') {
+            newFiltersWithoutName.push(columnFilter)
+          }
+        }
 
-      //   let oldFiltersSizeWithoutName = 0
-      //   for (const columnFilter of columnFilters) {
-      //     if (columnFilter.id !== 'name') {
-      //       oldFiltersSizeWithoutName++
-      //     }
-      //   }
+        let oldFiltersSizeWithoutName = 0
+        for (const columnFilter of columnFilters) {
+          if (columnFilter.id !== 'name') {
+            oldFiltersSizeWithoutName++
+          }
+        }
 
-      //   if (newFiltersWithoutName.length !== oldFiltersSizeWithoutName) {
-      //     submit(
-      //       { filters: JSON.stringify(newFiltersWithoutName) },
-      //       { action, method: 'POST' }
-      //     )
-      //   }
-      // }
+        if (newFiltersWithoutName.length !== oldFiltersSizeWithoutName) {
+          axios.post(store().url, {
+            filters: JSON.stringify(newFiltersWithoutName),
+            ...viewStore
+          })
+        }
+      }
 
       setColumnFilters(updater)
     },
-    []
-    // [action, columnFilters, submit]
+    [columnFilters, viewStore]
   )
 
   // Columns visibility
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
-    () => ({})
-    // () => view?.visibility ?? {}
+    () => view?.visibility ?? viewDefaults.visibility
   )
 
   /**
@@ -78,33 +76,23 @@ export default function UseTableStates<TData extends RowData>({
    */
   const onColumnVisibilityChange = useMemo(
     () => (updater: Updater<VisibilityState>) => {
-      // if (action && submit) {
-      //   submit(
-      //     {
-      //       visibility: JSON.stringify(
-      //         updater instanceof Function ? updater(columnVisibility) : updater
-      //       )
-      //     },
-      //     { action, method: 'POST' }
-      //   )
-      // }
+      if (viewStore) {
+        axios.post(store().url, {
+          visibility: JSON.stringify(
+            updater instanceof Function ? updater(columnVisibility) : updater
+          ),
+          ...viewStore
+        })
+      }
 
       setColumnVisibility(updater)
     },
-    []
-    // [action, submit, columnVisibility]
+    [columnVisibility, viewStore]
   )
 
   // Pagination
   const [pagination, setPagination] = useState(
-    () => ({
-      pageIndex: 0,
-      pageSize: 10
-    })
-    // view?.pagination ?? {
-    //   pageIndex: 0,
-    //   pageSize: 10
-    // }
+    view?.pagination ?? viewDefaults.pagination
   )
 
   /**
@@ -115,27 +103,26 @@ export default function UseTableStates<TData extends RowData>({
    */
   const onPaginationChange = useMemo(
     () => (updater: Updater<PaginationState>) => {
-      // if (action && submit) {
-      //   const newPagination =
-      //     updater instanceof Function ? updater(pagination) : updater
+      if (viewStore) {
+        const newPagination =
+          updater instanceof Function ? updater(pagination) : updater
 
-      //   if (
-      //     newPagination.pageIndex != pagination.pageIndex ||
-      //     newPagination.pageSize != pagination.pageSize
-      //   ) {
-      //     submit(
-      //       { pagination: JSON.stringify(newPagination) },
-      //       { action, method: 'POST' }
-      //     )
+        if (
+          newPagination.pageIndex != pagination.pageIndex ||
+          newPagination.pageSize != pagination.pageSize
+        ) {
+          axios.post(store().url, {
+            pagination: JSON.stringify(newPagination),
+            ...viewStore
+          })
 
-      //     setPagination(updater)
-      //   }
-      // } else {
-      setPagination(updater)
-      // }
+          setPagination(updater)
+        }
+      } else {
+        setPagination(updater)
+      }
     },
-    []
-    // [action, submit, pagination]
+    [pagination, viewStore]
   )
 
   // Row selection
@@ -143,8 +130,7 @@ export default function UseTableStates<TData extends RowData>({
 
   // Sorting
   const [sorting, setSorting] = useState<SortingState>(
-    () => []
-    // () => view?.sorting ?? []
+    () => view?.sorting ?? viewDefaults.sorting
   )
 
   /**
@@ -152,21 +138,18 @@ export default function UseTableStates<TData extends RowData>({
    */
   const onSortingChange = useMemo(
     () => (updater: Updater<SortingState>) => {
-      // if (action && submit) {
-      //   submit(
-      //     {
-      //       sorting: JSON.stringify(
-      //         updater instanceof Function ? updater(sorting) : updater
-      //       )
-      //     },
-      //     { action, method: 'POST' }
-      //   )
-      // }
+      if (viewStore) {
+        axios.post(store().url, {
+          sorting: JSON.stringify(
+            updater instanceof Function ? updater(sorting) : updater
+          ),
+          ...viewStore
+        })
+      }
 
       setSorting(updater)
     },
-    []
-    // [action, submit, sorting]
+    [sorting, viewStore]
   )
 
   return {

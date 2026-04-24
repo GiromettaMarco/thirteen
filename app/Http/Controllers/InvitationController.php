@@ -27,6 +27,17 @@ class InvitationController extends Controller
                 ->get(),
             // @TODO add can_add_members policy check for each team
             'teams' => $user->profile->teams,
+            'views' => [
+                'invitations' => $user->views()->where([
+                    ['page', 'invitations.index'],
+                    ['table', 'invitations'],
+                ])->first([
+                    'filters',
+                    'pagination',
+                    'sorting',
+                    'visibility',
+                ]),
+            ],
         ]);
     }
 

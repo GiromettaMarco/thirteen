@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamMemberController;
+use App\Http\Controllers\ViewController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,6 +21,10 @@ Route::prefix('dashboard')
         Route::get('/', function () {
             return Inertia::render('dashboard/index');
         })->name('dashboard');
+
+        // Views
+        Route::post('/views', [ViewController::class, 'store'])
+            ->name('views.store');
 
         // Settings
         Route::get('/settings', function () {

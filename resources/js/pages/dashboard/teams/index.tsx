@@ -1,14 +1,17 @@
 import { TeamsTable } from '@/components/teams/teams-table'
 import { Container } from '@/components/ui/container'
 import DashboardLayout from '@/layouts/dashboard-layout'
-import type { Team, WithTeamPermissions } from '@/types'
+import { parseView } from '@/lib/utils'
+import type { RawView, Team, WithTeamPermissions } from '@/types'
 import { Head } from '@inertiajs/react'
 import { useTranslation } from 'react-i18next'
 
 export default function TeamsIndex({
-  teams
+  teams,
+  views
 }: {
   teams: Array<Team & WithTeamPermissions & { profiles_count: number }>
+  views: { teams: RawView | null }
 }) {
   // i18n
   const { t } = useTranslation()
@@ -18,7 +21,10 @@ export default function TeamsIndex({
       <Head title={t(($) => $.teams.title)} />
 
       <Container>
-        <TeamsTable teams={teams} />
+        <TeamsTable
+          teams={teams}
+          view={parseView(views.teams)}
+        />
       </Container>
     </DashboardLayout>
   )

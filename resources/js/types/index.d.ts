@@ -1,3 +1,10 @@
+import type {
+  ColumnFiltersState,
+  PaginationState,
+  SortingState,
+  VisibilityState
+} from '@tanstack/react-table'
+
 //#region App
 export type Appearance = 'dark' | 'light' | 'system'
 
@@ -73,6 +80,27 @@ export interface Invitation extends WithTimestamps {
   id: number
   user: AuthUser & { profile: Profile }
   user_id: number
+}
+//#endregion
+
+//#region View
+export interface RawView {
+  filters: string
+  pagination: string
+  sorting: string
+  visibility: string
+}
+
+export interface View {
+  filters: ColumnFiltersState
+  pagination: PaginationState
+  sorting: SortingState
+  visibility: VisibilityState
+}
+
+export interface ViewStore {
+  page: string
+  table: string
 }
 //#endregion
 

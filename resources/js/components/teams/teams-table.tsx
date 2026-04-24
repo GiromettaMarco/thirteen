@@ -40,7 +40,7 @@ import { Schema } from '@/lib/tsv/schema'
 import { AppContext } from '@/providers/app-context-provider'
 import { update } from '@/routes/current-team'
 import { destroy, show } from '@/routes/teams'
-import type { Team, WithTeamPermissions } from '@/types'
+import type { Team, View, ViewStore, WithTeamPermissions } from '@/types'
 import { Link, useForm, usePage } from '@inertiajs/react'
 import type { ColumnDef } from '@tanstack/react-table'
 import {
@@ -272,24 +272,18 @@ function TeamsTableEmpty() {
 type TeamRow = Team & WithTeamPermissions & { profiles_count: number }
 
 export function TeamsTable({
-  teams
-  // view
+  teams,
+  view,
+  viewStore = { page: 'teams.index', table: 'teams' }
 }: {
   teams: TeamRow[]
-  // view?: View
+  view?: View
+  viewStore?: ViewStore
 }) {
   // i18n
   const { t } = useTranslation()
 
   const { user } = usePage().props.auth
-
-  // /**
-  //  * Update user's "teams view" action path.
-  //  */
-  // const action = useMemo(
-  //   () => route('users.update-teams-view', { user: userId }),
-  //   [userId]
-  // )
 
   // Table states
   const {
@@ -304,10 +298,9 @@ export function TeamsTable({
     setData,
     sorting
   } = UseTableStates({
-    // action,
-    data: teams
-    // submit: updateViewFetcher.submit,
-    // view
+    data: teams,
+    view,
+    viewStore
   })
 
   // Watch for data revalidation
@@ -317,7 +310,7 @@ export function TeamsTable({
 
   const labels = useMemo<Record<string, string>>(
     () => ({
-      users_count: t(($) => $.user, { count: 2 })
+      profiles_count: t(($) => $.member, { count: 2 })
       // projectsCount: t(($) => $.project, { count: 2 })
     }),
     [t]

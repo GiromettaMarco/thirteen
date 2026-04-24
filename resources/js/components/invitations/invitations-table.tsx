@@ -14,7 +14,7 @@ import {
 import UseTableStates from '@/hooks/use-table-states'
 import { format } from '@/lib/utils'
 import { destroy, update } from '@/routes/invitations'
-import type { Invitation } from '@/types'
+import type { Invitation, View, ViewStore } from '@/types'
 import { useForm } from '@inertiajs/react'
 import type { ColumnDef } from '@tanstack/react-table'
 import {
@@ -82,14 +82,16 @@ function InvitationsTableActions({ invitation }: { invitation: Invitation }) {
 
 //#region InvitationsTable
 export function InvitationsTable({
-  invitations
+  invitations,
+  view,
+  viewStore = { page: 'invitations.index', table: 'invitations' }
 }: {
   invitations: Invitation[]
+  view?: View
+  viewStore?: ViewStore
 }) {
   // i18n
   const { i18n, t } = useTranslation()
-
-  // @TODO add invitations view
 
   // Table states
   const {
@@ -104,7 +106,9 @@ export function InvitationsTable({
     setData,
     sorting
   } = UseTableStates({
-    data: invitations
+    data: invitations,
+    view,
+    viewStore
   })
 
   // Watch for data revalidation

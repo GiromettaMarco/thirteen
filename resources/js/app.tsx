@@ -1,4 +1,5 @@
 import '../css/app.css'
+import './bootstrap'
 
 import AppContainer from '@/app-container'
 import { APP_NAME } from '@/config'
