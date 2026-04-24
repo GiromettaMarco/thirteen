@@ -576,6 +576,12 @@ export function SortableColumnHeader<TData, TValue>({
   title: string
   tooltip?: string
 }) {
+  // @NOTE prevent this function from being optimized by React Compiler.
+  // @see https://github.com/TanStack/table/issues/5567
+  // @see https://github.com/TanStack/table/discussions/5834
+  // @see https://github.com/TanStack/table/discussions/5595
+  'use no memo'
+
   // i18n
   const { t } = useTranslation()
 
