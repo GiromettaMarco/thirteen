@@ -838,7 +838,8 @@ export function ActionsButton({
   className,
   label,
   size = 'icon',
-  variant = 'ghost'
+  variant = 'ghost',
+  ...props
 }: ComponentProps<typeof Button> & { label?: string }) {
   // i18n
   const { t } = useTranslation()
@@ -852,6 +853,7 @@ export function ActionsButton({
         )}
         size={size}
         variant={variant}
+        {...props}
       >
         <EllipsisVertical />
         <span className="sr-only">{label || t(($) => $.openMenu)}</span>
