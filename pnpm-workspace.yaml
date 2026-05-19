@@ -1,0 +1,2 @@
+patchedDependencies:
+  ast-types: patches/ast-types.patch
