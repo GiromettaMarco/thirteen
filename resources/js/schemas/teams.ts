@@ -14,7 +14,6 @@ export const updateTeamPermissionsSchema = new Schema({
   admin: new InputRule(),
   can_edit: new InputRule(),
   can_delete: new InputRule(),
-  can_add_members: new InputRule(),
   can_edit_members: new InputRule(),
-  can_remove_members: new InputRule()
+  can_edit_projects: new InputRule()
 })

@@ -26,9 +26,8 @@ return new class extends Migration
             $table->boolean('admin')->default(false);
             $table->boolean('can_edit')->default(false);
             $table->boolean('can_delete')->default(false);
-            $table->boolean('can_add_members')->default(false);
             $table->boolean('can_edit_members')->default(false);
-            $table->boolean('can_remove_members')->default(false);
+            $table->boolean('can_edit_projects')->default(false);
             $table->timestamps();
         });
     }

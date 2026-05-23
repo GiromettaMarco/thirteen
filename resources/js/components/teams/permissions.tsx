@@ -66,13 +66,6 @@ export function ShowTeamPermissions({
       />
 
       <ReadonlyCheckbox
-        checked={permissions.can_add_members}
-        id="can_add_members"
-        label={t(($) => $.teamPermissions.canAddMembers)}
-        name="can_add_members"
-      />
-
-      <ReadonlyCheckbox
         checked={permissions.can_edit_members}
         id="can_edit_members"
         label={t(($) => $.teamPermissions.canEditMembers)}
@@ -80,10 +73,10 @@ export function ShowTeamPermissions({
       />
 
       <ReadonlyCheckbox
-        checked={permissions.can_remove_members}
-        id="can_remove_members"
-        label={t(($) => $.teamPermissions.canRemoveMembers)}
-        name="can_remove_members"
+        checked={permissions.can_edit_projects}
+        id="can_edit_projects"
+        label={t(($) => $.teamPermissions.canEditProjects)}
+        name="can_edit_projects"
       />
     </div>
   )
@@ -105,11 +98,10 @@ export function EditTeamPermissions({
     <Form
       defaults={{
         admin: profile.pivot.admin ? 'true' : '',
-        can_add_members: profile.pivot.can_add_members ? 'true' : '',
         can_delete: profile.pivot.can_delete ? 'true' : '',
         can_edit: profile.pivot.can_edit ? 'true' : '',
         can_edit_members: profile.pivot.can_edit_members ? 'true' : '',
-        can_remove_members: profile.pivot.can_remove_members ? 'true' : ''
+        can_edit_projects: profile.pivot.can_edit_projects ? 'true' : ''
       }}
       route={update({ profile: profile.id, team: teamId })}
       schema={updateTeamPermissionsSchema}
@@ -127,9 +119,8 @@ export function EditTeamPermissions({
               if (checked === true) {
                 form.setValue('can_edit', 'true')
                 form.setValue('can_delete', 'true')
-                form.setValue('can_add_members', 'true')
                 form.setValue('can_edit_members', 'true')
-                form.setValue('can_remove_members', 'true')
+                form.setValue('can_edit_projects', 'true')
               }
             }}
           />
@@ -152,14 +143,6 @@ export function EditTeamPermissions({
 
           <CheckboxField
             control={form.control}
-            inputId="can_add_members"
-            inputName="can_add_members"
-            label={t(($) => $.teamPermissions.canAddMembers)}
-            readonly={isAdmin}
-          />
-
-          <CheckboxField
-            control={form.control}
             inputId="can_edit_members"
             inputName="can_edit_members"
             label={t(($) => $.teamPermissions.canEditMembers)}
@@ -168,9 +151,9 @@ export function EditTeamPermissions({
 
           <CheckboxField
             control={form.control}
-            inputId="can_remove_members"
-            inputName="can_remove_members"
-            label={t(($) => $.teamPermissions.canRemoveMembers)}
+            inputId="can_edit_projects"
+            inputName="can_edit_projects"
+            label={t(($) => $.teamPermissions.canEditProjects)}
             readonly={isAdmin}
           />
 

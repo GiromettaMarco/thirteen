@@ -24,18 +24,16 @@ class DatabaseSeeder extends Seeder
             'admin' => true,
             'can_edit' => true,
             'can_delete' => true,
-            'can_add_members' => true,
             'can_edit_members' => true,
-            'can_remove_members' => true,
+            'can_edit_projects' => true,
         ];
 
         $no_permissions = [
             'admin' => false,
             'can_edit' => false,
             'can_delete' => false,
-            'can_add_members' => false,
             'can_edit_members' => false,
-            'can_remove_members' => false,
+            'can_edit_projects' => false,
         ];
 
         /** @var User */

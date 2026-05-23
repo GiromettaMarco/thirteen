@@ -339,9 +339,8 @@ export default {
     admin: 'Administrator',
     canEdit: 'Can edit the team',
     canDelete: 'Can delete the team',
-    canAddMembers: 'Can add new team members',
-    canEditMembers: 'Can edit existing team members',
-    canRemoveMembers: 'Can remove team members'
+    canEditMembers: 'Can edit team members',
+    canEditProjects: 'Can edit related projects and tasks'
   },
   // teams: {
   //   addMembers: {

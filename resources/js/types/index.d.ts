@@ -16,7 +16,6 @@ export interface WithTimestamps {
   created_at: string
   updated_at: string
 }
-//#endregion
 
 //#region Auth/Inertia
 export interface UsersPermissions {
@@ -50,7 +49,6 @@ export interface FlashMessage {
   description?: string | null
   level?: 'success' | 'info' | 'warning' | 'error' | null
 }
-//#endregion
 
 //#region Dashboard
 export interface UserAgent {
@@ -81,7 +79,6 @@ export interface Invitation extends WithTimestamps {
   user: AuthUser & { profile: Profile }
   user_id: number
 }
-//#endregion
 
 //#region View
 export interface RawView {
@@ -102,7 +99,6 @@ export interface ViewStore {
   page: string
   table: string
 }
-//#endregion
 
 //#region Team
 export interface Team extends WithTimestamps {
@@ -114,9 +110,8 @@ export interface TeamPermissions {
   admin: boolean
   can_delete: boolean
   can_edit: boolean
-  can_add_members: boolean
   can_edit_members: boolean
-  can_remove_members: boolean
+  can_edit_projects: boolean
 }
 
 export interface WithTeamPermissions {
@@ -126,4 +121,3 @@ export interface WithTeamPermissions {
       team_id: number
     }
 }
-//#endregion

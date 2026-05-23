@@ -335,6 +335,13 @@ export default {
   },
   team_one: 'Team',
   team_other: 'Teams',
+  teamPermissions: {
+    admin: 'Amministratore',
+    canEdit: 'Può modificare il team',
+    canDelete: 'Può cancellare il team',
+    canEditMembers: 'Può modificare i membri del team',
+    canEditProjects: 'Può modificare progetti e compiti correlati'
+  },
   // teams: {
   //   addMembers: {
   //     description:

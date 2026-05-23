@@ -38,9 +38,8 @@ class Profile extends Model
                 'admin',
                 'can_edit',
                 'can_delete',
-                'can_add_members',
                 'can_edit_members',
-                'can_remove_members',
+                'can_edit_projects',
             ])
             ->withTimestamps();
     }

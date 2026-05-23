@@ -59,67 +59,9 @@ class Team extends Model
                 'admin',
                 'can_edit',
                 'can_delete',
-                'can_add_members',
                 'can_edit_members',
-                'can_remove_members',
+                'can_edit_projects',
             ])
             ->withTimestamps();
     }
-
-    // /**
-    //  * One to Many relationship
-    //  */
-    // public function projects(): HasMany
-    // {
-    //     return $this->hasMany(Project::class);
-    // }
-
-    // /**
-    //  * One to Many polymorphic relationship.
-    //  */
-    // public function views(): MorphMany
-    // {
-    //     return $this->morphMany(View::class, 'viewable');
-    // }
-
-    // /**
-    //  * Query for the related projects view.
-    //  */
-    // public function projectsView(User $user): ?View
-    // {
-    //     return $this
-    //         ->views()
-    //         ->where('user_id', $user->id)
-    //         ->where('items', 'projects')
-    //         ->first();
-    // }
-
-    // /**
-    //  * Query for the related users view.
-    //  */
-    // public function usersView(User $user): ?View
-    // {
-    //     return $this
-    //         ->views()
-    //         ->where('user_id', $user->id)
-    //         ->where('items', 'users')
-    //         ->first();
-    // }
-
-    // /**
-    //  * Get all views for the user.
-    //  *
-    //  * @return array{projects:?View, users:?View}
-    //  */
-    // public function getViews(User $user)
-    // {
-    //     $this->loadMissing(['views' => function ($query) use ($user) {
-    //         $query->where('user_id', $user->id);
-    //     }]);
-
-    //     return [
-    //         'projects' => $this->views->firstWhere('items', 'projects'),
-    //         'users' => $this->views->firstWhere('items', 'users'),
-    //     ];
-    // }
 }

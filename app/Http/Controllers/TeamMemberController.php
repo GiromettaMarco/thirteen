@@ -40,9 +40,8 @@ class TeamMemberController extends Controller
             'admin' => $admin,
             'can_edit' => $admin || $request->boolean('can_edit'),
             'can_delete' => $admin || $request->boolean('can_delete'),
-            'can_add_members' => $admin || $request->boolean('can_add_members'),
             'can_edit_members' => $admin || $request->boolean('can_edit_members'),
-            'can_remove_members' => $admin || $request->boolean('can_remove_members'),
+            'can_edit_projects' => $admin || $request->boolean('can_edit_projects'),
         ];
 
         $team->profiles()->updateExistingPivot($profile, $data);
