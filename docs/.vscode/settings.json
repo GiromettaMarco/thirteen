@@ -90,6 +90,9 @@
     // Conventional commit
     "conventionalCommits.scopes": ["client", "server"],
 
+    // Intelephense
+    "intelephense.diagnostics.argumentCount": "declared",
+
     // Spell check
     "cSpell.language": "en,it",
     "cSpell.ignorePaths": [
