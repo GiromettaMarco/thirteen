@@ -1,4 +1,4 @@
-import { Form } from '@/components/form'
+import { NameCell } from '@/components/name-cell'
 import {
   AddTeamDrawer,
   AddTeamDrawerTrigger
@@ -12,14 +12,7 @@ import TableMain, {
   SortableColumnHeader,
   TableToolbar
 } from '@/components/ui/data-table'
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogTitle
-} from '@/components/ui/dialog'
+import { DestroyDialog } from '@/components/ui/destroy-dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -34,14 +27,12 @@ import {
   EmptyMedia,
   EmptyTitle
 } from '@/components/ui/empty'
-import { Submit } from '@/components/ui/submit'
 import UseTableStates from '@/hooks/use-table-states'
-import { Schema } from '@/lib/tsv/schema'
 import { AppContext } from '@/providers/app-context-provider'
 import { update } from '@/routes/current-team'
 import { destroy, show } from '@/routes/teams'
 import type { Team, View, ViewStore, WithTeamPermissions } from '@/types'
-import { Link, useForm, usePage } from '@inertiajs/react'
+import { useForm, usePage } from '@inertiajs/react'
 import type { ColumnDef } from '@tanstack/react-table'
 import {
   getCoreRowModel,
@@ -56,8 +47,8 @@ import { Star, UserStar } from 'lucide-react'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-//#region TeamsTableCurrent
-function TeamsTableCurrent({
+//#region CurrentTeamCell
+function CurrentTeamCell({
   currentTeamId,
   team
 }: {
@@ -94,12 +85,9 @@ function TeamsTableCurrent({
     </button>
   )
 }
-//#endregion
 
-//#region TeamsTableActions
-const deleteSchema = new Schema({})
-
-function TeamsTableActions({
+//#region Actions
+function Actions({
   // userId,
   team
 }: {
@@ -142,44 +130,14 @@ function TeamsTableActions({
 
   return (
     <>
-      <Dialog
-        onOpenChange={(open) => setDeleteOpen(open)}
+      <DestroyDialog
+        description={t(($) => $.teams.deleteDesc, { team: team.name })}
         open={deleteOpen}
-      >
-        <DialogContent
-          onOpenAutoFocus={(event) => (event.target as HTMLElement).blur()}
-        >
-          <DialogTitle>{t(($) => $.teams.deleteTitle)}</DialogTitle>
-
-          <DialogDescription>
-            {t(($) => $.teams.deleteDesc1, { team: team.name })}
-            <br />
-            {t(($) => $.teams.deleteDesc2)}
-          </DialogDescription>
-
-          <Form
-            onSuccess={() => setDeleteOpen(false)}
-            route={destroy(team.id)}
-            schema={deleteSchema}
-          >
-            {({ loading }) => (
-              <>
-                <DialogFooter className="items-center">
-                  <DialogClose asChild>
-                    <Button variant="secondary">{t(($) => $.cancel)}</Button>
-                  </DialogClose>
-
-                  <Submit
-                    label={t(($) => $.delete)}
-                    loading={loading}
-                    variant="destructive"
-                  />
-                </DialogFooter>
-              </>
-            )}
-          </Form>
-        </DialogContent>
-      </Dialog>
+        route={destroy(team.id)}
+        setOpen={setDeleteOpen}
+        title={t(($) => $.teams.deleteTitle)}
+        warning={t(($) => $.teams.deleteWarn)}
+      />
 
       <DropdownMenu>
         <ActionsButton
@@ -233,10 +191,9 @@ function TeamsTableActions({
     </>
   )
 }
-//#endregion
 
-//#region TeamsTableEmpty
-function TeamsTableEmpty() {
+//#region EmptyFiller
+function EmptyFiller() {
   // i18n
   const { t } = useTranslation()
 
@@ -266,7 +223,6 @@ function TeamsTableEmpty() {
     </Empty>
   )
 }
-//#endregion
 
 //#region TeamsTable
 type TeamRow = Team & WithTeamPermissions & { profiles_count: number }
@@ -322,7 +278,7 @@ export function TeamsTable({
         id: 'current',
         header: () => null,
         cell: ({ row }) => (
-          <TeamsTableCurrent
+          <CurrentTeamCell
             currentTeamId={user?.current_team_id}
             team={row.original}
           />
@@ -334,13 +290,10 @@ export function TeamsTable({
         accessorKey: 'name',
         header: t(($) => $.name),
         cell: ({ row }) => (
-          <Button
-            asChild
-            variant="link"
-            className="text-foreground w-fit px-0 text-left"
-          >
-            <Link href={show(row.original.id)}>{row.original.name}</Link>
-          </Button>
+          <NameCell
+            href={show(row.original.id)}
+            name={row.original.name}
+          />
         ),
         enableHiding: false
       },
@@ -368,7 +321,7 @@ export function TeamsTable({
       {
         id: 'actions',
         cell: ({ row }) => (
-          <TeamsTableActions
+          <Actions
             team={row.original}
             // userId={userId}
           />
@@ -435,9 +388,8 @@ export function TeamsTable({
           />
         </>
       ) : (
-        <TeamsTableEmpty />
+        <EmptyFiller />
       )}
     </section>
   )
 }
-//#endregion

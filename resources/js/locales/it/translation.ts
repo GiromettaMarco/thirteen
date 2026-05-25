@@ -245,6 +245,9 @@ export default {
     deadlineBy_one: 'Deadline scaduta ieri',
     deadlineBy_other: 'Deadline scaduta {{count}} giorni fa',
     defaultName: 'Nuovo progetto',
+    deleteDesc: 'Stai per cancellare il progetto "{{project}}".',
+    deleteTitle: 'Sei sicuro di voler eliminare il progetto?',
+    deleteWarn: 'Tutti i compiti correlati andranno persi per sempre.',
     descriptionPlaceholder:
       'Facoltativo, breve testo descrittivo del progetto.',
     editEmployee: 'Modifica impiego e permessi.',
@@ -361,10 +364,10 @@ export default {
     createTeam: 'Crea Team',
     createTitle: 'Nuovo team',
     defaultName: 'Nuovo team',
-    deleteDesc1: 'Stai per cancellare il team "{{team}}".',
-    deleteDesc2:
-      'Tutte le risorse correlate (progetti, compiti...) andranno perse per sempre.',
+    deleteDesc: 'Stai per cancellare il team "{{team}}".',
     deleteTitle: 'Sei sicuro di voler eliminare il team?',
+    deleteWarn:
+      'Tutte le risorse correlate (progetti, compiti...) andranno perse per sempre.',
     emptyDesc1: 'Non hai ancora creato alcun team.',
     emptyDesc2: 'Inizia creando il tuo primo team.',
     emptyTitle: 'Ancora nessun team',

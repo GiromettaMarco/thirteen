@@ -247,6 +247,9 @@ export default {
     deadlineBy_one: 'Deadline expired yesterday',
     deadlineBy_other: 'Deadline expired {{count}} days ago',
     defaultName: 'New project',
+    deleteDesc: 'You are about to delete the "{{project}}" project.',
+    deleteTitle: 'Are you sure you want to delete the project?',
+    deleteWarn: 'Any related task will be lost forever.',
     descriptionPlaceholder: 'Optional, short text describing the project.',
     editEmployee: 'Edit employment and permissions.',
     emptyTable: {
@@ -358,10 +361,10 @@ export default {
     createTeam: 'Create Team',
     createTitle: 'New team',
     defaultName: 'New team',
-    deleteDesc1: 'You are about to delete the  "{{team}}" team.',
-    deleteDesc2:
-      'Any related resource (projects, tasks...) will be lost forever.',
+    deleteDesc: 'You are about to delete the  "{{team}}" team.',
     deleteTitle: 'Are you sure you want to delete the team?',
+    deleteWarn:
+      'Any related resource (projects, tasks...) will be lost forever.',
     emptyDesc1: "You haven't created any team yet.",
     emptyDesc2: 'Get started by creating your first team.',
     emptyTitle: 'No Teams yet',
