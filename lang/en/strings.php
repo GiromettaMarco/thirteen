@@ -34,6 +34,11 @@ return [
     'profile' => [
         'updated' => 'Profile updated',
     ],
+    'project' => [
+        'created' => 'Project created',
+        'deleted' => 'Project deleted',
+        'updated' => 'Project updated',
+    ],
     'team' => [
         'deleted' => 'Team deleted',
         'created' => 'Team created',

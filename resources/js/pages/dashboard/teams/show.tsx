@@ -1,25 +1,38 @@
 import type { BreadcrumbLink } from '@/components/breadcrumbs'
+import { ProjectsTable } from '@/components/projects/projects-table'
+import { MembersTable } from '@/components/teams/members-table'
 import { Container } from '@/components/ui/container'
 import { Heading } from '@/components/ui/heading'
 import { Separator } from '@/components/ui/separator'
 import DashboardLayout from '@/layouts/dashboard-layout'
+import { parseView } from '@/lib/utils'
 import { dashboard } from '@/routes'
-import { show } from '@/routes/members'
 import { index } from '@/routes/teams'
-import type { Profile, Team, WithTeamPermissions } from '@/types'
-import { Head, Link } from '@inertiajs/react'
+import type {
+  Profile,
+  Project,
+  RawView,
+  Team,
+  WithTeamPermissions
+} from '@/types'
+import { Head } from '@inertiajs/react'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export default function TeamsShow({
-  profiles,
-  team
+  members,
+  projects,
+  team,
+  views
 }: {
-  profiles: Profile[]
+  members: Profile[]
+  projects: Project[]
   team: Team & WithTeamPermissions
+  views: {
+    members: RawView | null
+    projects: RawView | null
+  }
 }) {
-  console.log(profiles)
-
   // i18n
   const { t } = useTranslation()
 
@@ -42,29 +55,32 @@ export default function TeamsShow({
       <Container className="grid gap-6">
         <section className="grid gap-1">
           <Heading
-            h={t(($) => $.teams.teamMembers)}
+            h={t(($) => $.project, { count: 2 })}
             variant="small"
           />
-
-          <ul>
-            {profiles.map((profile) => (
-              <li key={profile.id}>
-                <Link
-                  href={show({
-                    profile: profile.id,
-                    team: team.id
-                  })}
-                >
-                  {profile.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <ProjectsTable
+            canEdit={team.pivot.can_edit_projects}
+            projects={projects}
+            teamId={team.id}
+            view={parseView(views.projects)}
+          />
         </section>
 
         <Separator />
 
-        <p>Projects table goes here</p>
+        <section className="grid gap-1">
+          <Heading
+            h={t(($) => $.teams.teamMembers)}
+            variant="small"
+          />
+          <MembersTable
+            // canEdit={}
+            // currentUserId={}
+            members={members}
+            teamId={team.id}
+            view={parseView(views.members)}
+          />
+        </section>
       </Container>
     </DashboardLayout>
   )

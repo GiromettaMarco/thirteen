@@ -87,7 +87,6 @@ function SidebarItem({
     </SidebarMenuItem>
   )
 }
-//#endregion
 
 //#region Navigation
 function Navigation({
@@ -130,7 +129,7 @@ function Navigation({
                   active={url === teamsShow.url({ team: currentTeamId })}
                   Icon={Users}
                   href={teamsShow({ team: currentTeamId })}
-                  label={t(($) => $.team, { count: 2 })}
+                  label={t(($) => $.team, { count: 1 })}
                 />
               </>
             )}
@@ -187,7 +186,6 @@ function Navigation({
     </>
   )
 }
-//#endregion
 
 //#region ProfileDropdown
 function ProfileDropdown({
@@ -282,7 +280,6 @@ function ProfileDropdown({
     </SidebarMenu>
   )
 }
-//#endregion
 
 //#region Layout
 export default function DashboardLayout({
@@ -332,8 +329,7 @@ export default function DashboardLayout({
 
         <SidebarContent>
           <Navigation
-            // currentTeamId={auth.user.currentTeamId}
-            currentTeamId={null}
+            currentTeamId={auth.user.current_team_id}
             permissions={auth.permissions}
           />
         </SidebarContent>
@@ -392,4 +388,3 @@ export default function DashboardLayout({
     </SidebarProvider>
   )
 }
-//#endregion

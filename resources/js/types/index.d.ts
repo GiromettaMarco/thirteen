@@ -121,3 +121,13 @@ export interface WithTeamPermissions {
       team_id: number
     }
 }
+
+//#region Project
+export interface Project extends WithTimestamps {
+  archived: boolean
+  deadline: string | null
+  description: string | null
+  id: number
+  name: string
+  team_id: number
+}

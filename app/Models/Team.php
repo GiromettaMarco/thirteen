@@ -6,6 +6,7 @@ use App\Events\TeamDeleting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 
 class Team extends Model
@@ -63,5 +64,13 @@ class Team extends Model
                 'can_edit_projects',
             ])
             ->withTimestamps();
+    }
+
+    /**
+     * One to Many relationship
+     */
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
     }
 }

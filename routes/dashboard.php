@@ -93,4 +93,19 @@ Route::prefix('dashboard')
         // Projects
         Route::get('/teams/{team}/projects', [ProjectController::class, 'index'])
             ->name('projects.index');
+        Route::get('/teams/{team}/projects/{project}', [ProjectController::class, 'show'])
+            ->scopeBindings()
+            ->name('projects.show');
+        Route::post('/teams/{team}/projects', [ProjectController::class, 'store'])
+            ->scopeBindings()
+            ->can('editProjects', 'team')
+            ->name('projects.store');
+        Route::put('/teams/{team}/projects/{project}', [ProjectController::class, 'update'])
+            ->scopeBindings()
+            ->can('editProjects', 'team')
+            ->name('projects.update');
+        Route::delete('/teams/{team}/projects/{project}', [ProjectController::class, 'destroy'])
+            ->scopeBindings()
+            ->can('editProjects', 'team')
+            ->name('projects.destroy');
     });

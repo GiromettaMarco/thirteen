@@ -47,8 +47,11 @@ class TeamController extends Controller
      */
     public function show(Request $request, Team $team): Response
     {
+        /** @var User */
+        $user = $request->user();
+
         return Inertia::render('dashboard/teams/show', [
-            'profiles' => $team
+            'members' => $team
                 ->profiles()
                 // ->withCount([
                 //     'projects' => function ($query) use ($team) {
@@ -59,8 +62,29 @@ class TeamController extends Controller
                 //     },
                 // ])
                 ->get(),
-            // @TODO fix me
+            'projects' => $team->projects()->get(),
             'team' => $team,
+            'views' => [
+                // @TODO merge queries
+                'members' => $user->views()->where([
+                    ['page', 'teams.show'],
+                    ['table', 'members'],
+                ])->first([
+                    'filters',
+                    'pagination',
+                    'sorting',
+                    'visibility',
+                ]),
+                'projects' => $user->views()->where([
+                    ['page', 'teams.show'],
+                    ['table', 'projects'],
+                ])->first([
+                    'filters',
+                    'pagination',
+                    'sorting',
+                    'visibility',
+                ]),
+            ],
         ]);
     }
 
