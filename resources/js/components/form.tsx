@@ -65,7 +65,7 @@ import {
   type FieldPath
 } from 'react-hook-form'
 
-type Method = 'get' | 'post' | 'put' | 'delete' | 'patch'
+export type FormMethod = 'get' | 'post' | 'put' | 'delete' | 'patch'
 
 type RenderFN<TValues extends FieldValues> = ({
   form,
@@ -118,7 +118,7 @@ export function Form<
   onSuccess?: GlobalEventCallback<'success', RequestPayload>
   preserveScroll?: boolean
   resetOnSuccess?: boolean
-  route: RouteDefinition<Method>
+  route: RouteDefinition<FormMethod>
   schema: Schema<TRuleset>
   setDefaultsOnSuccess?: boolean
 }) {
