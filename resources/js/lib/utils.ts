@@ -81,3 +81,19 @@ export function format(
     locale: dateLocales[locale]
   })
 }
+
+/**
+ * Filler for functions declared in a react context provider.
+ */
+export function missingFn() {
+  console.error('This function must be used within its own context provider.')
+}
+
+/**
+ * Format date for database insert.
+ *
+ * @param date A date object
+ */
+export function formatDateForDB(date: Date) {
+  return `${date.getFullYear()}-${(date.getMonth() + 1 + '').padStart(2, '0')}-${(date.getDate() + '').padStart(2, '0')}`
+}

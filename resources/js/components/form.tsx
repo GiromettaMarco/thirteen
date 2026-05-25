@@ -1,3 +1,5 @@
+import { AutoTextarea } from '@/components/ui/auto-textarea'
+import { CalendarI18n } from '@/components/ui/calendar-i18n'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   Field,
@@ -28,7 +30,7 @@ import { flashMessage } from '@/lib/flash'
 import { useTsvResolver, type InferSchema } from '@/lib/tsv/hookform'
 import type { Schema } from '@/lib/tsv/schema'
 import type { Ruleset } from '@/lib/tsv/types'
-import { cn } from '@/lib/utils'
+import { cn, formatDateForDB } from '@/lib/utils'
 import type { RouteDefinition } from '@/wayfinder'
 import type {
   CancelTokenCallback,
@@ -768,6 +770,91 @@ export function SelectField<TFieldValues extends FieldValues = FieldValues>({
           </Select>
 
           {description && <FieldDescription>{description}</FieldDescription>}
+
+          <ErrorMonitor error={fieldState.error} />
+        </Field>
+      )}
+    />
+  )
+}
+
+export default function CalendarField<
+  TFieldValues extends FieldValues = FieldValues
+>({
+  control,
+  inputId,
+  inputName,
+  label,
+  ...props
+}: ComponentProps<typeof Field> & {
+  control: Control<TFieldValues>
+  inputId?: string
+  inputName: FieldPath<TFieldValues>
+  label?: string
+}) {
+  return (
+    <Controller
+      name={inputName}
+      control={control}
+      render={({ field, fieldState }) => (
+        <Field
+          data-invalid={fieldState.invalid}
+          {...props}
+        >
+          {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
+
+          <CalendarI18n
+            aria-invalid={fieldState.invalid}
+            className="w-full rounded-md border"
+            fixedWeeks={true}
+            id={inputId}
+            mode="single"
+            onSelect={(date) =>
+              field.onChange(date ? formatDateForDB(date) : '')
+            }
+            selected={field.value}
+          />
+
+          <ErrorMonitor error={fieldState.error} />
+        </Field>
+      )}
+    />
+  )
+}
+
+export function TextareaField<TFieldValues extends FieldValues = FieldValues>({
+  control,
+  inputId,
+  inputName,
+  label,
+  placeholder,
+  ...props
+}: ComponentProps<typeof Field> & {
+  control: Control<TFieldValues>
+  inputId?: string
+  inputName: FieldPath<TFieldValues>
+  label?: string
+  placeholder?: string
+}) {
+  return (
+    <Controller
+      name={inputName}
+      control={control}
+      render={({ field, fieldState }) => (
+        <Field
+          data-invalid={fieldState.invalid}
+          {...props}
+        >
+          {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
+
+          <AutoTextarea
+            aria-invalid={fieldState.invalid}
+            autoComplete="off"
+            className="resize-none"
+            id={inputId}
+            placeholder={placeholder}
+            {...field}
+          />
 
           <ErrorMonitor error={fieldState.error} />
         </Field>
