@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
             ->for($teams[0], 'currentTeam')
             ->hasAttached($view_users)
             ->hasAttached($edit_users)
-            ->withProfile('Test User')
+            ->withProfile('Test User', 'manager')
             ->create(['email' => 'test@example.com']);
 
         $test_user->profile->teams()->attach([
@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()
-            ->withProfile('Alfred M. Harrison')
+            ->withProfile('Alfred M. Harrison', 'designer')
             ->create(['email' => 'alfredmharrison@example.com']);
 
         /** @var User */

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -13,7 +14,7 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     /**
-     * The user name being used by the factory.
+     * The profile name being used by the factory.
      */
     protected static ?string $name;
 
@@ -21,6 +22,11 @@ class UserFactory extends Factory
      * The current password being used by the factory.
      */
     protected static ?string $password;
+
+    /**
+     * The profile role being used by the factory.
+     */
+    protected static ?string $role;
 
     /**
      * Define the model's default state.
@@ -40,9 +46,13 @@ class UserFactory extends Factory
     /**
      * Add a related profile model.
      */
-    public function withProfile(string $name): Factory
+    public function withProfile(string $name, string $role = 'guest'): Factory
     {
         static::$name = $name;
+
+        if (in_array($role, Config::get('custom.roles'))) {
+            static::$role = $role;
+        }
 
         return $this;
     }
@@ -55,6 +65,7 @@ class UserFactory extends Factory
         return $this->afterCreating(function (User $user) {
             $user->profile()->create([
                 'name' => static::$name ??= fake()->name(),
+                'role' => static::$role ??= 'guest',
             ]);
         });
     }
