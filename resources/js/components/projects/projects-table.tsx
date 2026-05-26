@@ -210,7 +210,7 @@ export function ProjectsTable({
   projects,
   teamId,
   view,
-  viewStore = { page: 'teams.show', table: 'projects' }
+  viewStore
 }: {
   canEdit?: boolean
   projects: Project[]
@@ -246,20 +246,19 @@ export function ProjectsTable({
     setData(() => projects)
   }, [projects, setData])
 
-  const labels: Record<string, string> = useMemo(
+  const labels = useMemo<Record<string, string>>(
     () => ({
       name: t(($) => $.name),
-      description: t(($) => $.description),
-      team: t(($) => $.team, { count: 1 }),
       // usersCount: t('user_other'),
       // tasksCount: t('task_other'),
       createdAt: t(($) => $.dateCreated),
-      updatedAt: t(($) => $.dateModified)
+      updatedAt: t(($) => $.dateModified),
+      deadline: t(($) => $.projects.deadline)
     }),
     [t]
   )
 
-  const columns: ColumnDef<Project>[] = useMemo(
+  const columns = useMemo<ColumnDef<Project>[]>(
     () => [
       ...(canEdit ? [getSelectColDef<Project>()] : []),
       {

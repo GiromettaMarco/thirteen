@@ -63,6 +63,10 @@ export default function TeamsShow({
             projects={projects}
             teamId={team.id}
             view={parseView(views.projects)}
+            viewStore={{
+              page: `teams.show/${team.id}`,
+              table: 'projects'
+            }}
           />
         </section>
 
@@ -79,6 +83,10 @@ export default function TeamsShow({
             members={members}
             teamId={team.id}
             view={parseView(views.members)}
+            viewStore={{
+              page: `teams.show/${team.id}`,
+              table: 'members'
+            }}
           />
         </section>
       </Container>

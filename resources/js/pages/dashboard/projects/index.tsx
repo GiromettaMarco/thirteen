@@ -35,8 +35,8 @@ export default function ProjectsIndex({
             teamId={teamId}
             view={parseView(views.projects)}
             viewStore={{
-              page: `team-${teamId}.projects`,
-              table: 'projects'
+              page: 'projects.index',
+              table: `projects/team:${teamId}`
             }}
           />
         ) : (

@@ -230,7 +230,7 @@ type TeamRow = Team & WithTeamPermissions & { profiles_count: number }
 export function TeamsTable({
   teams,
   view,
-  viewStore = { page: 'teams.index', table: 'teams' }
+  viewStore
 }: {
   teams: TeamRow[]
   view?: View

@@ -42,6 +42,10 @@ export default function InvitationsIndex({
           <InvitationsTable
             invitations={invitations}
             view={parseView(views.invitations)}
+            viewStore={{
+              page: 'invitations.index',
+              table: 'invitations'
+            }}
           />
         </Format>
       </Container>

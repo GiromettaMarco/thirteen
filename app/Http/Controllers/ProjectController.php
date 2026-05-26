@@ -28,7 +28,7 @@ class ProjectController extends Controller
             'views' => [
                 'projects' => $user->views()->where([
                     ['page', 'projects.index'],
-                    ['table', "team-$team->id.projects"],
+                    ['table', "projects/team:$team->id"],
                 ])->first([
                     'filters',
                     'pagination',
@@ -40,7 +40,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show all related projects.
+     * Show the project with related tasks.
      */
     public function show(
         Request $request,
@@ -59,9 +59,6 @@ class ProjectController extends Controller
         StoreProjectRequest $request,
         Team $team
     ): RedirectResponse {
-        /** @var User */
-        $user = $request->user();
-
         $team->projects()->create($request->validated());
 
         Inertia::flash('toast', new FlashMessage(__('strings.project.created'), 'success'));

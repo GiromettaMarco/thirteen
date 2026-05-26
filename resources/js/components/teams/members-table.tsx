@@ -27,7 +27,7 @@ export function MembersTable({
   teamId,
   members,
   view,
-  viewStore = { page: 'teams.show', table: 'members' }
+  viewStore
 }: {
   canEdit?: boolean
   currentUserId?: number

@@ -67,7 +67,7 @@ class TeamController extends Controller
             'views' => [
                 // @TODO merge queries
                 'members' => $user->views()->where([
-                    ['page', 'teams.show'],
+                    ['page', "teams.show/$team->id"],
                     ['table', 'members'],
                 ])->first([
                     'filters',
@@ -76,7 +76,7 @@ class TeamController extends Controller
                     'visibility',
                 ]),
                 'projects' => $user->views()->where([
-                    ['page', 'teams.show'],
+                    ['page', "teams.show/$team->id"],
                     ['table', 'projects'],
                 ])->first([
                     'filters',

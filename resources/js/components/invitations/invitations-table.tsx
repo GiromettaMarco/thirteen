@@ -84,7 +84,7 @@ function InvitationsTableActions({ invitation }: { invitation: Invitation }) {
 export function InvitationsTable({
   invitations,
   view,
-  viewStore = { page: 'invitations.index', table: 'invitations' }
+  viewStore
 }: {
   invitations: Invitation[]
   view?: View
