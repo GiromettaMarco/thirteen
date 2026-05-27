@@ -24,6 +24,10 @@ export default function TeamsIndex({
         <TeamsTable
           teams={teams}
           view={parseView(views.teams)}
+          viewStore={{
+            page: 'teams.index',
+            table: 'teams'
+          }}
         />
       </Container>
     </DashboardLayout>
