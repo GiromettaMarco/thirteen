@@ -1,4 +1,5 @@
-import CalendarField, {
+import {
+  CalendarField,
   Form,
   TextareaField,
   TextField

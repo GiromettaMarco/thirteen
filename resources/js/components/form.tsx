@@ -1,4 +1,5 @@
 import { AutoTextarea } from '@/components/ui/auto-textarea'
+import { Button } from '@/components/ui/button'
 import { CalendarI18n } from '@/components/ui/calendar-i18n'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -41,7 +42,7 @@ import type {
   SharedPageProps
 } from '@inertiajs/core'
 import { useForm as useInertiaForm } from '@inertiajs/react'
-import { Minus, Plus } from 'lucide-react'
+import { Minus, Plus, X } from 'lucide-react'
 import type { Checkbox as CheckboxPrimitive } from 'radix-ui'
 import type {
   ComponentProps,
@@ -53,10 +54,12 @@ import type {
 import { useEffect, type ReactNode } from 'react'
 import type {
   DefaultValues,
+  FieldPathValue,
   FieldValues,
   Path,
   FieldError as RHFFieldError,
-  UseFormReturn
+  UseFormReturn,
+  UseFormSetValue
 } from 'react-hook-form'
 import {
   Controller,
@@ -64,6 +67,7 @@ import {
   type Control,
   type FieldPath
 } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 export type FormMethod = 'get' | 'post' | 'put' | 'delete' | 'patch'
 
@@ -703,7 +707,7 @@ export function FancyRadioField<
   )
 }
 
-interface SelectOption {
+export interface SelectOption {
   key?: string | number
   label: ReactNode
   value: string
@@ -778,9 +782,101 @@ export function SelectField<TFieldValues extends FieldValues = FieldValues>({
   )
 }
 
-export default function CalendarField<
+export function NullableSelectField<
   TFieldValues extends FieldValues = FieldValues
 >({
+  autoComplete,
+  control,
+  description,
+  disabled,
+  inputId,
+  inputName,
+  label,
+  options,
+  placeholder,
+  setValue,
+  ...props
+}: ComponentProps<typeof Field> & {
+  autoComplete?: HTMLInputAutoCompleteAttribute
+  control: Control<TFieldValues>
+  description?: string
+  disabled?: boolean
+  inputId?: string
+  inputName: FieldPath<TFieldValues>
+  label?: string
+  options: SelectOption[]
+  placeholder?: string
+  setValue: UseFormSetValue<TFieldValues>
+  type?: HTMLInputTypeAttribute
+}) {
+  // i18n
+  const { t } = useTranslation()
+
+  return (
+    <Controller
+      control={control}
+      disabled={disabled}
+      name={inputName}
+      render={({ field, fieldState }) => (
+        <Field
+          data-invalid={fieldState.invalid}
+          {...props}
+        >
+          {label && <FieldLabel htmlFor={inputId}>{label}</FieldLabel>}
+
+          <div className="flex items-end gap-4">
+            <Select
+              autoComplete={autoComplete}
+              disabled={field.disabled}
+              name={field.name}
+              onValueChange={field.onChange}
+              value={field.value}
+            >
+              <SelectTrigger
+                aria-invalid={fieldState.invalid}
+                className="flex-1 overflow-hidden"
+                id={inputId}
+              >
+                <SelectValue placeholder={placeholder} />
+              </SelectTrigger>
+              <SelectContent>
+                {options.map((option) => (
+                  <SelectItem
+                    key={option.key ?? option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <Button
+              className="flex-none"
+              onClick={() =>
+                setValue(
+                  inputName,
+                  '' as FieldPathValue<TFieldValues, FieldPath<TFieldValues>>
+                )
+              }
+              type="button"
+              variant="outline"
+            >
+              <span className="sr-only">{t(($) => $.reset)}</span>
+              <X />
+            </Button>
+          </div>
+
+          {description && <FieldDescription>{description}</FieldDescription>}
+
+          <ErrorMonitor error={fieldState.error} />
+        </Field>
+      )}
+    />
+  )
+}
+
+export function CalendarField<TFieldValues extends FieldValues = FieldValues>({
   control,
   inputId,
   inputName,
