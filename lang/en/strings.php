@@ -39,9 +39,14 @@ return [
         'deleted' => 'Project deleted',
         'updated' => 'Project updated',
     ],
+    'task' => [
+        'created' => 'Task created',
+        'deleted' => 'Task deleted',
+        'updated' => 'Task updated',
+    ],
     'team' => [
-        'deleted' => 'Team deleted',
         'created' => 'Team created',
+        'deleted' => 'Team deleted',
         'updated' => 'Team updated',
     ],
     'team_member' => [

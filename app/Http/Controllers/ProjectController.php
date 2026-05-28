@@ -47,8 +47,25 @@ class ProjectController extends Controller
         Team $team,
         Project $project
     ): Response {
+        /** @var User $user */
+        $user = $request->user();
+
         return Inertia::render('dashboard/projects/show', [
+            'permissions' => $team->pivot,
             'project' => $project,
+            'tasks' => $project->tasks()->with('profile')->get(),
+            'team_members' => $team->profiles()->get(),
+            'views' => [
+                'tasks' => $user->views()->where([
+                    ['page', "projects.show/$project->id"],
+                    ['table', 'tasks'],
+                ])->first([
+                    'filters',
+                    'pagination',
+                    'sorting',
+                    'visibility',
+                ]),
+            ],
         ]);
     }
 

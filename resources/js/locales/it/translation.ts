@@ -10,7 +10,6 @@ export default {
     select: 'Select appearance',
     system: 'Sistema'
   },
-  assignedTo: 'Assegnato a',
   auth: {
     confirmPassword: 'Conferma password',
     currentPassword: 'Password attuale',
@@ -36,13 +35,6 @@ export default {
   homepage: 'Pagina iniziale',
   invitation_one: 'Invito',
   invitation_other: 'Inviti',
-  label: 'Etichetta',
-  labelValue: {
-    bug: 'Bug',
-    documentation: 'Documentazione',
-    feature: 'Feature',
-    none: 'nessuna'
-  },
   language: {
     change: 'Cambia lingua',
     language: 'Lingua',
@@ -220,12 +212,6 @@ export default {
       }
     }
   },
-  priority: 'Priorità',
-  priorityValue: {
-    high: 'Alta',
-    low: 'Bassa',
-    medium: 'Media'
-  },
   profile: 'Profilo',
   project_one: 'Progetto',
   project_other: 'Progetti',
@@ -280,14 +266,6 @@ export default {
     sidebar: 'Sidebar',
     toggle: 'Attiva/disattiva Sidebar'
   },
-  status: 'Stato',
-  statusValue: {
-    backlog: 'Backlog',
-    canceled: 'Cancellato',
-    done: 'Fatto',
-    inProgress: 'In Corso',
-    todo: 'Da Fare'
-  },
   submit: 'Invia',
   table: {
     Asc: 'Asc',
@@ -316,6 +294,7 @@ export default {
   task_one: 'Compito',
   task_other: 'Compiti',
   tasks: {
+    assignedTo: 'Assegnato a',
     assignToMember: 'Assegna ad un membro del team',
     createInstructions: 'Aggiungi un nuovo compito per questo progetto.',
     createTask: 'Crea Compito',
@@ -328,12 +307,33 @@ export default {
       title: 'Ancora nessun compito'
     },
     filterTasks: 'Filtra compiti...',
+    label: 'Etichetta',
+    labels: {
+      bug: 'Bug',
+      documentation: 'Documentazione',
+      feature: 'Feature',
+      none: 'nessuna'
+    },
     namePlaceholder: 'Nome del compito',
     newTask: 'New task',
+    priority: 'Priorità',
+    priorities: {
+      high: 'Alta',
+      low: 'Bassa',
+      medium: 'Media'
+    },
     selectLabel: 'Seleziona una etichetta',
     selectPriority: 'Seleziona una priorità',
     selectStatus: 'Seleziona uno stato',
     selectUser: 'Seleziona un membro del team',
+    status: 'Stato',
+    statuses: {
+      backlog: 'Backlog',
+      canceled: 'Cancellato',
+      done: 'Fatto',
+      inProgress: 'In Corso',
+      todo: 'Da Fare'
+    },
     taskDescription: 'Descrizione del compito'
   },
   team_one: 'Team',

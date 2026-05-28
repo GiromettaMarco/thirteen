@@ -131,3 +131,29 @@ export interface Project extends WithTimestamps {
   name: string
   team_id: number
 }
+
+//#region Task
+export type TaskLabel = 'bug' | 'documentation' | 'feature'
+
+export type TaskPriority = 'low' | 'medium' | 'high'
+
+export type TaskStatus =
+  | 'backlog'
+  | 'canceled'
+  | 'done'
+  | 'in_progress'
+  | 'todo'
+
+export interface Task extends WithTimestamps {
+  description: string | null
+  id: number
+  label: TaskLabel | null
+  name: string
+  priority: TaskPriority
+  project_id: number
+  status: TaskStatus
+}
+
+export interface TaskWithProfile extends Task {
+  profile: Profile
+}

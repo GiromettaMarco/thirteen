@@ -17,7 +17,7 @@ export const AppContext = createContext<{
   // activeTask: TaskWithUser | undefined
   activeTeam: Team | undefined
   addProjectOpen: boolean
-  // addTaskOpen: boolean
+  addTaskOpen: boolean
   addTeamOpen: boolean
   isTouch: boolean | undefined
   // setActiveEmployee: Dispatch<SetStateAction<EmployeeData | undefined>>
@@ -25,7 +25,7 @@ export const AppContext = createContext<{
   // setActiveTask: Dispatch<SetStateAction<TaskWithUser | undefined>>
   setActiveTeam: Dispatch<SetStateAction<Team | undefined>>
   setAddProjectOpen: Dispatch<SetStateAction<boolean>>
-  // setAddTaskOpen: Dispatch<SetStateAction<boolean>>
+  setAddTaskOpen: Dispatch<SetStateAction<boolean>>
   setAddTeamOpen: Dispatch<SetStateAction<boolean>>
   // setUpdateEmployeeOpen: Dispatch<SetStateAction<boolean>>
   setUpdateProjectOpen: Dispatch<SetStateAction<boolean>>
@@ -42,7 +42,7 @@ export const AppContext = createContext<{
   // activeTask: undefined,
   activeTeam: undefined,
   addProjectOpen: false,
-  // addTaskOpen: false,
+  addTaskOpen: false,
   addTeamOpen: false,
   // setActiveEmployee: missingFn,
   setActiveProject: missingFn,
@@ -50,7 +50,7 @@ export const AppContext = createContext<{
   isTouch: undefined,
   setActiveTeam: missingFn,
   setAddProjectOpen: missingFn,
-  // setAddTaskOpen: missingFn,
+  setAddTaskOpen: missingFn,
   setAddTeamOpen: missingFn,
   // setUpdateEmployeeOpen: missingFn,
   setUpdateProjectOpen: missingFn,
@@ -75,7 +75,7 @@ export default function AppContextProvider({ children }: PropsWithChildren) {
   // )
   const [activeTeam, setActiveTeam] = useState<Team | undefined>(undefined)
   const [addProjectOpen, setAddProjectOpen] = useState(false)
-  // const [addTaskOpen, setAddTaskOpen] = useState(false)
+  const [addTaskOpen, setAddTaskOpen] = useState(false)
   const [addTeamOpen, setAddTeamOpen] = useState(false)
   const [isTouch, setIsTouch] = useState<boolean | undefined>(undefined)
   // const [updateEmployeeOpen, setUpdateEmployeeOpen] = useState(false)
@@ -107,7 +107,7 @@ export default function AppContextProvider({ children }: PropsWithChildren) {
         // activeTask,
         activeTeam,
         addProjectOpen,
-        // addTaskOpen,
+        addTaskOpen,
         addTeamOpen,
         isTouch,
         // setActiveEmployee,
@@ -115,7 +115,7 @@ export default function AppContextProvider({ children }: PropsWithChildren) {
         // setActiveTask,
         setActiveTeam,
         setAddProjectOpen,
-        // setAddTaskOpen,
+        setAddTaskOpen,
         setAddTeamOpen,
         // setUpdateEmployeeOpen,
         setUpdateProjectOpen,

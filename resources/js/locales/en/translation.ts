@@ -10,7 +10,6 @@ export default {
     select: 'Select appearance',
     system: 'System'
   },
-  assignedTo: 'Assigned to',
   auth: {
     confirmPassword: 'Confirm password',
     currentPassword: 'Current password',
@@ -36,13 +35,6 @@ export default {
   homepage: 'Homepage',
   invitation_one: 'Invitation',
   invitation_other: 'Invitations',
-  label: 'Label',
-  labelValue: {
-    bug: 'Bug',
-    documentation: 'Documentation',
-    feature: 'Feature',
-    none: 'none'
-  },
   language: {
     change: 'Change language',
     language: 'Language',
@@ -222,12 +214,6 @@ export default {
       }
     }
   },
-  priority: 'Priority',
-  priorityValue: {
-    high: 'High',
-    low: 'Low',
-    medium: 'Medium'
-  },
   profile: 'Profile',
   project_one: 'Project',
   project_other: 'Projects',
@@ -281,14 +267,6 @@ export default {
     sidebar: 'Sidebar',
     toggle: 'Toggle Sidebar'
   },
-  status: 'Status',
-  statusValue: {
-    backlog: 'Backlog',
-    canceled: 'Canceled',
-    done: 'Done',
-    inProgress: 'In Progress',
-    todo: 'To Do'
-  },
   submit: 'Submit',
   table: {
     Asc: 'Asc',
@@ -317,6 +295,7 @@ export default {
   task_one: 'Task',
   task_other: 'Tasks',
   tasks: {
+    assignedTo: 'Assigned to',
     assignToMember: 'Assign to a team member',
     createInstructions: 'Add a new task for this project.',
     createTask: 'Create Task',
@@ -328,12 +307,33 @@ export default {
       title: 'No Tasks yet'
     },
     filterTasks: 'Filter tasks...',
+    label: 'Label',
+    labels: {
+      bug: 'Bug',
+      documentation: 'Documentation',
+      feature: 'Feature',
+      none: 'none'
+    },
     namePlaceholder: 'Task name',
     newTask: 'New task',
+    priority: 'Priority',
+    priorities: {
+      high: 'High',
+      low: 'Low',
+      medium: 'Medium'
+    },
     selectLabel: 'Select a label',
     selectPriority: 'Select a priority',
     selectStatus: 'Select a status',
     selectUser: 'Select a team member',
+    status: 'Status',
+    statuses: {
+      backlog: 'Backlog',
+      canceled: 'Canceled',
+      done: 'Done',
+      inProgress: 'In Progress',
+      todo: 'To Do'
+    },
     taskDescription: 'Task description'
   },
   team_one: 'Team',
