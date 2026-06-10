@@ -1,6 +1,6 @@
 {
+    // Avoid polluting search results
     "search.exclude": {
-        // Avoid polluting search results
         "composer.lock": true,
         "reports/": true,
         "storage/": true,
@@ -8,23 +8,62 @@
         "pnpm-lock.yaml": true,
         "node_modules/": true
     },
+
     // Ensure VSCode uses pnpm instead of npm
     "npm.packageManager": "pnpm",
-    // For those using file-nesting, nest the new files. E.g.:
-    "explorer.fileNesting.patterns": {
-        "package.json": "pnpm-workspace.yaml, pnpm-lock.yaml"
+
+    // Tailwind
+    "files.associations": {
+        "*.css": "tailwindcss"
     },
 
-    // TODO Tree settings
-    "todo-tree.tree.showBadges": true,
-    "todo-tree.highlights.defaultHighlight": {
-        "icon": "alert",
-        "type": "tag",
-        "opacity": 0,
-        "iconColour": "#0000FF",
-        "gutterIcon": true
-    },
-    "todo-tree.highlights.customHighlight": {
+    // Conventional commit
+    "conventionalCommits.scopes": ["client", "server"],
+
+    // Intelephense
+    "intelephense.diagnostics.argumentCount": "declared",
+
+    // Spell check
+    "cSpell.language": "en,it",
+    "cSpell.ignorePaths": [
+        "package-lock.json",
+        "node_modules",
+        "vscode-extension",
+        ".git/{info,lfs,logs,refs,objects}/**",
+        ".git/{index,*refs,*HEAD}",
+        ".vscode",
+        ".vscode-insiders",
+        "composer.json",
+        "package.json"
+    ],
+    "cSpell.words": [
+        "autodocs",
+        "disconnetti",
+        "Dispatchable",
+        "endforeach",
+        "endisset",
+        "Gantt",
+        "improcessabile",
+        "inertiajs",
+        "Infobox",
+        "isset",
+        "Laravel",
+        "oklch",
+        "Subcopy",
+        "wayfinder"
+    ],
+
+    // Better Todo Tree
+    "better-todo-tree.general.tags": [
+        "TODO",
+        "NOTE",
+        "LEARN",
+        "FIXME",
+        "BUG",
+        "[ ]",
+        "[x]"
+    ],
+    "better-todo-tree.highlights.customHighlight": {
         "TODO": {
             "icon": "check",
             "background": "#FFFF00",
@@ -59,52 +98,16 @@
             "iconColour": "#008000"
         }
     },
-    "todo-tree.general.tags": [
-        "TODO",
-        "NOTE",
-        "LEARN",
-        "FIXME",
-        "BUG",
-        "[ ]",
-        "[x]"
-    ],
-    "todo-tree.regex.regex": "(\\*|//|#|<!--|\\{\\{--|;|/\\*|^|^\\s*(-|\\d+.))\\s*@($TAGS).*(\\n\\s*//\\s{2,}.*)*",
-    "todo-tree.regex.regexCaseSensitive": false,
-    "todo-tree.tree.scanMode": "workspace only",
-
-    // Tailwind
-    "files.associations": {
-        "*.css": "tailwindcss"
+    "better-todo-tree.highlights.defaultHighlight": {
+        "icon": "alert",
+        "type": "tag",
+        "opacity": 0,
+        "iconColour": "#0000FF",
+        "gutterIcon": true
     },
-
-    // eslint fix
-    "eslint.useFlatConfig": true,
-    "eslint.options": {
-        "overrideConfigFile": "./eslint.config.js"
-    },
-
-    // Detect TypeScript version from workspace
-    "typescript.tsdk": "./node_modules/typescript/lib",
-    "typescript.enablePromptUseWorkspaceTsdk": true,
-
-    // Conventional commit
-    "conventionalCommits.scopes": ["client", "server"],
-
-    // Intelephense
-    "intelephense.diagnostics.argumentCount": "declared",
-
-    // Spell check
-    "cSpell.language": "en,it",
-    "cSpell.ignorePaths": [
-        "package-lock.json",
-        "node_modules",
-        "vscode-extension",
-        ".git/{info,lfs,logs,refs,objects}/**",
-        ".git/{index,*refs,*HEAD}",
-        ".vscode",
-        ".vscode-insiders",
-        "composer.json",
-        "package.json"
-    ],
-    "cSpell.words": ["disconnetti", "inertiajs", "Infobox", "Laravel"]
+    "better-todo-tree.tree.scanMode": "workspace only",
+    "better-todo-tree.tree.showBadges": true,
+    "better-todo-tree.regex.regex": "(\\*|//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*@($TAGS).*(\\n\\s*//\\s{2,}.*)*",
+    "better-todo-tree.regex.regexCaseSensitive": false,
+    "better-todo-tree.general.tagGroups": {}
 }
