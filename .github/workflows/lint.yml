@@ -17,7 +17,8 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v6
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -25,14 +26,12 @@ jobs:
           php-version: '8.4'
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          run_install: false
+        uses: pnpm/action-setup@v6
 
       - name: Setup Node with cache
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
           cache: 'pnpm'
 
       - name: Install Dependencies
@@ -53,7 +52,7 @@ jobs:
         run: pnpm run lint
 
       - name: Commit Changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
-          commit_message: 'fix: auto-fix code style'
+          commit_message: 'docs: auto-fix code style'
           commit_options: '--no-verify'
