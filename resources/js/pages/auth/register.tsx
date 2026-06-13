@@ -49,7 +49,7 @@ export default function Register() {
           )}
         </Form>
 
-        <div className="text-muted-foreground text-center text-sm">
+        <div className="text-center text-sm text-muted-foreground">
           <Trans
             components={{ a: <TextLink href={login()} /> }}
             i18nKey={($) => $.pages.auth.register.loginCTA}

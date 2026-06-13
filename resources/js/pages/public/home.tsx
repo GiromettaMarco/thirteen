@@ -142,7 +142,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="bg-brand/5 relative -mb-px aspect-335/376 w-full shrink-0 overflow-hidden rounded-t-lg lg:mb-0 lg:-ml-px lg:aspect-auto lg:w-109.5 lg:rounded-t-none lg:rounded-r-lg">
+          <div className="relative -mb-px aspect-335/376 w-full shrink-0 overflow-hidden rounded-t-lg bg-brand/5 lg:mb-0 lg:-ml-px lg:aspect-auto lg:w-109.5 lg:rounded-t-none lg:rounded-r-lg">
             <BrandAndLogo
               className="flex flex-col-reverse p-8 text-center"
               brandClassName="translate-y-0 opacity-100 transition-all duration-750 starting:translate-y-4 starting:opacity-0"

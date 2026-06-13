@@ -320,7 +320,7 @@ export default function DashboardLayout({
                 className="data-[slot=sidebar-menu-button]:p-1.5!"
               >
                 <Link href={home()}>
-                  <Logo className="text-brand text-base font-semibold" />
+                  <Logo className="text-base font-semibold text-brand" />
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

@@ -96,7 +96,7 @@ export default function Login({
         </Form>
 
         {canRegister && (
-          <div className="text-muted-foreground text-center text-sm">
+          <div className="text-center text-sm text-muted-foreground">
             <Trans
               components={{ a: <TextLink href={register()} /> }}
               i18nKey={($) => $.pages.auth.login.registerCTA}

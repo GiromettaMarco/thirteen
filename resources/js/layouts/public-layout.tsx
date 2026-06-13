@@ -54,7 +54,7 @@ function MobileMenu({
   return (
     <nav
       className={cn(
-        'bg-background fixed top-0 left-0 z-20 flex h-full w-96 max-w-full -translate-x-full flex-col gap-2 overflow-x-hidden overflow-y-auto border-e p-8 transition duration-300 lg:hidden',
+        'fixed top-0 left-0 z-20 flex h-full w-96 max-w-full -translate-x-full flex-col gap-2 overflow-x-hidden overflow-y-auto border-e bg-background p-8 transition duration-300 lg:hidden',
         { 'translate-0': open }
       )}
     >
@@ -75,21 +75,21 @@ function MobileMenu({
       </div>
 
       <Link
-        className="hover:bg-accent text-accent-foreground rounded px-2 py-1"
+        className="rounded px-2 py-1 text-accent-foreground hover:bg-accent"
         href="#"
       >
         Components
       </Link>
 
       <Link
-        className="hover:bg-accent text-accent-foreground rounded px-2 py-1"
+        className="rounded px-2 py-1 text-accent-foreground hover:bg-accent"
         href="#"
       >
         Docs
       </Link>
 
       <Link
-        className="hover:bg-accent text-accent-foreground rounded px-2 py-1"
+        className="rounded px-2 py-1 text-accent-foreground hover:bg-accent"
         href="#"
       >
         List
@@ -98,7 +98,7 @@ function MobileMenu({
       <Separator />
 
       <Link
-        className="hover:bg-accent text-accent-foreground rounded px-2 py-1"
+        className="rounded px-2 py-1 text-accent-foreground hover:bg-accent"
         href={dashboard()}
       >
         {t(($) => $.dashboard)}
@@ -124,13 +124,13 @@ function PublicMenu() {
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <Link
-                    className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-4 no-underline outline-hidden transition-all duration-200 select-none focus:shadow-md md:p-6"
+                    className="flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b from-muted/50 to-muted p-4 no-underline outline-hidden transition-all duration-200 select-none focus:shadow-md md:p-6"
                     href="#"
                   >
                     <div className="mb-2 text-lg font-medium sm:mt-4">
                       shadcn/ui
                     </div>
-                    <p className="text-muted-foreground text-sm leading-tight">
+                    <p className="text-sm leading-tight text-muted-foreground">
                       Beautifully designed components built with Tailwind CSS.
                     </p>
                   </Link>
@@ -142,7 +142,7 @@ function PublicMenu() {
                     <div className="text-sm leading-none font-medium">
                       Introduction
                     </div>
-                    <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                       Re-usable components built using Radix UI and Tailwind
                       CSS.
                     </p>
@@ -155,7 +155,7 @@ function PublicMenu() {
                     <div className="text-sm leading-none font-medium">
                       Installation
                     </div>
-                    <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                       How to install dependencies and structure your app.
                     </p>
                   </Link>
@@ -167,7 +167,7 @@ function PublicMenu() {
                     <div className="text-sm leading-none font-medium">
                       Typography
                     </div>
-                    <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                       Styles for headings, paragraphs, lists...etc
                     </p>
                   </Link>
@@ -188,7 +188,7 @@ function PublicMenu() {
                     <div className="text-sm leading-none font-medium">
                       Alert Dialog
                     </div>
-                    <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                       A modal dialog that interrupts the user with important
                       content and expects a response.
                     </p>
@@ -201,7 +201,7 @@ function PublicMenu() {
                     <div className="text-sm leading-none font-medium">
                       Hover Card
                     </div>
-                    <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                       For sighted users to preview content available behind a
                       link.
                     </p>
@@ -214,7 +214,7 @@ function PublicMenu() {
                     <div className="text-sm leading-none font-medium">
                       Progress
                     </div>
-                    <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                       Displays an indicator showing the completion progress of a
                       task, typically displayed as a progress bar.
                     </p>
@@ -227,7 +227,7 @@ function PublicMenu() {
                     <div className="text-sm leading-none font-medium">
                       Scroll-area
                     </div>
-                    <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                       Visually or semantically separates content.
                     </p>
                   </Link>
@@ -237,7 +237,7 @@ function PublicMenu() {
                 <NavigationMenuLink asChild>
                   <Link href="#">
                     <div className="text-sm leading-none font-medium">Tabs</div>
-                    <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                       A set of layered sections of content—known as tab
                       panels—that are displayed one at a time.
                     </p>
@@ -250,7 +250,7 @@ function PublicMenu() {
                     <div className="text-sm leading-none font-medium">
                       Tooltip
                     </div>
-                    <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                       A popup that displays information related to an element
                       when the element receives keyboard focus or the mouse
                       hovers over it.
@@ -398,7 +398,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
         }}
       >
         <header className="h-14">
-          <div className="bg-background/60 fixed top-0 z-10 w-full border-b border-dashed backdrop-blur-sm">
+          <div className="fixed top-0 z-10 w-full border-b border-dashed bg-background/60 backdrop-blur-sm">
             <div className="container mx-auto flex h-14 items-center justify-between gap-8 border-x border-dashed px-4 sm:px-6">
               <div className="flex flex-1 items-center gap-4">
                 <div className="flex-initial lg:hidden">

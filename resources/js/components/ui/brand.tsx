@@ -39,7 +39,7 @@ function BrandAndLogo({
     <div className={className}>
       <Brand className={brandClassName} />
       <Logo
-        className={cn('text-brand text-2xl font-semibold', logoClassName)}
+        className={cn('text-2xl font-semibold text-brand', logoClassName)}
       />
     </div>
   )

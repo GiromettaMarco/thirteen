@@ -526,13 +526,13 @@ export function InfoCheckboxField<
           {...props}
         >
           <Label
-            className="hover:bg-accent/50 has-aria-checked:border-info-foreground has-aria-checked:bg-info flex items-start gap-3 rounded-lg border p-3"
+            className="flex items-start gap-3 rounded-lg border p-3 hover:bg-accent/50 has-aria-checked:border-info-foreground has-aria-checked:bg-info"
             data-slot="field-label"
           >
             <Checkbox
               aria-invalid={fieldState.invalid}
               checked={field.value === value}
-              className="data-[state=checked]:border-info-foreground data-[state=checked]:bg-info-foreground dark:data-[state=checked]:border-info-foreground dark:data-[state=checked]:bg-info-foreground data-[state=checked]:text-white"
+              className="data-[state=checked]:border-info-foreground data-[state=checked]:bg-info-foreground data-[state=checked]:text-white dark:data-[state=checked]:border-info-foreground dark:data-[state=checked]:bg-info-foreground"
               disabled={field.disabled}
               id={inputId}
               name={field.name}
@@ -553,7 +553,7 @@ export function InfoCheckboxField<
             <div className="grid gap-1.5 font-normal">
               <p className="text-sm leading-none font-medium">{label}</p>
 
-              <p className="text-muted-foreground text-sm">{text}</p>
+              <p className="text-sm text-muted-foreground">{text}</p>
 
               <ErrorMonitor error={fieldState.error} />
             </div>
@@ -685,11 +685,11 @@ export function FancyRadioField<
           >
             {items.map((item) => (
               <Label
-                className="hover:bg-accent/50 ring-ring/50 rounded-md border transition-all has-focus-visible:ring-[3px]"
+                className="rounded-md border ring-ring/50 transition-all hover:bg-accent/50 has-focus-visible:ring-[3px]"
                 data-slot="field-label"
                 key={item.value + item.id}
               >
-                <div className="has-aria-checked:border-ring flex w-full items-center gap-3 rounded-md p-3 transition-all has-aria-checked:border-l-8">
+                <div className="flex w-full items-center gap-3 rounded-md p-3 transition-all has-aria-checked:border-l-8 has-aria-checked:border-ring">
                   <RadioGroupItem
                     className="sr-only"
                     id={item.id}

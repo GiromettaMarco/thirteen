@@ -34,7 +34,7 @@ export function Heading({
       >
         {h}
       </Tag>
-      {p && <p className="text-muted-foreground text-sm">{p}</p>}
+      {p && <p className="text-sm text-muted-foreground">{p}</p>}
     </header>
   )
 }

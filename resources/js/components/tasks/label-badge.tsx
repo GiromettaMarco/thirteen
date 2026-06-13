@@ -27,7 +27,7 @@ export function LabelBadge({ label }: { label: TaskLabel | 'none' }) {
       {label !== 'none' && (
         <Badge
           variant="outline"
-          className="text-muted-foreground px-1.5"
+          className="px-1.5 text-muted-foreground"
         >
           <LabelName label={label} />
         </Badge>

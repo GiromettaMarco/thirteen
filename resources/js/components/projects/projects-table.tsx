@@ -131,7 +131,7 @@ export function Actions({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
-              className="data-[state=open]:bg-muted text-muted-foreground flex size-8"
+              className="flex size-8 text-muted-foreground data-[state=open]:bg-muted"
               size="icon"
               variant="ghost"
             >

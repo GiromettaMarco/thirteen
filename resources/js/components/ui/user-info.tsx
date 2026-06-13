@@ -36,7 +36,7 @@ export function UserInfo({
 
       <div className="grid flex-1 text-left text-sm leading-tight">
         <span className="truncate font-medium">{name}</span>
-        <span className="text-muted-foreground truncate text-xs">{email}</span>
+        <span className="truncate text-xs text-muted-foreground">{email}</span>
       </div>
 
       {dots && <EllipsisVertical className="ml-auto size-4" />}

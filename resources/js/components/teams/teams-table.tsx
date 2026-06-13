@@ -76,7 +76,7 @@ function CurrentTeamCell({
       type="button"
     >
       <Star
-        className="hover:text-brand size-4"
+        className="size-4 hover:text-brand"
         fill={team.id === currentTeamId ? 'currentColor' : 'none'}
       />
       <span className="sr-only">

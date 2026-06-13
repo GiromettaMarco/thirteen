@@ -54,7 +54,7 @@ export function StatusBadge({ status }: { status: TaskStatus }) {
   return (
     <Badge
       variant="outline"
-      className="text-muted-foreground px-1.5"
+      className="px-1.5 text-muted-foreground"
     >
       <StatusIcon status={status} />
       <StatusName status={status} />

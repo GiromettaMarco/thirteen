@@ -32,7 +32,7 @@ export default function AuthLayout({
           <div className="space-y-2 text-center">
             {h1 && <h1 className="text-xl font-medium">{h1}</h1>}
             {p && (
-              <p className="text-muted-foreground text-center text-sm">{p}</p>
+              <p className="text-center text-sm text-muted-foreground">{p}</p>
             )}
           </div>
         </div>

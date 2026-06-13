@@ -60,16 +60,16 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
             <div>{session.agent.is_desktop ? <Monitor /> : <Smartphone />}</div>
 
             <div className="ms-3">
-              <div className="text-muted-foreground text-sm">
+              <div className="text-sm text-muted-foreground">
                 {session.agent.platform ?? 'Unknown'} -{' '}
                 {session.agent.browser ?? 'Unknown'}
               </div>
 
               <div>
-                <div className="text-muted-foreground text-xs">
+                <div className="text-xs text-muted-foreground">
                   {session.ip_address},{' '}
                   {session.is_current_device ? (
-                    <span className="text-success-foreground font-semibold">
+                    <span className="font-semibold text-success-foreground">
                       {t(($) => $.pages.dashboard.account.sessions.thisDevice)}
                     </span>
                   ) : (

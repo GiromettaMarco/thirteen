@@ -86,7 +86,7 @@ export function SelectionMonitor<TData>({
   return (
     <div
       className={cn(
-        'text-muted-foreground hidden flex-1 text-sm lg:flex',
+        'hidden flex-1 text-sm text-muted-foreground lg:flex',
         className
       )}
     >
@@ -116,7 +116,7 @@ export function SortingMonitor({
   }
 
   return (
-    <div className={cn('text-muted-foreground text-sm', className)}>
+    <div className={cn('text-sm text-muted-foreground', className)}>
       {t(($) => $.table.sorting) + ': '}
       {sorting.map((column, index) => (
         <span key={column.id}>
@@ -500,7 +500,7 @@ export function FacetedFilter<TData, TValue>({
                     >
                       <div
                         className={cn(
-                          'border-primary mr-2 flex h-4 w-4 items-center justify-center rounded-sm border',
+                          'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
                           isSelected
                             ? 'bg-primary text-primary-foreground'
                             : 'opacity-50 [&_svg]:invisible'
@@ -510,7 +510,7 @@ export function FacetedFilter<TData, TValue>({
                       </div>
 
                       {option.icon && (
-                        <option.icon className="text-muted-foreground mr-2 h-4 w-4" />
+                        <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
                       )}
 
                       <span>{option.label}</span>
@@ -596,7 +596,7 @@ export function SortableColumnHeader<TData, TValue>({
           <Tooltip>
             <TooltipTrigger
               asChild
-              className="focus-visible:border-ring focus-visible:ring-ring/50 rounded-md outline-none focus-visible:ring-3"
+              className="rounded-md outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
             >
               <DropdownMenuTrigger asChild>
                 <Button
@@ -626,19 +626,19 @@ export function SortableColumnHeader<TData, TValue>({
 
         <DropdownMenuContent align="start">
           <DropdownMenuItem onClick={() => column.toggleSorting(false, true)}>
-            <ArrowUp className="text-muted-foreground/70 h-3.5 w-3.5" />
+            <ArrowUp className="h-3.5 w-3.5 text-muted-foreground/70" />
             {t(($) => $.table.Asc)}
           </DropdownMenuItem>
 
           <DropdownMenuItem onClick={() => column.toggleSorting(true, true)}>
-            <ArrowDown className="text-muted-foreground/70 h-3.5 w-3.5" />
+            <ArrowDown className="h-3.5 w-3.5 text-muted-foreground/70" />
             {t(($) => $.table.Desc)}
           </DropdownMenuItem>
 
           <DropdownMenuSeparator />
 
           <DropdownMenuItem onClick={() => column.clearSorting()}>
-            <X className="text-muted-foreground/70 h-3.5 w-3.5" />
+            <X className="h-3.5 w-3.5 text-muted-foreground/70" />
             {t(($) => $.reset)}
           </DropdownMenuItem>
         </DropdownMenuContent>
@@ -665,7 +665,7 @@ export default function TableMain<TData>({
   return (
     <div className="overflow-hidden rounded-md border">
       <Table>
-        <TableHeader className="bg-muted sticky top-0 z-10">
+        <TableHeader className="sticky top-0 z-10 bg-muted">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
@@ -848,7 +848,7 @@ export function ActionsButton({
     <DropdownMenuTrigger asChild>
       <Button
         className={cn(
-          'data-[state=open]:bg-muted text-muted-foreground size-8',
+          'size-8 text-muted-foreground data-[state=open]:bg-muted',
           className
         )}
         size={size}

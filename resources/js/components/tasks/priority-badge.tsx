@@ -42,7 +42,7 @@ export function PriorityBadge({ priority }: { priority: TaskPriority }) {
   return (
     <Badge
       variant="outline"
-      className="text-muted-foreground px-1.5"
+      className="px-1.5 text-muted-foreground"
     >
       <PriorityIcon priority={priority} />
       <PriorityName priority={priority} />
