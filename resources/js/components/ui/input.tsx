@@ -17,24 +17,4 @@ function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
   )
 }
 
-function InputError({
-  className,
-  error,
-  ...props
-}: React.ComponentProps<'div'> & { error: string | undefined }) {
-  if (!error) {
-    return null
-  }
-
-  return (
-    <div
-      role="alert"
-      className={cn('text-sm font-normal text-destructive', className)}
-      {...props}
-    >
-      {error}
-    </div>
-  )
-}
-
-export { Input, InputError }
+export { Input }
