@@ -110,9 +110,6 @@ function MobileMenu({
 
 //#region Public Menu
 function PublicMenu() {
-  // i18n
-  const { t } = useTranslation()
-
   return (
     <NavigationMenu viewport={false}>
       <NavigationMenuList className="flex-wrap">
@@ -319,7 +316,7 @@ function PublicMenu() {
                     className="flex-row items-center gap-2"
                   >
                     <CircleHelp />
-                    {t(($) => $.statusValue.backlog)}
+                    Backlog
                   </Link>
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
@@ -328,7 +325,7 @@ function PublicMenu() {
                     className="flex-row items-center gap-2"
                   >
                     <Circle />
-                    {t(($) => $.statusValue.todo)}
+                    TODO
                   </Link>
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
@@ -337,7 +334,7 @@ function PublicMenu() {
                     className="flex-row items-center gap-2"
                   >
                     <CircleCheck />
-                    {t(($) => $.statusValue.done)}
+                    Done
                   </Link>
                 </NavigationMenuLink>
               </li>
