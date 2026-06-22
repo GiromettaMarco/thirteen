@@ -109,5 +109,9 @@
     "better-todo-tree.tree.showBadges": true,
     "better-todo-tree.regex.regex": "(\\*|//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*@($TAGS).*(\\n\\s*//\\s{2,}.*)*",
     "better-todo-tree.regex.regexCaseSensitive": false,
-    "better-todo-tree.general.tagGroups": {}
+    "better-todo-tree.general.tagGroups": {},
+
+    // Typescript
+    "js/ts.tsdk.path": "node_modules/typescript/lib",
+    "js/ts.tsdk.promptToUseWorkspaceVersion": true
 }
