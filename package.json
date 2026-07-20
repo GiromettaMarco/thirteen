@@ -7,7 +7,7 @@
     "description": "Laravel 13 application.",
     "author": "Marco Girometta",
     "license": "MIT",
-    "packageManager": "pnpm@11.5.0",
+    "packageManager": "pnpm@11.15.0",
     "scripts": {
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
