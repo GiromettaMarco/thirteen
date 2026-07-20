@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@source '../../node_modules/@gmcode/react-ui';
+@source '../../node_modules/@gmcode/forms';
 @source '../views';
 
 @custom-variant dark (&:is(.dark *));
@@ -55,9 +57,18 @@
   --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
+  /* Radius */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 :root {
+  --radius: 0.625rem;
   --background: oklch(98.5% 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);

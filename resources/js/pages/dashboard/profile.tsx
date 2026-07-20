@@ -1,5 +1,4 @@
 import { NameFieldPreset } from '@/components/auth/fields'
-import { FancyRadioField, Form, InfoCheckboxField } from '@/components/form'
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
 import {
@@ -17,6 +16,7 @@ import DashboardLayout from '@/layouts/dashboard-layout'
 import { update } from '@/routes/profile'
 import { updateProfileSchema } from '@/schemas/profile'
 import type { Profile } from '@/types'
+import { FancyRadioField, Form, InfoCheckboxField } from '@gmcode/forms'
 import { Head } from '@inertiajs/react'
 import { ChartNoAxesGantt, Code2, Handshake, Palette } from 'lucide-react'
 import { useMemo, useState } from 'react'
@@ -76,7 +76,7 @@ function UpdateProfileDrawer({ profile }: { profile: Profile }) {
           className="h-full overflow-y-auto"
           defaults={{
             name: profile.name,
-            public: profile.public ? '1' : '0',
+            public: profile.public ? 'true' : '',
             role: profile.role
           }}
           onSuccess={() => setOpen(false)}
@@ -93,8 +93,8 @@ function UpdateProfileDrawer({ profile }: { profile: Profile }) {
                   control={form.control}
                   defaultValue={profile.role}
                   inputName="role"
-                  items={roles}
                   label={t(($) => $.role)}
+                  options={roles}
                 />
 
                 <InfoCheckboxField
@@ -104,8 +104,6 @@ function UpdateProfileDrawer({ profile }: { profile: Profile }) {
                   inputName="public"
                   label={t(($) => $.pages.dashboard.profile.public)}
                   text={t(($) => $.pages.dashboard.profile.info)}
-                  uncheckedValue="0"
-                  value="1"
                 />
               </div>
 

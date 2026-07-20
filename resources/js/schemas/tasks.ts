@@ -1,7 +1,5 @@
-import { InputNumberRule } from '@/lib/tsv/form/input-number'
-import { InputSelectRule } from '@/lib/tsv/form/input-select'
-import { Schema } from '@/lib/tsv/schema'
 import { description, name } from '@/schemas/misc'
+import { InputNumberRule, InputSelectRule, Schema } from '@gmcode/forms'
 
 const label = new InputSelectRule({
   optional: true,

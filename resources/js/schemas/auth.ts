@@ -1,11 +1,12 @@
-import { InputRule } from '@/lib/tsv/form/input'
-import { InputTextRule } from '@/lib/tsv/form/input-text'
-import { TsvMessage } from '@/lib/tsv/message'
-import { Schema } from '@/lib/tsv/schema'
 import { email, name } from '@/schemas/misc'
+import {
+  InputCheckboxRule,
+  InputTextRule,
+  Message,
+  Schema
+} from '@gmcode/forms'
 
 //#region Fields
-
 export const current_password = new InputTextRule({
   minChars: 8,
   messages: {
@@ -29,10 +30,8 @@ export const password_confirmation = new InputTextRule({
     required: 'confirmPassword.required'
   }
 })
-//#endregion
 
 //#region Post Validation
-
 export const passwordMatch = {
   addTo: 'password_confirmation' as const,
   callback({
@@ -46,17 +45,15 @@ export const passwordMatch = {
       return true
     }
 
-    return new TsvMessage('confirmPassword.match')
+    return new Message('confirmPassword.match')
   }
 }
-//#endregion
 
 //#region Schemas
-
 export const loginSchema = new Schema({
   email,
   password,
-  remember: new InputRule({ optional: true })
+  remember: new InputCheckboxRule()
 })
 
 export const registerSchema = new Schema(
@@ -94,4 +91,3 @@ export const resetPasswordSchema = new Schema(
     postValidation: [passwordMatch]
   }
 )
-//#endregion

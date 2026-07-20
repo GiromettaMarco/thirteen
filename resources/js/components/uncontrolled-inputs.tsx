@@ -6,7 +6,7 @@ import {
   FieldLabel,
   FieldLegend,
   FieldSet
-} from '@/components/ui/field'
+} from '@gmcode/react-ui'
 import type { Checkbox as CheckboxPrimitive } from 'radix-ui'
 import type { FC, SVGProps } from 'react'
 import { useRef, type ComponentProps } from 'react'

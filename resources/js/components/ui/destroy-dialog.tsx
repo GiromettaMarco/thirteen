@@ -1,4 +1,3 @@
-import { Form, type FormMethod } from '@/components/form'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -10,8 +9,8 @@ import {
 } from '@/components/ui/dialog'
 import { Infobox } from '@/components/ui/infobox'
 import { Submit } from '@/components/ui/submit'
-import { Schema } from '@/lib/tsv/schema'
 import type { RouteDefinition } from '@/wayfinder'
+import { Form, Schema, type Method } from '@gmcode/forms'
 import type { Dispatch, PropsWithChildren, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -28,7 +27,7 @@ export function DestroyDialog({
 }: PropsWithChildren<{
   description?: string
   open: boolean
-  route: RouteDefinition<FormMethod>
+  route: RouteDefinition<Method>
   setOpen: Dispatch<SetStateAction<boolean>>
   title?: string
   warning?: string

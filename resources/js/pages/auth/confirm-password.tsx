@@ -1,9 +1,9 @@
 import { store } from '@/actions/App/Http/Controllers/Auth/ConfirmablePasswordController'
 import { PasswordFieldPreset } from '@/components/auth/fields'
-import { Form } from '@/components/form'
 import { Submit } from '@/components/ui/submit'
 import AuthLayout from '@/layouts/auth-layout'
 import { passwordConfirmSchema } from '@/schemas/auth'
+import { Form } from '@gmcode/forms'
 import { Head } from '@inertiajs/react'
 import { useTranslation } from 'react-i18next'
 

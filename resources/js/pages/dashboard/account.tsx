@@ -3,7 +3,6 @@ import {
   EmailFieldPreset,
   PasswordFieldPreset
 } from '@/components/auth/fields'
-import { Form, PasswordField } from '@/components/form'
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
 import {
@@ -29,6 +28,7 @@ import { destroy as destroySessions } from '@/routes/sessions'
 import { updateAccountSchema, updatePasswordSchema } from '@/schemas/account'
 import { passwordConfirmSchema } from '@/schemas/auth'
 import type { Auth, Session } from '@/types'
+import { Form, PasswordField } from '@gmcode/forms'
 import { Head } from '@inertiajs/react'
 import { Monitor, Smartphone } from 'lucide-react'
 import { useState } from 'react'

@@ -1,10 +1,10 @@
-import { CheckboxField, Form } from '@/components/form'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Field, FieldLabel } from '@/components/ui/field'
 import { Submit } from '@/components/ui/submit'
 import { update } from '@/routes/members'
 import { updateTeamPermissionsSchema } from '@/schemas/teams'
 import type { Profile, TeamPermissions, WithTeamPermissions } from '@/types'
+import { CheckboxField, Form } from '@gmcode/forms'
+import { Field, FieldLabel } from '@gmcode/react-ui'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -130,7 +130,7 @@ export function EditTeamPermissions({
             inputId="can_edit"
             inputName="can_edit"
             label={t(($) => $.teamPermissions.canEdit)}
-            readonly={isAdmin}
+            readOnly={isAdmin}
           />
 
           <CheckboxField
@@ -138,7 +138,7 @@ export function EditTeamPermissions({
             inputId="can_delete"
             inputName="can_delete"
             label={t(($) => $.teamPermissions.canDelete)}
-            readonly={isAdmin}
+            readOnly={isAdmin}
           />
 
           <CheckboxField
@@ -146,7 +146,7 @@ export function EditTeamPermissions({
             inputId="can_edit_members"
             inputName="can_edit_members"
             label={t(($) => $.teamPermissions.canEditMembers)}
-            readonly={isAdmin}
+            readOnly={isAdmin}
           />
 
           <CheckboxField
@@ -154,7 +154,7 @@ export function EditTeamPermissions({
             inputId="can_edit_projects"
             inputName="can_edit_projects"
             label={t(($) => $.teamPermissions.canEditProjects)}
-            readonly={isAdmin}
+            readOnly={isAdmin}
           />
 
           <Submit

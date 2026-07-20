@@ -1,4 +1,3 @@
-import { Form, TextField } from '@/components/form'
 import { Button } from '@/components/ui/button'
 import {
   Drawer,
@@ -15,6 +14,7 @@ import { AppContext } from '@/providers/app-context-provider'
 import { update } from '@/routes/teams'
 import { updateTeamSchema } from '@/schemas/teams'
 import type { Team } from '@/types'
+import { Form, TextField } from '@gmcode/forms'
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 

@@ -1,9 +1,4 @@
-import {
-  CalendarField,
-  Form,
-  TextareaField,
-  TextField
-} from '@/components/form'
+import { CalendarFieldI18n } from '@/components/calendar-field-i18n'
 import { Button } from '@/components/ui/button'
 import {
   Drawer,
@@ -18,6 +13,7 @@ import { Submit } from '@/components/ui/submit'
 import { AppContext } from '@/providers/app-context-provider'
 import { store } from '@/routes/projects'
 import { createProjectSchema } from '@/schemas/projects'
+import { Form, TextareaField, TextField } from '@gmcode/forms'
 import { Plus } from 'lucide-react'
 import { useContext, type ComponentProps } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -92,7 +88,7 @@ export function AddProjectDrawer({ teamId }: { teamId: number }) {
                   placeholder={t(($) => $.projects.descriptionPlaceholder)}
                 />
 
-                <CalendarField
+                <CalendarFieldI18n
                   control={form.control}
                   inputId="project-deadline"
                   inputName="deadline"

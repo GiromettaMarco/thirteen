@@ -1,11 +1,3 @@
-import {
-  Form,
-  NullableSelectField,
-  SelectField,
-  TextareaField,
-  TextField,
-  type SelectOption
-} from '@/components/form'
 import { Button } from '@/components/ui/button'
 import {
   Drawer,
@@ -21,6 +13,14 @@ import { AppContext } from '@/providers/app-context-provider'
 import { store } from '@/routes/tasks'
 import { createTaskSchema } from '@/schemas/tasks'
 import type { Profile } from '@/types'
+import {
+  Form,
+  NullableSelectField,
+  SelectField,
+  TextareaField,
+  TextField,
+  type Option
+} from '@gmcode/forms'
 import { Plus } from 'lucide-react'
 import { useContext, useMemo, type ComponentProps } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -59,7 +59,7 @@ export function AddTaskDrawer({
   // App context
   const { addTaskOpen: open, setAddTaskOpen: setOpen } = useContext(AppContext)
 
-  const labelOptions = useMemo<SelectOption[]>(
+  const labelOptions = useMemo<Option[]>(
     () => [
       { key: 1, label: t(($) => $.tasks.labels.bug), value: 'bug' },
       {
@@ -72,7 +72,7 @@ export function AddTaskDrawer({
     [t]
   )
 
-  const priorityOptions = useMemo<SelectOption[]>(
+  const priorityOptions = useMemo<Option[]>(
     () => [
       { key: 1, label: t(($) => $.tasks.priorities.low), value: 'low' },
       { key: 2, label: t(($) => $.tasks.priorities.medium), value: 'medium' },
@@ -81,7 +81,7 @@ export function AddTaskDrawer({
     [t]
   )
 
-  const statusOptions = useMemo<SelectOption[]>(
+  const statusOptions = useMemo<Option[]>(
     () => [
       { key: 1, label: t(($) => $.tasks.statuses.todo), value: 'todo' },
       {
@@ -96,7 +96,7 @@ export function AddTaskDrawer({
     [t]
   )
 
-  const assignedToOptions = useMemo<SelectOption[]>(
+  const assignedToOptions = useMemo<Option[]>(
     () =>
       teamMembers
         ? teamMembers.map((profile) => ({

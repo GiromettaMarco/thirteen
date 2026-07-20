@@ -1,6 +1,5 @@
-import { InputRule } from '@/lib/tsv/form/input'
-import { Schema } from '@/lib/tsv/schema'
 import { description, name } from '@/schemas/misc'
+import { InputRule, Schema } from '@gmcode/forms'
 
 const deadline = new InputRule({ optional: true })
 

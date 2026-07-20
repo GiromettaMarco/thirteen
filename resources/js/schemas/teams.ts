@@ -1,6 +1,5 @@
-import { InputRule } from '@/lib/tsv/form/input'
-import { Schema } from '@/lib/tsv/schema'
 import { name } from '@/schemas/misc'
+import { InputRule, Schema } from '@gmcode/forms'
 
 export const createTeamSchema = new Schema({
   name

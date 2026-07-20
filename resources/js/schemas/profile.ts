@@ -1,9 +1,8 @@
-import { InputRule } from '@/lib/tsv/form/input'
-import { Schema } from '@/lib/tsv/schema'
 import { name } from '@/schemas/misc'
+import { InputRule, Schema } from '@gmcode/forms'
 
 export const updateProfileSchema = new Schema({
   name,
-  public: new InputRule(),
+  public: new InputRule({ optional: true }),
   role: new InputRule()
 })

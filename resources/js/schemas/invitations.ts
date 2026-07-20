@@ -1,7 +1,5 @@
-import { InputRule } from '@/lib/tsv/form/input'
-import { InputSelectRule } from '@/lib/tsv/form/input-select'
-import { Schema } from '@/lib/tsv/schema'
 import { email, name } from '@/schemas/misc'
+import { InputRule, InputSelectRule, Schema } from '@gmcode/forms'
 
 export const createInvitationSchema = new Schema({
   name,

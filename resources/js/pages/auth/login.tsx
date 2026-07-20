@@ -1,8 +1,5 @@
 import { EmailFieldPreset } from '@/components/auth/fields'
-import { CheckboxField, Form } from '@/components/form'
 import { TextLink } from '@/components/text-link'
-import { Field, FieldLabel } from '@/components/ui/field'
-import { FieldErrorI18n } from '@/components/ui/field-i18n'
 import { Input } from '@/components/ui/input'
 import { Submit } from '@/components/ui/submit'
 import AuthLayout from '@/layouts/auth-layout'
@@ -10,6 +7,8 @@ import { register } from '@/routes'
 import { store } from '@/routes/login'
 import { request } from '@/routes/password'
 import { loginSchema } from '@/schemas/auth'
+import { CheckboxField, ErrorMonitor, Form } from '@gmcode/forms'
+import { Field, FieldLabel } from '@gmcode/react-ui'
 import { Head } from '@inertiajs/react'
 import { Controller } from 'react-hook-form'
 import { Trans, useTranslation } from 'react-i18next'
@@ -72,7 +71,7 @@ export default function Login({
                     </div>
 
                     {fieldState.invalid && (
-                      <FieldErrorI18n errors={[fieldState.error]} />
+                      <ErrorMonitor error={fieldState.error} />
                     )}
                   </Field>
                 )}

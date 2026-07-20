@@ -1,4 +1,3 @@
-import { Schema } from '@/lib/tsv/schema'
 import {
   current_password,
   password,
@@ -6,6 +5,7 @@ import {
   passwordMatch
 } from '@/schemas/auth'
 import { email } from '@/schemas/misc'
+import { Schema } from '@gmcode/forms'
 
 export const updateAccountSchema = new Schema({
   email

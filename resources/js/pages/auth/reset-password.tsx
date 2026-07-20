@@ -2,11 +2,11 @@ import {
   ConfirmPasswordFieldPreset,
   PasswordFieldPreset
 } from '@/components/auth/fields'
-import { Form, HiddenField } from '@/components/form'
 import { Submit } from '@/components/ui/submit'
 import AuthLayout from '@/layouts/auth-layout'
 import { store } from '@/routes/password'
 import { resetPasswordSchema } from '@/schemas/auth'
+import { Form, HiddenField } from '@gmcode/forms'
 import { Head } from '@inertiajs/react'
 import { useTranslation } from 'react-i18next'
 
