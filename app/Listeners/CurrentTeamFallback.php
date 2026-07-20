@@ -57,6 +57,8 @@ class CurrentTeamFallback
 
     /**
      * Current team fallback for the TeamDeleting event.
+     *
+     * @TODO delete related views
      */
     protected function onTeamDeleting(TeamDeleting $event): void
     {

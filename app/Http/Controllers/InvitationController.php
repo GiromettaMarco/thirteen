@@ -25,7 +25,7 @@ class InvitationController extends Controller
             'invitations' => Invitation::with(['user', 'user.profile'])
                 ->orderBy('created_at', 'DESC')
                 ->get(),
-            // @TODO add can_add_members policy check for each team
+            // @TODO add can_edit_members policy check for each team
             'teams' => $user->profile->teams,
             'views' => [
                 'invitations' => $user->views()->where([
@@ -63,7 +63,7 @@ class InvitationController extends Controller
         $teams = json_decode($validated['teams']);
 
         if (is_array($teams)) {
-            // @TODO add can_add_members policy check for each team
+            // @TODO add can_edit_members policy check for each team
             $user->profile->teams()->attach($teams);
         }
 
