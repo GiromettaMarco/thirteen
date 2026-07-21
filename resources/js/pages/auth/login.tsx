@@ -21,7 +21,7 @@ export default function Login({
   canReset?: boolean
 }) {
   // i18n
-  const { t } = useTranslation()
+  const { i18n, t } = useTranslation()
 
   return (
     <AuthLayout
@@ -37,7 +37,10 @@ export default function Login({
         >
           {({ form, loading }) => (
             <>
-              <EmailFieldPreset control={form.control} />
+              <EmailFieldPreset
+                control={form.control}
+                i18n={i18n}
+              />
 
               <Controller
                 name="password"

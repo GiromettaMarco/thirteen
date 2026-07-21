@@ -16,7 +16,7 @@ import { Trans, useTranslation } from 'react-i18next'
 
 export default function Register() {
   // i18n
-  const { t } = useTranslation()
+  const { i18n, t } = useTranslation()
 
   return (
     <AuthLayout
@@ -32,13 +32,25 @@ export default function Register() {
         >
           {({ form, loading }) => (
             <>
-              <NameFieldPreset control={form.control} />
+              <NameFieldPreset
+                control={form.control}
+                i18n={i18n}
+              />
 
-              <EmailFieldPreset control={form.control} />
+              <EmailFieldPreset
+                control={form.control}
+                i18n={i18n}
+              />
 
-              <PasswordFieldPreset control={form.control} />
+              <PasswordFieldPreset
+                control={form.control}
+                i18n={i18n}
+              />
 
-              <ConfirmPasswordFieldPreset control={form.control} />
+              <ConfirmPasswordFieldPreset
+                control={form.control}
+                i18n={i18n}
+              />
 
               <Submit
                 className="mt-2 w-full"

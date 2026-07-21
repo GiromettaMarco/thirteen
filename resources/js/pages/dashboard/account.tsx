@@ -37,7 +37,7 @@ import { useTranslation } from 'react-i18next'
 //#region ManageSessions
 function ManageSessions({ sessions }: { sessions: Session[] }) {
   // i18n
-  const { t } = useTranslation()
+  const { i18n, t } = useTranslation()
 
   // Dialog state
   const [open, setOpen] = useState(false)
@@ -112,6 +112,7 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
                 <>
                   <PasswordFieldPreset
                     control={form.control}
+                    i18n={i18n}
                     placeholder={false}
                   />
 
@@ -140,7 +141,7 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
 //#region UpdateEmail
 function UpdateEmail({ email }: { email: string }) {
   // i18n
-  const { t } = useTranslation()
+  const { i18n, t } = useTranslation()
 
   return (
     <Format
@@ -160,7 +161,10 @@ function UpdateEmail({ email }: { email: string }) {
       >
         {({ form, loading }) => (
           <>
-            <EmailFieldPreset control={form.control} />
+            <EmailFieldPreset
+              control={form.control}
+              i18n={i18n}
+            />
 
             <Submit
               className="w-36"
@@ -178,7 +182,7 @@ function UpdateEmail({ email }: { email: string }) {
 //#region UpdatePassword
 function UpdatePassword() {
   // i18n
-  const { t } = useTranslation()
+  const { i18n, t } = useTranslation()
 
   return (
     <Format
@@ -202,11 +206,13 @@ function UpdatePassword() {
 
             <PasswordFieldPreset
               control={form.control}
+              i18n={i18n}
               placeholder={false}
             />
 
             <ConfirmPasswordFieldPreset
               control={form.control}
+              i18n={i18n}
               placeholder={false}
             />
 
@@ -226,7 +232,7 @@ function UpdatePassword() {
 //#region DeleteAccount
 function DeleteAccount() {
   // i18n
-  const { t } = useTranslation()
+  const { i18n, t } = useTranslation()
 
   return (
     <Format
@@ -264,6 +270,7 @@ function DeleteAccount() {
               <>
                 <PasswordFieldPreset
                   control={form.control}
+                  i18n={i18n}
                   placeholder={false}
                 />
 

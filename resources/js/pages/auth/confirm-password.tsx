@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
 
 export default function ConfirmPassword() {
   // i18n
-  const { t } = useTranslation()
+  const { i18n, t } = useTranslation()
 
   return (
     <AuthLayout
@@ -26,6 +26,7 @@ export default function ConfirmPassword() {
           <>
             <PasswordFieldPreset
               control={form.control}
+              i18n={i18n}
               placeholder={false}
             />
 
