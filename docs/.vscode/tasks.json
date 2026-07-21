@@ -70,17 +70,6 @@
             }
         },
         {
-            "label": "$(github-alt)",
-            "type": "shell",
-            "command": "act -W '.github/workflows/tests.yml' --artifact-server-path /tmp/artifacts",
-            "options": {
-                "statusbar": {
-                    "detail": "act",
-                    "color": "#22C1D6"
-                }
-            }
-        },
-        {
             "label": "$(type-hierarchy)",
             "type": "shell",
             "command": "php artisan wayfinder:generate",
