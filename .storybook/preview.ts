@@ -1,9 +1,17 @@
 import { withThemeByClassName } from '@storybook/addon-themes'
 import type { Preview, ReactRenderer } from '@storybook/react-vite'
+import { initialize, mswLoader } from 'msw-storybook-addon'
 import DocsWithTheme from './decorators/docs-with-theme'
 import { WithI18next } from './decorators/with-i18next'
+import { getResponses } from './msw'
 
 import '../resources/css/app.css'
+
+// @see https://github.com/mswjs/msw-storybook-addon#configuring-msw
+initialize({
+  onUnhandledRequest: import.meta.env.MSW_ON_UNHANDLED_REQUEST ?? 'bypass',
+  quiet: import.meta.env.MSW_QUIET ?? true
+})
 
 const preview: Preview = {
   globalTypes: {
@@ -38,6 +46,10 @@ const preview: Preview = {
 
     docs: {
       container: DocsWithTheme
+    },
+
+    msw: {
+      handlers: getResponses()
     }
   },
 
@@ -51,7 +63,9 @@ const preview: Preview = {
     }),
 
     WithI18next
-  ]
+  ],
+
+  loaders: [mswLoader]
 }
 
 export default preview

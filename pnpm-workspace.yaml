@@ -1,6 +1,7 @@
 allowBuilds:
   '@swc/core': false
   esbuild: false
+  msw: false
 minimumReleaseAgeExclude:
   - '@storybook/addon-a11y@10.5.3'
   - '@storybook/addon-docs@10.5.3'
@@ -14,4 +15,5 @@ minimumReleaseAgeExclude:
   - eslint-plugin-storybook@10.5.3
   - storybook@10.5.3
 patchedDependencies:
+  # fix ast-types imports (required with "skipLibCheck": false)
   ast-types: patches/ast-types.patch

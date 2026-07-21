@@ -63,8 +63,8 @@ export default defineConfig({
           browser: {
             enabled: true,
             headless: true,
-            provider: playwright({}),
-            instances: [{ browser: 'chromium' }]
+            instances: [{ browser: 'chromium' }],
+            provider: playwright()
           },
           setupFiles: ['.storybook/vitest.setup.ts'],
           alias

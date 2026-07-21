@@ -29,3 +29,7 @@ pnpm-lock.yaml
 **/*.cur
 **/*.tif
 **/*.tiff
+
+# mocks
+.storybook/mocks/inertia/*.js
+public/mockServiceWorker.js

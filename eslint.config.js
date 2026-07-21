@@ -2,7 +2,7 @@ import prettier from 'eslint-config-prettier'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import storybook from 'eslint-plugin-storybook'
-import { defineConfig } from 'eslint/config'
+import { defineConfig, globalIgnores } from 'eslint/config'
 import typescript from 'typescript-eslint'
 
 export default defineConfig([
@@ -54,5 +54,8 @@ export default defineConfig([
     rules: {
       'react-hooks/incompatible-library': 'off'
     }
-  }
+  },
+
+  // Ignore mocks
+  globalIgnores(['.storybook/mocks/inertia/*.js'])
 ])

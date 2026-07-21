@@ -1,10 +1,6 @@
-import path from 'node:path'
-
 const alias = {
-  '@inertiajs/react': path.resolve(
-    import.meta.dirname,
-    './mocks/inertia/react.tsx'
-  )
+  '@inertiajs/core': import.meta.resolve('./mocks/inertia/core.js'),
+  '@inertiajs/react': import.meta.resolve('./mocks/inertia/react.js')
 }
 
 export default alias
