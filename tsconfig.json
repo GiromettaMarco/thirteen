@@ -24,7 +24,8 @@
         "noImplicitAny": true,
 
         /* Completeness */
-        "skipLibCheck": false,
+        // ignore storybook broken declarations
+        "skipLibCheck": true,
         "paths": {
             "@/*": ["./resources/js/*"]
         },
