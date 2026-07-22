@@ -1,15 +1,17 @@
 import {
+  type DelayMode,
   type HttpHandler,
   type HttpResponseInit,
   type JsonBodyType,
   HttpResponse,
+  delay,
   http
 } from 'msw'
 
-function getBody(props: object = {}): JsonBodyType {
+function getBody(props: object = {}, flash: object = {}): JsonBodyType {
   return {
     component: 'page',
-    flash: {},
+    flash,
     props,
     sharedProps: [],
     url: '/',
@@ -28,19 +30,47 @@ function getInit(status: number = 200): HttpResponseInit {
   }
 }
 
-const responses = [
-  http.get('/', async () => HttpResponse.json(getBody(), getInit())),
-  http.get('/forgot-password', async () =>
-    HttpResponse.json(getBody(), getInit())
-  ),
-  http.post('/login', async () => HttpResponse.json(getBody(), getInit())),
-  http.get('/register', async () => HttpResponse.json(getBody(), getInit()))
+async function makeResponse(options?: {
+  duration?: DelayMode | number
+  props?: object
+  flash?: object
+  status?: number
+}) {
+  await delay(options?.duration ?? 0)
+
+  return HttpResponse.json(
+    getBody(options?.props, options?.flash),
+    getInit(options?.status)
+  )
+}
+
+const handlers = [
+  http.get('/', async () => makeResponse()),
+  http.get('/forgot-password', async () => makeResponse()),
+  http.get('/register', async () => makeResponse())
 ]
 
-export function getResponses(handlers?: HttpHandler[]) {
-  if (handlers) {
-    return [...responses, ...handlers]
+export function getHandlers(extra?: HttpHandler | HttpHandler[]) {
+  if (extra) {
+    if (Array.isArray(extra)) {
+      return [...handlers, ...extra]
+    }
+
+    return [...handlers, extra]
   }
 
-  return responses
+  return handlers
 }
+
+export const loginSuccess = http.post('/login', async () => makeResponse())
+
+export const loginFail = http.post('/login', async () =>
+  makeResponse({
+    duration: 'real',
+    props: {
+      errors: {
+        root: 'These credentials do not match our records.'
+      }
+    }
+  })
+)

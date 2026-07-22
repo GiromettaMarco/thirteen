@@ -3,7 +3,8 @@ import type { Preview, ReactRenderer } from '@storybook/react-vite'
 import { initialize, mswLoader } from 'msw-storybook-addon'
 import DocsWithTheme from './decorators/docs-with-theme'
 import { WithI18next } from './decorators/with-i18next'
-import { getResponses } from './msw'
+import { WithToaster } from './decorators/with-toaster'
+import { getHandlers } from './msw'
 
 import '../resources/css/app.css'
 
@@ -49,7 +50,7 @@ const preview: Preview = {
     },
 
     msw: {
-      handlers: getResponses()
+      handlers: getHandlers()
     }
   },
 
@@ -62,7 +63,8 @@ const preview: Preview = {
       defaultTheme: 'dark'
     }),
 
-    WithI18next
+    WithI18next,
+    WithToaster
   ],
 
   loaders: [mswLoader]
