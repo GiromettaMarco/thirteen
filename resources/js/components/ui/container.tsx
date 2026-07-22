@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@gmcode/react-ui'
 import type { ComponentProps } from 'react'
 
 export function Container({

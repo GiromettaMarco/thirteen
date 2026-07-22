@@ -1,5 +1,4 @@
 import { NameFieldPreset } from '@/components/auth/fields'
-import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
 import {
   Drawer,
@@ -10,13 +9,13 @@ import {
   DrawerHeader,
   DrawerTitle
 } from '@/components/ui/drawer'
-import { Submit } from '@/components/ui/submit'
 import { UpdateDrawerTrigger } from '@/components/update-drawer-trigger'
 import DashboardLayout from '@/layouts/dashboard-layout'
 import { update } from '@/routes/profile'
 import { updateProfileSchema } from '@/schemas/profile'
 import type { Profile } from '@/types'
-import { FancyRadioField, Form, InfoCheckboxField } from '@gmcode/forms'
+import { FancyRadioField, Form, InfoCheckboxField, Submit } from '@gmcode/forms'
+import { Button } from '@gmcode/react-ui'
 import { Head } from '@inertiajs/react'
 import { ChartNoAxesGantt, Code2, Handshake, Palette } from 'lucide-react'
 import { useMemo, useState } from 'react'

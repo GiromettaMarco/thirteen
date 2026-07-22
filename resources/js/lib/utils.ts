@@ -1,9 +1,7 @@
 import type { RawView, View } from '@/types'
-import { type ClassValue, clsx } from 'clsx'
 import type { Locale } from 'date-fns'
 import { format as originalFormat } from 'date-fns'
 import { it } from 'date-fns/locale'
-import { twMerge } from 'tailwind-merge'
 
 /**
  * Default values for a table view.
@@ -39,10 +37,6 @@ export function parseView(view: RawView | null, fallback?: View): View {
   }
 
   return fallback ?? viewDefaults
-}
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
 }
 
 /**

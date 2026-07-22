@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogClose,
@@ -7,10 +6,9 @@ import {
   DialogFooter,
   DialogTitle
 } from '@/components/ui/dialog'
-import { Infobox } from '@/components/ui/infobox'
-import { Submit } from '@/components/ui/submit'
 import type { RouteDefinition } from '@/wayfinder'
-import { Form, Schema, type Method } from '@gmcode/forms'
+import { Form, Schema, Submit, type Method } from '@gmcode/forms'
+import { Button, Infobox } from '@gmcode/react-ui'
 import type { Dispatch, PropsWithChildren, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
 

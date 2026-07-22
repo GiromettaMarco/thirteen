@@ -6,7 +6,6 @@ import {
 import { LabelBadge } from '@/components/tasks/label-badge'
 import { PriorityBadge } from '@/components/tasks/priority-badge'
 import { StatusBadge } from '@/components/tasks/status-badge'
-import { Button } from '@/components/ui/button'
 import TableMain, {
   AfterTable,
   ColumnsVisibility,
@@ -27,6 +26,7 @@ import UseTableStates from '@/hooks/use-table-states'
 import { format } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
 import type { Profile, TaskWithProfile, View, ViewStore } from '@/types'
+import { Button } from '@gmcode/react-ui'
 import {
   getCoreRowModel,
   getFacetedRowModel,

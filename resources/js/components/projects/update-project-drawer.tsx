@@ -1,5 +1,4 @@
 import { CalendarFieldI18n } from '@/components/calendar-field-i18n'
-import { Button } from '@/components/ui/button'
 import {
   Drawer,
   DrawerClose,
@@ -9,13 +8,13 @@ import {
   DrawerHeader,
   DrawerTitle
 } from '@/components/ui/drawer'
-import { Submit } from '@/components/ui/submit'
 import { UpdateDrawerTrigger } from '@/components/update-drawer-trigger'
 import { AppContext } from '@/providers/app-context-provider'
 import { update } from '@/routes/projects'
 import { updateProjectSchema } from '@/schemas/projects'
 import type { Project } from '@/types'
-import { Form, TextareaField, TextField } from '@gmcode/forms'
+import { Form, Submit, TextareaField, TextField } from '@gmcode/forms'
+import { Button } from '@gmcode/react-ui'
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 

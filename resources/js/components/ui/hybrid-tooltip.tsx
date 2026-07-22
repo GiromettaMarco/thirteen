@@ -10,8 +10,8 @@ import {
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
-import { cn } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
+import { cn } from '@gmcode/react-ui'
 import {
   Popover as PopoverPrimitive,
   Tooltip as TooltipPrimitive

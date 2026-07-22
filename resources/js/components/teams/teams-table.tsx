@@ -4,7 +4,6 @@ import {
   AddTeamDrawerTrigger
 } from '@/components/teams/add-team-drawer'
 import UpdateTeamDrawer from '@/components/teams/update-team-drawer'
-import { Button } from '@/components/ui/button'
 import TableMain, {
   ActionsButton,
   AfterTable,
@@ -32,6 +31,7 @@ import { AppContext } from '@/providers/app-context-provider'
 import { update } from '@/routes/current-team'
 import { destroy, show } from '@/routes/teams'
 import type { Team, View, ViewStore, WithTeamPermissions } from '@/types'
+import { Button } from '@gmcode/react-ui'
 import { useForm, usePage } from '@inertiajs/react'
 import type { ColumnDef } from '@tanstack/react-table'
 import {

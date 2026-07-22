@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button'
 import {
   Drawer,
   DrawerClose,
@@ -8,11 +7,11 @@ import {
   DrawerHeader,
   DrawerTitle
 } from '@/components/ui/drawer'
-import { Submit } from '@/components/ui/submit'
 import { AppContext } from '@/providers/app-context-provider'
 import { store } from '@/routes/teams'
 import { createTeamSchema } from '@/schemas/teams'
-import { Form, TextField } from '@gmcode/forms'
+import { Form, Submit, TextField } from '@gmcode/forms'
+import { Button } from '@gmcode/react-ui'
 import { Plus } from 'lucide-react'
 import { useContext, type ComponentProps } from 'react'
 import { useTranslation } from 'react-i18next'

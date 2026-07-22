@@ -1,5 +1,5 @@
 import { Heading } from '@/components/ui/heading'
-import { cn } from '@/lib/utils'
+import { cn } from '@gmcode/react-ui'
 import type { ComponentProps } from 'react'
 
 export function Format({

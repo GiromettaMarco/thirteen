@@ -3,7 +3,6 @@ import {
   EmailFieldPreset,
   PasswordFieldPreset
 } from '@/components/auth/fields'
-import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
 import {
   Dialog,
@@ -15,9 +14,6 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog'
 import { Format } from '@/components/ui/format'
-import { Infobox } from '@/components/ui/infobox'
-import { Separator } from '@/components/ui/separator'
-import { Submit } from '@/components/ui/submit'
 import DashboardLayout from '@/layouts/dashboard-layout'
 import {
   update as accountUpdate,
@@ -28,7 +24,8 @@ import { destroy as destroySessions } from '@/routes/sessions'
 import { updateAccountSchema, updatePasswordSchema } from '@/schemas/account'
 import { passwordConfirmSchema } from '@/schemas/auth'
 import type { Auth, Session } from '@/types'
-import { Form, PasswordField } from '@gmcode/forms'
+import { Form, PasswordField, Submit } from '@gmcode/forms'
+import { Button, Infobox, Separator } from '@gmcode/react-ui'
 import { Head } from '@inertiajs/react'
 import { Monitor, Smartphone } from 'lucide-react'
 import { useState } from 'react'

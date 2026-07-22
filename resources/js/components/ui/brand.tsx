@@ -1,5 +1,5 @@
 import { APP_NAME } from '@/config'
-import { cn } from '@/lib/utils'
+import { cn } from '@gmcode/react-ui'
 import type { ComponentProps, SVGAttributes } from 'react'
 
 function Brand(props: SVGAttributes<SVGElement>) {

@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@gmcode/react-ui'
 import { cva, type VariantProps } from 'class-variance-authority'
 import type { ComponentProps } from 'react'
 

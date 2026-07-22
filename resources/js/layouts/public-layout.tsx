@@ -2,7 +2,6 @@ import { AppearanceSelector } from '@/components/appearance-selector'
 import { LanguageSelector } from '@/components/language-selector'
 import { BrandAndLogo } from '@/components/ui/brand'
 import { GitHub } from '@/components/ui/brand-icons'
-import { Button } from '@/components/ui/button'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,14 +11,13 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu'
-import { Separator } from '@/components/ui/separator'
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
-import { cn } from '@/lib/utils'
 import { dashboard, home } from '@/routes'
+import { Button, cn, Separator } from '@gmcode/react-ui'
 import { Link } from '@inertiajs/react'
 import {
   Circle,

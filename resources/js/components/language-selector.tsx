@@ -1,11 +1,3 @@
-import { Button } from '@/components/ui/button'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select'
 import {
   Tooltip,
   TooltipContent,
@@ -14,6 +6,14 @@ import {
 import { COOKIE_LOCALE } from '@/config'
 import { setClientCookie } from '@/lib/cookie'
 import type { Locale } from '@/types'
+import {
+  Button,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@gmcode/react-ui'
 import type { Callback, TFunction } from 'i18next'
 import { Languages } from 'lucide-react'
 import { type ComponentProps } from 'react'

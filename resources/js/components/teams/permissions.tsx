@@ -1,10 +1,8 @@
-import { Checkbox } from '@/components/ui/checkbox'
-import { Submit } from '@/components/ui/submit'
 import { update } from '@/routes/members'
 import { updateTeamPermissionsSchema } from '@/schemas/teams'
 import type { Profile, TeamPermissions, WithTeamPermissions } from '@/types'
-import { CheckboxField, Form } from '@gmcode/forms'
-import { Field, FieldLabel } from '@gmcode/react-ui'
+import { CheckboxField, Form, Submit } from '@gmcode/forms'
+import { Checkbox, Field, FieldLabel } from '@gmcode/react-ui'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 

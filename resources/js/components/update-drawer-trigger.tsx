@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
 import { DrawerTrigger } from '@/components/ui/drawer'
+import { Button } from '@gmcode/react-ui'
 import { Edit } from 'lucide-react'
 import type { MouseEventHandler } from 'react'
 import { useTranslation } from 'react-i18next'

@@ -3,7 +3,6 @@ import { ProjectsTable } from '@/components/projects/projects-table'
 import { MembersTable } from '@/components/teams/members-table'
 import { Container } from '@/components/ui/container'
 import { Heading } from '@/components/ui/heading'
-import { Separator } from '@/components/ui/separator'
 import DashboardLayout from '@/layouts/dashboard-layout'
 import { parseView } from '@/lib/utils'
 import { dashboard } from '@/routes'
@@ -15,6 +14,7 @@ import type {
   Team,
   WithTeamPermissions
 } from '@/types'
+import { Separator } from '@gmcode/react-ui'
 import { Head } from '@inertiajs/react'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'

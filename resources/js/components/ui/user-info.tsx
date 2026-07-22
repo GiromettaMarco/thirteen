@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { cn } from '@/lib/utils'
+import { cn } from '@gmcode/react-ui'
 import { EllipsisVertical } from 'lucide-react'
 
 export function UserInfo({

@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@gmcode/react-ui'
 import * as React from 'react'
 
 function Table({ className, ...props }: React.ComponentProps<'table'>) {

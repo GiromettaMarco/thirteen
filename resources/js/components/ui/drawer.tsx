@@ -1,5 +1,5 @@
 import { useIsMobile } from '@/hooks/use-mobile'
-import { cn } from '@/lib/utils'
+import { cn } from '@gmcode/react-ui'
 import * as React from 'react'
 import { Drawer as DrawerPrimitive } from 'vaul'
 

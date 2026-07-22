@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@gmcode/react-ui'
 import { Avatar as AvatarPrimitive } from 'radix-ui'
 import * as React from 'react'
 

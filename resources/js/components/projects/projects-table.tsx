@@ -5,7 +5,6 @@ import {
 } from '@/components/projects/add-project-drawer'
 import { ProjectDeadline } from '@/components/projects/project-deadline'
 import { UpdateProjectDrawer } from '@/components/projects/update-project-drawer'
-import { Button } from '@/components/ui/button'
 import TableMain, {
   AfterTable,
   ColumnsVisibility,
@@ -34,6 +33,7 @@ import { format } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
 import { destroy, show } from '@/routes/projects'
 import type { Project, View, ViewStore } from '@/types'
+import { Button } from '@gmcode/react-ui'
 import type { ColumnDef } from '@tanstack/react-table'
 import {
   getCoreRowModel,

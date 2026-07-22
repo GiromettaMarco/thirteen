@@ -1,5 +1,5 @@
-import { Checkbox } from '@/components/ui/checkbox'
 import {
+  Checkbox,
   Field,
   FieldDescription,
   FieldGroup,

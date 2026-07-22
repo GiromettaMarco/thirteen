@@ -1,4 +1,5 @@
-import { cn, format } from '@/lib/utils'
+import { format } from '@/lib/utils'
+import { cn } from '@gmcode/react-ui'
 import { differenceInCalendarDays } from 'date-fns'
 import { useTranslation } from 'react-i18next'
 

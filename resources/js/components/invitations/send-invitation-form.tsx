@@ -1,9 +1,8 @@
-import { Submit } from '@/components/ui/submit'
 import { MultipleCheckboxField } from '@/components/uncontrolled-inputs'
 import { store } from '@/routes/invitations'
 import { createInvitationSchema } from '@/schemas/invitations'
 import type { Team } from '@/types'
-import { EmailField, Form, SelectField, TextField } from '@gmcode/forms'
+import { EmailField, Form, SelectField, Submit, TextField } from '@gmcode/forms'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 

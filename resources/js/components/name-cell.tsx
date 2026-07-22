@@ -1,5 +1,4 @@
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { Button, cn } from '@gmcode/react-ui'
 import type { UrlMethodPair } from '@inertiajs/core'
 import { Link } from '@inertiajs/react'
 

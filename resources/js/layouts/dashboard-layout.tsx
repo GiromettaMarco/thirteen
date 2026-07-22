@@ -1,7 +1,6 @@
 import { Breadcrumbs, type BreadcrumbLink } from '@/components/breadcrumbs'
 import { Logo } from '@/components/ui/brand'
 import { GitHub } from '@/components/ui/brand-icons'
-import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +10,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-import { Separator } from '@/components/ui/separator'
 import {
   Sidebar,
   SidebarContent,
@@ -29,7 +27,6 @@ import {
   useSidebar
 } from '@/components/ui/sidebar'
 import { UserInfo } from '@/components/ui/user-info'
-import { cn } from '@/lib/utils'
 import { dashboard, home, logout, settings } from '@/routes'
 import { edit as accountEdit } from '@/routes/account'
 import { index as invitationsIndex } from '@/routes/invitations'
@@ -38,6 +35,7 @@ import { index as projectsIndex } from '@/routes/projects'
 import { index as teamsIndex, show as teamsShow } from '@/routes/teams'
 import type { Permissions } from '@/types'
 import type { RouteDefinition } from '@/wayfinder'
+import { Button, cn, Separator } from '@gmcode/react-ui'
 import { Link, usePage } from '@inertiajs/react'
 import {
   CircleUser,

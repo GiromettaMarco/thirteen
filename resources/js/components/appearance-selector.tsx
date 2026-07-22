@@ -1,11 +1,3 @@
-import { Button } from '@/components/ui/button'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select'
 import {
   Tooltip,
   TooltipContent,
@@ -14,6 +6,14 @@ import {
 import { isAppearance } from '@/lib/appearance'
 import { AppearanceContext } from '@/providers/appearance-provider'
 import type { Appearance } from '@/types'
+import {
+  Button,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@gmcode/react-ui'
 import { Moon, Sun, type LucideIcon } from 'lucide-react'
 import { useContext, type ComponentProps, type SVGAttributes } from 'react'
 import { useTranslation } from 'react-i18next'
