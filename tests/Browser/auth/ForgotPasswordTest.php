@@ -6,7 +6,7 @@ it('may accept a forgot password submission')
     ->mobile()
     ->assertSee('Forgot password')
     ->fill('email', 'test@example.com')
-    ->click('Send password reset link')
+    ->pressAndWaitFor('Send password reset link', 1)
     ->assertSee('A reset link will be sent if the account exists.');
 
 it('may validate and throttle forgot password submissions')
