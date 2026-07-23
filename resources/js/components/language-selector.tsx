@@ -1,12 +1,4 @@
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger
-} from '@/components/ui/tooltip'
-import { COOKIE_LOCALE } from '@/config'
-import { setClientCookie } from '@/lib/cookie'
-import type { Locale } from '@/types'
-import {
   Button,
   Select,
   SelectContent,
@@ -14,18 +6,23 @@ import {
   SelectTrigger,
   SelectValue
 } from '@gmcode/react-ui'
-import type { Callback, TFunction } from 'i18next'
+import type { i18n } from 'i18next'
 import { Languages } from 'lucide-react'
 import { type ComponentProps } from 'react'
 import { useTranslation } from 'react-i18next'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger
+} from '@/components/ui/tooltip'
+import { COOKIE_LOCALE } from '@/config'
+import { setClientCookie } from '@/lib/cookie'
+import type { Locale } from '@/types'
 
-function changeLocale(
-  changeLanguage: (lng?: string, callback?: Callback) => Promise<TFunction>,
-  locale: Locale
-) {
-  changeLanguage(locale)
-
-  setClientCookie(COOKIE_LOCALE, locale)
+async function changeLocale(i18n: i18n, locale: Locale) {
+  await i18n
+    .changeLanguage(locale)
+    .then(() => setClientCookie(COOKIE_LOCALE, locale))
 }
 
 export function LanguageSelector({
@@ -36,15 +33,15 @@ export function LanguageSelector({
   // i18n
   const { i18n, t } = useTranslation()
 
-  function languageSwitch() {
+  async function languageSwitch() {
     switch (i18n.language) {
       case 'en':
-        changeLocale(i18n.changeLanguage, 'it')
+        await changeLocale(i18n, 'it')
         break
 
       case 'it':
       default:
-        changeLocale(i18n.changeLanguage, 'en')
+        await changeLocale(i18n, 'en')
         break
     }
   }
@@ -53,9 +50,9 @@ export function LanguageSelector({
     <Tooltip>
       <TooltipTrigger asChild>
         <Button
-          variant={variant}
-          size="icon"
           onClick={languageSwitch}
+          size="icon"
+          variant={variant}
         >
           <span className="uppercase">{i18n.language}</span>
           <span className="sr-only">{t(($) => $.language.change)}</span>
@@ -77,13 +74,13 @@ export function LanguageSelect(props: ComponentProps<'div'>) {
     it: 'Italiano - IT'
   }
 
-  const tabs: { value: Locale; label: string }[] = [
-    { value: 'en', label: langs['en'] },
-    { value: 'it', label: langs['it'] }
+  const tabs: { label: string; value: Locale }[] = [
+    { label: langs['en'], value: 'en' },
+    { label: langs['it'], value: 'it' }
   ]
 
-  function onValueChange(value: Locale) {
-    changeLocale(i18n.changeLanguage, value)
+  async function onValueChange(value: Locale) {
+    await changeLocale(i18n, value)
   }
 
   return (
@@ -105,7 +102,7 @@ export function LanguageSelect(props: ComponentProps<'div'>) {
         </SelectTrigger>
 
         <SelectContent>
-          {tabs.map(({ value, label }) => (
+          {tabs.map(({ label, value }) => (
             <SelectItem
               key={value}
               value={value}
