@@ -1,34 +1,34 @@
-import { email, name } from '@/schemas/misc'
 import {
   InputCheckboxRule,
   InputTextRule,
   Message,
   Schema
 } from '@gmcode/forms'
+import { email, name } from '@/schemas/misc'
 
 //#region Fields
 export const current_password = new InputTextRule({
-  minChars: 8,
   messages: {
     minChars: 'password.length',
     required: 'currentPassword.required'
-  }
+  },
+  minChars: 8
 })
 
 export const password = new InputTextRule({
-  minChars: 8,
   messages: {
     minChars: 'password.length',
     required: 'password.required'
-  }
+  },
+  minChars: 8
 })
 
 export const password_confirmation = new InputTextRule({
-  minChars: 8,
   messages: {
     minChars: 'password.length',
     required: 'confirmPassword.required'
-  }
+  },
+  minChars: 8
 })
 
 //#region Post Validation

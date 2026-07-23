@@ -23,19 +23,6 @@ import {
 } from '@/components/ui/popover'
 
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from '@/components/ui/table'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger
-} from '@/components/ui/tooltip'
-import {
   Button,
   Checkbox,
   cn,
@@ -72,6 +59,19 @@ import {
 } from 'lucide-react'
 import type { ComponentProps, PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from '@/components/ui/table'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger
+} from '@/components/ui/tooltip'
 
 //#region SelectionMonitor
 export function SelectionMonitor<TData>({
@@ -153,22 +153,22 @@ export function TablePagination<TData>({
     <div className={cn('flex w-full items-center gap-8 lg:w-fit', className)}>
       <div className="hidden items-center gap-2 lg:flex">
         <Label
-          htmlFor="rows-per-page"
           className="text-sm font-medium"
+          htmlFor="rows-per-page"
         >
           {t(($) => $.table.rowsPerPage)}
         </Label>
 
         <Select
-          value={`${table.getState().pagination.pageSize}`}
           onValueChange={(value) => {
             table.setPageSize(Number(value))
           }}
+          value={`${table.getState().pagination.pageSize}`}
         >
           <SelectTrigger
-            size="sm"
             className="w-20"
             id="rows-per-page"
+            size="sm"
           >
             <SelectValue placeholder={table.getState().pagination.pageSize} />
           </SelectTrigger>
@@ -195,43 +195,43 @@ export function TablePagination<TData>({
 
       <div className="ml-auto flex items-center gap-2 lg:ml-0">
         <Button
-          variant="outline"
           className="hidden h-8 w-8 p-0 lg:flex"
-          onClick={() => table.setPageIndex(0)}
           disabled={!table.getCanPreviousPage()}
+          onClick={() => table.setPageIndex(0)}
+          variant="outline"
         >
           <span className="sr-only">{t(($) => $.table.goToFirst)}</span>
           <ChevronsLeft />
         </Button>
 
         <Button
-          variant="outline"
           className="size-8"
-          size="icon"
-          onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
+          onClick={() => table.previousPage()}
+          size="icon"
+          variant="outline"
         >
           <span className="sr-only">{t(($) => $.table.goToPrevious)}</span>
           <ChevronLeft />
         </Button>
 
         <Button
-          variant="outline"
           className="size-8"
-          size="icon"
-          onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
+          onClick={() => table.nextPage()}
+          size="icon"
+          variant="outline"
         >
           <span className="sr-only">{t(($) => $.table.goToNext)}</span>
           <ChevronRight />
         </Button>
 
         <Button
-          variant="outline"
           className="hidden size-8 lg:flex"
-          size="icon"
-          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
           disabled={!table.getCanNextPage()}
+          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+          size="icon"
+          variant="outline"
         >
           <span className="sr-only">{t(($) => $.table.goToLast)}</span>
           <ChevronsRight />
@@ -356,8 +356,8 @@ export function ColumnsVisibility<TData>({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="outline"
           size="sm"
+          variant="outline"
         >
           <Columns2 />
           <span>{t(($) => $.table.columns)}</span>
@@ -378,8 +378,8 @@ export function ColumnsVisibility<TData>({
           .map((column) => {
             return (
               <DropdownMenuCheckboxItem
-                key={column.id}
                 checked={column.getIsVisible()}
+                key={column.id}
                 onCheckedChange={(value) => column.toggleVisibility(!!value)}
               >
                 {labels ? (labels[column.id] ?? column.id) : column.id}
@@ -394,18 +394,18 @@ export function ColumnsVisibility<TData>({
 //#region FacetedFilter
 interface FacetedFilterProps<TData, TValue> {
   column?: Column<TData, TValue>
-  title?: string
   options: {
+    icon?: React.ComponentType<{ className?: string }>
     label: string
     value: string
-    icon?: React.ComponentType<{ className?: string }>
   }[]
+  title?: string
 }
 
 export function FacetedFilter<TData, TValue>({
   column,
-  title,
-  options
+  options,
+  title
 }: FacetedFilterProps<TData, TValue>) {
   // i18n
   const { t } = useTranslation()
@@ -418,9 +418,9 @@ export function FacetedFilter<TData, TValue>({
       <Popover>
         <PopoverTrigger asChild>
           <Button
-            variant="outline"
-            size="sm"
             className="h-8"
+            size="sm"
+            variant="outline"
           >
             <PlusCircle />
 
@@ -429,13 +429,13 @@ export function FacetedFilter<TData, TValue>({
             {selectedValues?.size > 0 && (
               <>
                 <Separator
-                  orientation="vertical"
                   className="mx-2 h-4"
+                  orientation="vertical"
                 />
 
                 <Badge
-                  variant="secondary"
                   className="rounded-sm px-1 font-normal 2xl:hidden"
+                  variant="secondary"
                 >
                   {selectedValues.size}
                 </Badge>
@@ -443,8 +443,8 @@ export function FacetedFilter<TData, TValue>({
                 <div className="hidden space-x-1 2xl:flex">
                   {selectedValues.size > 2 ? (
                     <Badge
-                      variant="secondary"
                       className="rounded-sm px-1 font-normal"
+                      variant="secondary"
                     >
                       {t(($) => $.table.filterSelected, {
                         count: selectedValues.size
@@ -455,9 +455,9 @@ export function FacetedFilter<TData, TValue>({
                       .filter((option) => selectedValues.has(option.value))
                       .map((option) => (
                         <Badge
-                          variant="secondary"
-                          key={option.value ?? 'none'}
                           className="rounded-sm px-1 font-normal"
+                          key={option.value ?? 'none'}
+                          variant="secondary"
                         >
                           {option.label}
                         </Badge>
@@ -470,8 +470,8 @@ export function FacetedFilter<TData, TValue>({
         </PopoverTrigger>
 
         <PopoverContent
-          className="w-50 p-0"
           align="start"
+          className="w-50 p-0"
         >
           <Command>
             <CommandInput placeholder={title} />
@@ -532,8 +532,8 @@ export function FacetedFilter<TData, TValue>({
 
                   <CommandGroup>
                     <CommandItem
-                      onSelect={() => column?.setFilterValue(undefined)}
                       className="justify-center text-center"
+                      onSelect={() => column?.setFilterValue(undefined)}
                     >
                       {t(($) => $.table.clearFilters)}
                     </CommandItem>
@@ -689,8 +689,8 @@ export default function TableMain<TData>({
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
-                key={row.id}
                 data-state={row.getIsSelected() && 'selected'}
+                key={row.id}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
@@ -702,8 +702,8 @@ export default function TableMain<TData>({
           ) : (
             <TableRow>
               <TableCell
-                colSpan={table.getAllColumns().length}
                 className="h-24 text-center"
+                colSpan={table.getAllColumns().length}
               >
                 {t(($) => $.table.noResults)}
               </TableCell>
@@ -732,13 +732,13 @@ export function SelectHeader<T extends object>({
 
   return (
     <Checkbox
+      aria-label={t(($) => $.table.selectAll)}
       checked={
         table.getIsAllPageRowsSelected() ||
         (table.getIsSomePageRowsSelected() && 'indeterminate')
       }
       className="translate-y-0.5"
       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-      aria-label={t(($) => $.table.selectAll)}
     />
   )
 }
@@ -755,10 +755,10 @@ export function SelectCell<T extends object>({ row }: { row: Row<T> }) {
 
   return (
     <Checkbox
+      aria-label={t(($) => $.table.selectRow)}
       checked={row.getIsSelected()}
       className="translate-y-0.5"
       onCheckedChange={(value) => row.toggleSelected(!!value)}
-      aria-label={t(($) => $.table.selectRow)}
     />
   )
 }
@@ -806,12 +806,12 @@ export function TableToolbar<TData>({
   return (
     <div className={cn('grid items-center gap-2 xl:flex', className)}>
       <Input
-        placeholder={t(($) => $.table.searchByName)}
-        value={(table.getColumn(columnId)?.getFilterValue() as string) ?? ''}
+        className="h-8 w-full 2xl:w-64"
         onChange={(event) =>
           table.getColumn(columnId)?.setFilterValue(event.target.value)
         }
-        className="h-8 w-full 2xl:w-64"
+        placeholder={t(($) => $.table.searchByName)}
+        value={(table.getColumn(columnId)?.getFilterValue() as string) ?? ''}
       />
 
       {(isFiltered || children) && (
@@ -820,9 +820,9 @@ export function TableToolbar<TData>({
 
           {isFiltered && (
             <Button
-              variant="ghost"
-              onClick={() => table.resetColumnFilters()}
               className="h-8 px-2 lg:px-3"
+              onClick={() => table.resetColumnFilters()}
+              variant="ghost"
             >
               {t(($) => $.reset)}
               <X />

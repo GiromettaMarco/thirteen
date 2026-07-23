@@ -1,16 +1,16 @@
-import { Heading } from '@/components/ui/heading'
 import { cn } from '@gmcode/react-ui'
 import type { ComponentProps } from 'react'
+import { Heading } from '@/components/ui/heading'
 
 export function Format({
   children,
   className,
-  p,
   h2,
+  p,
   ...props
 }: ComponentProps<'div'> & {
-  p?: string
   h2: string
+  p?: string
 }) {
   return (
     <section
@@ -22,8 +22,8 @@ export function Format({
     >
       <Heading
         className="lg:col-span-3 2xl:col-start-2"
-        p={p}
         h={h2}
+        p={p}
         variant="small"
       />
 

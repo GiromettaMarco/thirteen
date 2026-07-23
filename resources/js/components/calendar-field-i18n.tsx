@@ -1,8 +1,8 @@
-import { dateLocales } from '@/lib/utils'
 import { CalendarField } from '@gmcode/forms'
 import type { ComponentProps } from 'react'
 import type { FieldValues } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { dateLocales } from '@/lib/utils'
 
 export function CalendarFieldI18n<
   TFieldValues extends FieldValues = FieldValues

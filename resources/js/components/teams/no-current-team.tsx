@@ -1,3 +1,8 @@
+import { Button } from '@gmcode/react-ui'
+import { Link } from '@inertiajs/react'
+import { UserStar } from 'lucide-react'
+import { useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   Empty,
   EmptyContent,
@@ -8,11 +13,6 @@ import {
 } from '@/components/ui/empty'
 import { AppContext } from '@/providers/app-context-provider'
 import { index } from '@/routes/teams'
-import { Button } from '@gmcode/react-ui'
-import { Link } from '@inertiajs/react'
-import { UserStar } from 'lucide-react'
-import { useContext } from 'react'
-import { useTranslation } from 'react-i18next'
 
 export function NoCurrentTeam() {
   // i18n

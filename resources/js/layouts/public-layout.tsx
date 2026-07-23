@@ -1,3 +1,21 @@
+import { Button, cn, Separator } from '@gmcode/react-ui'
+import { Link } from '@inertiajs/react'
+import {
+  Circle,
+  CircleCheck,
+  CircleHelp,
+  Menu,
+  UserRound,
+  X
+} from 'lucide-react'
+import {
+  useEffect,
+  useState,
+  type Dispatch,
+  type PropsWithChildren,
+  type SetStateAction
+} from 'react'
+import { useTranslation } from 'react-i18next'
 import { AppearanceSelector } from '@/components/appearance-selector'
 import { LanguageSelector } from '@/components/language-selector'
 import { BrandAndLogo } from '@/components/ui/brand'
@@ -17,24 +35,6 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 import { dashboard, home } from '@/routes'
-import { Button, cn, Separator } from '@gmcode/react-ui'
-import { Link } from '@inertiajs/react'
-import {
-  Circle,
-  CircleCheck,
-  CircleHelp,
-  Menu,
-  UserRound,
-  X
-} from 'lucide-react'
-import {
-  useEffect,
-  useState,
-  type Dispatch,
-  type PropsWithChildren,
-  type SetStateAction
-} from 'react'
-import { useTranslation } from 'react-i18next'
 
 const PUBLIC_MOBILE_MENU_BREAKPOINT = 1024
 
@@ -59,14 +59,14 @@ function MobileMenu({
       <div className="flex justify-between">
         <Link href={home()}>
           <BrandAndLogo
-            className="flex flex-initial items-center gap-4"
             brandClassName="size-10"
+            className="flex flex-initial items-center gap-4"
           />
         </Link>
 
         <Button
-          variant="ghost"
           onClick={() => setOpen(false)}
+          variant="ghost"
         >
           <X />
         </Button>
@@ -310,8 +310,8 @@ function PublicMenu() {
               <li>
                 <NavigationMenuLink asChild>
                   <Link
-                    href="#"
                     className="flex-row items-center gap-2"
+                    href="#"
                   >
                     <CircleHelp />
                     Backlog
@@ -319,8 +319,8 @@ function PublicMenu() {
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
                   <Link
-                    href="#"
                     className="flex-row items-center gap-2"
+                    href="#"
                   >
                     <Circle />
                     TODO
@@ -328,8 +328,8 @@ function PublicMenu() {
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
                   <Link
-                    href="#"
                     className="flex-row items-center gap-2"
+                    href="#"
                   >
                     <CircleCheck />
                     Done
@@ -355,7 +355,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
 
   // Prevent scroll when the mobile menu is open
   useEffect(() => {
-    if (typeof document !== undefined) {
+    if (typeof document !== 'undefined') {
       document.body.classList.toggle('overflow-hidden', open)
     }
   }, [open])
@@ -368,7 +368,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
       }
     }
 
-    if (typeof window !== undefined) {
+    if (typeof window !== 'undefined') {
       window.addEventListener('resize', closeIfDesktop)
       return () => window.removeEventListener('resize', closeIfDesktop)
     }

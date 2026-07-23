@@ -1,16 +1,16 @@
 import {
+  createContext,
+  useEffect,
+  useState,
+  type PropsWithChildren
+} from 'react'
+import {
   appearanceMediaQuery,
   applyTheme,
   getThemeFromAppearance,
   setAppearanceCookie
 } from '@/lib/appearance'
 import type { Appearance, Theme } from '@/types'
-import {
-  createContext,
-  useEffect,
-  useState,
-  type PropsWithChildren
-} from 'react'
 
 export const AppearanceContext = createContext<{
   appearance: Appearance

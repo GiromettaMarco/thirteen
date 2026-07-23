@@ -28,6 +28,7 @@ export interface Permissions {
 }
 
 export interface AuthUser extends WithTimestamps {
+  [key: string]: unknown // This allows for additional properties...
   avatar?: string
   current_team_id: number
   email: string
@@ -35,7 +36,6 @@ export interface AuthUser extends WithTimestamps {
   id: number
   name: string
   profile_id: number
-  [key: string]: unknown // This allows for additional properties...
 }
 
 export interface Auth<TWithUser extends boolean = false> {
@@ -45,9 +45,9 @@ export interface Auth<TWithUser extends boolean = false> {
 }
 
 export interface FlashMessage {
-  title: string
   description?: string | null
   level?: 'success' | 'info' | 'warning' | 'error' | null
+  title: string
 }
 
 //#region Dashboard

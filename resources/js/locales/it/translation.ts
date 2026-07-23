@@ -6,9 +6,9 @@ export default {
     change: 'Cambia aspetto',
     dark: 'Scuro',
     light: 'Chiaro',
-    theme: 'Tema',
     select: 'Select appearance',
-    system: 'Sistema'
+    system: 'Sistema',
+    theme: 'Tema'
   },
   auth: {
     confirmPassword: 'Conferma password',
@@ -96,8 +96,8 @@ export default {
       verifyEmail: {
         h1: 'Verifica la tua email',
         p: 'Verifica il tuo indirizzo email cliccando sul link che ti abbiamo appena inviato.',
-        title: 'Verifica email',
-        submit: "Invia nuovamente l'email di verifica"
+        submit: "Invia nuovamente l'email di verifica",
+        title: 'Verifica email'
       }
     },
     dashboard: {
@@ -224,12 +224,12 @@ export default {
     createInstructions: 'Inizia un nuovo progetto.',
     createProject: 'Crea Progetto',
     deadline: 'Deadline',
-    deadlineIn_zero: 'Deadline oggi',
-    deadlineIn_one: 'Deadline domani',
-    deadlineIn_other: 'Deadline in {{count}} giorni',
-    deadlineBy_zero: 'Deadline oggi',
     deadlineBy_one: 'Deadline scaduta ieri',
     deadlineBy_other: 'Deadline scaduta {{count}} giorni fa',
+    deadlineBy_zero: 'Deadline oggi',
+    deadlineIn_one: 'Deadline domani',
+    deadlineIn_other: 'Deadline in {{count}} giorni',
+    deadlineIn_zero: 'Deadline oggi',
     defaultName: 'Nuovo progetto',
     deleteDesc: 'Stai per cancellare il progetto "{{project}}".',
     deleteTitle: 'Sei sicuro di voler eliminare il progetto?',
@@ -316,12 +316,12 @@ export default {
     },
     namePlaceholder: 'Nome del compito',
     newTask: 'New task',
-    priority: 'Priorità',
     priorities: {
       high: 'Alta',
       low: 'Bassa',
       medium: 'Media'
     },
+    priority: 'Priorità',
     selectLabel: 'Seleziona una etichetta',
     selectPriority: 'Seleziona una priorità',
     selectStatus: 'Seleziona uno stato',
@@ -340,8 +340,8 @@ export default {
   team_other: 'Teams',
   teamPermissions: {
     admin: 'Amministratore',
-    canEdit: 'Può modificare il team',
     canDelete: 'Può cancellare il team',
+    canEdit: 'Può modificare il team',
     canEditMembers: 'Può modificare i membri del team',
     canEditProjects: 'Può modificare progetti e compiti correlati'
   },

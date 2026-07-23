@@ -1,6 +1,6 @@
+import { useTranslation } from 'react-i18next'
 import { Badge } from '@/components/ui/badge'
 import type { TaskLabel } from '@/types'
-import { useTranslation } from 'react-i18next'
 
 export function LabelName({ label }: { label: TaskLabel }) {
   // i18n
@@ -26,8 +26,8 @@ export function LabelBadge({ label }: { label: TaskLabel | 'none' }) {
     <div className="w-32">
       {label !== 'none' && (
         <Badge
-          variant="outline"
           className="px-1.5 text-muted-foreground"
+          variant="outline"
         >
           <LabelName label={label} />
         </Badge>

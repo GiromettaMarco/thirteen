@@ -78,8 +78,8 @@ export function MultipleCheckboxField({
               value={item.value}
             />
             <FieldLabel
-              htmlFor={item.id ?? `item-${index}`}
               className="flex font-normal"
+              htmlFor={item.id ?? `item-${index}`}
             >
               {item.Icon && <item.Icon />}
               {item.label}

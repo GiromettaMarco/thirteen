@@ -1,13 +1,13 @@
-import { APP_NAME } from '@/config'
 import { cn } from '@gmcode/react-ui'
 import type { ComponentProps, SVGAttributes } from 'react'
+import { APP_NAME } from '@/config'
 
 function Brand(props: SVGAttributes<SVGElement>) {
   return (
     <svg
       {...props}
-      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path
         className="fill-foreground"

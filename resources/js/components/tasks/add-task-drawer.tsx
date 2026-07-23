@@ -1,17 +1,4 @@
 import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle
-} from '@/components/ui/drawer'
-import { AppContext } from '@/providers/app-context-provider'
-import { store } from '@/routes/tasks'
-import { createTaskSchema } from '@/schemas/tasks'
-import type { Profile } from '@/types'
-import {
   Form,
   NullableSelectField,
   SelectField,
@@ -24,6 +11,19 @@ import { Button } from '@gmcode/react-ui'
 import { Plus } from 'lucide-react'
 import { useContext, useMemo, type ComponentProps } from 'react'
 import { useTranslation } from 'react-i18next'
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle
+} from '@/components/ui/drawer'
+import { AppContext } from '@/providers/app-context-provider'
+import { store } from '@/routes/tasks'
+import { createTaskSchema } from '@/schemas/tasks'
+import type { Profile } from '@/types'
 
 export function AddTaskDrawerTrigger(props: ComponentProps<typeof Button>) {
   // i18n
@@ -159,9 +159,9 @@ export function AddTaskDrawer({
                   inputId="task-label"
                   inputName="label"
                   label={t(($) => $.tasks.label)}
+                  options={labelOptions}
                   placeholder={t(($) => $.tasks.selectLabel)}
                   setValue={form.setValue}
-                  options={labelOptions}
                 />
 
                 <div className="grid grid-cols-2 gap-4">
@@ -170,8 +170,8 @@ export function AddTaskDrawer({
                     inputId="task-priority"
                     inputName="priority"
                     label={t(($) => $.tasks.priority)}
-                    placeholder={t(($) => $.tasks.selectPriority)}
                     options={priorityOptions}
+                    placeholder={t(($) => $.tasks.selectPriority)}
                   />
 
                   <SelectField
@@ -179,8 +179,8 @@ export function AddTaskDrawer({
                     inputId="task-status"
                     inputName="status"
                     label={t(($) => $.tasks.status)}
-                    placeholder={t(($) => $.tasks.selectStatus)}
                     options={statusOptions}
+                    placeholder={t(($) => $.tasks.selectStatus)}
                   />
                 </div>
 
@@ -189,9 +189,9 @@ export function AddTaskDrawer({
                   inputId="task-profile"
                   inputName="profile_id"
                   label={t(($) => $.tasks.assignedTo)}
+                  options={assignedToOptions}
                   placeholder={t(($) => $.tasks.assignToMember)}
                   setValue={form.setValue}
-                  options={assignedToOptions}
                 />
               </div>
 

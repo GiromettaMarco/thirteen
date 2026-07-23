@@ -1,6 +1,6 @@
-import DashboardLayout from '@/layouts/dashboard-layout'
 import { Head } from '@inertiajs/react'
 import { useTranslation } from 'react-i18next'
+import DashboardLayout from '@/layouts/dashboard-layout'
 
 export default function Dashboard() {
   // i18n

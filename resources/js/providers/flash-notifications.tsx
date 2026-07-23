@@ -1,8 +1,8 @@
-import { AppearanceContext } from '@/providers/appearance-provider'
 import { flash, Toaster } from '@gmcode/react-ui'
 import { router } from '@inertiajs/react'
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { AppearanceContext } from '@/providers/appearance-provider'
 
 export default function FlashNotifications() {
   // i18n
@@ -20,9 +20,9 @@ export default function FlashNotifications() {
 
   return (
     <Toaster
-      position="bottom-center"
       closeButton={true}
       containerAriaLabel={t(($) => $.notifications)}
+      position="bottom-center"
       theme={theme}
       toastOptions={{
         closeButtonAriaLabel: t(($) => $.close)

@@ -1,3 +1,6 @@
+import { Form, HiddenField, Submit } from '@gmcode/forms'
+import { Head } from '@inertiajs/react'
+import { useTranslation } from 'react-i18next'
 import {
   ConfirmPasswordFieldPreset,
   PasswordFieldPreset
@@ -5,9 +8,6 @@ import {
 import AuthLayout from '@/layouts/auth-layout'
 import { store } from '@/routes/password'
 import { resetPasswordSchema } from '@/schemas/auth'
-import { Form, HiddenField, Submit } from '@gmcode/forms'
-import { Head } from '@inertiajs/react'
-import { useTranslation } from 'react-i18next'
 
 export default function ResetPassword({
   email,

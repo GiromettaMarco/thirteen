@@ -1,3 +1,9 @@
+import { Form, PasswordField, Submit } from '@gmcode/forms'
+import { Button, Infobox, Separator } from '@gmcode/react-ui'
+import { Head } from '@inertiajs/react'
+import { Monitor, Smartphone } from 'lucide-react'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   ConfirmPasswordFieldPreset,
   EmailFieldPreset,
@@ -24,12 +30,6 @@ import { destroy as destroySessions } from '@/routes/sessions'
 import { updateAccountSchema, updatePasswordSchema } from '@/schemas/account'
 import { passwordConfirmSchema } from '@/schemas/auth'
 import type { Auth, Session } from '@/types'
-import { Form, PasswordField, Submit } from '@gmcode/forms'
-import { Button, Infobox, Separator } from '@gmcode/react-ui'
-import { Head } from '@inertiajs/react'
-import { Monitor, Smartphone } from 'lucide-react'
-import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
 
 //#region ManageSessions
 function ManageSessions({ sessions }: { sessions: Session[] }) {
@@ -82,8 +82,8 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
         ))}
 
         <Dialog
-          open={open}
           onOpenChange={setOpen}
+          open={open}
         >
           <DialogTrigger asChild>
             <Button variant="destructive">

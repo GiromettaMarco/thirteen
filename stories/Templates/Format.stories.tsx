@@ -1,5 +1,5 @@
-import { Format } from '@/components/ui/format'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Format } from '@/components/ui/format'
 
 const meta = {
   component: Format,
@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     children: (
-      <div className="text-sm space-y-2">
+      <div className="space-y-2 text-sm">
         <p>
           If necessary, you may log out of all of your other browser sessions
           across all of your devices. This list may not be exhaustive. If you

@@ -1,8 +1,8 @@
-import { Brand } from '@/components/ui/brand'
-import { home } from '@/routes'
 import { Link } from '@inertiajs/react'
 import { type PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Brand } from '@/components/ui/brand'
+import { home } from '@/routes'
 
 export default function AuthLayout({
   children,
@@ -21,9 +21,9 @@ export default function AuthLayout({
         <div className="flex flex-col items-center">
           <div className="w-full text-center">
             <Link
-              href={home.url()}
-              className="inline-block"
               aria-label={t(($) => $.homepage)}
+              className="inline-block"
+              href={home.url()}
             >
               <Brand className="size-16" />
             </Link>

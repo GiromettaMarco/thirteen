@@ -5,6 +5,7 @@ import {
 import type { ReactRenderer } from '@storybook/react-vite'
 import type { PropsWithChildren } from 'react'
 import { themes } from 'storybook/theming'
+import type { Theme } from '@/types'
 
 export default function DocsWithTheme({
   children,

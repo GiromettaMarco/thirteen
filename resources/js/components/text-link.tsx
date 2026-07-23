@@ -3,8 +3,8 @@ import { Link } from '@inertiajs/react'
 import type { ComponentProps } from 'react'
 
 export function TextLink({
-  className = '',
   children,
+  className = '',
   ...props
 }: ComponentProps<typeof Link>) {
   return (

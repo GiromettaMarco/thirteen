@@ -1,10 +1,10 @@
+import { Head } from '@inertiajs/react'
+import { useTranslation } from 'react-i18next'
 import { TeamsTable } from '@/components/teams/teams-table'
 import { Container } from '@/components/ui/container'
 import DashboardLayout from '@/layouts/dashboard-layout'
 import { parseView } from '@/lib/utils'
 import type { RawView, Team, WithTeamPermissions } from '@/types'
-import { Head } from '@inertiajs/react'
-import { useTranslation } from 'react-i18next'
 
 export default function TeamsIndex({
   teams,

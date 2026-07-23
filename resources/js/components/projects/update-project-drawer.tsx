@@ -1,3 +1,7 @@
+import { Form, Submit, TextareaField, TextField } from '@gmcode/forms'
+import { Button } from '@gmcode/react-ui'
+import { useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 import { CalendarFieldI18n } from '@/components/calendar-field-i18n'
 import {
   Drawer,
@@ -13,10 +17,6 @@ import { AppContext } from '@/providers/app-context-provider'
 import { update } from '@/routes/projects'
 import { updateProjectSchema } from '@/schemas/projects'
 import type { Project } from '@/types'
-import { Form, Submit, TextareaField, TextField } from '@gmcode/forms'
-import { Button } from '@gmcode/react-ui'
-import { useContext } from 'react'
-import { useTranslation } from 'react-i18next'
 
 export function UpdateProjectDrawer({
   project: singleResource

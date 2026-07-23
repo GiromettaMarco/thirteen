@@ -1,10 +1,10 @@
+import { Form, Submit } from '@gmcode/forms'
+import { Head } from '@inertiajs/react'
+import { useTranslation } from 'react-i18next'
 import { store } from '@/actions/App/Http/Controllers/Auth/ConfirmablePasswordController'
 import { PasswordFieldPreset } from '@/components/auth/fields'
 import AuthLayout from '@/layouts/auth-layout'
 import { passwordConfirmSchema } from '@/schemas/auth'
-import { Form, Submit } from '@gmcode/forms'
-import { Head } from '@inertiajs/react'
-import { useTranslation } from 'react-i18next'
 
 export default function ConfirmPassword() {
   // i18n

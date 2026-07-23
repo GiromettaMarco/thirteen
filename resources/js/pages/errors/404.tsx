@@ -1,7 +1,7 @@
-import { Heading } from '@/components/ui/heading'
-import PublicLayout from '@/layouts/public-layout'
 import { Head } from '@inertiajs/react'
 import { useTranslation } from 'react-i18next'
+import { Heading } from '@/components/ui/heading'
+import PublicLayout from '@/layouts/public-layout'
 
 export default function Error404() {
   // i18n

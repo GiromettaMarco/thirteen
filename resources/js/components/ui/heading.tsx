@@ -3,14 +3,14 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import type { ComponentProps } from 'react'
 
 const headingVariants = cva(undefined, {
+  defaultVariants: {
+    variant: 'default'
+  },
   variants: {
     variant: {
       default: 'text-xl font-semibold',
       small: 'mb-0.5 text-base font-medium'
     }
-  },
-  defaultVariants: {
-    variant: 'default'
   }
 })
 

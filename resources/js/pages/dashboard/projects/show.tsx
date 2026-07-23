@@ -1,3 +1,6 @@
+import { Head } from '@inertiajs/react'
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { BreadcrumbLink } from '@/components/breadcrumbs'
 import { TasksTable } from '@/components/tasks/tasks-table'
 import { Container } from '@/components/ui/container'
@@ -13,9 +16,6 @@ import type {
   TaskWithProfile,
   TeamPermissions
 } from '@/types'
-import { Head } from '@inertiajs/react'
-import { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 
 export default function ProjectsShow({
   permissions,
@@ -36,10 +36,10 @@ export default function ProjectsShow({
   // Breadcrumbs
   const breadcrumbs = useMemo<BreadcrumbLink[]>(
     () => [
-      { key: 1, href: dashboard(), label: t(($) => $.dashboard) },
+      { href: dashboard(), key: 1, label: t(($) => $.dashboard) },
       {
-        key: 2,
         href: index({ team: project.team_id }),
+        key: 2,
         label: t(($) => $.project, { count: 2 })
       }
     ],

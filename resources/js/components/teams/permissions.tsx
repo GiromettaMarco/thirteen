@@ -1,10 +1,10 @@
-import { update } from '@/routes/members'
-import { updateTeamPermissionsSchema } from '@/schemas/teams'
-import type { Profile, TeamPermissions, WithTeamPermissions } from '@/types'
 import { CheckboxField, Form, Submit } from '@gmcode/forms'
 import { Checkbox, Field, FieldLabel } from '@gmcode/react-ui'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { update } from '@/routes/members'
+import { updateTeamPermissionsSchema } from '@/schemas/teams'
+import type { Profile, TeamPermissions, WithTeamPermissions } from '@/types'
 
 function ReadonlyCheckbox({
   checked,

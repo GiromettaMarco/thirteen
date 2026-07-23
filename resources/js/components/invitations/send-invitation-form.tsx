@@ -1,10 +1,10 @@
+import { EmailField, Form, SelectField, Submit, TextField } from '@gmcode/forms'
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { MultipleCheckboxField } from '@/components/uncontrolled-inputs'
 import { store } from '@/routes/invitations'
 import { createInvitationSchema } from '@/schemas/invitations'
 import type { Team } from '@/types'
-import { EmailField, Form, SelectField, Submit, TextField } from '@gmcode/forms'
-import { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 
 export function SendInvitationForm({ teams }: { teams: Team[] }) {
   // i18n
@@ -61,8 +61,8 @@ export function SendInvitationForm({ teams }: { teams: Team[] }) {
             inputId="role"
             inputName="role"
             label={t(($) => $.role)}
-            placeholder={t(($) => $.pages.dashboard.invitations.send.role)}
             options={roles}
+            placeholder={t(($) => $.pages.dashboard.invitations.send.role)}
           />
 
           {teams && (

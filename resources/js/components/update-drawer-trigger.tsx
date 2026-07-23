@@ -1,8 +1,8 @@
-import { DrawerTrigger } from '@/components/ui/drawer'
 import { Button } from '@gmcode/react-ui'
 import { Edit } from 'lucide-react'
 import type { MouseEventHandler } from 'react'
 import { useTranslation } from 'react-i18next'
+import { DrawerTrigger } from '@/components/ui/drawer'
 
 export function UpdateDrawerTrigger({
   onClick

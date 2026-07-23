@@ -1,5 +1,11 @@
 'use client'
 
+import { cn } from '@gmcode/react-ui'
+import {
+  Popover as PopoverPrimitive,
+  Tooltip as TooltipPrimitive
+} from 'radix-ui'
+import { useContext } from 'react'
 import {
   Popover,
   PopoverContent,
@@ -11,12 +17,6 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 import { AppContext } from '@/providers/app-context-provider'
-import { cn } from '@gmcode/react-ui'
-import {
-  Popover as PopoverPrimitive,
-  Tooltip as TooltipPrimitive
-} from 'radix-ui'
-import { useContext } from 'react'
 
 export function HybridTooltip(
   props: TooltipPrimitive.TooltipProps & PopoverPrimitive.PopoverProps

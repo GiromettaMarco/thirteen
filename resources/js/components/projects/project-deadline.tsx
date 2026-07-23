@@ -1,14 +1,14 @@
-import { format } from '@/lib/utils'
 import { cn } from '@gmcode/react-ui'
 import { differenceInCalendarDays } from 'date-fns'
 import { useTranslation } from 'react-i18next'
+import { format } from '@/lib/utils'
 
 export function ProjectDeadline({
-  deadline,
-  className
+  className,
+  deadline
 }: {
-  deadline: Date | string | null | undefined
   className?: string
+  deadline: Date | string | null | undefined
 }) {
   // i18n
   const { i18n, t } = useTranslation()

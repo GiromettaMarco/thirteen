@@ -1,12 +1,12 @@
+import { Form, Submit } from '@gmcode/forms'
+import { Head } from '@inertiajs/react'
+import { Trans, useTranslation } from 'react-i18next'
 import { EmailFieldPreset } from '@/components/auth/fields'
 import { TextLink } from '@/components/text-link'
 import AuthLayout from '@/layouts/auth-layout'
 import { login } from '@/routes'
 import { email } from '@/routes/password'
 import { forgotPasswordSchema } from '@/schemas/auth'
-import { Form, Submit } from '@gmcode/forms'
-import { Head } from '@inertiajs/react'
-import { Trans, useTranslation } from 'react-i18next'
 
 export default function ForgotPassword() {
   // i18n

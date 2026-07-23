@@ -1,12 +1,7 @@
-import { Heading } from '@/components/ui/heading'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Heading } from '@/components/ui/heading'
 
 const meta = {
-  component: Heading,
-  parameters: {
-    layout: 'centered'
-  },
-  tags: ['autodocs'],
   argTypes: {
     tag: {
       control: 'radio',
@@ -16,7 +11,12 @@ const meta = {
       control: 'radio',
       options: ['default', 'small']
     }
-  }
+  },
+  component: Heading,
+  parameters: {
+    layout: 'centered'
+  },
+  tags: ['autodocs']
 } satisfies Meta<typeof Heading>
 
 export default meta

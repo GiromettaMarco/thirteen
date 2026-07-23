@@ -1,3 +1,17 @@
+import { Button } from '@gmcode/react-ui'
+import type { ColumnDef } from '@tanstack/react-table'
+import {
+  getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable
+} from '@tanstack/react-table'
+import { EllipsisVertical, Folder } from 'lucide-react'
+import { useContext, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { NameCell } from '@/components/name-cell'
 import {
   AddProjectDrawer,
@@ -33,20 +47,6 @@ import { format } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
 import { destroy, show } from '@/routes/projects'
 import type { Project, View, ViewStore } from '@/types'
-import { Button } from '@gmcode/react-ui'
-import type { ColumnDef } from '@tanstack/react-table'
-import {
-  getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable
-} from '@tanstack/react-table'
-import { EllipsisVertical, Folder } from 'lucide-react'
-import { useContext, useEffect, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 
 //#region MassDelete
 // export function MassDelete({
@@ -109,7 +109,7 @@ export function Actions({
   const { t } = useTranslation()
 
   // Global state
-  const { setUpdateProjectOpen, setActiveProject } = useContext(AppContext)
+  const { setActiveProject, setUpdateProjectOpen } = useContext(AppContext)
 
   // Delete dialog state
   const [deleteOpen, setDeleteOpen] = useState(false)
@@ -248,12 +248,12 @@ export function ProjectsTable({
 
   const labels = useMemo<Record<string, string>>(
     () => ({
-      name: t(($) => $.name),
       // usersCount: t('user_other'),
       // tasksCount: t('task_other'),
       createdAt: t(($) => $.dateCreated),
-      updatedAt: t(($) => $.dateModified),
-      deadline: t(($) => $.projects.deadline)
+      deadline: t(($) => $.projects.deadline),
+      name: t(($) => $.name),
+      updatedAt: t(($) => $.dateModified)
     }),
     [t]
   )
@@ -347,28 +347,28 @@ export function ProjectsTable({
   )
 
   const table = useReactTable({
-    data,
     columns,
-    state: {
-      sorting,
-      columnVisibility,
-      rowSelection,
-      columnFilters,
-      pagination
-    },
-    getRowId: (row) => row.id.toString(),
+    data,
     enableRowSelection: true,
-    onRowSelectionChange: setRowSelection,
-    onSortingChange,
+    getCoreRowModel: getCoreRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getRowId: (row) => row.id.toString(),
+    getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange,
     onColumnVisibilityChange,
     onPaginationChange,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues()
+    onRowSelectionChange: setRowSelection,
+    onSortingChange,
+    state: {
+      columnFilters,
+      columnVisibility,
+      pagination,
+      rowSelection,
+      sorting
+    }
   })
 
   return (
@@ -387,8 +387,8 @@ export function ProjectsTable({
 
             <div className="flex gap-2">
               <ColumnsVisibility
-                table={table}
                 labels={labels}
+                table={table}
               />
 
               {canEdit && (

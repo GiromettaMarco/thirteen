@@ -1,5 +1,5 @@
-import { Breadcrumbs } from '@/components/breadcrumbs'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Breadcrumbs } from '@/components/breadcrumbs'
 
 const meta = {
   component: Breadcrumbs,
@@ -16,8 +16,8 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     links: [
-      { key: 1, href: '/dashboard', label: 'dashboard' },
-      { key: 2, href: '/teams', label: 'teams' }
+      { href: '/dashboard', key: 1, label: 'dashboard' },
+      { href: '/teams', key: 2, label: 'teams' }
     ]
   }
 }

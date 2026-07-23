@@ -1,3 +1,9 @@
+import { FancyRadioField, Form, InfoCheckboxField, Submit } from '@gmcode/forms'
+import { Button } from '@gmcode/react-ui'
+import { Head } from '@inertiajs/react'
+import { ChartNoAxesGantt, Code2, Handshake, Palette } from 'lucide-react'
+import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { NameFieldPreset } from '@/components/auth/fields'
 import { Container } from '@/components/ui/container'
 import {
@@ -14,12 +20,6 @@ import DashboardLayout from '@/layouts/dashboard-layout'
 import { update } from '@/routes/profile'
 import { updateProfileSchema } from '@/schemas/profile'
 import type { Profile } from '@/types'
-import { FancyRadioField, Form, InfoCheckboxField, Submit } from '@gmcode/forms'
-import { Button } from '@gmcode/react-ui'
-import { Head } from '@inertiajs/react'
-import { ChartNoAxesGantt, Code2, Handshake, Palette } from 'lucide-react'
-import { useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 
 //#region UpdateProfileDrawer
 function UpdateProfileDrawer({ profile }: { profile: Profile }) {

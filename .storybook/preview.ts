@@ -15,59 +15,52 @@ initialize({
 })
 
 const preview: Preview = {
+  decorators: [
+    withThemeByClassName<ReactRenderer>({
+      defaultTheme: 'dark',
+      themes: {
+        dark: 'dark',
+        light: ''
+      }
+    }),
+    WithI18next,
+    WithToaster
+  ],
   globalTypes: {
     locale: {
-      name: 'Locale',
       description: 'Internationalization locale',
+      name: 'Locale',
       toolbar: {
-        title: 'locale',
         icon: 'globe',
         items: [
-          { value: 'en', title: 'English', right: '🇬🇧' },
-          { value: 'it', title: 'Italiano', right: '🇮🇹' }
-        ]
+          { right: '🇬🇧', title: 'English', value: 'en' },
+          { right: '🇮🇹', title: 'Italiano', value: 'it' }
+        ],
+        title: 'locale'
       }
     }
   },
-
+  loaders: [mswLoader],
   parameters: {
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i
-      }
-    },
-
     a11y: {
       // 'todo' - show a11y violations in the test UI only
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
       test: 'todo'
     },
-
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/i
+      }
+    },
     docs: {
       container: DocsWithTheme
     },
-
     msw: {
       handlers: getHandlers()
     }
-  },
-
-  decorators: [
-    withThemeByClassName<ReactRenderer>({
-      themes: {
-        light: '',
-        dark: 'dark'
-      },
-      defaultTheme: 'dark'
-    }),
-
-    WithI18next,
-    WithToaster
-  ],
-
-  loaders: [mswLoader]
+  }
 }
 
 export default preview

@@ -1,3 +1,7 @@
+import { Separator } from '@gmcode/react-ui'
+import { Head } from '@inertiajs/react'
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { BreadcrumbLink } from '@/components/breadcrumbs'
 import { TeamPermissions } from '@/components/teams/permissions'
 import { Container } from '@/components/ui/container'
@@ -6,10 +10,6 @@ import DashboardLayout from '@/layouts/dashboard-layout'
 import { dashboard } from '@/routes'
 import { index, show } from '@/routes/teams'
 import type { Profile, Team, WithTeamPermissions } from '@/types'
-import { Separator } from '@gmcode/react-ui'
-import { Head } from '@inertiajs/react'
-import { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 
 export default function TeamMembersShow({
   profile,
@@ -23,9 +23,9 @@ export default function TeamMembersShow({
 
   const breadcrumbs = useMemo<BreadcrumbLink[]>(
     () => [
-      { key: 1, href: dashboard(), label: t(($) => $.dashboard) },
-      { key: 2, href: index(), label: t(($) => $.team, { count: 2 }) },
-      { key: 3, href: show(team.id), label: team.name }
+      { href: dashboard(), key: 1, label: t(($) => $.dashboard) },
+      { href: index(), key: 2, label: t(($) => $.team, { count: 2 }) },
+      { href: show(team.id), key: 3, label: team.name }
     ],
     [t, team.id, team.name]
   )

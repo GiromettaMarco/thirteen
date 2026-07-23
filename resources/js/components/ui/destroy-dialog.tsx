@@ -1,3 +1,7 @@
+import { Form, Schema, Submit, type Method } from '@gmcode/forms'
+import { Button, Infobox } from '@gmcode/react-ui'
+import type { Dispatch, PropsWithChildren, SetStateAction } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   Dialog,
   DialogClose,
@@ -7,10 +11,6 @@ import {
   DialogTitle
 } from '@/components/ui/dialog'
 import type { RouteDefinition } from '@/wayfinder'
-import { Form, Schema, Submit, type Method } from '@gmcode/forms'
-import { Button, Infobox } from '@gmcode/react-ui'
-import type { Dispatch, PropsWithChildren, SetStateAction } from 'react'
-import { useTranslation } from 'react-i18next'
 
 const deleteSchema = new Schema({})
 

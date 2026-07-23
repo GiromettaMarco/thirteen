@@ -1,17 +1,17 @@
-import { TextLink } from '@/components/text-link'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { TextLink } from '@/components/text-link'
 
 const meta = {
+  argTypes: {
+    children: { type: 'string' },
+    className: { type: 'string' },
+    href: { type: 'string' }
+  },
   component: TextLink,
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
-  argTypes: {
-    className: { type: 'string' },
-    children: { type: 'string' },
-    href: { type: 'string' }
-  }
+  tags: ['autodocs']
 } satisfies Meta<typeof TextLink>
 
 export default meta

@@ -1,3 +1,28 @@
+import { Button } from '@gmcode/react-ui'
+import {
+  getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+  type ColumnDef,
+  type Table
+} from '@tanstack/react-table'
+import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUp,
+  Calendar,
+  Check,
+  Ellipsis,
+  Inbox,
+  SquareCheckBig,
+  X
+} from 'lucide-react'
+import { useContext, useEffect, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { NameCell } from '@/components/name-cell'
 import {
   AddTaskDrawer,
@@ -26,31 +51,6 @@ import UseTableStates from '@/hooks/use-table-states'
 import { format } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
 import type { Profile, TaskWithProfile, View, ViewStore } from '@/types'
-import { Button } from '@gmcode/react-ui'
-import {
-  getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-  type ColumnDef,
-  type Table
-} from '@tanstack/react-table'
-import {
-  ArrowDown,
-  ArrowRight,
-  ArrowUp,
-  Calendar,
-  Check,
-  Ellipsis,
-  Inbox,
-  SquareCheckBig,
-  X
-} from 'lucide-react'
-import { useContext, useEffect, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 
 //#region TableToolbar
 function TableToolbar<TData>({ table }: { table: Table<TData> }) {
@@ -59,66 +59,66 @@ function TableToolbar<TData>({ table }: { table: Table<TData> }) {
 
   const labels = [
     {
-      value: 'bug',
-      label: t(($) => $.tasks.labels.bug)
+      label: t(($) => $.tasks.labels.bug),
+      value: 'bug'
     },
     {
-      value: 'documentation',
-      label: t(($) => $.tasks.labels.documentation)
+      label: t(($) => $.tasks.labels.documentation),
+      value: 'documentation'
     },
     {
-      value: 'feature',
-      label: t(($) => $.tasks.labels.feature)
+      label: t(($) => $.tasks.labels.feature),
+      value: 'feature'
     },
     {
-      value: 'none',
-      label: t(($) => $.tasks.labels.none)
+      label: t(($) => $.tasks.labels.none),
+      value: 'none'
     }
   ]
 
   const statuses = [
     {
-      value: 'backlog',
+      icon: Inbox,
       label: t(($) => $.tasks.statuses.backlog),
-      icon: Inbox
+      value: 'backlog'
     },
     {
-      value: 'todo',
+      icon: Calendar,
       label: t(($) => $.tasks.statuses.todo),
-      icon: Calendar
+      value: 'todo'
     },
     {
-      value: 'in_progress',
+      icon: Ellipsis,
       label: t(($) => $.tasks.statuses.inProgress),
-      icon: Ellipsis
+      value: 'in_progress'
     },
     {
-      value: 'done',
+      icon: Check,
       label: t(($) => $.tasks.statuses.done),
-      icon: Check
+      value: 'done'
     },
     {
-      value: 'canceled',
+      icon: X,
       label: t(($) => $.tasks.statuses.canceled),
-      icon: X
+      value: 'canceled'
     }
   ]
 
   const priorities = [
     {
-      value: 'low',
+      icon: ArrowDown,
       label: t(($) => $.tasks.priorities.low),
-      icon: ArrowDown
+      value: 'low'
     },
     {
-      value: 'medium',
+      icon: ArrowRight,
       label: t(($) => $.tasks.priorities.medium),
-      icon: ArrowRight
+      value: 'medium'
     },
     {
-      value: 'high',
+      icon: ArrowUp,
       label: t(($) => $.tasks.priorities.high),
-      icon: ArrowUp
+      value: 'high'
     }
   ]
 
@@ -126,20 +126,20 @@ function TableToolbar<TData>({ table }: { table: Table<TData> }) {
     <DataTableToolbar table={table}>
       <FacetedFilter
         column={table.getColumn('label')}
-        title={t(($) => $.tasks.label)}
         options={labels}
+        title={t(($) => $.tasks.label)}
       />
 
       <FacetedFilter
         column={table.getColumn('status')}
-        title={t(($) => $.tasks.status)}
         options={statuses}
+        title={t(($) => $.tasks.status)}
       />
 
       <FacetedFilter
         column={table.getColumn('priority')}
-        title={t(($) => $.tasks.priority)}
         options={priorities}
+        title={t(($) => $.tasks.priority)}
       />
     </DataTableToolbar>
   )
@@ -225,12 +225,12 @@ export function TasksTable({
 
   const labels = useMemo<Record<string, string>>(
     () => ({
-      name: t(($) => $.name),
-      label: t(($) => $.tasks.label),
-      priority: t(($) => $.tasks.priority),
-      status: t(($) => $.tasks.status),
-      profile: t(($) => $.tasks.assignedTo),
       createdAt: t(($) => $.dateCreated),
+      label: t(($) => $.tasks.label),
+      name: t(($) => $.name),
+      priority: t(($) => $.tasks.priority),
+      profile: t(($) => $.tasks.assignedTo),
+      status: t(($) => $.tasks.status),
       updatedAt: t(($) => $.dateModified)
     }),
     [t]
@@ -329,28 +329,28 @@ export function TasksTable({
   )
 
   const table = useReactTable({
-    data,
     columns,
-    state: {
-      sorting,
-      columnVisibility,
-      rowSelection,
-      columnFilters,
-      pagination
-    },
-    getRowId: (row) => row.id.toString(),
+    data,
     enableRowSelection: canEdit,
-    onRowSelectionChange: setRowSelection,
-    onColumnFiltersChange,
-    onPaginationChange,
-    onSortingChange,
-    onColumnVisibilityChange,
     getCoreRowModel: getCoreRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getRowId: (row) => row.id.toString(),
     getSortedRowModel: getSortedRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues()
+    onColumnFiltersChange,
+    onColumnVisibilityChange,
+    onPaginationChange,
+    onRowSelectionChange: setRowSelection,
+    onSortingChange,
+    state: {
+      columnFilters,
+      columnVisibility,
+      pagination,
+      rowSelection,
+      sorting
+    }
   })
 
   return (
@@ -377,8 +377,8 @@ export function TasksTable({
 
             <div className="flex gap-2">
               <ColumnsVisibility
-                table={table}
                 labels={labels}
+                table={table}
               />
 
               {canEdit && (

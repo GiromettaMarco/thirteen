@@ -1,3 +1,18 @@
+import { Button } from '@gmcode/react-ui'
+import { useForm, usePage } from '@inertiajs/react'
+import type { ColumnDef } from '@tanstack/react-table'
+import {
+  getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable
+} from '@tanstack/react-table'
+import { Star, UserStar } from 'lucide-react'
+import { useContext, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { NameCell } from '@/components/name-cell'
 import {
   AddTeamDrawer,
@@ -31,21 +46,6 @@ import { AppContext } from '@/providers/app-context-provider'
 import { update } from '@/routes/current-team'
 import { destroy, show } from '@/routes/teams'
 import type { Team, View, ViewStore, WithTeamPermissions } from '@/types'
-import { Button } from '@gmcode/react-ui'
-import { useForm, usePage } from '@inertiajs/react'
-import type { ColumnDef } from '@tanstack/react-table'
-import {
-  getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable
-} from '@tanstack/react-table'
-import { Star, UserStar } from 'lucide-react'
-import { useContext, useEffect, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 
 //#region CurrentTeamCell
 function CurrentTeamCell({
@@ -98,7 +98,7 @@ function Actions({
   const { t } = useTranslation()
 
   // Global state
-  const { setUpdateTeamOpen, setActiveTeam } = useContext(AppContext)
+  const { setActiveTeam, setUpdateTeamOpen } = useContext(AppContext)
 
   // Delete dialog state
   const [deleteOpen, setDeleteOpen] = useState(false)
@@ -275,27 +275,27 @@ export function TeamsTable({
   const columns = useMemo<ColumnDef<TeamRow>[]>(
     () => [
       {
-        id: 'current',
-        header: () => null,
         cell: ({ row }) => (
           <CurrentTeamCell
             currentTeamId={user?.current_team_id}
             team={row.original}
           />
         ),
-        enableHiding: false
+        enableHiding: false,
+        header: () => null,
+        id: 'current'
       },
 
       {
         accessorKey: 'name',
-        header: t(($) => $.name),
         cell: ({ row }) => (
           <NameCell
             href={show(row.original.id)}
             name={row.original.name}
           />
         ),
-        enableHiding: false
+        enableHiding: false,
+        header: t(($) => $.name)
       },
 
       {
@@ -319,39 +319,39 @@ export function TeamsTable({
       // }
 
       {
-        id: 'actions',
         cell: ({ row }) => (
           <Actions
             team={row.original}
             // userId={userId}
           />
-        )
+        ),
+        id: 'actions'
       }
     ],
     [t, user?.current_team_id]
   )
 
   const table = useReactTable({
-    data,
     columns,
-    state: {
-      sorting,
-      columnVisibility,
-      columnFilters,
-      pagination
-    },
-    getRowId: (row) => row.id.toString(),
+    data,
     enableRowSelection: false,
-    onSortingChange,
+    getCoreRowModel: getCoreRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getRowId: (row) => row.id.toString(),
+    getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange,
     onColumnVisibilityChange,
     onPaginationChange,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues()
+    onSortingChange,
+    state: {
+      columnFilters,
+      columnVisibility,
+      pagination,
+      sorting
+    }
   })
 
   return (
@@ -370,8 +370,8 @@ export function TeamsTable({
 
             <div className="flex gap-2">
               <ColumnsVisibility
-                table={table}
                 labels={labels}
+                table={table}
               />
 
               <AddTeamDrawerTrigger />

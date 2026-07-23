@@ -6,9 +6,9 @@ export default {
     change: 'Change appearance',
     dark: 'Dark',
     light: 'Light',
-    theme: 'Theme',
     select: 'Select appearance',
-    system: 'System'
+    system: 'System',
+    theme: 'Theme'
   },
   auth: {
     confirmPassword: 'Confirm password',
@@ -95,8 +95,8 @@ export default {
       verifyEmail: {
         h1: 'Verify email',
         p: 'Please verify your email address by clicking on the link we just emailed to you.',
-        title: 'Email verification',
-        submit: 'Resend verification email'
+        submit: 'Resend verification email',
+        title: 'Email verification'
       }
     },
     dashboard: {
@@ -226,12 +226,12 @@ export default {
     createInstructions: 'Start a new project.',
     createProject: 'Create Project',
     deadline: 'Deadline',
-    deadlineIn_zero: 'Deadline today',
-    deadlineIn_one: 'Deadline tomorrow',
-    deadlineIn_other: 'Deadline in {{count}} days',
-    deadlineBy_zero: 'Deadline today',
     deadlineBy_one: 'Deadline expired yesterday',
     deadlineBy_other: 'Deadline expired {{count}} days ago',
+    deadlineBy_zero: 'Deadline today',
+    deadlineIn_one: 'Deadline tomorrow',
+    deadlineIn_other: 'Deadline in {{count}} days',
+    deadlineIn_zero: 'Deadline today',
     defaultName: 'New project',
     deleteDesc: 'You are about to delete the "{{project}}" project.',
     deleteTitle: 'Are you sure you want to delete the project?',
@@ -316,12 +316,12 @@ export default {
     },
     namePlaceholder: 'Task name',
     newTask: 'New task',
-    priority: 'Priority',
     priorities: {
       high: 'High',
       low: 'Low',
       medium: 'Medium'
     },
+    priority: 'Priority',
     selectLabel: 'Select a label',
     selectPriority: 'Select a priority',
     selectStatus: 'Select a status',
@@ -340,8 +340,8 @@ export default {
   team_other: 'Teams',
   teamPermissions: {
     admin: 'Administrator',
-    canEdit: 'Can edit the team',
     canDelete: 'Can delete the team',
+    canEdit: 'Can edit the team',
     canEditMembers: 'Can edit team members',
     canEditProjects: 'Can edit related projects and tasks'
   },

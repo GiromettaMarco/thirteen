@@ -1,10 +1,10 @@
-import type { Theme } from '@/types'
 import { flash, Toaster } from '@gmcode/react-ui'
 import { router } from '@inertiajs/core'
 import type { StoryContext } from '@storybook/react-vite'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { PartialStoryFn } from 'storybook/internal/csf'
+import type { Theme } from '@/types'
 
 /**
  * Mock of the FlashNotifications provider

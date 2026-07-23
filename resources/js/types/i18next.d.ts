@@ -3,8 +3,8 @@ import 'i18next'
 
 declare module 'i18next' {
   interface CustomTypeOptions {
-    enableSelector: true
     defaultNS: 'translation'
+    enableSelector: true
     resources: typeof en
   }
 }

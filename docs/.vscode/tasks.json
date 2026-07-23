@@ -1,84 +1,84 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "$(debug-alt-small)",
-            "type": "shell",
-            "command": "composer run-script dev",
-            "options": {
-                "statusbar": {
-                    "detail": "dev",
-                    "color": "#22C1D6"
-                }
-            }
-        },
-        {
-            "label": "$(play)",
-            "type": "shell",
-            "command": "composer run-script dev:ssr",
-            "options": {
-                "statusbar": {
-                    "detail": "dev:ssr",
-                    "color": "#22C1D6"
-                }
-            }
-        },
-        {
-            "label": "$(mail)",
-            "type": "shell",
-            "command": "Start \"http://localhost:8025/\" && c:/path/to/mailpit/mailpit.exe --database c:/path/to/mailpit/storage/thirteen.db",
-            "options": {
-                "statusbar": {
-                    "detail": "mailpit",
-                    "color": "#22C1D6"
-                }
-            }
-        },
-        {
-            "label": "$(test-view-icon)",
-            "type": "shell",
-            "command": "composer run-script test",
-            "options": {
-                "statusbar": {
-                    "detail": "test",
-                    "color": "#22C1D6"
-                }
-            }
-        },
-        {
-            "label": "$(test-view-icon)",
-            "type": "shell",
-            "command": "composer run-script test:browser",
-            "options": {
-                "statusbar": {
-                    "detail": "test:browser",
-                    "color": "#22C1D6"
-                }
-            }
-        },
-        {
-            "label": "$(remote-explorer-documentation)",
-            "type": "shell",
-            "command": "pnpm run storybook",
-            "options": {
-                "statusbar": {
-                    "detail": "storybook",
-                    "color": "#22C1D6"
-                }
-            }
-        },
-        {
-            "label": "$(type-hierarchy)",
-            "type": "shell",
-            "command": "php artisan wayfinder:generate",
-            "options": {
-                "statusbar": {
-                    "detail": "wayfinder",
-                    "color": "#22C1D6"
-                }
-            }
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "$(debug-alt-small)",
+      "type": "shell",
+      "command": "composer run-script dev",
+      "options": {
+        "statusbar": {
+          "detail": "dev",
+          "color": "#22C1D6"
         }
-    ]
+      }
+    },
+    {
+      "label": "$(play)",
+      "type": "shell",
+      "command": "composer run-script dev:ssr",
+      "options": {
+        "statusbar": {
+          "detail": "dev:ssr",
+          "color": "#22C1D6"
+        }
+      }
+    },
+    {
+      "label": "$(mail)",
+      "type": "shell",
+      "command": "Start \"http://localhost:8025/\" && c:/path/to/mailpit/mailpit.exe --database c:/path/to/mailpit/storage/thirteen.db",
+      "options": {
+        "statusbar": {
+          "detail": "mailpit",
+          "color": "#22C1D6"
+        }
+      }
+    },
+    {
+      "label": "$(test-view-icon)",
+      "type": "shell",
+      "command": "composer run-script test",
+      "options": {
+        "statusbar": {
+          "detail": "test",
+          "color": "#22C1D6"
+        }
+      }
+    },
+    {
+      "label": "$(test-view-icon)",
+      "type": "shell",
+      "command": "composer run-script test:browser",
+      "options": {
+        "statusbar": {
+          "detail": "test:browser",
+          "color": "#22C1D6"
+        }
+      }
+    },
+    {
+      "label": "$(remote-explorer-documentation)",
+      "type": "shell",
+      "command": "pnpm run storybook",
+      "options": {
+        "statusbar": {
+          "detail": "storybook",
+          "color": "#22C1D6"
+        }
+      }
+    },
+    {
+      "label": "$(type-hierarchy)",
+      "type": "shell",
+      "command": "php artisan wayfinder:generate",
+      "options": {
+        "statusbar": {
+          "detail": "wayfinder",
+          "color": "#22C1D6"
+        }
+      }
+    }
+  ]
 }

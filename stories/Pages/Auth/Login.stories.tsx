@@ -1,5 +1,5 @@
-import LoginPage from '@/pages/auth/login'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import LoginPage from '@/pages/auth/login'
 import { getHandlers, loginFail, loginSuccess } from '../../../.storybook/msw'
 
 const meta = {

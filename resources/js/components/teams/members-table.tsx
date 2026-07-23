@@ -1,13 +1,3 @@
-import { NameCell } from '@/components/name-cell'
-import TableMain, {
-  AfterTable,
-  ColumnsVisibility,
-  SortableColumnHeader,
-  TableToolbar
-} from '@/components/ui/data-table'
-import UseTableStates from '@/hooks/use-table-states'
-import { show } from '@/routes/members'
-import type { Profile, View, ViewStore } from '@/types'
 import {
   getCoreRowModel,
   getFacetedRowModel,
@@ -20,19 +10,29 @@ import {
 } from '@tanstack/react-table'
 import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { NameCell } from '@/components/name-cell'
+import TableMain, {
+  AfterTable,
+  ColumnsVisibility,
+  SortableColumnHeader,
+  TableToolbar
+} from '@/components/ui/data-table'
+import UseTableStates from '@/hooks/use-table-states'
+import { show } from '@/routes/members'
+import type { Profile, View, ViewStore } from '@/types'
 
 export function MembersTable({
+  members,
   // canEdit = false,
   // currentUserId,
   teamId,
-  members,
   view,
   viewStore
 }: {
   canEdit?: boolean
   currentUserId?: number
-  teamId: number
   members: Profile[]
+  teamId: number
   view?: View
   viewStore?: ViewStore
 }) {
@@ -156,26 +156,26 @@ export function MembersTable({
   )
 
   const table = useReactTable({
-    data,
     columns,
-    state: {
-      sorting,
-      columnVisibility,
-      columnFilters,
-      pagination
-    },
-    getRowId: (row) => row.id.toString(),
+    data,
     enableRowSelection: false,
-    onSortingChange,
+    getCoreRowModel: getCoreRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getRowId: (row) => row.id.toString(),
+    getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange,
     onColumnVisibilityChange,
     onPaginationChange,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues()
+    onSortingChange,
+    state: {
+      columnFilters,
+      columnVisibility,
+      pagination,
+      sorting
+    }
   })
 
   return (
@@ -188,8 +188,8 @@ export function MembersTable({
 
         <div className="flex gap-2">
           <ColumnsVisibility
-            table={table}
             labels={labels}
+            table={table}
           />
 
           {/* {canEdit && (

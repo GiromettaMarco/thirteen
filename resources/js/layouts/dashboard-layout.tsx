@@ -1,3 +1,25 @@
+import { Button, cn, Separator } from '@gmcode/react-ui'
+import { Link, usePage } from '@inertiajs/react'
+import {
+  CircleUser,
+  Folder,
+  Gauge,
+  HelpCircle,
+  LogOut,
+  Mail,
+  Settings,
+  UserRound,
+  Users,
+  UserStar
+} from 'lucide-react'
+import type {
+  CSSProperties,
+  FC,
+  PropsWithChildren,
+  ReactNode,
+  SVGProps
+} from 'react'
+import { useTranslation } from 'react-i18next'
 import { Breadcrumbs, type BreadcrumbLink } from '@/components/breadcrumbs'
 import { Logo } from '@/components/ui/brand'
 import { GitHub } from '@/components/ui/brand-icons'
@@ -35,39 +57,17 @@ import { index as projectsIndex } from '@/routes/projects'
 import { index as teamsIndex, show as teamsShow } from '@/routes/teams'
 import type { Permissions } from '@/types'
 import type { RouteDefinition } from '@/wayfinder'
-import { Button, cn, Separator } from '@gmcode/react-ui'
-import { Link, usePage } from '@inertiajs/react'
-import {
-  CircleUser,
-  Folder,
-  Gauge,
-  HelpCircle,
-  LogOut,
-  Mail,
-  Settings,
-  UserRound,
-  Users,
-  UserStar
-} from 'lucide-react'
-import type {
-  CSSProperties,
-  FC,
-  PropsWithChildren,
-  ReactNode,
-  SVGProps
-} from 'react'
-import { useTranslation } from 'react-i18next'
 
 //#region SidebarItem
 function SidebarItem({
   active = false,
-  Icon,
   href,
+  Icon,
   label
 }: {
   active?: boolean
-  Icon: FC<SVGProps<SVGSVGElement>>
   href: RouteDefinition<'get'>
+  Icon: FC<SVGProps<SVGSVGElement>>
   label: string
 }) {
   return (
@@ -107,8 +107,8 @@ function Navigation({
           <SidebarMenu>
             <SidebarItem
               active={url === dashboard.url()}
-              Icon={Gauge}
               href={dashboard()}
+              Icon={Gauge}
               label={t(($) => $.dashboard)}
             />
 
@@ -118,15 +118,15 @@ function Navigation({
               <>
                 <SidebarItem
                   active={url === projectsIndex.url({ team: currentTeamId })}
-                  Icon={Folder}
                   href={projectsIndex({ team: currentTeamId })}
+                  Icon={Folder}
                   label={t(($) => $.project, { count: 2 })}
                 />
 
                 <SidebarItem
                   active={url === teamsShow.url({ team: currentTeamId })}
-                  Icon={Users}
                   href={teamsShow({ team: currentTeamId })}
+                  Icon={Users}
                   label={t(($) => $.team, { count: 1 })}
                 />
               </>
@@ -140,16 +140,16 @@ function Navigation({
         <SidebarMenu>
           <SidebarItem
             active={url === teamsIndex.url()}
-            Icon={UserStar}
             href={teamsIndex()}
+            Icon={UserStar}
             label={t(($) => $.team, { count: 2 })}
           />
 
           {permissions.users.edit && (
             <SidebarItem
               active={url === invitationsIndex.url()}
-              Icon={Mail}
               href={invitationsIndex()}
+              Icon={Mail}
               label={t(($) => $.invitation, { count: 2 })}
             />
           )}
@@ -161,8 +161,8 @@ function Navigation({
           <SidebarMenu>
             <SidebarItem
               active={url === settings.url()}
-              Icon={Settings}
               href={settings()}
+              Icon={Settings}
               label={t(($) => $.settings)}
             />
 
@@ -209,8 +209,8 @@ function ProfileDropdown({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
-              size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              size="lg"
             >
               <UserInfo
                 avatar={avatar}
@@ -223,9 +223,9 @@ function ProfileDropdown({
           </DropdownMenuTrigger>
 
           <DropdownMenuContent
+            align="end"
             className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
             side={isMobile ? 'bottom' : 'right'}
-            align="end"
             sideOffset={4}
           >
             <DropdownMenuLabel className="p-0 font-normal">
@@ -281,13 +281,13 @@ function ProfileDropdown({
 
 //#region Layout
 export default function DashboardLayout({
-  button,
   breadcrumbs = [],
+  button,
   children,
   title
 }: PropsWithChildren<{
-  button?: ReactNode
   breadcrumbs?: BreadcrumbLink[]
+  button?: ReactNode
   title?: string
 }>) {
   const { auth, sidebarOpen } = usePage().props
@@ -301,8 +301,8 @@ export default function DashboardLayout({
       defaultOpen={sidebarOpen}
       style={
         {
-          '--sidebar-width': 'calc(var(--spacing) * 72)',
-          '--header-height': 'calc(var(--spacing) * 12)'
+          '--header-height': 'calc(var(--spacing) * 12)',
+          '--sidebar-width': 'calc(var(--spacing) * 72)'
         } as CSSProperties
       }
     >
@@ -346,8 +346,8 @@ export default function DashboardLayout({
           <SidebarTrigger className="-ml-1" />
 
           <Separator
-            orientation="vertical"
             className="mx-2 data-[orientation=vertical]:h-4"
+            orientation="vertical"
           />
 
           <h1 className="text-base font-medium">{title}</h1>
@@ -355,17 +355,17 @@ export default function DashboardLayout({
           <div className="ml-auto flex items-center gap-2">
             {button ?? (
               <Button
-                variant="ghost"
                 asChild
-                size="icon"
                 className="hidden sm:flex"
+                size="icon"
+                variant="ghost"
               >
                 <a
+                  className="dark:text-foreground"
                   href="https://github.com/GiromettaMarco/thirteen"
                   rel="noreferrer"
                   target="_blank"
                   title="GitHub"
-                  className="dark:text-foreground"
                 >
                   <GitHub className="size-6" />
                 </a>

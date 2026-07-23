@@ -1,3 +1,6 @@
+import { Separator } from '@gmcode/react-ui'
+import { Head } from '@inertiajs/react'
+import { useTranslation } from 'react-i18next'
 import { InvitationsTable } from '@/components/invitations/invitations-table'
 import { SendInvitationForm } from '@/components/invitations/send-invitation-form'
 import { Container } from '@/components/ui/container'
@@ -5,9 +8,6 @@ import { Format } from '@/components/ui/format'
 import DashboardLayout from '@/layouts/dashboard-layout'
 import { parseView } from '@/lib/utils'
 import type { Invitation, RawView, Team } from '@/types'
-import { Separator } from '@gmcode/react-ui'
-import { Head } from '@inertiajs/react'
-import { useTranslation } from 'react-i18next'
 
 export default function InvitationsIndex({
   invitations,

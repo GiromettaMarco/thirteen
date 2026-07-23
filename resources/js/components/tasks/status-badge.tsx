@@ -1,7 +1,7 @@
-import { Badge } from '@/components/ui/badge'
-import type { TaskStatus } from '@/types'
 import { Calendar, Check, Ellipsis, Inbox, X } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { Badge } from '@/components/ui/badge'
+import type { TaskStatus } from '@/types'
 
 export function StatusIcon({ status }: { status: TaskStatus }) {
   switch (status) {
@@ -53,8 +53,8 @@ export function StatusName({ status }: { status: TaskStatus }) {
 export function StatusBadge({ status }: { status: TaskStatus }) {
   return (
     <Badge
-      variant="outline"
       className="px-1.5 text-muted-foreground"
+      variant="outline"
     >
       <StatusIcon status={status} />
       <StatusName status={status} />

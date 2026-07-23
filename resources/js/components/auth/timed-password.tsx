@@ -1,7 +1,7 @@
-import { PasswordFieldPreset } from '@/components/auth/fields'
-import { AUTH_PASSWORD_TIMEOUT } from '@/config'
 import type { i18n } from 'i18next'
 import type { Control } from 'react-hook-form'
+import { PasswordFieldPreset } from '@/components/auth/fields'
+import { AUTH_PASSWORD_TIMEOUT } from '@/config'
 
 function isPasswordExpired(confirmedAt?: number | null): boolean {
   if (!confirmedAt) {

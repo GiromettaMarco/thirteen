@@ -1,3 +1,5 @@
+import { Link } from '@inertiajs/react'
+import { Fragment, type ComponentProps } from 'react'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,8 +8,6 @@ import {
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 import type { RouteDefinition } from '@/wayfinder'
-import { Link } from '@inertiajs/react'
-import { Fragment, type ComponentProps } from 'react'
 
 export interface BreadcrumbLink {
   href?: string | RouteDefinition<'get'>

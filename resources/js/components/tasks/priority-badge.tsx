@@ -1,7 +1,7 @@
-import { Badge } from '@/components/ui/badge'
-import type { TaskPriority } from '@/types'
 import { ArrowDown, ArrowRight, ArrowUp } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { Badge } from '@/components/ui/badge'
+import type { TaskPriority } from '@/types'
 
 export function PriorityIcon({ priority }: { priority: TaskPriority }) {
   switch (priority) {
@@ -41,8 +41,8 @@ export function PriorityName({ priority }: { priority: TaskPriority }) {
 export function PriorityBadge({ priority }: { priority: TaskPriority }) {
   return (
     <Badge
-      variant="outline"
       className="px-1.5 text-muted-foreground"
+      variant="outline"
     >
       <PriorityIcon priority={priority} />
       <PriorityName priority={priority} />

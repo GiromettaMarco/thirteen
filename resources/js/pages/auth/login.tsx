@@ -1,3 +1,8 @@
+import { CheckboxField, ErrorMonitor, Form, Submit } from '@gmcode/forms'
+import { Field, FieldLabel, Input } from '@gmcode/react-ui'
+import { Head } from '@inertiajs/react'
+import { Controller } from 'react-hook-form'
+import { Trans, useTranslation } from 'react-i18next'
 import { EmailFieldPreset } from '@/components/auth/fields'
 import { TextLink } from '@/components/text-link'
 import AuthLayout from '@/layouts/auth-layout'
@@ -5,11 +10,6 @@ import { register } from '@/routes'
 import { store } from '@/routes/login'
 import { request } from '@/routes/password'
 import { loginSchema } from '@/schemas/auth'
-import { CheckboxField, ErrorMonitor, Form, Submit } from '@gmcode/forms'
-import { Field, FieldLabel, Input } from '@gmcode/react-ui'
-import { Head } from '@inertiajs/react'
-import { Controller } from 'react-hook-form'
-import { Trans, useTranslation } from 'react-i18next'
 
 export default function Login({
   canRegister = false,
@@ -41,8 +41,8 @@ export default function Login({
               />
 
               <Controller
-                name="password"
                 control={form.control}
+                name="password"
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
                     <div className="flex flex-col-reverse gap-2">

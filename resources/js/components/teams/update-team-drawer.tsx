@@ -1,3 +1,7 @@
+import { Form, Submit, TextField } from '@gmcode/forms'
+import { Button } from '@gmcode/react-ui'
+import { useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   Drawer,
   DrawerClose,
@@ -12,10 +16,6 @@ import { AppContext } from '@/providers/app-context-provider'
 import { update } from '@/routes/teams'
 import { updateTeamSchema } from '@/schemas/teams'
 import type { Team } from '@/types'
-import { Form, Submit, TextField } from '@gmcode/forms'
-import { Button } from '@gmcode/react-ui'
-import { useContext } from 'react'
-import { useTranslation } from 'react-i18next'
 
 export default function UpdateTeamDrawer({
   team: singleResource

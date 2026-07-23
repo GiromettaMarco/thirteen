@@ -1,3 +1,6 @@
+import { Form, Submit } from '@gmcode/forms'
+import { Head } from '@inertiajs/react'
+import { Trans, useTranslation } from 'react-i18next'
 import {
   ConfirmPasswordFieldPreset,
   EmailFieldPreset,
@@ -9,9 +12,6 @@ import AuthLayout from '@/layouts/auth-layout'
 import { login } from '@/routes'
 import { store } from '@/routes/register'
 import { registerSchema } from '@/schemas/auth'
-import { Form, Submit } from '@gmcode/forms'
-import { Head } from '@inertiajs/react'
-import { Trans, useTranslation } from 'react-i18next'
 
 export default function Register() {
   // i18n

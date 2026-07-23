@@ -1,3 +1,7 @@
+import { Separator } from '@gmcode/react-ui'
+import { Head } from '@inertiajs/react'
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { BreadcrumbLink } from '@/components/breadcrumbs'
 import { ProjectsTable } from '@/components/projects/projects-table'
 import { MembersTable } from '@/components/teams/members-table'
@@ -14,10 +18,6 @@ import type {
   Team,
   WithTeamPermissions
 } from '@/types'
-import { Separator } from '@gmcode/react-ui'
-import { Head } from '@inertiajs/react'
-import { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 
 export default function TeamsShow({
   members,
@@ -38,8 +38,8 @@ export default function TeamsShow({
 
   const breadcrumbs = useMemo<BreadcrumbLink[]>(
     () => [
-      { key: 1, href: dashboard(), label: t(($) => $.dashboard) },
-      { key: 2, href: index(), label: t(($) => $.team, { count: 2 }) }
+      { href: dashboard(), key: 1, label: t(($) => $.dashboard) },
+      { href: index(), key: 2, label: t(($) => $.team, { count: 2 }) }
     ],
     [t]
   )

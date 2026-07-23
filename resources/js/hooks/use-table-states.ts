@@ -1,6 +1,3 @@
-import { viewDefaults } from '@/lib/utils'
-import { store } from '@/routes/views'
-import type { View, ViewStore } from '@/types'
 import type {
   ColumnFiltersState,
   PaginationState,
@@ -10,6 +7,9 @@ import type {
   VisibilityState
 } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'
+import { viewDefaults } from '@/lib/utils'
+import { store } from '@/routes/views'
+import type { View, ViewStore } from '@/types'
 
 export default function UseTableStates<TData extends RowData>({
   data: initialData,
@@ -54,7 +54,7 @@ export default function UseTableStates<TData extends RowData>({
         }
 
         if (newFiltersWithoutName.length !== oldFiltersSizeWithoutName) {
-          axios.post(store().url, {
+          void axios.post(store().url, {
             filters: JSON.stringify(newFiltersWithoutName),
             ...viewStore
           })
@@ -77,7 +77,7 @@ export default function UseTableStates<TData extends RowData>({
   const onColumnVisibilityChange = useMemo(
     () => (updater: Updater<VisibilityState>) => {
       if (viewStore) {
-        axios.post(store().url, {
+        void axios.post(store().url, {
           visibility: JSON.stringify(
             updater instanceof Function ? updater(columnVisibility) : updater
           ),
@@ -111,7 +111,7 @@ export default function UseTableStates<TData extends RowData>({
           newPagination.pageIndex != pagination.pageIndex ||
           newPagination.pageSize != pagination.pageSize
         ) {
-          axios.post(store().url, {
+          void axios.post(store().url, {
             pagination: JSON.stringify(newPagination),
             ...viewStore
           })
@@ -139,7 +139,7 @@ export default function UseTableStates<TData extends RowData>({
   const onSortingChange = useMemo(
     () => (updater: Updater<SortingState>) => {
       if (viewStore) {
-        axios.post(store().url, {
+        void axios.post(store().url, {
           sorting: JSON.stringify(
             updater instanceof Function ? updater(sorting) : updater
           ),

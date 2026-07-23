@@ -1,10 +1,10 @@
 import type { Appearance, Auth, FlashMessage } from '@/types'
 
 export interface SharedPageProps {
+  [key: string]: unknown
   appearance: Appearance
   auth: Auth
   sidebarOpen: boolean
-  [key: string]: unknown
 }
 
 declare module '@inertiajs/core' {

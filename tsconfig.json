@@ -1,36 +1,36 @@
 {
-    "compilerOptions": {
-        /* Language and Environment */
-        "target": "ESNext",
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ESNext",
 
-        /* Modules */
-        "module": "ESNext",
-        "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true,
+    /* Modules */
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
 
-        /* JavaScript Support */
-        "allowJs": true,
+    /* JavaScript Support */
+    "allowJs": true,
 
-        /* Emit */
-        "noEmit": true,
+    /* Emit */
+    "noEmit": true,
 
-        /* Interop Constraints */
-        "isolatedModules": true,
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
+    /* Interop Constraints */
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
 
-        /* Type Checking */
-        "strict": true,
-        "noImplicitAny": true,
+    /* Type Checking */
+    "strict": true,
+    "noImplicitAny": true,
 
-        /* Completeness */
-        // ignore storybook broken declarations
-        "skipLibCheck": true,
-        "paths": {
-            "@/*": ["./resources/js/*"]
-        },
-        "jsx": "react-jsx"
+    /* Completeness */
+    // ignore storybook broken declarations
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./resources/js/*"]
     },
-    /* @see https://github.com/microsoft/TypeScript/issues/49555 */
-    "include": [".storybook/**/*", "resources/js", "stories"]
+    "jsx": "react-jsx"
+  },
+  /* @see https://github.com/microsoft/TypeScript/issues/49555 */
+  "include": [".storybook/**/*", "resources/js", "stories"]
 }

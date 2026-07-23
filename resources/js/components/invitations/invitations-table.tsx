@@ -1,3 +1,16 @@
+import { useForm } from '@inertiajs/react'
+import type { ColumnDef } from '@tanstack/react-table'
+import {
+  getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable
+} from '@tanstack/react-table'
+import { useEffect, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import TableMain, {
   ActionsButton,
   AfterTable,
@@ -15,19 +28,6 @@ import UseTableStates from '@/hooks/use-table-states'
 import { format } from '@/lib/utils'
 import { destroy, update } from '@/routes/invitations'
 import type { Invitation, View, ViewStore } from '@/types'
-import { useForm } from '@inertiajs/react'
-import type { ColumnDef } from '@tanstack/react-table'
-import {
-  getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable
-} from '@tanstack/react-table'
-import { useEffect, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
 
 //#region InvitationsTableActions
 function UpdateInvitationItem({ id }: { id: number }) {
@@ -118,9 +118,9 @@ export function InvitationsTable({
 
   const labels = useMemo<Record<string, string>>(
     () => ({
-      user_email: t(($) => $.emailAddress),
       created_at: t(($) => $.pages.dashboard.invitations.first),
-      updated_at: t(($) => $.pages.dashboard.invitations.last)
+      updated_at: t(($) => $.pages.dashboard.invitations.last),
+      user_email: t(($) => $.emailAddress)
     }),
     [t]
   )
@@ -129,13 +129,13 @@ export function InvitationsTable({
     () => [
       {
         accessorKey: 'user.profile.name',
+        enableHiding: false,
         header: ({ column }) => (
           <SortableColumnHeader
             column={column}
             title={t(($) => $.name)}
           />
-        ),
-        enableHiding: false
+        )
       },
       {
         accessorKey: 'user.email',
@@ -169,34 +169,36 @@ export function InvitationsTable({
         sortingFn: 'datetime'
       },
       {
-        id: 'actions',
-        cell: ({ row }) => <InvitationsTableActions invitation={row.original} />
+        cell: ({ row }) => (
+          <InvitationsTableActions invitation={row.original} />
+        ),
+        id: 'actions'
       }
     ],
     [i18n.language, t]
   )
 
   const table = useReactTable({
-    data,
     columns,
-    state: {
-      sorting,
-      columnVisibility,
-      columnFilters,
-      pagination
-    },
-    getRowId: (row) => row.id.toString(),
+    data,
     enableRowSelection: false,
-    onSortingChange,
+    getCoreRowModel: getCoreRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getRowId: (row) => row.id.toString(),
+    getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange,
     onColumnVisibilityChange,
     onPaginationChange,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues()
+    onSortingChange,
+    state: {
+      columnFilters,
+      columnVisibility,
+      pagination,
+      sorting
+    }
   })
 
   return (
@@ -208,8 +210,8 @@ export function InvitationsTable({
         />
 
         <ColumnsVisibility
-          table={table}
           labels={labels}
+          table={table}
         />
       </div>
 

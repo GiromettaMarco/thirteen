@@ -1,10 +1,10 @@
+import { Submit } from '@gmcode/forms'
+import { Form, Head } from '@inertiajs/react'
+import { useTranslation } from 'react-i18next'
 import { TextLink } from '@/components/text-link'
 import AuthLayout from '@/layouts/auth-layout'
 import { logout } from '@/routes'
 import { send } from '@/routes/verification'
-import { Submit } from '@gmcode/forms'
-import { Form, Head } from '@inertiajs/react'
-import { useTranslation } from 'react-i18next'
 
 export default function VerifyEmail() {
   // i18n

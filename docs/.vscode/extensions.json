@@ -1,23 +1,21 @@
 {
-    "recommendations": [
-        "ryanluker.vscode-coverage-gutters",
-        "editorconfig.editorconfig",
-        "laravel.vscode-laravel",
-        "xdebug.php-debug",
-        "neilbrayfield.php-docblocker",
-        "bmewburn.vscode-intelephense-client",
-        "st-pham.php-refactor-tool",
-        "dbaeumer.vscode-eslint",
-        "unifiedjs.vscode-mdx",
-        "esbenp.prettier-vscode",
-        "vitest.explorer",
-        "redhat.vscode-yaml",
-        "actboy168.tasks",
-        "bradlc.vscode-tailwindcss",
-        "devsense.composer-php-vscode",
-        "streetsidesoftware.code-spell-checker",
-        "streetsidesoftware.code-spell-checker-italian",
-        "alek.gutteraid",
-        "fanaticpythoner.better-todo-tree"
-    ]
+  "recommendations": [
+    "ryanluker.vscode-coverage-gutters",
+    "editorconfig.editorconfig",
+    "laravel.vscode-laravel",
+    "xdebug.php-debug",
+    "neilbrayfield.php-docblocker",
+    "bmewburn.vscode-intelephense-client",
+    "st-pham.php-refactor-tool",
+    "unifiedjs.vscode-mdx",
+    "redhat.vscode-yaml",
+    "actboy168.tasks",
+    "bradlc.vscode-tailwindcss",
+    "devsense.composer-php-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "streetsidesoftware.code-spell-checker-italian",
+    "alek.gutteraid",
+    "fanaticpythoner.better-todo-tree",
+    "VoidZero.vite-plus-extension-pack"
+  ]
 }

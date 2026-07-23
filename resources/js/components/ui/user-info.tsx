@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { cn } from '@gmcode/react-ui'
 import { EllipsisVertical } from 'lucide-react'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 export function UserInfo({
   avatar,
@@ -25,8 +25,8 @@ export function UserInfo({
       <Avatar className="h-8 w-8 rounded-lg grayscale">
         {avatar && (
           <AvatarImage
-            src={avatar}
             alt={name}
+            src={avatar}
           />
         )}
         <AvatarFallback className="rounded-lg">

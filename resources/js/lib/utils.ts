@@ -1,7 +1,7 @@
-import type { RawView, View } from '@/types'
 import type { Locale } from 'date-fns'
 import { format as originalFormat } from 'date-fns'
 import { it } from 'date-fns/locale'
+import type { RawView, View } from '@/types'
 
 /**
  * Default values for a table view.

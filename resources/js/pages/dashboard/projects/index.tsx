@@ -1,11 +1,11 @@
+import { Head } from '@inertiajs/react'
+import { useTranslation } from 'react-i18next'
 import { ProjectsTable } from '@/components/projects/projects-table'
 import { NoCurrentTeam } from '@/components/teams/no-current-team'
 import { Container } from '@/components/ui/container'
 import DashboardLayout from '@/layouts/dashboard-layout'
 import { parseView } from '@/lib/utils'
 import type { Auth, Project, RawView, Team, WithTeamPermissions } from '@/types'
-import { Head } from '@inertiajs/react'
-import { useTranslation } from 'react-i18next'
 
 export default function ProjectsIndex({
   auth,

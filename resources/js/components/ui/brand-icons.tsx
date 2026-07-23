@@ -105,8 +105,8 @@ export function Laravel(props: SVGAttributes<SVGElement>) {
       {...props}
     >
       <path
-        d="M63,14.5c0,0.1,0,0.2,0,0.3v13.7c0,0.4-0.2,0.7-0.5,0.9L51.1,36v13.2c0,0.4-0.2,0.7-0.5,0.9L26.5,63.9 c-0.1,0-0.1,0.1-0.2,0.1c0,0,0,0-0.1,0c-0.2,0-0.3,0-0.5,0c0,0-0.1,0-0.1,0c-0.1,0-0.1,0-0.2-0.1L1.4,50c-0.3-0.2-0.5-0.5-0.5-0.9 V7.9c0-0.1,0-0.2,0-0.3c0,0,0-0.1,0-0.1C1,7.5,1,7.5,1,7.4c0,0,0-0.1,0.1-0.1c0,0,0.1-0.1,0.1-0.1c0,0,0.1-0.1,0.1-0.1 c0,0,0.1-0.1,0.1-0.1l12-6.9c0.3-0.2,0.7-0.2,1,0l12,6.9c0,0,0.1,0.1,0.1,0.1c0,0,0.1,0,0.1,0.1c0,0,0.1,0.1,0.1,0.1 c0,0,0.1,0.1,0.1,0.1c0,0,0,0.1,0.1,0.2c0,0,0,0.1,0,0.1c0,0.1,0,0.2,0,0.3v25.7l10-5.8V14.7c0-0.1,0-0.2,0-0.3c0,0,0-0.1,0-0.1 c0-0.1,0-0.1,0.1-0.2c0,0,0-0.1,0.1-0.1c0,0,0.1-0.1,0.1-0.1c0,0,0.1,0,0.1-0.1c0,0,0.1-0.1,0.1-0.1l12-6.9c0.3-0.2,0.7-0.2,1,0 l12,6.9c0,0,0.1,0.1,0.1,0.1c0,0,0.1,0,0.1,0.1c0,0,0.1,0.1,0.1,0.1c0,0,0,0.1,0.1,0.1C63,14.3,63,14.3,63,14.5 C63,14.4,63,14.4,63,14.5z M61.1,27.9V16.5l-4.2,2.4l-5.8,3.3v11.4C51.1,33.7,61.1,27.9,61.1,27.9z M49,48.6V37.1l-5.7,3.3L27,49.7 v11.5C27,61.3,49,48.6,49,48.6z M2.9,9.7v38.9L25,61.3V49.7l-11.5-6.5l0,0l0,0c0,0-0.1-0.1-0.1-0.1c0,0-0.1,0-0.1-0.1l0,0 c0,0-0.1-0.1-0.1-0.1c0,0-0.1-0.1-0.1-0.1l0,0c0,0,0-0.1-0.1-0.1c0,0,0-0.1,0-0.1c0,0,0-0.1,0-0.1c0,0,0-0.1,0-0.1V15.4l-5.8-3.3 C7.1,12.1,2.9,9.7,2.9,9.7z M14,2.2l-10,5.8l10,5.8l10-5.8L14,2.2L14,2.2z M19.2,38.2l5.8-3.3V9.7l-4.2,2.4L15,15.4v25.2 C15,40.6,19.2,38.2,19.2,38.2z M50,9l-10,5.8l10,5.8l10-5.8L50,9z M49,22.2l-5.8-3.3L39,16.5v11.4l5.8,3.3l4.2,2.4V22.2z M26,48 l14.7-8.4l7.3-4.2l-10-5.8l-11.5,6.6L16,42.3C16,42.3,26,48,26,48z"
         clipRule="evenodd"
+        d="M63,14.5c0,0.1,0,0.2,0,0.3v13.7c0,0.4-0.2,0.7-0.5,0.9L51.1,36v13.2c0,0.4-0.2,0.7-0.5,0.9L26.5,63.9 c-0.1,0-0.1,0.1-0.2,0.1c0,0,0,0-0.1,0c-0.2,0-0.3,0-0.5,0c0,0-0.1,0-0.1,0c-0.1,0-0.1,0-0.2-0.1L1.4,50c-0.3-0.2-0.5-0.5-0.5-0.9 V7.9c0-0.1,0-0.2,0-0.3c0,0,0-0.1,0-0.1C1,7.5,1,7.5,1,7.4c0,0,0-0.1,0.1-0.1c0,0,0.1-0.1,0.1-0.1c0,0,0.1-0.1,0.1-0.1 c0,0,0.1-0.1,0.1-0.1l12-6.9c0.3-0.2,0.7-0.2,1,0l12,6.9c0,0,0.1,0.1,0.1,0.1c0,0,0.1,0,0.1,0.1c0,0,0.1,0.1,0.1,0.1 c0,0,0.1,0.1,0.1,0.1c0,0,0,0.1,0.1,0.2c0,0,0,0.1,0,0.1c0,0.1,0,0.2,0,0.3v25.7l10-5.8V14.7c0-0.1,0-0.2,0-0.3c0,0,0-0.1,0-0.1 c0-0.1,0-0.1,0.1-0.2c0,0,0-0.1,0.1-0.1c0,0,0.1-0.1,0.1-0.1c0,0,0.1,0,0.1-0.1c0,0,0.1-0.1,0.1-0.1l12-6.9c0.3-0.2,0.7-0.2,1,0 l12,6.9c0,0,0.1,0.1,0.1,0.1c0,0,0.1,0,0.1,0.1c0,0,0.1,0.1,0.1,0.1c0,0,0,0.1,0.1,0.1C63,14.3,63,14.3,63,14.5 C63,14.4,63,14.4,63,14.5z M61.1,27.9V16.5l-4.2,2.4l-5.8,3.3v11.4C51.1,33.7,61.1,27.9,61.1,27.9z M49,48.6V37.1l-5.7,3.3L27,49.7 v11.5C27,61.3,49,48.6,49,48.6z M2.9,9.7v38.9L25,61.3V49.7l-11.5-6.5l0,0l0,0c0,0-0.1-0.1-0.1-0.1c0,0-0.1,0-0.1-0.1l0,0 c0,0-0.1-0.1-0.1-0.1c0,0-0.1-0.1-0.1-0.1l0,0c0,0,0-0.1-0.1-0.1c0,0,0-0.1,0-0.1c0,0,0-0.1,0-0.1c0,0,0-0.1,0-0.1V15.4l-5.8-3.3 C7.1,12.1,2.9,9.7,2.9,9.7z M14,2.2l-10,5.8l10,5.8l10-5.8L14,2.2L14,2.2z M19.2,38.2l5.8-3.3V9.7l-4.2,2.4L15,15.4v25.2 C15,40.6,19.2,38.2,19.2,38.2z M50,9l-10,5.8l10,5.8l10-5.8L50,9z M49,22.2l-5.8-3.3L39,16.5v11.4l5.8,3.3l4.2,2.4V22.2z M26,48 l14.7-8.4l7.3-4.2l-10-5.8l-11.5,6.6L16,42.3C16,42.3,26,48,26,48z"
         fill="#FF2D20"
         fillRule="evenodd"
       />
@@ -122,13 +122,13 @@ export function Pest(props: SVGAttributes<SVGElement>) {
       {...props}
     >
       <linearGradient
-        id="a"
-        gradientUnits="userSpaceOnUse"
-        x1="-966.0286"
-        y1="129.8598"
-        x2="-965.7107"
-        y2="129.8598"
         gradientTransform="matrix(869.3333 52.7991 232.9371 -197.0489 809467.9375 76685.5547)"
+        gradientUnits="userSpaceOnUse"
+        id="a"
+        x1="-966.0286"
+        x2="-965.7107"
+        y1="129.8598"
+        y2="129.8598"
       >
         <stop
           offset="0.1"
@@ -140,8 +140,8 @@ export function Pest(props: SVGAttributes<SVGElement>) {
         />
       </linearGradient>
       <path
-        fill="url(#a)"
         d="M227.1,57.9C232.7,26,211.4,0,179.6,0H35.8L25.6,57.9h143.9l-3.4,19.3H22.2L0,204h57.6l12.1-69H156 c31.8,0,62.1-26,67.7-57.9L227.1,57.9z"
+        fill="url(#a)"
       />
     </svg>
   )
@@ -150,10 +150,10 @@ export function Pest(props: SVGAttributes<SVGElement>) {
 export function Pnpm(props: SVGAttributes<SVGElement>) {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="50"
       height="50"
       viewBox="0 0 50 50"
+      width="50"
+      xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <path
@@ -196,8 +196,8 @@ export function React(props: SVGAttributes<SVGElement>) {
   return (
     <svg
       height="512px"
-      viewBox="0 0 569 512"
       version="1.1"
+      viewBox="0 0 569 512"
       width="569px"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
@@ -220,31 +220,31 @@ export function Shadcn(props: SVGAttributes<SVGElement>) {
       {...props}
     >
       <rect
-        width="256"
+        fill="none"
         height="256"
-        fill="none"
+        width="256"
       />
       <line
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
         x1="208"
-        y1="128"
         x2="128"
+        y1="128"
         y2="208"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="32"
       />
       <line
-        x1="192"
-        y1="40"
-        x2="40"
-        y2="192"
         fill="none"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="32"
+        x1="192"
+        x2="40"
+        y1="40"
+        y2="192"
       />
     </svg>
   )
@@ -312,10 +312,10 @@ export function TypeScript(props: SVGAttributes<SVGElement>) {
 export function Vite(props: SVGAttributes<SVGElement>) {
   return (
     <svg
-      width="410"
+      fill="none"
       height="404"
       viewBox="0 0 410 404"
-      fill="none"
+      width="410"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
@@ -329,12 +329,12 @@ export function Vite(props: SVGAttributes<SVGElement>) {
       />
       <defs>
         <linearGradient
+          gradientUnits="userSpaceOnUse"
           id="paint0_linear"
           x1="6.00017"
-          y1="32.9999"
           x2="235"
+          y1="32.9999"
           y2="344"
-          gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="#41D1FF" />
           <stop
@@ -343,12 +343,12 @@ export function Vite(props: SVGAttributes<SVGElement>) {
           />
         </linearGradient>
         <linearGradient
+          gradientUnits="userSpaceOnUse"
           id="paint1_linear"
           x1="194.651"
-          y1="8.81818"
           x2="236.076"
+          y1="8.81818"
           y2="292.989"
-          gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="#FFEA83" />
           <stop

@@ -1,3 +1,7 @@
+import { Button } from '@gmcode/react-ui'
+import { Head, Link } from '@inertiajs/react'
+import type { PropsWithChildren } from 'react'
+import { useTranslation } from 'react-i18next'
 import { BrandAndLogo } from '@/components/ui/brand'
 import {
   Docker,
@@ -16,10 +20,6 @@ import { Heading } from '@/components/ui/heading'
 import { APP_NAME } from '@/config'
 import PublicLayout from '@/layouts/public-layout'
 import { login } from '@/routes'
-import { Button } from '@gmcode/react-ui'
-import { Head, Link } from '@inertiajs/react'
-import type { PropsWithChildren } from 'react'
-import { useTranslation } from 'react-i18next'
 
 function StackItem({
   children,

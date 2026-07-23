@@ -1,10 +1,10 @@
+import { Head } from '@inertiajs/react'
+import { useTranslation } from 'react-i18next'
 import { AppearanceSelect } from '@/components/appearance-selector'
 import { LanguageSelect } from '@/components/language-selector'
 import { Container } from '@/components/ui/container'
 import { Format } from '@/components/ui/format'
 import DashboardLayout from '@/layouts/dashboard-layout'
-import { Head } from '@inertiajs/react'
-import { useTranslation } from 'react-i18next'
 
 export default function Settings() {
   // i18n

@@ -1,5 +1,5 @@
-import { description, name } from '@/schemas/misc'
 import { InputNumberRule, InputSelectRule, Schema } from '@gmcode/forms'
+import { description, name } from '@/schemas/misc'
 
 const label = new InputSelectRule({
   optional: true,
@@ -20,7 +20,7 @@ export const createTaskSchema = new Schema({
   description,
   label,
   name,
-  profile_id,
   priority,
+  profile_id,
   status
 })

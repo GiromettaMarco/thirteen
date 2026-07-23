@@ -14,7 +14,7 @@ export const WithI18next = (Story: PartialStoryFn, context: StoryContext) => {
 
   // Set the new locale in i18n when the locale global changes
   useEffect(() => {
-    i18n.changeLanguage(locale)
+    void i18n.changeLanguage(locale)
   }, [locale])
 
   return (

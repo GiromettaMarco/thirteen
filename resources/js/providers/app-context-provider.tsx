@@ -1,6 +1,4 @@
 // import { useActiveProjectChartData } from '@/hooks/use-active-project-chart-data'
-import { missingFn } from '@/lib/utils'
-import type { Project, Team } from '@/types'
 import {
   createContext,
   useEffect,
@@ -9,6 +7,8 @@ import {
   type PropsWithChildren,
   type SetStateAction
 } from 'react'
+import { missingFn } from '@/lib/utils'
+import type { Project, Team } from '@/types'
 
 export const AppContext = createContext<{
   // activeEmployee: EmployeeData | undefined
@@ -44,10 +44,10 @@ export const AppContext = createContext<{
   addProjectOpen: false,
   addTaskOpen: false,
   addTeamOpen: false,
-  // setActiveEmployee: missingFn,
-  setActiveProject: missingFn,
   // setActiveTask: missingFn,
   isTouch: undefined,
+  // setActiveEmployee: missingFn,
+  setActiveProject: missingFn,
   setActiveTeam: missingFn,
   setAddProjectOpen: missingFn,
   setAddTaskOpen: missingFn,

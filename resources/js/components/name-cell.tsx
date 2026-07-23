@@ -14,8 +14,8 @@ export function NameCell({
   return (
     <Button
       asChild
-      variant="link"
       className={cn('w-fit px-0', className)}
+      variant="link"
     >
       <Link href={href}>{name}</Link>
     </Button>

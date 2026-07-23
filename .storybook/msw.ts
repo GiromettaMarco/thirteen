@@ -32,8 +32,8 @@ function getInit(status: number = 200): HttpResponseInit {
 
 async function makeResponse(options?: {
   duration?: DelayMode | number
-  props?: object
   flash?: object
+  props?: object
   status?: number
 }) {
   await delay(options?.duration ?? 0)

@@ -1,9 +1,9 @@
-import { email, name } from '@/schemas/misc'
 import { InputRule, InputSelectRule, Schema } from '@gmcode/forms'
+import { email, name } from '@/schemas/misc'
 
 export const createInvitationSchema = new Schema({
-  name,
   email,
+  name,
   role: new InputSelectRule({
     options: ['guest', 'developer', 'designer', 'manager']
   }),
