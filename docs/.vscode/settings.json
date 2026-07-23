@@ -1,117 +1,168 @@
 {
-    // Avoid polluting search results
-    "search.exclude": {
-        "composer.lock": true,
-        "reports/": true,
-        "storage/": true,
-        "vendor/": true,
-        "pnpm-lock.yaml": true,
-        "node_modules/": true
+  // Avoid polluting search results
+  "search.exclude": {
+    "composer.lock": true,
+    "reports/": true,
+    "storage/": true,
+    "vendor/": true,
+    "pnpm-lock.yaml": true,
+    "node_modules/": true
+  },
+
+  // Ensure VSCode uses pnpm instead of npm
+  "npm.packageManager": "pnpm",
+
+  // Tailwind
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  // Conventional commit
+  "conventionalCommits.scopes": ["client", "server"],
+
+  // Intelephense
+  "intelephense.diagnostics.argumentCount": "declared",
+
+  // Spell check
+  "cSpell.language": "en,it",
+  "cSpell.ignorePaths": [
+    "package-lock.json",
+    "node_modules",
+    "vscode-extension",
+    ".git/{info,lfs,logs,refs,objects}/**",
+    ".git/{index,*refs,*HEAD}",
+    ".vscode",
+    ".vscode-insiders",
+    "composer.json",
+    "package.json"
+  ],
+  "cSpell.words": [
+    "autodocs",
+    "disconnetti",
+    "Dispatchable",
+    "endforeach",
+    "endisset",
+    "Gantt",
+    "hookform",
+    "improcessabile",
+    "inertiajs",
+    "Infobox",
+    "isset",
+    "languagedetector",
+    "Laravel",
+    "Lngs",
+    "oklch",
+    "Subcopy",
+    "wayfinder"
+  ],
+
+  // Better Todo Tree
+  "better-todo-tree.general.tags": [
+    "TODO",
+    "NOTE",
+    "LEARN",
+    "FIXME",
+    "BUG",
+    "[ ]",
+    "[x]"
+  ],
+  "better-todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "icon": "check",
+      "background": "#FFFF00",
+      "iconColour": "#FFFF00"
     },
-
-    // Ensure VSCode uses pnpm instead of npm
-    "npm.packageManager": "pnpm",
-
-    // Tailwind
-    "files.associations": {
-        "*.css": "tailwindcss"
+    "NOTE": {
+      "icon": "note",
+      "background": "#6495ED",
+      "iconColour": "#6495ED"
     },
-
-    // Conventional commit
-    "conventionalCommits.scopes": ["client", "server"],
-
-    // Intelephense
-    "intelephense.diagnostics.argumentCount": "declared",
-
-    // Spell check
-    "cSpell.language": "en,it",
-    "cSpell.ignorePaths": [
-        "package-lock.json",
-        "node_modules",
-        "vscode-extension",
-        ".git/{info,lfs,logs,refs,objects}/**",
-        ".git/{index,*refs,*HEAD}",
-        ".vscode",
-        ".vscode-insiders",
-        "composer.json",
-        "package.json"
-    ],
-    "cSpell.words": [
-        "autodocs",
-        "disconnetti",
-        "Dispatchable",
-        "endforeach",
-        "endisset",
-        "Gantt",
-        "improcessabile",
-        "inertiajs",
-        "Infobox",
-        "isset",
-        "Laravel",
-        "oklch",
-        "Subcopy",
-        "wayfinder"
-    ],
-
-    // Better Todo Tree
-    "better-todo-tree.general.tags": [
-        "TODO",
-        "NOTE",
-        "LEARN",
-        "FIXME",
-        "BUG",
-        "[ ]",
-        "[x]"
-    ],
-    "better-todo-tree.highlights.customHighlight": {
-        "TODO": {
-            "icon": "check",
-            "background": "#FFFF00",
-            "iconColour": "#FFFF00"
-        },
-        "NOTE": {
-            "icon": "note",
-            "background": "#6495ED",
-            "iconColour": "#6495ED"
-        },
-        "LEARN": {
-            "icon": "note",
-            "background": "#FF69B4",
-            "iconColour": "#FF69B4"
-        },
-        "FIXME": {
-            "background": "#DEB887",
-            "iconColour": "#DEB887"
-        },
-        "BUG": {
-            "background": "#DC143C",
-            "iconColour": "#DC143C"
-        },
-        "[ ]": {
-            "icon": "check",
-            "background": "#FFFFFF",
-            "iconColour": "#FFFF00"
-        },
-        "[x]": {
-            "icon": "check",
-            "background": "#008000",
-            "iconColour": "#008000"
-        }
+    "LEARN": {
+      "icon": "note",
+      "background": "#FF69B4",
+      "iconColour": "#FF69B4"
     },
-    "better-todo-tree.highlights.defaultHighlight": {
-        "icon": "alert",
-        "type": "tag",
-        "opacity": 0,
-        "iconColour": "#0000FF",
-        "gutterIcon": true
+    "FIXME": {
+      "background": "#DEB887",
+      "iconColour": "#DEB887"
     },
-    "better-todo-tree.tree.scanMode": "workspace only",
-    "better-todo-tree.tree.showBadges": true,
-    "better-todo-tree.regex.regex": "(\\*|//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*@($TAGS).*(\\n\\s*//\\s{2,}.*)*",
-    "better-todo-tree.regex.regexCaseSensitive": false,
-    "better-todo-tree.general.tagGroups": {},
+    "BUG": {
+      "background": "#DC143C",
+      "iconColour": "#DC143C"
+    },
+    "[ ]": {
+      "icon": "check",
+      "background": "#FFFFFF",
+      "iconColour": "#FFFF00"
+    },
+    "[x]": {
+      "icon": "check",
+      "background": "#008000",
+      "iconColour": "#008000"
+    }
+  },
+  "better-todo-tree.highlights.defaultHighlight": {
+    "icon": "alert",
+    "type": "tag",
+    "opacity": 0,
+    "iconColour": "#0000FF",
+    "gutterIcon": true
+  },
+  "better-todo-tree.tree.scanMode": "workspace only",
+  "better-todo-tree.tree.showBadges": true,
+  "better-todo-tree.regex.regex": "(\\*|//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*@($TAGS).*(\\n\\s*//\\s{2,}.*)*",
+  "better-todo-tree.regex.regexCaseSensitive": false,
+  "better-todo-tree.general.tagGroups": {},
 
-    // Typescript
-    "js/ts.tsdk.path": "node_modules/typescript/lib",
-    "js/ts.tsdk.promptToUseWorkspaceVersion": true
+  // Typescript
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "js/ts.tsdk.promptToUseWorkspaceVersion": true,
+
+  // Vite Plus
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "[html]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[tailwindcss]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "oxc.fmt.configPath": "./vite.config.ts",
+  "npm.scriptRunner": "vp",
+
+  // @see https://vite.dev/config/#debugging-the-config-file-on-vs-code
+  "debug.javascript.terminalOptions": {
+    "resolveSourceMapLocations": [
+      "${workspaceFolder}/**",
+      "!**/node_modules/**",
+      "**/node_modules/.vite-temp/**"
+    ]
+  },
+
+  // Format on save
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.oxc": "explicit"
+  }
 }
