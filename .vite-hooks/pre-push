@@ -1,4 +1,4 @@
-pnpm types
-pnpm run build
+vp check
+vp build
 composer run-script test
 composer run-script test:browser

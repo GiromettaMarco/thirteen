@@ -2,29 +2,34 @@ import type { StorybookConfig } from '@storybook/react-vite'
 import alias from './alias.ts'
 
 const config: StorybookConfig = {
-  stories: [
-    '../stories/**/*.mdx',
-    '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'
-  ],
   addons: [
     '@storybook/addon-vitest',
     '@storybook/addon-a11y',
     '@storybook/addon-docs',
     '@storybook/addon-themes'
   ],
-  framework: '@storybook/react-vite',
   core: {
     disableTelemetry: true
   },
   features: {
     sidebarOnboardingChecklist: false
   },
+  framework: '@storybook/react-vite',
   staticDirs: ['../public'],
+  stories: [
+    '../stories/**/*.mdx',
+    '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'
+  ],
   viteFinal: async (config) => {
     if (config.resolve) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        ...alias
+      if (Array.isArray(config.resolve.alias)) {
+        config.resolve.alias.push(alias)
+      } else {
+        config.resolve.alias = {
+          // oxlint-disable-next-line typescript/no-misused-spread
+          ...config.resolve.alias,
+          ...alias
+        }
       }
     }
     return config
