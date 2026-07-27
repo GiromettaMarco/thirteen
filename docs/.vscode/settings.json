@@ -164,5 +164,9 @@
   "editor.formatOnSaveMode": "file",
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "explicit"
-  }
+  },
+  "Laravel.pint.runOnSave": true,
+
+  // Disable laravel test runner integration
+  "Laravel.testRunner.enabled": false
 }
