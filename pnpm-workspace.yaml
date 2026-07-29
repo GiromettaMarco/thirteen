@@ -6,10 +6,11 @@ patchedDependencies:
   # fix ast-types imports (required with "skipLibCheck": false)
   ast-types: patches/ast-types.patch
 catalog:
-  vite: npm:@voidzero-dev/vite-plus-core@0.2.5
-  vitest: 4.1.10
-  vite-plus: 0.2.5
   '@vitest/coverage-v8': 4.1.10
+  '@vitest/browser-playwright': 4.1.10
+  vite: npm:@voidzero-dev/vite-plus-core@0.2.6
+  vitest: 4.1.10
+  vite-plus: 0.2.6
 overrides:
   vite: 'catalog:'
   vitest: 'catalog:'
