@@ -147,6 +147,9 @@
   "[tailwindcss]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
+  "[json]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
   "oxc.fmt.configPath": "./vite.config.ts",
   "npm.scriptRunner": "vp",
 
