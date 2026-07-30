@@ -34,6 +34,8 @@
         <env name="PULSE_ENABLED" value="false"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>
+        <env name="INERTIA_SSR_ENABLED" value="false"/>
+        <env name="INERTIA_SSR_THROW_ON_ERROR" value="true"/>
     </php>
     <coverage>
         <report>
