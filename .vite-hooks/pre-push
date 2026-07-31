@@ -1,4 +1,5 @@
 vp check
+composer run lint
 vp build
-composer run-script test
-composer run-script test:browser
+composer run test
+composer run test:browser
