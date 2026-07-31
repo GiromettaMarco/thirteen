@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\ThrottledRequest;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
@@ -31,9 +32,9 @@ class PasswordEmailRequest extends ThrottledRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return ['email' => ['required', 'email']];
     }
@@ -61,7 +62,7 @@ class PasswordEmailRequest extends ThrottledRequest
      *
      * @throws ValidationException
      */
-    public function sendLink()
+    public function sendLink(): void
     {
         $this->ensureIsNotRateLimited();
 

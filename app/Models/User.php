@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Notifications\Invitation as NotificationsInvitation;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -14,20 +15,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Password;
 
+/**
+ * @property-read Profile $profile
+ */
+#[Fillable(['email', 'password'])]
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'email',
-        'password',
-    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -54,6 +49,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * One to One relationship.
+     *
+     * @return HasOne<Profile, $this>
      */
     public function profile(): HasOne
     {
@@ -62,6 +59,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Many to Many relationship.
+     *
+     * @return BelongsToMany<Permission, $this>
      */
     public function permissions(): BelongsToMany
     {
@@ -70,6 +69,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * One to One relationship.
+     *
+     * @return HasOne<Invitation, $this>
      */
     public function invitation(): HasOne
     {
@@ -90,6 +91,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * One to Many (inverse) relationship
+     *
+     * @return BelongsTo<Team, $this>
      */
     public function currentTeam(): BelongsTo
     {
@@ -99,7 +102,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Send a new invitation notification.
      */
-    public function invite()
+    public function invite(): void
     {
         $this->notify(
             new NotificationsInvitation(Password::createToken($this))
@@ -108,6 +111,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * One to Many relationship
+     *
+     * @return HasMany<View, $this>
      */
     public function views(): HasMany
     {

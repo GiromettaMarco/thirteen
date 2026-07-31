@@ -12,9 +12,10 @@ class Permissions
     /**
      *  Get app level permissions for the current authenticated user.
      *
-     * @param  array|null  $resource  Resource permissions.
+     * @param  array<string, mixed>|null  $resource  Resource permissions.
+     * @return array<string, mixed>
      */
-    public static function getPermissions(?array $resource = null)
+    public static function getPermissions(?array $resource = null): array
     {
         $user = Auth::user();
 
@@ -41,9 +42,10 @@ class Permissions
      * Get all authentication data required by the administrative
      * section of the application.
      *
-     * @param  array|null  $resource  Resource permissions.
+     * @param  array<string, mixed>|null  $resource  Resource permissions.
+     * @return array<string, mixed>
      */
-    public static function getAuth(?array $resource = null)
+    public static function getAuth(?array $resource = null): ?array
     {
         return [
             'password_confirmed_at' => session()->get('auth.password_confirmed_at'),
@@ -54,8 +56,10 @@ class Permissions
 
     /**
      * Get the authenticated user data.
+     *
+     * @return array<string, mixed>|null
      */
-    public static function getUser()
+    public static function getUser(): ?array
     {
         $user = Auth::user();
 

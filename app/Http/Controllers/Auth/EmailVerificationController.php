@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\VerificationSendRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -22,7 +23,10 @@ class EmailVerificationController extends Controller
             abort(403);
         }
 
-        return $request->user()->hasVerifiedEmail()
+        /** @var User */
+        $user = $request->user();
+
+        return $user->hasVerifiedEmail()
             ? redirect()->intended(route('dashboard', absolute: false))
             : Inertia::render('auth/verify-email');
     }
@@ -32,7 +36,10 @@ class EmailVerificationController extends Controller
      */
     public function store(VerificationSendRequest $request): RedirectResponse
     {
-        if ($request->user()->hasVerifiedEmail()) {
+        /** @var User */
+        $user = $request->user();
+
+        if ($user->hasVerifiedEmail()) {
             return redirect()->intended(route('dashboard', absolute: false));
         }
 

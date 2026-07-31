@@ -24,9 +24,11 @@ class CurrentTeamFallback
         //     $this->onMemberRemoved($event);
         // }
 
-        if (is_a($event, TeamDeleting::class)) {
-            $this->onTeamDeleting($event);
-        }
+        // if (is_a($event, TeamDeleting::class)) {
+        //     $this->onTeamDeleting($event);
+        // }
+
+        $this->onTeamDeleting($event);
     }
 
     // /**

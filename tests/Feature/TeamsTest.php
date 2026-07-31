@@ -42,6 +42,8 @@ it('may accept a create team request', function () {
 });
 
 it('may auto assign current team on create if missing', function () {
+    // @see https://github.com/laravel/vs-code-extension/issues/573
+    /** @var User $user */
     $user = User::find(2);
 
     actingAs($user)

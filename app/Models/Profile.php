@@ -2,26 +2,33 @@
 
 namespace App\Models;
 
+use App\Enums\ProfileRole;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property-read User $user
+ */
+#[Fillable(['name', 'public', 'role'])]
 class Profile extends Model
 {
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
+     * Get the attributes that should be cast.
      */
-    protected $fillable = [
-        'name',
-        'public',
-        'role',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'role' => ProfileRole::class,
+        ];
+    }
 
     /**
      * One to One (inverse) relationship.
+     *
+     * @return BelongsTo<User, $this>
      */
     public function user(): BelongsTo
     {
@@ -30,11 +37,14 @@ class Profile extends Model
 
     /**
      * Many to Many relationship.
+     *
+     * @return BelongsToMany<Team, $this, Membership, 'pivot'>
      */
     public function teams(): BelongsToMany
     {
         return $this
             ->belongsToMany(Team::class)
+            ->using(Membership::class)
             ->withPivot([
                 'admin',
                 'can_edit',
@@ -47,6 +57,8 @@ class Profile extends Model
 
     /**
      * One to Many relationship
+     *
+     * @return HasMany<Task, $this>
      */
     public function tasks(): HasMany
     {

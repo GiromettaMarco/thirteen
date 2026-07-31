@@ -3,29 +3,22 @@
 namespace App\Models;
 
 use App\Events\TeamDeleting;
+use Database\Factories\TeamFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 
+#[Fillable(['name'])]
 class Team extends Model
 {
+    /** @use HasFactory<TeamFactory> */
     use HasFactory;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-    ];
-
-    /**
      * The event map for the model.
-     *
-     * @var array<string, string>
      */
     protected $dispatchesEvents = [
         'deleting' => TeamDeleting::class,
@@ -51,11 +44,14 @@ class Team extends Model
 
     /**
      * Many to Many relationship.
+     *
+     * @return BelongsToMany<Profile, $this, Membership, 'pivot'>
      */
     public function profiles(): BelongsToMany
     {
         return $this
             ->belongsToMany(Profile::class)
+            ->using(Membership::class)
             ->withPivot([
                 'admin',
                 'can_edit',
@@ -68,6 +64,8 @@ class Team extends Model
 
     /**
      * One to Many relationship
+     *
+     * @return HasMany<Project, $this>
      */
     public function projects(): HasMany
     {

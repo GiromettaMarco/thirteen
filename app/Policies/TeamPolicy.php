@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Membership;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -13,7 +14,10 @@ class TeamPolicy
      */
     public function update(User $user, Team $team): Response
     {
-        return $team->pivot->can_edit
+        /** @var Membership $membership */
+        $membership = $team->getRelation('pivot');
+
+        return $membership->can_edit
             ? Response::allow()
             : Response::deny();
     }
@@ -23,7 +27,10 @@ class TeamPolicy
      */
     public function delete(User $user, Team $team): Response
     {
-        return $team->pivot->can_delete
+        /** @var Membership $membership */
+        $membership = $team->getRelation('pivot');
+
+        return $membership->can_delete
             ? Response::allow()
             : Response::deny();
     }
@@ -33,7 +40,10 @@ class TeamPolicy
      */
     public function editMembers(User $user, Team $team): Response
     {
-        return $team->pivot->can_edit_members
+        /** @var Membership $membership */
+        $membership = $team->getRelation('pivot');
+
+        return $membership->can_edit_members
             ? Response::allow()
             : Response::deny();
     }
@@ -43,7 +53,10 @@ class TeamPolicy
      */
     public function editProjects(User $user, Team $team): Response
     {
-        return $team->pivot->can_edit_projects
+        /** @var Membership $membership */
+        $membership = $team->getRelation('pivot');
+
+        return $membership->can_edit_projects
             ? Response::allow()
             : Response::deny();
     }

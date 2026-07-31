@@ -88,7 +88,6 @@ class Invitation extends Notification
     /**
      * Get the reset forgot password URL.
      *
-     * @param  User  $notifiable
      * @return string
      */
     protected function forgotPasswordUrl()

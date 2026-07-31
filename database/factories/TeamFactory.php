@@ -18,6 +18,7 @@ class TeamFactory extends Factory
     public function definition(): array
     {
         return [
+            // @phpstan-ignore argument.type (missing generic)
             'name' => ucwords(fake()->words(2, true)),
         ];
     }

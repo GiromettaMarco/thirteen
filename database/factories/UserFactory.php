@@ -46,7 +46,7 @@ class UserFactory extends Factory
     /**
      * Add a related profile model.
      */
-    public function withProfile(string $name, string $role = 'guest'): Factory
+    public function withProfile(string $name, string $role = 'guest'): UserFactory
     {
         static::$name = $name;
 

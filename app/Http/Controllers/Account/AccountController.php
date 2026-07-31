@@ -41,6 +41,7 @@ class AccountController extends Controller
 
         $user->email = $request->validated('email');
 
+        // @phpstan-ignore instanceof.alwaysTrue (email verification may be disabled in config)
         if ($user->isDirty() && $user instanceof MustVerifyEmail) {
             $user->forceFill([
                 'email_verified_at' => null,
@@ -61,7 +62,11 @@ class AccountController extends Controller
      */
     public function destroy(DestroyAccountRequest $request): RedirectResponse
     {
-        // Cache user before logout
+        /**
+         * Cache user before logout.
+         *
+         * @var User $user
+         */
         $user = $request->user();
 
         Auth::logout();
@@ -79,18 +84,21 @@ class AccountController extends Controller
     /**
      * Get active sessions for the authenticated user.
      *
-     * @return Collection
+     * @return Collection<int, mixed>
      */
-    public function sessions(Request $request)
+    public function sessions(Request $request): Collection
     {
         if (config('session.driver') !== 'database') {
             return collect();
         }
 
+        /** @var User */
+        $user = $request->user();
+
         return collect(
             DB::connection(config('session.connection'))
                 ->table(config('session.table', 'sessions'))
-                ->where('user_id', $request->user()->getAuthIdentifier())
+                ->where('user_id', $user->getAuthIdentifier())
                 ->orderBy('last_activity', 'desc')
                 ->get()
         )->map(function ($session) use ($request) {

@@ -17,8 +17,10 @@ class DatabaseSeeder extends Seeder
         $view_users = Permission::create(['name' => 'view-users']);
         $edit_users = Permission::create(['name' => 'edit-users']);
 
-        $teams = Team::factory(3)
-            ->create();
+        $teams = Team::factory(3)->create();
+
+        /** @var Team */
+        $team_1 = $teams[0];
 
         $all_permissions = [
             'admin' => true,
@@ -38,7 +40,7 @@ class DatabaseSeeder extends Seeder
 
         /** @var User */
         $test_user = User::factory()
-            ->for($teams[0], 'currentTeam')
+            ->for($team_1, 'currentTeam')
             ->hasAttached($view_users)
             ->hasAttached($edit_users)
             ->withProfile('Test User', 'manager')
@@ -55,7 +57,7 @@ class DatabaseSeeder extends Seeder
 
         /** @var User */
         $bob_brown = User::factory()
-            ->for($teams[0], 'currentTeam')
+            ->for($team_1, 'currentTeam')
             ->withProfile('Bob Brown')
             ->create(['email' => 'bob@example.com']);
 

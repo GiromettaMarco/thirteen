@@ -2,31 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property-read Team $team
+ */
+#[Fillable(['name', 'description', 'archived', 'deadline'])]
 class Project extends Model
 {
-    use HasFactory;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-        'description',
-        'deadline',
-        'archived',
-    ];
-
     /**
      * The model's default values for attributes.
-     *
-     * @var array
      */
     protected $attributes = [
         'archived' => false,
@@ -43,6 +31,8 @@ class Project extends Model
 
     /**
      * One to Many (inverse) relationship.
+     *
+     * @return BelongsTo<Team, $this>
      */
     public function team(): BelongsTo
     {
@@ -51,6 +41,8 @@ class Project extends Model
 
     /**
      * One to Many relationship.
+     *
+     * @return HasMany<Task, $this>
      */
     public function tasks(): HasMany
     {

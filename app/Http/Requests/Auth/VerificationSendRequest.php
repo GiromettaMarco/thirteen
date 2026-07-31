@@ -21,7 +21,7 @@ class VerificationSendRequest extends ThrottledRequest
      */
     public function throttleKey(): string
     {
-        return 'verification-send|'.$this->user()->id;
+        return 'verification-send|'.$this->user()?->id;
     }
 
     /**
@@ -34,11 +34,11 @@ class VerificationSendRequest extends ThrottledRequest
      *
      * @throws ValidationException
      */
-    public function sendEmail()
+    public function sendEmail(): void
     {
         $this->ensureIsNotRateLimited();
 
-        $this->user()->sendEmailVerificationNotification();
+        $this->user()?->sendEmailVerificationNotification();
 
         $this->limiterHit();
     }

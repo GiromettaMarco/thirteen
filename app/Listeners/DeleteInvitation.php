@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Models\Invitation;
+use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 
 class DeleteInvitation
@@ -17,11 +17,10 @@ class DeleteInvitation
      */
     public function handle(PasswordReset $event): void
     {
-        /** @var Invitation | null */
-        $invitation = $event->user->invitation;
+        $user = $event->user;
 
-        if ($invitation) {
-            $invitation->delete();
+        if ($user instanceof User && $user->invitation) {
+            $user->invitation->delete();
         }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Project\StoreProjectRequest;
+use App\Models\Membership;
 use App\Models\Project;
 use App\Models\Team;
 use App\Models\User;
@@ -50,8 +51,17 @@ class ProjectController extends Controller
         /** @var User $user */
         $user = $request->user();
 
+        /** @var Membership $membership */
+        $membership = $team->getRelation('pivot');
+
         return Inertia::render('dashboard/projects/show', [
-            'permissions' => $team->pivot,
+            'permissions' => [
+                'admin' => $membership->admin,
+                'can_delete' => $membership->can_delete,
+                'can_edit' => $membership->can_edit,
+                'can_edit_members' => $membership->can_edit_members,
+                'can_edit_projects' => $membership->can_edit_projects,
+            ],
             'project' => $project,
             'tasks' => $project->tasks()->with('profile')->get(),
             'team_members' => $team->profiles()->get(),

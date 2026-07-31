@@ -35,11 +35,17 @@ class VerifyEmailController extends Controller implements HasMiddleware
      */
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
-        if ($request->user()->hasVerifiedEmail()) {
+        $user = $request->user();
+
+        if (is_null($user)) {
+            abort(401, 'Unauthenticated.');
+        }
+
+        if ($user->hasVerifiedEmail()) {
             return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
         }
 
-        if ($request->user()->markEmailAsVerified()) {
+        if ($user->markEmailAsVerified()) {
             /** @var MustVerifyEmail $user */
             $user = $request->user();
 

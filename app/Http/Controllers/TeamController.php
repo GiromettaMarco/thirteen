@@ -26,7 +26,7 @@ class TeamController extends Controller
                 ->profile
                 ->teams()
                 ->withCount(['profiles'])
-                ->orderBy('updated_at', 'DESC')
+                ->orderBy('updated_at', 'desc')
                 ->get(),
             'views' => [
                 'teams' => $user->views()->where([
@@ -96,7 +96,6 @@ class TeamController extends Controller
         /** @var User */
         $user = $request->user();
 
-        /** @var Team */
         $team = $user->profile->teams()->create(
             $request->validated(),
             [

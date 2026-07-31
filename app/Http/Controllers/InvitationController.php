@@ -23,7 +23,7 @@ class InvitationController extends Controller
 
         return Inertia::render('dashboard/invitations/index', [
             'invitations' => Invitation::with(['user', 'user.profile'])
-                ->orderBy('created_at', 'DESC')
+                ->orderBy('created_at', 'desc')
                 ->get(),
             // @TODO add can_edit_members policy check for each team
             'teams' => $user->profile->teams,
@@ -53,7 +53,7 @@ class InvitationController extends Controller
             'email' => $validated['email'],
         ]);
 
-        $user->profile()->create([
+        $profile = $user->profile()->create([
             'name' => $validated['name'],
             'public' => false,
             'role' => $validated['role'],
@@ -64,7 +64,7 @@ class InvitationController extends Controller
 
         if (is_array($teams)) {
             // @TODO add can_edit_members policy check for each team
-            $user->profile->teams()->attach($teams);
+            $profile->teams()->attach($teams);
         }
 
         // Invite

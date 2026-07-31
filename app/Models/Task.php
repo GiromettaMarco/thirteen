@@ -2,31 +2,35 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\TaskLabel;
+use App\Enums\TaskPriority;
+use App\Enums\TaskStatus;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property-read Project $project
+ */
+#[Fillable(['name', 'description', 'label', 'priority', 'status'])]
 class Task extends Model
 {
-    use HasFactory;
-
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * Get the attributes that should be cast.
      */
-    protected $fillable = [
-        'name',
-        'description',
-        'label',
-        'priority',
-        'profile_id',
-        'project_id',
-        'status',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'label' => TaskLabel::class,
+            'priority' => TaskPriority::class,
+            'status' => TaskStatus::class,
+        ];
+    }
 
     /**
      * One to Many (inverse) relationship.
+     *
+     * @return BelongsTo<Project, $this>
      */
     public function project(): BelongsTo
     {
@@ -35,6 +39,8 @@ class Task extends Model
 
     /**
      * One to Many (inverse) relationship.
+     *
+     * @return BelongsTo<Profile, $this>
      */
     public function profile(): BelongsTo
     {

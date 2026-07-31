@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateCurrentTeamRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Sliver\Format\FlashMessage;
@@ -14,6 +15,7 @@ class CurrentTeamController extends Controller
      */
     public function update(UpdateCurrentTeamRequest $request): RedirectResponse
     {
+        /** @var User */
         $user = $request->user();
 
         $user->currentTeam()->associate($request->validated('id'));

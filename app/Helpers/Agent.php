@@ -106,19 +106,21 @@ class Agent extends MobileDetect
     /**
      * Match a detection rule and return the matched key.
      *
-     * @return string|null
+     * @param  array<int|string, mixed>  $rules
      */
-    protected function findDetectionRulesAgainstUserAgent(array $rules)
+    protected function findDetectionRulesAgainstUserAgent(array $rules): ?string
     {
         $userAgent = $this->getUserAgent();
 
-        foreach ($rules as $key => $regex) {
-            if (empty($regex)) {
-                continue;
-            }
+        if (! is_null($userAgent)) {
+            foreach ($rules as $key => $regex) {
+                if (empty($regex)) {
+                    continue;
+                }
 
-            if ($this->match($regex, $userAgent)) {
-                return $key ?: reset($this->matchesArray);
+                if ($this->match($regex, $userAgent)) {
+                    return $key ?: reset($this->matchesArray);
+                }
             }
         }
 
@@ -147,10 +149,10 @@ class Agent extends MobileDetect
     /**
      * Merge multiple rules into one array.
      *
-     * @param  array  $all
-     * @return array<string, string>
+     * @param  array<string|int, mixed>  $all
+     * @return array<int|string, mixed>
      */
-    protected function mergeRules(...$all)
+    protected function mergeRules(...$all): array
     {
         $merged = [];
 

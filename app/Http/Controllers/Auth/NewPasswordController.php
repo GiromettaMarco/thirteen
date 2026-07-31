@@ -48,6 +48,7 @@ class NewPasswordController extends Controller
             function (User $user) use ($request) {
                 // Verify the user email if set in config
                 $verify_email = Config::get('custom.auth.verify_on_reset') &&
+                    // @phpstan-ignore instanceof.alwaysTrue (email verification may be disabled in config)
                     $user instanceof MustVerifyEmail &&
                     ! $user->hasVerifiedEmail();
 

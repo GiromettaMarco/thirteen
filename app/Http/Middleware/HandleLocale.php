@@ -12,6 +12,8 @@ class HandleLocale
 {
     /**
      * List of available locales.
+     *
+     * @var array<int, string>
      */
     public $available = [
         'en',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Account\DestroyOtherSessionsRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,11 +18,14 @@ class OtherSessionsController extends Controller
      */
     public function destroy(DestroyOtherSessionsRequest $request): RedirectResponse
     {
+        /** @var User */
+        $user = $request->user();
+
         Auth::logoutOtherDevices($request->password);
 
         if (config('session.driver') === 'database') {
             DB::connection(config('session.connection'))->table(config('session.table', 'sessions'))
-                ->where('user_id', $request->user()->getAuthIdentifier())
+                ->where('user_id', $user->getAuthIdentifier())
                 ->where('id', '!=', $request->session()->getId())
                 ->delete();
         }
