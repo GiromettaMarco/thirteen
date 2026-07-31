@@ -16,6 +16,7 @@
     "streetsidesoftware.code-spell-checker-italian",
     "alek.gutteraid",
     "fanaticpythoner.better-todo-tree",
-    "VoidZero.vite-plus-extension-pack"
+    "VoidZero.vite-plus-extension-pack",
+    "sanderronde.phpstan-vscode"
   ]
 }

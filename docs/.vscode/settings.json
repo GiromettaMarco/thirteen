@@ -37,6 +37,7 @@
     "package.json"
   ],
   "cSpell.words": [
+    "analyse",
     "autodocs",
     "disconnetti",
     "Dispatchable",
@@ -49,9 +50,14 @@
     "Infobox",
     "isset",
     "languagedetector",
+    "larastan",
     "Laravel",
     "Lngs",
+    "nesbot",
     "oklch",
+    "phpstan",
+    "shivammathur",
+    "stefanzweifel",
     "Subcopy",
     "wayfinder"
   ],
@@ -149,6 +155,9 @@
   },
   "[json]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[php]": {
+    "editor.defaultFormatter": "laravel.vscode-laravel"
   },
   "oxc.fmt.configPath": "./vite.config.ts",
   "npm.scriptRunner": "vp",

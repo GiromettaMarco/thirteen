@@ -6,7 +6,7 @@
     {
       "label": "$(debug-alt-small)",
       "type": "shell",
-      "command": "composer run-script dev",
+      "command": "composer run dev",
       "options": {
         "statusbar": {
           "detail": "dev",
@@ -17,7 +17,7 @@
     {
       "label": "$(play)",
       "type": "shell",
-      "command": "composer run-script dev:ssr",
+      "command": "composer run dev:ssr",
       "options": {
         "statusbar": {
           "detail": "dev:ssr",
@@ -39,7 +39,7 @@
     {
       "label": "$(test-view-icon)",
       "type": "shell",
-      "command": "composer run-script test",
+      "command": "composer run test",
       "options": {
         "statusbar": {
           "detail": "test",
@@ -50,7 +50,7 @@
     {
       "label": "$(test-view-icon)",
       "type": "shell",
-      "command": "composer run-script test:browser",
+      "command": "composer run test:browser",
       "options": {
         "statusbar": {
           "detail": "test:browser",
