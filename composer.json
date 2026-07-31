@@ -43,7 +43,7 @@
   },
   "scripts": {
     "setup": [
-      "composer install --no-interaction --prefer-dist --optimize-autoloader",
+      "@composer install --no-interaction --prefer-dist --optimize-autoloader",
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
       "@php artisan key:generate",
       "@php artisan migrate --seed --force",
@@ -67,6 +67,16 @@
       "@php artisan config:clear --ansi",
       "@php artisan test --group=browser --no-coverage --parallel"
     ],
+    "format": [
+      "./vendor/bin/pint"
+    ],
+    "lint": [
+      "./vendor/bin/phpstan analyse"
+    ],
+    "check": [
+      "@format",
+      "@lint"
+    ],
     "post-autoload-dump": [
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
       "@php artisan package:discover --ansi"
@@ -85,6 +95,16 @@
     "pre-package-uninstall": [
       "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
     ]
+  },
+  "scripts-descriptions": {
+    "setup": "Install the application",
+    "dev": "Start php and vite dev servers",
+    "dev:ssr": "Start the php dev server and start the app with SSR enabled",
+    "test": "Run http tests",
+    "test:browser": "Run browser testing",
+    "format": "Format php code",
+    "lint": "Run static analysis",
+    "check": "Format php code and run static analysis"
   },
   "extra": {
     "laravel": {
