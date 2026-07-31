@@ -37,16 +37,16 @@ jobs:
           cache: 'pnpm'
 
       - name: Setup with Composer
-        run: composer run-script setup
+        run: composer run setup
 
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps chromium --only-shell
 
       - name: PHP Tests
-        run: composer run-script test
+        run: composer run test
 
       - name: Browser Tests
-        run: composer run-script test:browser
+        run: composer run test:browser
 
       # - name: Update PHP Coverage Badge
       #   run: bin/php-coverage
