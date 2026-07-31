@@ -20,5 +20,6 @@ return [
         'action' => 'Reset Password',
         'line_3' => 'If you did not request a password reset, no further action is required.',
     ],
+    'rights' => 'All rights reserved.',
     'salutation' => 'Regards',
 ];

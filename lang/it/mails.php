@@ -20,5 +20,6 @@ return [
         'action' => 'Reimposta password',
         'line_3' => 'Se non hai richiesto il ripristino della password, non è necessaria alcuna ulteriore azione.',
     ],
+    'rights' => 'Tutti i diritti riservati.',
     'salutation' => 'Saluti',
 ];
