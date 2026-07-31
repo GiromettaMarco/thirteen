@@ -64,7 +64,7 @@ class Invitation extends Notification
     {
         return (new MailMessage)
             ->subject(Lang::get('mails.invitation.subject', ['app_name' => Config::get('app.name')]))
-            ->markdown('mail.invitation', ['forgotPasswordUrl' => $url_alt])
+            ->markdown('notifications.invitation', ['forgotPasswordUrl' => $url_alt])
             ->greeting(Lang::get('mails.invitation.greeting', ['name' => $name]))
             ->line(Lang::get('mails.invitation.line_1'))
             ->line(Lang::get('mails.invitation.line_2'))

@@ -12,5 +12,13 @@ return [
         'action' => 'Imposta la password',
         'link_info' => 'Questo link scadrà tra :count minuti, ma puoi richiederne uno nuovo qui:',
     ],
+    'reset_password' => [
+        'subject' => 'Reimposta la tua password',
+        'greeting' => 'Il tuo link per reimpostare la password',
+        'line_1' => 'Ricevi questa email perché abbiamo ricevuto una richiesta di reimpostazione della password per il tuo account.',
+        'line_2' => 'Questo link per reimpostare la password scadrà tra :count minuti.',
+        'action' => 'Reimposta password',
+        'line_3' => 'Se non hai richiesto il ripristino della password, non è necessaria alcuna ulteriore azione.',
+    ],
     'salutation' => 'Saluti',
 ];

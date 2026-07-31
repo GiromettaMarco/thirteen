@@ -12,5 +12,13 @@ return [
         'action' => 'Set Password',
         'link_info' => 'This link will expire in :count minutes, but you can ask for a new one here:',
     ],
+    'reset_password' => [
+        'subject' => 'Reset your password',
+        'greeting' => 'Your password reset link',
+        'line_1' => 'You are receiving this email because we received a password reset request for your account.',
+        'line_2' => 'This password reset link will expire in :count minutes.',
+        'action' => 'Reset Password',
+        'line_3' => 'If you did not request a password reset, no further action is required.',
+    ],
     'salutation' => 'Regards',
 ];

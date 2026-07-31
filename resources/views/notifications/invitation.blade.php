@@ -37,7 +37,7 @@
 {{-- Subcopy --}}
 @isset($actionText)
 <x-slot:subcopy>
-@lang('mails.action_info', ['actionText' => $actionText]) 
+@lang('mails.action_info', ['actionText' => $actionText])&nbsp;
 <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
 </x-slot:subcopy>
 @endisset

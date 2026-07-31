@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Notifications\Invitation as NotificationsInvitation;
+use App\Notifications\Invitation as InvitationNotification;
+use App\Notifications\ResetPassword as ResetPasswordNotification;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -45,6 +46,17 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification(#[\SensitiveParameter] $token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 
     /**
@@ -105,7 +117,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function invite(): void
     {
         $this->notify(
-            new NotificationsInvitation(Password::createToken($this))
+            new InvitationNotification(Password::createToken($this))
         );
     }
 
