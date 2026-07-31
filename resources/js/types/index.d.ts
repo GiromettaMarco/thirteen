@@ -23,7 +23,7 @@ export interface UsersPermissions {
   view: boolean
 }
 
-export interface Permissions {
+export interface AppPermissions {
   users: UsersPermissions
 }
 
@@ -40,7 +40,7 @@ export interface AuthUser extends WithTimestamps {
 
 export interface Auth<TWithUser extends boolean = false> {
   password_confirmed_at: number | null
-  permissions: Permissions
+  permissions: AppPermissions
   user: TWithUser extends true ? AuthUser : AuthUser | null
 }
 

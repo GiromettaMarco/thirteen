@@ -55,7 +55,7 @@ import { index as invitationsIndex } from '@/routes/invitations'
 import { show as profileShow } from '@/routes/profile'
 import { index as projectsIndex } from '@/routes/projects'
 import { index as teamsIndex, show as teamsShow } from '@/routes/teams'
-import type { Permissions } from '@/types'
+import type { AppPermissions } from '@/types'
 import type { RouteDefinition } from '@/wayfinder'
 
 //#region SidebarItem
@@ -92,7 +92,7 @@ function Navigation({
   permissions
 }: {
   currentTeamId: number | null
-  permissions: Permissions
+  permissions: AppPermissions
 }) {
   // i18n
   const { t } = useTranslation()
