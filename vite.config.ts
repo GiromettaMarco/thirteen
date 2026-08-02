@@ -15,7 +15,6 @@ export default defineConfig({
   fmt: {
     htmlWhitespaceSensitivity: 'css',
     ignorePatterns: [
-      'resources/views/mail/*',
       'composer.lock',
       'pnpm-lock.yaml',
       '.storybook/mocks/inertia/*.js',
