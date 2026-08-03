@@ -28,12 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        /** @var Application */
-        $app = $this->app;
-
-        // Prevent lazy loading
-        Model::preventLazyLoading(! $app->isProduction());
-
         $this->configureDefaults();
         $this->configureRateLimiting();
         $this->configureRoutePatterns();
@@ -57,18 +51,11 @@ class AppServiceProvider extends ServiceProvider
         Model::shouldBeStrict();
 
         // @see https://laravel.com/docs/13.x/validation#validating-passwords
-        Password::defaults(fn (): Password => app()->isProduction()
-            ? Password::min(12)
-                ->mixedCase()
-                ->letters()
-                ->numbers()
-                ->symbols()
-                ->uncompromised()
-            : Password::min(12)
-                ->mixedCase()
-                ->letters()
-                ->numbers()
-                ->symbols()
+        Password::defaults(fn (): Password => Password::min(12)
+            ->mixedCase()
+            ->letters()
+            ->numbers()
+            ->symbols()
         );
     }
 
