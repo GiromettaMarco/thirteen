@@ -1,6 +1,6 @@
 import { cn } from '@gmcode/react-ui'
 import { cva, type VariantProps } from 'class-variance-authority'
-import type { ComponentProps } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
 
 const headingVariants = cva(undefined, {
   defaultVariants: {
@@ -15,6 +15,7 @@ const headingVariants = cva(undefined, {
 })
 
 export function Heading({
+  customDescription,
   h,
   p,
   tag: Tag = 'h2',
@@ -22,6 +23,7 @@ export function Heading({
   ...props
 }: ComponentProps<'header'> &
   VariantProps<typeof headingVariants> & {
+    customDescription?: ReactNode
     h: string
     p?: string
     tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
@@ -35,6 +37,7 @@ export function Heading({
         {h}
       </Tag>
       {p && <p className="text-sm text-muted-foreground">{p}</p>}
+      {customDescription}
     </header>
   )
 }
