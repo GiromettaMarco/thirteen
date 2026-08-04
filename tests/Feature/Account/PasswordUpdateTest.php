@@ -13,8 +13,8 @@ it('may accept a password update request', function () {
     actingAs(User::first())
         ->put(route('password.update', absolute: false), [
             'current_password' => 'password',
-            'password' => 'new_password',
-            'password_confirmation' => 'new_password',
+            'password' => 'New_Password_1234',
+            'password_confirmation' => 'New_Password_1234',
         ])
         ->assertSessionHasNoErrors();
 
@@ -26,8 +26,8 @@ it('may validate a password update request', function () {
     actingAs(User::first())
         ->put(route('password.update', absolute: false), [
             'current_password' => 'wrong_password',
-            'password' => 'new_password',
-            'password_confirmation' => 'new_password',
+            'password' => 'New_Password_1234',
+            'password_confirmation' => 'New_Password_1234',
         ])
         ->assertSessionHasErrors('current_password');
 });

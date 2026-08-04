@@ -1,9 +1,9 @@
 <?php
 
 use App\Models\User;
+use App\Notifications\ResetPassword;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\PasswordResetLinkSent;
-use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 
@@ -49,8 +49,8 @@ it('may accept a forgot and reset password request', function () {
     post(route('password.store', absolute: false), [
         'token' => $token,
         'email' => $user->email,
-        'password' => 'password',
-        'password_confirmation' => 'password',
+        'password' => 'New_Password_1234',
+        'password_confirmation' => 'New_Password_1234',
     ])
         ->assertSessionHasNoErrors()
         ->assertRedirect(route('login'));
@@ -62,7 +62,7 @@ it('may validate reset password requests', function () {
     post(route('password.store', absolute: false), [
         'token' => 'wrong-token',
         'email' => User::first()->email,
-        'password' => 'password',
-        'password_confirmation' => 'password',
+        'password' => 'New_Password_1234',
+        'password_confirmation' => 'New_Password_1234',
     ])->assertSessionHasErrors('root');
 });

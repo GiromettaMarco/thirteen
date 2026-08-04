@@ -30,8 +30,8 @@ it('may update the user password')
     ->visit('/dashboard/account')->on()->mobile()
     ->assertSee('Update password')
     ->fill('current_password', 'password')
-    ->fill('password', 'new_password')
-    ->fill('password_confirmation', 'new_password')
+    ->fill('password', 'NewPassword_1234')
+    ->fill('password_confirmation', 'NewPassword_1234')
     ->click('Change password')
     ->assertSee('Password updated');
 

@@ -19,8 +19,8 @@ it('may accept a register request', function () {
     post(route('register.store', absolute: false), [
         'name' => 'John Smith',
         'email' => 'jhonsmith@example.com',
-        'password' => 'password',
-        'password_confirmation' => 'password',
+        'password' => 'New_Password_1234',
+        'password_confirmation' => 'New_Password_1234',
     ])->assertSessionHasNoErrors();
 
     assertAuthenticated();
@@ -33,8 +33,8 @@ it('may validate and throttle register requests when email is already taken', fu
     $data = [
         'name' => 'Test User',
         'email' => 'test@example.com',
-        'password' => 'password',
-        'password_confirmation' => 'password',
+        'password' => 'New_Password_1234',
+        'password_confirmation' => 'New_Password_1234',
     ];
 
     post($uri, $data)->assertSessionHasErrors('email');
@@ -49,8 +49,8 @@ it('may throttle successful register requests', function () {
     post(route('register.store', absolute: false), [
         'name' => 'John Smith',
         'email' => 'jhonsmith@example.com',
-        'password' => 'password',
-        'password_confirmation' => 'password',
+        'password' => 'New_Password_1234',
+        'password_confirmation' => 'New_Password_1234',
     ])->assertSessionHasNoErrors();
 
     assertAuthenticated();
@@ -62,7 +62,7 @@ it('may throttle successful register requests', function () {
     post(route('register.store', absolute: false), [
         'name' => 'John Smith',
         'email' => 'jhonsmith@example.com',
-        'password' => 'password',
-        'password_confirmation' => 'password',
+        'password' => 'New_Password_1234',
+        'password_confirmation' => 'New_Password_1234',
     ])->assertSessionHasErrors('root');
 });
