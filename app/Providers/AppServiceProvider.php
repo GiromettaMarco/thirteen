@@ -48,7 +48,8 @@ class AppServiceProvider extends ServiceProvider
 
         // @see https://laravel.com/docs/13.x/eloquent-relationships#automatic-eager-loading
         Model::automaticallyEagerLoadRelationships();
-        Model::shouldBeStrict();
+        Model::preventLazyLoading();
+        Model::preventSilentlyDiscardingAttributes();
 
         // @see https://laravel.com/docs/13.x/validation#validating-passwords
         Password::defaults(fn (): Password => Password::min(12)
