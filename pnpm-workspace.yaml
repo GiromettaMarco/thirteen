@@ -21,3 +21,9 @@ peerDependencyRules:
   allowedVersions:
     vite: '*'
     vitest: '*'
+minimumReleaseAgeExclude:
+  - '@gmcode/forms'
+  - '@gmcode/react-ui'
+  - '@gmcode/tsv-core'
+  - '@gmcode/tsv-hookform'
+  - '@gmcode/tsv-input'

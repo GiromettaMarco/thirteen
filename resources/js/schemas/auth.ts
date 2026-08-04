@@ -1,5 +1,6 @@
 import {
   InputCheckboxRule,
+  InputPasswordRule,
   InputTextRule,
   Message,
   Schema
@@ -11,24 +12,30 @@ export const current_password = new InputTextRule({
   messages: {
     minChars: 'password.length',
     required: 'currentPassword.required'
-  },
-  minChars: 8
+  }
+})
+
+export const new_password = new InputPasswordRule({
+  messages: {
+    hasMixed: 'password.mixed',
+    hasNumber: 'password.number',
+    hasSymbol: 'password.symbol',
+    minChars: 'password.length',
+    required: 'password.required'
+  }
 })
 
 export const password = new InputTextRule({
   messages: {
     minChars: 'password.length',
     required: 'password.required'
-  },
-  minChars: 8
+  }
 })
 
 export const password_confirmation = new InputTextRule({
   messages: {
-    minChars: 'password.length',
     required: 'confirmPassword.required'
-  },
-  minChars: 8
+  }
 })
 
 //#region Post Validation
@@ -60,7 +67,7 @@ export const registerSchema = new Schema(
   {
     email,
     name,
-    password,
+    password: new_password,
     password_confirmation
   },
   {
@@ -79,7 +86,7 @@ export const forgotPasswordSchema = new Schema({
 export const resetPasswordSchema = new Schema(
   {
     email,
-    password,
+    password: new_password,
     password_confirmation,
     token: new InputTextRule({
       messages: {

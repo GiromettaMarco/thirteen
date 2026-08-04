@@ -28,8 +28,8 @@ importers:
   .:
     dependencies:
       '@gmcode/forms':
-        specifier: ^0.0.8
-        version: 0.0.8(@gmcode/tsv-core@0.1.3)(@inertiajs/core@3.6.1(axios@1.18.1(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)))(@inertiajs/react@3.6.1(axios@1.18.1(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@6.0.3)
+        specifier: ^0.1.0
+        version: 0.1.0(@gmcode/tsv-core@0.2.0)(@inertiajs/core@3.6.1(axios@1.18.1(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)))(@inertiajs/react@3.6.1(axios@1.18.1(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@6.0.3)
       '@gmcode/react-ui':
         specifier: ^0.3.5
         version: 0.3.5(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -517,8 +517,8 @@ packages:
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
 
-  '@gmcode/forms@0.0.8':
-    resolution: {integrity: sha512-fOdXaQ23HtqzNigE1eFPfJpTXyzTgKllJgnxjkaZM6wHI72wLdaQUpNJQ5VFnIt1wg5K7h3RBqgRHUcsvQMcbA==}
+  '@gmcode/forms@0.1.0':
+    resolution: {integrity: sha512-8+glXiZNm4IdmvwcfIjw0gvOUY7cYM/VxyzGRBATP93BRGnkuN7unybw3F9n16nkDCU69HB1djr//5qCAPYstg==}
     peerDependencies:
       '@inertiajs/core': ^3.5.0
       '@inertiajs/react': ^3.5.0
@@ -531,17 +531,17 @@ packages:
       react: ^19.2.7
       react-dom: ^19.2.7
 
-  '@gmcode/tsv-core@0.1.3':
-    resolution: {integrity: sha512-IPQZlM+TcSoBfyv5fmqOX/4jNS8dsgG2W515F4HCNK2aevWYkc7oqWAmz6/aSON1Fk4GqN53b7HjX8PAzPvGMw==}
+  '@gmcode/tsv-core@0.2.0':
+    resolution: {integrity: sha512-6tzV9KDY/wHTLaYALpGAwOQ+VwaaoDaqEEOEm5Wjh16hnUGGH/YA8S61sHjGbj/wLWwcObFk946x8goxO7wFfA==}
 
-  '@gmcode/tsv-hookform@0.1.3':
-    resolution: {integrity: sha512-Oe0Lek1SHkSTgkl4h63udzb12QlshIoWe+kTY+grtXl7U27N3gf7c5qiLi/QnI0WoemMKaLnNvFZZakmQ8FwPA==}
+  '@gmcode/tsv-hookform@0.1.5':
+    resolution: {integrity: sha512-ioO3Cs67QTwmEhPuFKrLDaOv7GwWrDiXC+ktDKr5F91hXuEpS0504ZxRNJ/Iq+xiQuzN3EzkxithsLtJ++V8cQ==}
     peerDependencies:
-      '@gmcode/tsv-core': ^0.1.3
+      '@gmcode/tsv-core': 0.2.0
       react-hook-form: ^7.71.2
 
-  '@gmcode/tsv-input@0.2.4':
-    resolution: {integrity: sha512-r8TSaPwY1D/vTAs+02KM+h+l29aXlIj/SD1YH/GrIkuzqTGB96iOuLQvlctSMubcw4uWznXiind4mcZpGrHSpQ==}
+  '@gmcode/tsv-input@0.3.0':
+    resolution: {integrity: sha512-BbUeQ0cY/zPaGy/ZFT+p9ZmdKy6McYBrQeO+ho9JVfG0PvaUJGgFl9yJdVA2WsdXqZEFoME97cp04PDDhG6C1A==}
 
   '@hookform/resolvers@5.4.0':
     resolution: {integrity: sha512-EIsqr/t/qbinPIhGjMdtvutIN1Kk4uwbROE9/UQ93CAVGR7GkA7Y92+fX80OzXi/OB67jVFYwKGO1WzkxmkFZw==}
@@ -5003,11 +5003,11 @@ snapshots:
 
   '@floating-ui/utils@0.2.11': {}
 
-  '@gmcode/forms@0.0.8(@gmcode/tsv-core@0.1.3)(@inertiajs/core@3.6.1(axios@1.18.1(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)))(@inertiajs/react@3.6.1(axios@1.18.1(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@6.0.3)':
+  '@gmcode/forms@0.1.0(@gmcode/tsv-core@0.2.0)(@inertiajs/core@3.6.1(axios@1.18.1(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)))(@inertiajs/react@3.6.1(axios@1.18.1(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@6.0.3)':
     dependencies:
       '@gmcode/react-ui': 0.3.5(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      '@gmcode/tsv-hookform': 0.1.3(@gmcode/tsv-core@0.1.3)(react-hook-form@7.71.2(react@19.2.7))
-      '@gmcode/tsv-input': 0.2.4
+      '@gmcode/tsv-hookform': 0.1.5(@gmcode/tsv-core@0.2.0)(react-hook-form@7.71.2(react@19.2.7))
+      '@gmcode/tsv-input': 0.3.0
       '@inertiajs/core': 3.6.1(axios@1.18.1(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))
       '@inertiajs/react': 3.6.1(axios@1.18.1(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       i18next: 26.3.5(typescript@6.0.3)
@@ -5042,17 +5042,17 @@ snapshots:
       - '@types/react'
       - '@types/react-dom'
 
-  '@gmcode/tsv-core@0.1.3': {}
+  '@gmcode/tsv-core@0.2.0': {}
 
-  '@gmcode/tsv-hookform@0.1.3(@gmcode/tsv-core@0.1.3)(react-hook-form@7.71.2(react@19.2.7))':
+  '@gmcode/tsv-hookform@0.1.5(@gmcode/tsv-core@0.2.0)(react-hook-form@7.71.2(react@19.2.7))':
     dependencies:
-      '@gmcode/tsv-core': 0.1.3
+      '@gmcode/tsv-core': 0.2.0
       '@hookform/resolvers': 5.4.0(react-hook-form@7.71.2(react@19.2.7))
       react-hook-form: 7.71.2(react@19.2.7)
 
-  '@gmcode/tsv-input@0.2.4':
+  '@gmcode/tsv-input@0.3.0':
     dependencies:
-      '@gmcode/tsv-core': 0.1.3
+      '@gmcode/tsv-core': 0.2.0
 
   '@hookform/resolvers@5.4.0(react-hook-form@7.71.2(react@19.2.7))':
     dependencies:

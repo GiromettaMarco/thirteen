@@ -14,6 +14,14 @@ export default {
     confirmPassword: 'Confirm password',
     currentPassword: 'Current password',
     password: 'Password',
+    requirements: {
+      hasLength: 'At least 12 characters',
+      hasLowercase: 'At least one lowercase letter',
+      hasNumber: 'At least one number',
+      hasSymbol: 'At least one symbol',
+      hasUppercase: 'At least one uppercase letter',
+      p: 'Must contain:'
+    },
     signIn: 'Sign In',
     signOut: 'Sign Out'
   },

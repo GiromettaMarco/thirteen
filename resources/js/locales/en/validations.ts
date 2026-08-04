@@ -18,8 +18,12 @@ export default {
     required: 'The Name field is required.'
   },
   password: {
-    length: 'The password must be at least 8 characters long.',
-    required: 'The Password field is required.'
+    length: 'The password must be at least 12 characters long.',
+    mixed:
+      'The password must contain at least one uppercase and one lowercase letter.',
+    number: 'The password must contain at least one number.',
+    required: 'The Password field is required.',
+    symbol: 'The password must contain at least one symbol.'
   },
   token: {
     required: 'The Token field is required.'

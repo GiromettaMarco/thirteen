@@ -2,7 +2,7 @@ import { Form, PasswordField, Submit } from '@gmcode/forms'
 import { Button, Infobox, Separator } from '@gmcode/react-ui'
 import { Head } from '@inertiajs/react'
 import { Monitor, Smartphone } from 'lucide-react'
-import { useState } from 'react'
+import { useState, type ChangeEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   ConfirmPasswordFieldPreset,
@@ -20,6 +20,8 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog'
 import { Format } from '@/components/ui/format'
+import { PasswordRequirements } from '@/components/ui/password-requirements'
+import { usePasswordCheck } from '@/hooks/use-password-check'
 import DashboardLayout from '@/layouts/dashboard-layout'
 import {
   update as accountUpdate,
@@ -180,11 +182,12 @@ function UpdateEmail({ email }: { email: string }) {
 function UpdatePassword() {
   // i18n
   const { i18n, t } = useTranslation()
+  const { check, report } = usePasswordCheck()
 
   return (
     <Format
+      customDescription={<PasswordRequirements report={report} />}
       h2={t(($) => $.pages.dashboard.account.password.h2)}
-      p={t(($) => $.pages.dashboard.account.password.p)}
     >
       <Form
         className="gap-3"
@@ -201,10 +204,15 @@ function UpdatePassword() {
               label={t(($) => $.auth.currentPassword)}
             />
 
-            <PasswordFieldPreset
+            <PasswordField
               control={form.control}
-              i18n={i18n}
-              placeholder={false}
+              inputId="password"
+              inputName="password"
+              label={t(($) => $.auth.password)}
+              // @TODO update forms package
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                check(event.target.value)
+              }
             />
 
             <ConfirmPasswordFieldPreset

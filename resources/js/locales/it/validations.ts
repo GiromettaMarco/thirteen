@@ -18,8 +18,12 @@ export default {
     required: 'Il campo Nome è obbligatorio.'
   },
   password: {
-    length: 'La password deve essere lunga almeno 8 caratteri.',
-    required: 'Il campo Password è obbligatorio.'
+    length: 'La password deve essere lunga almeno 12 caratteri.',
+    mixed:
+      'La password deve contenere almeno un carattere maiuscolo ed un carattere minuscolo.',
+    number: 'La password deve contenere almeno un numero.',
+    required: 'Il campo Password è obbligatorio.',
+    symbol: 'La password deve contenere almeno un simbolo.'
   },
   token: {
     required: 'Il campo Token è obbligatorio.'

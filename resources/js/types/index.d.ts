@@ -17,6 +17,15 @@ export interface WithTimestamps {
   updated_at: string
 }
 
+export interface PasswordReport {
+  hasLength: boolean
+  hasLowercase: boolean
+  hasNumber: boolean
+  hasSymbol: boolean
+  hasUppercase: boolean
+  level: number
+}
+
 //#region Auth/Inertia
 export interface UsersPermissions {
   edit: boolean

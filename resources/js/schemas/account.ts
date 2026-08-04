@@ -1,7 +1,7 @@
 import { Schema } from '@gmcode/forms'
 import {
   current_password,
-  password,
+  new_password,
   password_confirmation,
   passwordMatch
 } from '@/schemas/auth'
@@ -14,7 +14,7 @@ export const updateAccountSchema = new Schema({
 export const updatePasswordSchema = new Schema(
   {
     current_password,
-    password,
+    password: new_password,
     password_confirmation
   },
   {
