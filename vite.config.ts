@@ -147,6 +147,29 @@ export default defineConfig({
   resolve: {
     tsconfigPaths: true
   },
+  run: {
+    cache: true,
+    tasks: {
+      build: {
+        command: 'vp build'
+      },
+      build_ssr: {
+        command: 'vp build --ssr',
+        dependsOn: ['build']
+      },
+      ready: {
+        command: ['vp check', 'vpr test', 'vpr build_ssr']
+      },
+      test: {
+        command: 'vp test run --project=storybook --coverage',
+        input: [
+          { auto: true },
+          '!reports/ui/**',
+          '!node_modules/.cache/storybook/**'
+        ]
+      }
+    }
+  },
   staged: {
     '!(**/*.php)*': ['vp check --fix'],
     '**/*.php': ['php ./vendor/bin/pint']

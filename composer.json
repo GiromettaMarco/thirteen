@@ -47,17 +47,17 @@
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
       "@php artisan key:generate",
       "@php artisan migrate --seed --force",
-      "pnpm install",
-      "pnpm run build"
+      "vp install",
+      "vpr build"
     ],
     "dev": [
       "Composer\\Config::disableProcessTimeout",
-      "pnpm exec concurrently -c \"#93c5fd,#c4b5fd,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"pnpm run dev\" --names='server,queue,vite'"
+      "vpx concurrently -c \"#93c5fd,#c4b5fd,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"vp dev\" --names='server,queue,vite'"
     ],
     "dev:ssr": [
-      "pnpm run build:ssr",
+      "vpr build_ssr",
       "Composer\\Config::disableProcessTimeout",
-      "pnpm exec concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan inertia:start-ssr\" --names=server,queue,logs,ssr --kill-others"
+      "vpx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan inertia:start-ssr\" --names=server,queue,logs,ssr --kill-others"
     ],
     "test": [
       "@php artisan config:clear --ansi",

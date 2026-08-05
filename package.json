@@ -8,14 +8,10 @@
   "author": "Marco Girometta",
   "type": "module",
   "scripts": {
-    "build": "vp build",
-    "build:ssr": "vp build && vp build --ssr",
-    "dev": "vp dev",
     "preinstall": "npx only-allow pnpm",
     "prepare": "vp config",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build",
-    "test:ui": "vp test run --project=storybook --coverage"
+    "storybook:build": "storybook build"
   },
   "dependencies": {
     "@gmcode/forms": "^0.1.0",
