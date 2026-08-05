@@ -164,7 +164,7 @@ export default defineConfig({
         command: 'vp test run --project=storybook --coverage',
         input: [
           { auto: true },
-          '!reports/ui/**',
+          '!reports/**',
           '!node_modules/.cache/storybook/**'
         ]
       }
@@ -186,10 +186,10 @@ export default defineConfig({
         'resources/js/schemas/**'
       ],
       provider: 'v8',
-      reporter:
-        process.env.GITHUB_ACTIONS === 'true'
-          ? ['dot', 'github-actions']
-          : ['text', 'json-summary'],
+      reporter: [
+        'clover',
+        process.env.GITHUB_ACTIONS === 'true' ? 'github-actions' : 'text'
+      ],
       reportsDirectory: './reports/ui'
     },
     projects: [

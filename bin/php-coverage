@@ -1,0 +1,46 @@
+#!/usr/bin/env php
+<?php
+
+require 'make-coverage-badge.php';
+
+// Coverage value
+$coverage = 0;
+
+// Initialize the XML parser
+$parser = xml_parser_create();
+
+// Become true once coverage has been collected
+$collected = false;
+
+// Specify element handler
+xml_set_element_handler(
+    $parser,
+    function ($parser, $element_name, $element_attrs) use (&$collected, &$coverage) {
+        // Find the element
+        if (! $collected && $element_name === 'LINES') {
+            // Collect coverage
+            $coverage = intval($element_attrs['PERCENT']);
+
+            // Stop reading
+            $collected = true;
+        }
+    },
+    null
+);
+
+// Open XML file
+$fp = fopen('reports/php/index.xml', 'r');
+
+// Read data and exit when METRICS is found.
+// We expect to find it in the first kilobyte.
+while (! $collected && $data = fread($fp, 1024)) {
+    xml_parse($parser, $data, feof($fp)) or
+        exit(sprintf(
+            'XML Error: %s at line %d',
+            xml_error_string(xml_get_error_code($parser)),
+            xml_get_current_line_number($parser)
+        ));
+}
+
+// Print badge
+make_coverage_badge($coverage, 'php');

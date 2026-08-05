@@ -39,8 +39,6 @@
     </php>
     <coverage>
         <report>
-            <clover outputFile="reports/php/clover.xml"/>
-            <html outputDirectory="reports/php"/>
             <xml outputDirectory="reports/php"/>
         </report>
     </coverage>
