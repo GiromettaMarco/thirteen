@@ -1,19 +1,24 @@
-name: tests
+name: Tests
 
 on:
-  push:
+  pull_request:
     branches:
       - 1.x
       - master
-  pull_request:
+  push:
     branches:
       - 1.x
       - master
   workflow_dispatch:
 
 jobs:
-  ci:
+  test:
     runs-on: ubuntu-latest
+
+    timeout-minutes: 5
+
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout Repository
@@ -27,20 +32,17 @@ jobs:
           tools: composer:v2
           coverage: xdebug
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6
-
-      - name: Setup Node with cache
-        uses: actions/setup-node@v6
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@v1
         with:
-          node-version: 24
-          cache: 'pnpm'
+          node-version: '24'
+          cache: true
 
       - name: Setup with Composer
         run: composer run setup
 
       - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps chromium --only-shell
+        run: vpx playwright install --with-deps chromium --only-shell
 
       - name: PHP Tests
         run: composer run test
@@ -48,11 +50,26 @@ jobs:
       - name: Browser Tests
         run: composer run test:browser
 
-      # - name: Update PHP Coverage Badge
-      #   run: bin/php-coverage
+      - name: Vitest
+        run: vpr test
 
-      # - name: Commit Changes
-      #   uses: stefanzweifel/git-auto-commit-action@v7
-      #   with:
-      #     commit_message: 'docs: update coverage badges'
-      #     commit_options: '--no-verify'
+      - name: Update PHP Coverage Badge
+        run: bin/php-coverage
+
+      - name: Update TS Coverage Badge
+        run: bin/ts-coverage
+
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: 'docs: update coverage badges'
+          commit_options: '--no-verify'
+
+      - name: Store Artifacts
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: artifacts
+          path: |
+            tests/Browser/Screenshots/*.png
+          retention-days: 7

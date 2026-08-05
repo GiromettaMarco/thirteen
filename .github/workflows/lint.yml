@@ -1,4 +1,4 @@
-name: linter
+name: Lint
 
 on:
   pull_request:
@@ -9,9 +9,6 @@ on:
 
 permissions:
   contents: write
-
-env:
-  HUSKY: 0
 
 jobs:
   quality:
@@ -25,19 +22,16 @@ jobs:
         with:
           php-version: '8.4'
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6
-
-      - name: Setup Node with cache
-        uses: actions/setup-node@v6
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@v1
         with:
-          node-version: 24
-          cache: 'pnpm'
+          node-version: '24'
+          cache: true
 
       - name: Install Dependencies
         run: |
           composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-          pnpm install
+          vp install
 
       - name: Check Backend
         run: composer run check
