@@ -153,8 +153,20 @@ export default defineConfig({
   },
   test: {
     coverage: {
-      include: ['resources/js/components/ui/**'],
+      include: [
+        'resources/js/components/**',
+        'resources/js/hooks/**',
+        'resources/js/layouts/**',
+        'resources/js/lib/**',
+        'resources/js/pages/**',
+        'resources/js/providers/**',
+        'resources/js/schemas/**'
+      ],
       provider: 'v8',
+      reporter:
+        process.env.GITHUB_ACTIONS === 'true'
+          ? ['dot', 'github-actions']
+          : ['text', 'json-summary'],
       reportsDirectory: './reports/ui'
     },
     projects: [
