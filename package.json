@@ -79,7 +79,7 @@
     "@tailwindcss/oxide-linux-x64-gnu": "^4.3.0",
     "lightningcss-linux-x64-gnu": "^1.32.0"
   },
-  "packageManager": "pnpm@11.17.0",
+  "packageManager": "pnpm@11.20.0",
   "msw": {
     "workerDirectory": [
       "public"
