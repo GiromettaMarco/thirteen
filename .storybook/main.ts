@@ -17,8 +17,8 @@ const config: StorybookConfig = {
   framework: '@storybook/react-vite',
   staticDirs: ['../public'],
   stories: [
-    '../stories/**/*.mdx',
-    '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'
+    '../tests/stories/**/*.mdx',
+    '../tests/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'
   ],
   viteFinal: async (config) => {
     if (config.resolve) {

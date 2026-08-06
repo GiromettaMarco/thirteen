@@ -32,5 +32,5 @@
     "jsx": "react-jsx"
   },
   /* @see https://github.com/microsoft/TypeScript/issues/49555 */
-  "include": [".storybook/**/*", "resources/js", "stories"]
+  "include": [".storybook/**/*", "resources/js", "tests/stories"]
 }
