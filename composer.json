@@ -68,10 +68,10 @@
       "@php artisan test --group=browser --no-coverage --parallel"
     ],
     "format": [
-      "./vendor/bin/pint"
+      "pint --parallel"
     ],
     "lint": [
-      "./vendor/bin/phpstan analyse"
+      "phpstan analyse"
     ],
     "check": [
       "@format",
