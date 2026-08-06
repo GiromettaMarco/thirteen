@@ -151,11 +151,23 @@ export default defineConfig({
     cache: true,
     tasks: {
       build: {
-        command: 'vp build'
+        command: 'vp build',
+        input: [
+          'resources/css/**',
+          'resources/fonts/**',
+          'resources/js/**',
+          'pnpm-lock.yaml'
+        ]
       },
       build_ssr: {
         command: 'vp build --ssr',
-        dependsOn: ['build']
+        dependsOn: ['build'],
+        input: [
+          'resources/css/**',
+          'resources/fonts/**',
+          'resources/js/**',
+          'pnpm-lock.yaml'
+        ]
       },
       ready: {
         command: ['vp check', 'vpr test', 'vpr build_ssr']
@@ -163,9 +175,11 @@ export default defineConfig({
       test: {
         command: 'vp test run --project=storybook --coverage',
         input: [
-          { auto: true },
-          '!reports/**',
-          '!node_modules/.cache/storybook/**'
+          '.storybook/**',
+          'resources/css/**',
+          'resources/fonts/**',
+          'resources/js/**',
+          'pnpm-lock.yaml'
         ]
       }
     }
@@ -186,10 +200,7 @@ export default defineConfig({
         'resources/js/schemas/**'
       ],
       provider: 'v8',
-      reporter: [
-        'clover',
-        process.env.GITHUB_ACTIONS === 'true' ? 'github-actions' : 'text'
-      ],
+      reporter: ['clover', 'text'],
       reportsDirectory: './reports/ui'
     },
     projects: [
