@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Notifications\Invitation as InvitationNotification;
 use App\Notifications\ResetPassword as ResetPasswordNotification;
+use App\Notifications\VerifyEmail as VerifyEmailNotification;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -49,12 +50,19 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Send the email verification notification.
+     */
+    public function sendEmailVerificationNotification(): void
+    {
+        $this->notify(new VerifyEmailNotification);
+    }
+
+    /**
      * Send the password reset notification.
      *
      * @param  string  $token
-     * @return void
      */
-    public function sendPasswordResetNotification(#[\SensitiveParameter] $token)
+    public function sendPasswordResetNotification(#[\SensitiveParameter] $token): void
     {
         $this->notify(new ResetPasswordNotification($token));
     }

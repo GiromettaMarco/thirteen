@@ -22,4 +22,10 @@ return [
     ],
     'rights' => 'Tutti i diritti riservati.',
     'salutation' => 'Saluti',
+    'verify' => [
+        'subject' => 'Verifica il tuo indirizzo email',
+        'line_1' => 'Clicca sul pulsante qui sotto per verificare il tuo indirizzo email.',
+        'action' => 'Verifica indirizzo email',
+        'line_2' => 'Se non hai creato un account, non è richiesta alcuna azione.',
+    ],
 ];
