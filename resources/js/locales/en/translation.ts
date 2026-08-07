@@ -13,6 +13,7 @@ export default {
   auth: {
     confirmPassword: 'Confirm password',
     currentPassword: 'Current password',
+    newPassword: 'New Password',
     password: 'Password',
     requirements: {
       hasLength: 'At least 12 characters',
@@ -384,6 +385,7 @@ export default {
   },
   user_one: 'User',
   user_other: 'Users',
+  userMenu: 'User Menu',
   users: {
     deleteUser: 'Delete User',
     profile: {

@@ -185,8 +185,8 @@ function Navigation({
   )
 }
 
-//#region ProfileDropdown
-function ProfileDropdown({
+//#region UserDropdown
+function UserDropdown({
   avatar,
   email,
   profileId,
@@ -209,6 +209,7 @@ function ProfileDropdown({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
+              aria-label={t(($) => $.userMenu)}
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               size="lg"
             >
@@ -267,7 +268,10 @@ function ProfileDropdown({
               asChild
               className="w-full"
             >
-              <Link href={logout()}>
+              <Link
+                aria-label={t(($) => $.auth.signOut)}
+                href={logout()}
+              >
                 <LogOut />
                 {t(($) => $.auth.signOut)}
               </Link>
@@ -333,7 +337,7 @@ export default function DashboardLayout({
         </SidebarContent>
 
         <SidebarFooter>
-          <ProfileDropdown
+          <UserDropdown
             email={auth.user.email}
             profileId={auth.user.profile_id}
             profileName={auth.user.name}

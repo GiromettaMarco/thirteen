@@ -206,9 +206,9 @@ function UpdatePassword() {
 
             <PasswordField
               control={form.control}
-              inputId="password"
+              inputId="new-password"
               inputName="password"
-              label={t(($) => $.auth.password)}
+              label={t(($) => $.auth.newPassword)}
               // @TODO update forms package
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
                 check(event.target.value)
