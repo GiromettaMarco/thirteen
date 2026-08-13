@@ -48,17 +48,6 @@
       }
     },
     {
-      "label": "$(test-view-icon)",
-      "type": "shell",
-      "command": "composer run test:browser",
-      "options": {
-        "statusbar": {
-          "detail": "test:browser",
-          "color": "#22C1D6"
-        }
-      }
-    },
-    {
       "label": "$(remote-explorer-documentation)",
       "type": "shell",
       "command": "pnpm run storybook",
