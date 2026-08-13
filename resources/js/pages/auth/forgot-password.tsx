@@ -21,6 +21,7 @@ export default function ForgotPassword() {
 
       <div className="grid gap-6">
         <Form
+          id="forgot-password-form"
           route={email()}
           schema={forgotPasswordSchema}
         >

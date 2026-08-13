@@ -256,7 +256,7 @@ function SidebarTrigger({
       className={cn('size-7', className)}
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
-      data-test="toggle-sidebar"
+      id="toggle-sidebar"
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()
@@ -305,7 +305,7 @@ function SidebarInset({ className, ...props }: React.ComponentProps<'main'>) {
         className
       )}
       data-slot="sidebar-inset"
-      data-test="main"
+      id="main"
       {...props}
     />
   )

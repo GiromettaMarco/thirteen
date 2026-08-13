@@ -44,6 +44,7 @@ export default function Register() {
 
       <div className="grid gap-6">
         <Form
+          id="register-form"
           route={store()}
           schema={registerSchema}
         >

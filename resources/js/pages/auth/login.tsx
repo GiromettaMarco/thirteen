@@ -30,6 +30,7 @@ export default function Login({
 
       <div className="grid gap-6">
         <Form
+          id="login-form"
           route={store()}
           schema={loginSchema}
         >
@@ -87,7 +88,6 @@ export default function Login({
 
               <Submit
                 className="mt-4 w-full"
-                data-test="login-submit"
                 label={t(($) => $.auth.signIn)}
                 loading={loading}
               />

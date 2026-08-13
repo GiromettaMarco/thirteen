@@ -54,6 +54,7 @@ export default function UpdateTeamDrawer({
             defaults={{
               name: team.name
             }}
+            id="update-team-form"
             onSuccess={() => setOpen(false)}
             route={update(team.id)}
             schema={updateTeamSchema}

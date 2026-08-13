@@ -25,6 +25,7 @@ export function AddTeamDrawerTrigger(props: ComponentProps<typeof Button>) {
 
   return (
     <Button
+      id="open-create-team-drawer"
       onClick={() => setOpen(true)}
       size="sm"
       {...props}
@@ -58,6 +59,7 @@ export function AddTeamDrawer() {
           defaults={{
             name: t(($) => $.teams.defaultName)
           }}
+          id="create-team-form"
           onSuccess={() => setOpen(false)}
           route={store()}
           schema={createTeamSchema}

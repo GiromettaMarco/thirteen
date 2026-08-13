@@ -211,6 +211,7 @@ function UserDropdown({
             <SidebarMenuButton
               aria-label={t(($) => $.userMenu)}
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              id="open-user-menu"
               size="lg"
             >
               <UserInfo
@@ -255,7 +256,10 @@ function UserDropdown({
                 asChild
                 className="cursor-pointer"
               >
-                <Link href={profileShow(profileId)}>
+                <Link
+                  href={profileShow(profileId)}
+                  id="to-profile"
+                >
                   <UserRound />
                   {t(($) => $.profile)}
                 </Link>
@@ -271,6 +275,7 @@ function UserDropdown({
               <Link
                 aria-label={t(($) => $.auth.signOut)}
                 href={logout()}
+                id="logout"
               >
                 <LogOut />
                 {t(($) => $.auth.signOut)}

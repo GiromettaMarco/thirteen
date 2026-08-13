@@ -71,7 +71,7 @@ function CurrentTeamCell({
   return (
     <button
       className="flex justify-center"
-      data-test={`set-current-team-${team.id}`}
+      id={`set-current-team-${team.id}`}
       onClick={setCurrentTeam}
       type="button"
     >
@@ -141,7 +141,7 @@ function Actions({
 
       <DropdownMenu>
         <ActionsButton
-          data-test={`team-${team.id}-actions`}
+          id={`open-team-${team.id}-actions`}
           label={t(($) => $.teams.actions, { team: team.name })}
         />
 
@@ -149,18 +149,29 @@ function Actions({
           align="end"
           className="w-32"
         >
-          <DropdownMenuItem onClick={() => currentTeamForm.submit(update())}>
-            {t(($) => $.select)}
+          <DropdownMenuItem asChild>
+            <button
+              className="w-full"
+              onClick={() => currentTeamForm.submit(update())}
+              type="button"
+            >
+              {t(($) => $.select)}
+            </button>
           </DropdownMenuItem>
 
           {team.pivot.can_edit && (
-            <DropdownMenuItem
-              onClick={() => {
-                setActiveTeam(team)
-                setUpdateTeamOpen(true)
-              }}
-            >
-              {t(($) => $.edit)}
+            <DropdownMenuItem asChild>
+              <button
+                className="w-full"
+                id={`open-update-team-${team.id}-drawer`}
+                onClick={() => {
+                  setActiveTeam(team)
+                  setUpdateTeamOpen(true)
+                }}
+                type="button"
+              >
+                {t(($) => $.edit)}
+              </button>
             </DropdownMenuItem>
           )}
 
@@ -169,10 +180,17 @@ function Actions({
               <DropdownMenuSeparator />
 
               <DropdownMenuItem
-                onClick={() => setDeleteOpen(true)}
+                asChild
                 variant="destructive"
               >
-                {t(($) => $.delete)}
+                <button
+                  className="w-full"
+                  id={`open-delete-team-${team.id}-dialog`}
+                  onClick={() => setDeleteOpen(true)}
+                  type="button"
+                >
+                  {t(($) => $.delete)}
+                </button>
               </DropdownMenuItem>
             </>
           )}

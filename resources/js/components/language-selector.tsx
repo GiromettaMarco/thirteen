@@ -92,6 +92,7 @@ export function LanguageSelect(props: ComponentProps<'div'>) {
         <SelectTrigger
           aria-label={t(($) => $.language.select)}
           className="w-full"
+          id="select-language"
         >
           <SelectValue placeholder={t(($) => $.language.select)}>
             <div className="flex items-center gap-2">
@@ -104,6 +105,7 @@ export function LanguageSelect(props: ComponentProps<'div'>) {
         <SelectContent>
           {tabs.map(({ label, value }) => (
             <SelectItem
+              id={`language-${value}`}
               key={value}
               value={value}
             >

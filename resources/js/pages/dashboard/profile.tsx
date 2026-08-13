@@ -78,6 +78,7 @@ function UpdateProfileDrawer({ profile }: { profile: Profile }) {
             public: profile.public ? 'true' : '',
             role: profile.role
           }}
+          id="update-profile-form"
           onSuccess={() => setOpen(false)}
           route={update(profile.id)}
           schema={updateProfileSchema}
@@ -102,7 +103,6 @@ function UpdateProfileDrawer({ profile }: { profile: Profile }) {
                 <InfoCheckboxField
                   className="mt-2"
                   control={form.control}
-                  inputId="profile-privacy"
                   inputName="public"
                   label={t(($) => $.pages.dashboard.profile.public)}
                   text={t(($) => $.pages.dashboard.profile.info)}

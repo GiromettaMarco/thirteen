@@ -30,6 +30,7 @@ export default function VerifyEmail() {
         <TextLink
           className="text-sm"
           href={logout()}
+          id="logout"
         >
           {t(($) => $.auth.signOut)}
         </TextLink>

@@ -88,7 +88,10 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
           open={open}
         >
           <DialogTrigger asChild>
-            <Button variant="destructive">
+            <Button
+              id="open-delete-sessions-dialog"
+              variant="destructive"
+            >
               {t(($) => $.pages.dashboard.account.sessions.dialog.trigger)}
             </Button>
           </DialogTrigger>
@@ -103,6 +106,7 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
             </DialogDescription>
 
             <Form
+              id="delete-sessions-form"
               onSuccess={() => setOpen(false)}
               route={destroySessions()}
               schema={passwordConfirmSchema}
@@ -154,6 +158,7 @@ function UpdateEmail({ email }: { email: string }) {
       <Form
         className="gap-3"
         defaults={{ email }}
+        id="update-email-form"
         route={accountUpdate()}
         schema={updateAccountSchema}
         setDefaultsOnSuccess
@@ -191,6 +196,7 @@ function UpdatePassword() {
     >
       <Form
         className="gap-3"
+        id="update-password-form"
         resetOnSuccess={true}
         route={passwordUpdate()}
         schema={updatePasswordSchema}
@@ -252,7 +258,7 @@ function DeleteAccount() {
         <DialogTrigger asChild>
           <Button
             className="w-36"
-            data-test="delete-account"
+            id="open-delete-account-dialog"
             variant="destructive"
           >
             {t(($) => $.pages.dashboard.account.delete.dialog.trigger)}
@@ -268,6 +274,7 @@ function DeleteAccount() {
           </DialogDescription>
 
           <Form
+            id="delete-account-form"
             route={destroyAccount()}
             schema={passwordConfirmSchema}
           >

@@ -398,7 +398,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
               <div className="flex flex-1 items-center gap-4">
                 <div className="flex-initial lg:hidden">
                   <Button
-                    data-test="open-mobile-menu"
+                    id="open-mobile-menu"
                     onClick={() => setOpen(true)}
                     variant="ghost"
                   >

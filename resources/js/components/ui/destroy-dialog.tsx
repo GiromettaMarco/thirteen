@@ -50,6 +50,7 @@ export function DestroyDialog({
         {children}
 
         <Form
+          id="destroy-dialog"
           onSuccess={() => setOpen(false)}
           route={route}
           schema={deleteSchema}

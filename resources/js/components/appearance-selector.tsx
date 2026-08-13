@@ -115,6 +115,7 @@ export function AppearanceSelect(props: ComponentProps<'div'>) {
         <SelectTrigger
           aria-label={t(($) => $.appearance.select)}
           className="w-full"
+          id="select-appearance"
         >
           <SelectValue placeholder={t(($) => $.appearance.select)} />
         </SelectTrigger>
@@ -122,6 +123,7 @@ export function AppearanceSelect(props: ComponentProps<'div'>) {
         <SelectContent>
           {tabs.map(({ Icon, label, value }) => (
             <SelectItem
+              id={`appearance-${value}`}
               key={value}
               value={value}
             >

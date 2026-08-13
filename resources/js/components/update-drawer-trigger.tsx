@@ -5,8 +5,10 @@ import { useTranslation } from 'react-i18next'
 import { DrawerTrigger } from '@/components/ui/drawer'
 
 export function UpdateDrawerTrigger({
+  id = 'open-update-drawer',
   onClick
 }: {
+  id?: string
   onClick?: MouseEventHandler<HTMLButtonElement>
 }) {
   // i18n
@@ -15,6 +17,7 @@ export function UpdateDrawerTrigger({
   return (
     <DrawerTrigger asChild>
       <Button
+        id={id}
         onClick={onClick}
         size="sm"
         variant="ghost"
