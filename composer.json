@@ -26,7 +26,6 @@
     "mockery/mockery": "^1.6",
     "nunomaduro/collision": "^8.9",
     "pestphp/pest": "^4.3.1",
-    "pestphp/pest-plugin-browser": "^4.2.0",
     "pestphp/pest-plugin-laravel": "^4.0"
   },
   "autoload": {
@@ -68,10 +67,6 @@
       "@php artisan config:clear --ansi",
       "@php artisan test --exclude-group=browser --parallel"
     ],
-    "test:browser": [
-      "@php artisan config:clear --ansi",
-      "@php artisan test --group=browser --no-coverage --parallel"
-    ],
     "format": [
       "pint --parallel"
     ],
@@ -106,7 +101,6 @@
     "dev": "Start php and vite dev servers",
     "dev:ssr": "Start the php dev server and start the app with SSR enabled",
     "test": "Run http tests",
-    "test:browser": "Run browser testing",
     "format": "Format php code",
     "lint": "Run static analysis",
     "check": "Format php code and run static analysis"

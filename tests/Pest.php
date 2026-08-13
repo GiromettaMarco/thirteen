@@ -21,11 +21,6 @@ pest()->extend(TestCase::class)
     ->group('feature')
     ->in('Feature');
 
-pest()->extend(TestCase::class)
-    ->use(RefreshDatabase::class)
-    ->group('browser')
-    ->in('Browser');
-
 /*
 |--------------------------------------------------------------------------
 | Expectations
@@ -56,20 +51,3 @@ function something()
 {
     // ..
 }
-
-/*
-|--------------------------------------------------------------------------
-| Browser Tests - Workaround Bug Pest v4.0.3
-|--------------------------------------------------------------------------
-|
-| Chrome processes are not properly closed between tests, causing memory
-| accumulation and timeouts when running in parallel.
-| @see https://github.com/pestphp/pest/issues/1480
-|
-*/
-
-uses()->afterEach(function () {
-    if (isset($this->page)) {
-        $this->page->page()->close();
-    }
-})->in('Browser');

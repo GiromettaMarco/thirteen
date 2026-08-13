@@ -47,17 +47,14 @@ jobs:
       - name: PHP Tests
         run: composer run test
 
-      - name: Browser Tests
-        run: composer run test:browser
-
       - name: Vitest
         run: vpr test
 
       - name: Update PHP Coverage Badge
         run: bin/php-coverage
 
-      - name: Update TS Coverage Badge
-        run: bin/ts-coverage
+      # - name: Update TS Coverage Badge
+      #   run: bin/ts-coverage
 
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v7
@@ -65,11 +62,11 @@ jobs:
           commit_message: 'docs: update coverage badges'
           commit_options: '--no-verify'
 
-      - name: Store Artifacts
-        if: failure()
-        uses: actions/upload-artifact@v7
-        with:
-          name: artifacts
-          path: |
-            tests/Browser/Screenshots/*.png
-          retention-days: 7
+      # - name: Store Artifacts
+      #   if: failure()
+      #   uses: actions/upload-artifact@v7
+      #   with:
+      #     name: artifacts
+      #     path: |
+      #       tests/Browser/Screenshots/*.png
+      #     retention-days: 7

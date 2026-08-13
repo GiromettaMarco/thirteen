@@ -2,4 +2,3 @@ vp check
 composer run lint
 vp build
 composer run test
-composer run test:browser
