@@ -11,14 +11,14 @@ on:
       - master
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
 
     timeout-minutes: 5
-
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout Repository
