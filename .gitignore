@@ -5,10 +5,8 @@
 /node_modules
 /vendor
 
-# eslint
-.eslintcache
-
 # testing
+.nyc_output
 *storybook.log
 storybook-static
 /reports
@@ -18,7 +16,7 @@ tests/Browser/Screenshots
 .env
 .env.backup
 .env.production
-.env.test
+.env.testing
 
 # public
 /public/build

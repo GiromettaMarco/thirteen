@@ -59,6 +59,11 @@
       "Composer\\Config::disableProcessTimeout",
       "vpx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan inertia:start-ssr\" --names=server,queue,logs,ssr --kill-others"
     ],
+    "e2e": [
+      "@php artisan config:clear --ansi",
+      "Composer\\Config::disableProcessTimeout",
+      "@php artisan serve --env=testing"
+    ],
     "test": [
       "@php artisan config:clear --ansi",
       "@php artisan test --exclude-group=browser --parallel"

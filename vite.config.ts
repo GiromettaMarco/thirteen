@@ -4,6 +4,7 @@ import { storybookTest } from '@storybook/addon-vitest/vitest-plugin'
 import tailwindcss from '@tailwindcss/vite'
 import react, { reactCompilerPreset } from '@vitejs/plugin-react'
 import laravel from 'laravel-vite-plugin'
+import istanbul from 'vite-plugin-istanbul'
 import { defineConfig, lazyPlugins } from 'vite-plus'
 import { playwright } from 'vite-plus/test/browser-playwright'
 import alias from './.storybook/alias'
@@ -11,7 +12,22 @@ import alias from './.storybook/alias'
 /** Vitest or Storybook environment */
 const testing = process.env.VITEST || process.argv[1]?.includes('storybook')
 
+const isE2E = process.env.E2E === 'true'
+
 export default defineConfig({
+  build: isE2E
+    ? {
+        rollupOptions: {
+          checks: {
+            invalidAnnotation: false
+          },
+          output: {
+            manualChunks: () => 'bundle'
+          }
+        },
+        sourcemap: true
+      }
+    : undefined,
   fmt: {
     htmlWhitespaceSensitivity: 'css',
     ignorePatterns: [
@@ -116,7 +132,7 @@ export default defineConfig({
       'typescript/no-explicit-any': 'error',
       'typescript/no-extra-non-null-assertion': 'error',
       'typescript/no-misused-new': 'error',
-      'typescript/no-namespace': 'error',
+      'typescript/no-namespace': ['error', { allowDeclarations: true }],
       'typescript/no-non-null-asserted-optional-chain': 'error',
       'typescript/no-require-imports': 'error',
       'typescript/no-this-alias': 'error',
@@ -138,6 +154,20 @@ export default defineConfig({
           ssr: 'resources/js/ssr.tsx'
         })
       : undefined,
+    isE2E
+      ? istanbul({
+          exclude: [
+            'resources/js/actions/**',
+            'resources/js/locales/**',
+            'resources/js/routes/**',
+            'resources/js/wayfinder/**'
+          ],
+          extension: ['.ts', '.tsx'],
+          forceBuildInstrument: true,
+          include: 'resources/js/*',
+          requireEnv: false
+        })
+      : undefined,
     react(),
     // @see https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#react-compiler
     babel({ presets: [reactCompilerPreset()] }),
@@ -152,6 +182,15 @@ export default defineConfig({
     tasks: {
       build: {
         command: 'vp build',
+        input: [
+          'resources/css/**',
+          'resources/fonts/**',
+          'resources/js/**',
+          'pnpm-lock.yaml'
+        ]
+      },
+      build_e2e: {
+        command: 'cross-env E2E=true vp build',
         input: [
           'resources/css/**',
           'resources/fonts/**',

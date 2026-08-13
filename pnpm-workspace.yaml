@@ -1,5 +1,6 @@
 allowBuilds:
   '@swc/core': false
+  cypress: true
   esbuild: false
   msw: false
 patchedDependencies:
@@ -27,3 +28,4 @@ minimumReleaseAgeExclude:
   - '@gmcode/tsv-core'
   - '@gmcode/tsv-hookform'
   - '@gmcode/tsv-input'
+sideEffectsCache: false

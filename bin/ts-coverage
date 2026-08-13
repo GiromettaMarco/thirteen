@@ -31,7 +31,7 @@ xml_set_element_handler(
 );
 
 // Open XML file
-$fp = fopen('reports/ui/clover.xml', 'r');
+$fp = fopen('reports/cypress/clover.xml', 'r');
 
 // Read data and exit when METRICS is found.
 // We expect to find it in the first kilobyte.
@@ -43,9 +43,6 @@ while (! $collected && $data = fread($fp, 1024)) {
             xml_get_current_line_number($parser)
         ));
 }
-
-// Free the XML parser
-xml_parser_free($parser);
 
 // Print badge
 make_coverage_badge($coverage, 'ts');
