@@ -13,7 +13,7 @@ return [
         'updated' => 'Account updated',
     ],
     'auth' => [
-        'email_taken' => 'This email ha already been taken.',
+        'email_taken' => 'This email has already been taken.',
         'failed' => 'These credentials do not match our records.',
         'password_email' => 'A reset link will be sent if the account exists.',
         'registered' => 'Welcome!',
