@@ -1,0 +1,12 @@
+name: Setup CI
+
+description: Install Vite+ with node 24, enable cache and install dependencies.
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Vite+
+      uses: voidzero-dev/setup-vp@250f29ce396baf5e8f24498e17c0dfdebabc26eb # v1
+      with:
+        node-version: '24'
+        cache: true

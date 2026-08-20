@@ -22,21 +22,18 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: CI setup
+        uses: ./.github/actions/vp-setup
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           php-version: 8.4
           extensions: json, dom, curl, libxml, mbstring
           tools: composer:v2
           coverage: xdebug
-
-      - name: Setup Vite+
-        uses: voidzero-dev/setup-vp@v1
-        with:
-          node-version: '24'
-          cache: true
 
       - name: Setup with Composer
         run: composer run setup
@@ -57,7 +54,7 @@ jobs:
       #   run: bin/ts-coverage
 
       - name: Commit Changes
-        uses: stefanzweifel/git-auto-commit-action@v7
+        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7
         with:
           commit_message: 'docs: update coverage badges'
           commit_options: '--no-verify'
