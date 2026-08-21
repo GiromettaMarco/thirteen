@@ -39,6 +39,7 @@
   "cSpell.words": [
     "analyse",
     "autodocs",
+    "COVEREDSTATEMENTS",
     "disconnetti",
     "Dispatchable",
     "endforeach",
@@ -54,6 +55,7 @@
     "Laravel",
     "Lngs",
     "nesbot",
+    "NIGHTWATCH",
     "oklch",
     "phpstan",
     "shivammathur",
@@ -194,6 +196,14 @@
     "README*": "AUTHORS, Authors, BACKERS*, Backers*, CHANGELOG*, CITATION*, CODEOWNERS, CODE_OF_CONDUCT*, CONTRIBUTING*, CONTRIBUTORS, CONTRIBUTORS.MD, CONTRIBUTORS.TXT, COPYING*, CREDITS, Changelog*, Citation*, Code_Of_Conduct*, Codeowners, Contributing*, Contributors, Contributors.md, Contributors.txt, Copying*, Credits, GOVERNANCE.MD, Governance.md, HISTORY.MD, History.md, LICENSE, LICENSE.MD, LICENSE.txt, License, License.md, License.txt, MAINTAINERS, Maintainers, README-*, README_*, RELEASE_NOTES*, ROADMAP.MD, Readme-*, Readme_*, Release_Notes*, Roadmap.md, SECURITY.MD, SPONSORS*, Security.md, Sponsors*, authors, backers*, changelog*, citation*, code_of_conduct*, codeowners, contributing*, contributors, contributors.md, contributors.txt, copying*, credits, governance.md, history.md, license, license.md, license.txt, maintainers, readme-*, readme_*, release_notes*, roadmap.md, security.md, sponsors*",
     "*.ts": "$(capture).js, $(capture).d.ts.map, $(capture).*.ts, $(capture)_*.js, $(capture)_*.ts",
     "*.tsx": "$(capture).ts, $(capture).*.ts, $(capture).*.tsx, $(capture)_*.ts, $(capture)_*.tsx, $(capture).css, $(capture).module.css, $(capture).less, $(capture).module.less, $(capture).module.less.d.ts, $(capture).scss, $(capture).module.scss, $(capture).module.scss.d.ts, $(capture).css.ts",
-    "vite.config.*": "cypress.config.ts, i18next.config.ts, playwright.config.ts, tsconfig.json"
-  }
+    "vite.config.*": "cypress.config.*, i18next.config.*, playwright.config.*, tsconfig.json, vitest.config.*"
+  },
+
+  // Coverage Gutters
+  "coverage-gutters.coverageBaseDir": "reports",
+  "coverage-gutters.coverageReportFileName": "{cypress/lcov-report,php/html-report}/index.html",
+  "coverage-gutters.coverageFileNames": [
+    "php/cobertura.xml",
+    "cypress/lcov.info"
+  ]
 }

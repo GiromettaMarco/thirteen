@@ -4,70 +4,95 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "$(debug-alt-small)",
-      "type": "shell",
       "command": "composer run dev",
+      "detail": "Start the development server.",
+      "label": "$(debug-alt-small) Dev",
+      "type": "shell",
       "options": {
         "statusbar": {
+          "color": "#22C1D6",
           "detail": "dev",
-          "color": "#22C1D6"
+          "label": "$(debug-alt-small)"
         }
       }
     },
     {
-      "label": "$(play)",
-      "type": "shell",
       "command": "composer run dev:ssr",
+      "detail": "Start the development server with SSR.",
+      "label": "$(play) Dev:SSR",
+      "type": "shell",
       "options": {
         "statusbar": {
+          "color": "#22C1D6",
           "detail": "dev:ssr",
-          "color": "#22C1D6"
+          "label": "$(play)"
         }
       }
     },
     {
-      "label": "$(mail)",
-      "type": "shell",
       "command": "Start \"http://localhost:8025/\" && c:/path/to/mailpit/mailpit.exe --database c:/path/to/mailpit/storage/thirteen.db",
+      "detail": "Start Mailpit server.",
+      "label": "$(mail) Mailpit",
       "options": {
         "statusbar": {
+          "color": "#22C1D6",
           "detail": "mailpit",
-          "color": "#22C1D6"
+          "label": "$(mail)"
         }
-      }
+      },
+      "type": "shell"
     },
     {
-      "label": "$(test-view-icon)",
-      "type": "shell",
       "command": "composer run test",
+      "detail": "Run PHP unit tests with Pest.",
+      "label": "$(beaker) Unit Tests",
       "options": {
         "statusbar": {
-          "detail": "test",
-          "color": "#22C1D6"
+          "color": "#22C1D6",
+          "detail": "php tests",
+          "label": "$(beaker)"
         }
-      }
+      },
+      "type": "shell"
     },
     {
-      "label": "$(remote-explorer-documentation)",
-      "type": "shell",
+      "command": "vpr e2e:ui",
+      "detail": "Run end-to-end tests with Cypress UI.",
+      "label": "$(beaker) E2E Tests",
+      "options": {
+        "statusbar": {
+          "color": "#22C1D6",
+          "detail": "e2e ui",
+          "label": "$(beaker)"
+        }
+      },
+      "type": "shell"
+    },
+    {
       "command": "pnpm run storybook",
+      "detail": "Open Storybook.",
+      "label": "$(remote-explorer-documentation) Storybook",
       "options": {
         "statusbar": {
+          "color": "#22C1D6",
           "detail": "storybook",
-          "color": "#22C1D6"
+          "label": "$(remote-explorer-documentation)"
         }
-      }
+      },
+      "type": "shell"
     },
     {
-      "label": "$(type-hierarchy)",
-      "type": "shell",
       "command": "php artisan wayfinder:generate",
+      "detail": "Generate routes with Wayfinder.",
+      "label": "$(type-hierarchy) Wayfinder",
       "options": {
         "statusbar": {
+          "color": "#22C1D6",
           "detail": "wayfinder",
-          "color": "#22C1D6"
+          "label": "$(type-hierarchy)"
         }
-      }
+      },
+      "type": "shell"
     }
   ]
 }
