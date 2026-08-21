@@ -36,7 +36,8 @@
     </php>
     <coverage>
         <report>
-            <xml outputDirectory="reports/php"/>
+            <cobertura outputFile="reports/php/cobertura.xml"/>
+            <html outputDirectory="reports/php/html-report"/>
         </report>
     </coverage>
 </phpunit>

@@ -17,9 +17,9 @@ xml_set_element_handler(
     $parser,
     function ($parser, $element_name, $element_attrs) use (&$collected, &$coverage) {
         // Find the element
-        if (! $collected && $element_name === 'LINES') {
+        if (! $collected && $element_name === 'COVERAGE') {
             // Collect coverage
-            $coverage = intval($element_attrs['PERCENT']);
+            $coverage = $element_attrs['LINE-RATE'] * 100;
 
             // Stop reading
             $collected = true;
@@ -29,7 +29,7 @@ xml_set_element_handler(
 );
 
 // Open XML file
-$fp = fopen('reports/php/index.xml', 'r');
+$fp = fopen('reports/php/cobertura.xml', 'r');
 
 // Read data and exit when METRICS is found.
 // We expect to find it in the first kilobyte.
