@@ -189,7 +189,7 @@ export default defineConfig({
           'pnpm-lock.yaml'
         ]
       },
-      build_e2e: {
+      'build:e2e': {
         command: 'cross-env E2E=true vp build',
         input: [
           'resources/css/**',
@@ -198,7 +198,7 @@ export default defineConfig({
           'pnpm-lock.yaml'
         ]
       },
-      build_ssr: {
+      'build:ssr': {
         command: 'vp build --ssr',
         dependsOn: ['build'],
         input: [
@@ -208,8 +208,21 @@ export default defineConfig({
           'pnpm-lock.yaml'
         ]
       },
+      e2e: {
+        command:
+          'start-server-and-test "composer run e2e" 8000 "cypress run --e2e --browser chrome"',
+        dependsOn: ['build:e2e'],
+        input: ['cypress/**', 'public/**'],
+        output: ['.nyc_output/**', 'reports/cypress/**']
+      },
+      'e2e:ui': {
+        cache: false,
+        command:
+          'start-server-and-test "composer run e2e" 8000 "cypress open --e2e --browser chrome"',
+        dependsOn: ['build:e2e']
+      },
       ready: {
-        command: ['vp check', 'vpr test', 'vpr build_ssr']
+        command: ['vp check', 'vpr test', 'vpr build:ssr']
       },
       test: {
         command: 'vp test run --project=storybook --coverage',

@@ -61,7 +61,7 @@
     "e2e": [
       "@php artisan config:clear --ansi",
       "Composer\\Config::disableProcessTimeout",
-      "@php artisan serve --env=testing"
+      "@php artisan serve --silent --env=testing"
     ],
     "test": [
       "@php artisan config:clear --ansi",
