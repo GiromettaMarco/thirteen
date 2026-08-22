@@ -106,13 +106,11 @@ export default defineConfig({
     }
   },
   plugins: lazyPlugins(() => [
-    !process.env.VITEST
-      ? laravel({
-          input: ['resources/css/app.css', 'resources/js/app.tsx'],
-          refresh: true,
-          ssr: 'resources/js/ssr.tsx'
-        })
-      : undefined,
+    laravel({
+      input: ['resources/css/app.css', 'resources/js/app.tsx'],
+      refresh: true,
+      ssr: 'resources/js/ssr.tsx'
+    }),
     isE2E
       ? istanbul({
           exclude: [
@@ -131,7 +129,7 @@ export default defineConfig({
     // @see https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#react-compiler
     babel({ presets: [reactCompilerPreset()] }),
     tailwindcss(),
-    !process.env.VITEST ? wayfinder() : undefined
+    wayfinder()
   ]),
   resolve: {
     tsconfigPaths: true
@@ -154,7 +152,8 @@ export default defineConfig({
           'resources/css/**',
           'resources/fonts/**',
           'resources/js/**',
-          'pnpm-lock.yaml'
+          'pnpm-lock.yaml',
+          'vite.config.ts'
         ]
       },
       'build:ssr': {
@@ -164,7 +163,8 @@ export default defineConfig({
           'resources/css/**',
           'resources/fonts/**',
           'resources/js/**',
-          'pnpm-lock.yaml'
+          'pnpm-lock.yaml',
+          'vite.config.ts'
         ]
       },
       e2e: {
@@ -173,7 +173,7 @@ export default defineConfig({
           'bin/ts-coverage'
         ],
         dependsOn: ['build:e2e'],
-        input: ['cypress/**', 'public/**'],
+        input: ['cypress/**', 'public/**', 'vite.config.ts'],
         output: [
           '.nyc_output/**',
           'docs/.vscode/ts-coverage.svg',
