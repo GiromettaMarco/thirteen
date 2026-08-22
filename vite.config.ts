@@ -168,11 +168,17 @@ export default defineConfig({
         ]
       },
       e2e: {
-        command:
+        command: [
           'start-server-and-test "composer run e2e" 8000 "cypress run --e2e --browser chrome"',
+          'bin/ts-coverage'
+        ],
         dependsOn: ['build:e2e'],
         input: ['cypress/**', 'public/**'],
-        output: ['.nyc_output/**', 'reports/cypress/**']
+        output: [
+          '.nyc_output/**',
+          'docs/.vscode/ts-coverage.svg',
+          'reports/cypress/**'
+        ]
       },
       'e2e:ui': {
         cache: false,
