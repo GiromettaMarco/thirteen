@@ -14,8 +14,8 @@
   "dependencies": {
     "@gmcode/forms": "^0.1.1",
     "@gmcode/react-ui": "^0.3.6",
-    "@inertiajs/react": "^3.6.1",
-    "@inertiajs/vite": "^3.6.1",
+    "@inertiajs/react": "^3.7.0",
+    "@inertiajs/vite": "^3.7.0",
     "@tailwindcss/vite": "^4.3.0",
     "@tanstack/react-table": "^8.21.3",
     "@types/react": "^19.2.14",
@@ -43,7 +43,7 @@
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "@cypress/code-coverage": "^4.0.3",
-    "@inertiajs/core": "^3.6.1",
+    "@inertiajs/core": "^3.7.0",
     "@laravel/vite-plugin-wayfinder": "^0.1.7",
     "@rolldown/plugin-babel": "^0.2.3",
     "@types/babel__core": "^7.20.5",
