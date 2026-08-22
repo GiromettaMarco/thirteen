@@ -69,19 +69,6 @@
       "type": "shell"
     },
     {
-      "command": "pnpm run storybook",
-      "detail": "Open Storybook.",
-      "label": "$(remote-explorer-documentation) Storybook",
-      "options": {
-        "statusbar": {
-          "color": "#22C1D6",
-          "detail": "storybook",
-          "label": "$(remote-explorer-documentation)"
-        }
-      },
-      "type": "shell"
-    },
-    {
       "command": "php artisan wayfinder:generate",
       "detail": "Generate routes with Wayfinder.",
       "label": "$(type-hierarchy) Wayfinder",

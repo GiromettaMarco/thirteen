@@ -25,13 +25,11 @@
 
     /* Completeness */
     "types": ["cypress", "node"],
-    // ignore storybook broken declarations
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "paths": {
       "@/*": ["./resources/js/*"]
     },
     "jsx": "react-jsx"
   },
-  /* @see https://github.com/microsoft/TypeScript/issues/49555 */
-  "include": [".storybook/**/*", "cypress", "resources/js", "tests/stories"]
+  "include": ["cypress", "resources/js"]
 }

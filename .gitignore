@@ -7,8 +7,6 @@
 
 # testing
 .nyc_output
-*storybook.log
-storybook-static
 /reports
 
 # environment

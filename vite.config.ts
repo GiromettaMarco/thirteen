@@ -1,16 +1,10 @@
 import { wayfinder } from '@laravel/vite-plugin-wayfinder'
 import babel from '@rolldown/plugin-babel'
-import { storybookTest } from '@storybook/addon-vitest/vitest-plugin'
 import tailwindcss from '@tailwindcss/vite'
 import react, { reactCompilerPreset } from '@vitejs/plugin-react'
 import laravel from 'laravel-vite-plugin'
 import istanbul from 'vite-plugin-istanbul'
 import { defineConfig, lazyPlugins } from 'vite-plus'
-import { playwright } from 'vite-plus/test/browser-playwright'
-import alias from './.storybook/alias'
-
-/** Vitest or Storybook environment */
-const testing = process.env.VITEST || process.argv[1]?.includes('storybook')
 
 const isE2E = process.env.E2E === 'true'
 
@@ -30,12 +24,7 @@ export default defineConfig({
     : undefined,
   fmt: {
     htmlWhitespaceSensitivity: 'css',
-    ignorePatterns: [
-      'composer.lock',
-      'pnpm-lock.yaml',
-      '.storybook/mocks/inertia/*.js',
-      '**/mockServiceWorker.js'
-    ],
+    ignorePatterns: ['composer.lock', 'pnpm-lock.yaml'],
     printWidth: 80,
     semi: false,
     singleAttributePerLine: true,
@@ -67,8 +56,7 @@ export default defineConfig({
       'node_modules',
       'public',
       'bootstrap/ssr',
-      'reports',
-      '.storybook/mocks/inertia/*.js'
+      'reports'
     ],
     jsPlugins: [
       'eslint-plugin-perfectionist',
@@ -81,35 +69,6 @@ export default defineConfig({
       typeAware: true,
       typeCheck: true
     },
-    overrides: [
-      {
-        // @see https://github.com/oxc-project/oxc/issues/21525
-        files: [
-          '**/*.stories.{ts,tsx,js,jsx,mjs,cjs}',
-          '**/*.story.{ts,tsx,js,jsx,mjs,cjs}'
-        ],
-        jsPlugins: ['eslint-plugin-storybook'],
-        rules: {
-          'storybook/await-interactions': 'error',
-          'storybook/context-in-play-function': 'error',
-          'storybook/default-exports': 'error',
-          'storybook/hierarchy-separator': 'warn',
-          'storybook/no-redundant-story-name': 'warn',
-          'storybook/no-renderer-packages': 'error',
-          'storybook/prefer-pascal-case': 'warn',
-          'storybook/story-exports': 'error',
-          'storybook/use-storybook-expect': 'error',
-          'storybook/use-storybook-testing-library': 'error'
-        }
-      },
-      {
-        files: ['.storybook/main.{ts,tsx,js,jsx,mjs,cjs}'],
-        jsPlugins: ['eslint-plugin-storybook'],
-        rules: {
-          'storybook/no-uninstalled-addons': 'error'
-        }
-      }
-    ],
     plugins: ['oxc', 'typescript', 'unicorn', 'react'],
     rules: {
       'no-array-constructor': 'error',
@@ -147,7 +106,7 @@ export default defineConfig({
     }
   },
   plugins: lazyPlugins(() => [
-    !testing
+    !process.env.VITEST
       ? laravel({
           input: ['resources/css/app.css', 'resources/js/app.tsx'],
           refresh: true,
@@ -172,7 +131,7 @@ export default defineConfig({
     // @see https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#react-compiler
     babel({ presets: [reactCompilerPreset()] }),
     tailwindcss(),
-    !testing ? wayfinder() : undefined
+    !process.env.VITEST ? wayfinder() : undefined
   ]),
   resolve: {
     tsconfigPaths: true
@@ -223,54 +182,11 @@ export default defineConfig({
       },
       ready: {
         command: ['vp check', 'vpr test', 'vpr build:ssr']
-      },
-      test: {
-        command: 'vp test run --project=storybook --coverage',
-        input: [
-          '.storybook/**',
-          'resources/css/**',
-          'resources/fonts/**',
-          'resources/js/**',
-          'pnpm-lock.yaml'
-        ]
       }
     }
   },
   staged: {
     '!(**/*.php)*': ['vp check --fix'],
     '**/*.php': ['php ./vendor/bin/pint']
-  },
-  test: {
-    coverage: {
-      include: [
-        'resources/js/components/**',
-        'resources/js/hooks/**',
-        'resources/js/layouts/**',
-        'resources/js/lib/**',
-        'resources/js/pages/**',
-        'resources/js/providers/**',
-        'resources/js/schemas/**'
-      ],
-      provider: 'v8',
-      reporter: ['clover', 'text'],
-      reportsDirectory: './reports/ui'
-    },
-    projects: [
-      {
-        extends: true,
-        plugins: [testing ? storybookTest() : null],
-        test: {
-          alias,
-          browser: {
-            enabled: true,
-            headless: true,
-            instances: [{ browser: 'chromium' }],
-            provider: playwright()
-          },
-          name: 'storybook'
-        }
-      }
-    ],
-    reporters: ['default']
   }
 })
