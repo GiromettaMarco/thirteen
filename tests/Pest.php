@@ -21,6 +21,11 @@ pest()->extend(TestCase::class)
     ->group('feature')
     ->in('Feature');
 
+pest()->tia()
+    ->locally()    // run TIA on every local invocation, no --tia flag needed
+    // ->baselined()  // fetch the shared baseline from CI when no local graph exists
+    ->filtered();  // narrow PHPUnit to only affected test files
+
 /*
 |--------------------------------------------------------------------------
 | Expectations
