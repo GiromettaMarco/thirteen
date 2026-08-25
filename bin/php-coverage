@@ -19,7 +19,7 @@ xml_set_element_handler(
         // Find the element
         if (! $collected && $element_name === 'COVERAGE') {
             // Collect coverage
-            $coverage = $element_attrs['LINE-RATE'] * 100;
+            $coverage = intval($element_attrs['LINE-RATE'] * 100);
 
             // Stop reading
             $collected = true;
