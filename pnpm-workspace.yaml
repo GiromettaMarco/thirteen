@@ -1,6 +1,6 @@
 allowBuilds:
   '@swc/core': false
-  cypress: true
+  cypress: false
   esbuild: false
   msw: false
 catalog:
