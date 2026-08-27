@@ -2,6 +2,7 @@ import { Head } from '@inertiajs/react'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { BreadcrumbLink } from '@/components/breadcrumbs'
+import { UpdateProjectDrawer } from '@/components/projects/update-project-drawer'
 import { TasksTable } from '@/components/tasks/tasks-table'
 import { Container } from '@/components/ui/container'
 import { Heading } from '@/components/ui/heading'
@@ -48,10 +49,12 @@ export default function ProjectsShow({
 
   return (
     <DashboardLayout
-      // button={
-      //   can.update ? <UpdateProjectDrawer project={project} /> : undefined
-      // }
       breadcrumbs={breadcrumbs}
+      button={
+        permissions.can_edit_projects ? (
+          <UpdateProjectDrawer project={project} />
+        ) : undefined
+      }
       title={project.name}
     >
       <Head title={project.name} />
