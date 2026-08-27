@@ -33,6 +33,7 @@ export default {
   dateCreated: 'Date creazione',
   dateModified: 'Ultima modifica',
   delete: 'Elimina',
+  deleteMany: 'Stai per cancellare i seguenti elementi:',
   description: 'Descrizione',
   edit: 'Modifica',
   emailAddress: 'Indirizzo email',
@@ -309,6 +310,7 @@ export default {
     createTask: 'Crea Compito',
     defaultName: 'Nuovo compito',
     deleteDesc: 'Stai per cancellare il compito "{{task}}".',
+    deleteManyTitle: 'Sei sicuro di voler eliminare i compiti selezionati?',
     deleteTitle: 'Sei sicuro di voler eliminare questo compito?',
     descriptionPlaceholder:
       "Facoltativo, breve testo descrittivo dell'attività.",

@@ -24,6 +24,9 @@ importers:
       '@gmcode/react-ui':
         specifier: ^0.3.6
         version: 0.3.6(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@gmcode/tsv-advanced':
+        specifier: ^0.1.6
+        version: 0.1.6
       '@inertiajs/react':
         specifier: ^3.7.0
         version: 3.7.0(axios@1.18.1(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -974,6 +977,9 @@ packages:
     peerDependencies:
       react: ^19.2.7
       react-dom: ^19.2.7
+
+  '@gmcode/tsv-advanced@0.1.6':
+    resolution: {integrity: sha512-KGVZlmo4DI9u3sq78K0R8WQ9SXl4Hdq2YU5q7kPJNlu/XbJKNOXs8sCc/9pKKoyEkUn5/DwgmjeuHBfECzhWZQ==}
 
   '@gmcode/tsv-core@0.2.1':
     resolution: {integrity: sha512-w8KIWvbWtgJ8IcApmCZngTeHkBy7kAWfhvMZZW4o8ACIRl3tPIsZS1Df/vskqmxUzItKwtr1dLotyxQ7IlUSCg==}
@@ -6450,6 +6456,10 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
+
+  '@gmcode/tsv-advanced@0.1.6':
+    dependencies:
+      '@gmcode/tsv-core': 0.2.1
 
   '@gmcode/tsv-core@0.2.1': {}
 

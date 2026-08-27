@@ -129,8 +129,8 @@ Route::prefix('dashboard')
             ->can('editProjects', 'team')
             ->name('tasks.destroy');
 
-        // Route::delete('/teams/{team}/projects/{project}/tasks', [ProjectController::class, 'destroyTasks'])
-        //     ->scopeBindings()
-        //     ->can('editTasks', ['project', 'team'])
-        //     ->name('tasks.destroy-many');
+        Route::delete('/teams/{team}/projects/{project}/tasks', [TaskController::class, 'destroyMany'])
+            ->scopeBindings()
+            ->can('editProjects', 'team')
+            ->name('tasks.destroy-many');
     });

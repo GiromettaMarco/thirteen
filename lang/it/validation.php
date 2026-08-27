@@ -130,6 +130,7 @@ return [
     'prohibits' => ':Attribute impedisce a :other di essere presente.',
     'project_member' => 'L\'utente selezionato non è collegato al progetto.',
     'regex' => 'Il formato del campo :attribute non è valido.',
+    'related_tasks' => 'Uno o più compiti, non sono collegati al progetto.',
     'related_team' => 'Non sei un membro del team specificato.',
     'required' => 'Il campo :attribute è richiesto.',
     'required_array_keys' => 'Il campo :attribute deve contenere voci per: :values.',

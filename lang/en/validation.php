@@ -130,6 +130,7 @@ return [
     'prohibits' => 'The :attribute field prohibits :other from being present.',
     'project_member' => 'The selected user is not related to the project.',
     'regex' => 'The :attribute field format is invalid.',
+    'related_tasks' => 'One or more tasks, are not related to the project.',
     'related_team' => 'You are not a member of the specified team.',
     'required' => 'The :attribute field is required.',
     'required_array_keys' => 'The :attribute field must contain entries for: :values.',

@@ -57,14 +57,12 @@ import {
   EmptyMedia,
   EmptyTitle
 } from '@/components/ui/empty'
+import { MassDelete } from '@/components/ui/mass-delete'
 import UseTableStates from '@/hooks/use-table-states'
 import { format } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
-import { destroy } from '@/routes/tasks'
+import { destroy, destroyMany } from '@/routes/tasks'
 import type { Profile, Task, TaskWithProfile, View, ViewStore } from '@/types'
-
-//#region MassDelete
-// @TODO
 
 //#region Actions
 export function Actions({
@@ -496,12 +494,14 @@ export function TasksTable({
               {canEdit && (
                 <>
                   <AddTaskDrawerTrigger />
-                  {/* <TasksTableMassDelete
-                    projectId={projectId}
-                    rowSelection={rowSelection}
-                    setRowSelection={setRowSelection}
-                    teamId={teamId}
-                  /> */}
+                  <MassDelete
+                    route={destroyMany({
+                      project: projectId,
+                      team: teamId
+                    })}
+                    table={table}
+                    title={t(($) => $.tasks.deleteManyTitle)}
+                  />
                 </>
               )}
             </div>

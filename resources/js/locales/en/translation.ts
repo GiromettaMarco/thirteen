@@ -33,6 +33,7 @@ export default {
   dateCreated: 'Date created',
   dateModified: 'Date modified',
   delete: 'Delete',
+  deleteMany: 'You are about to delete the following items:',
   description: 'Description',
   edit: 'Edit',
   emailAddress: 'Email address',
@@ -310,6 +311,7 @@ export default {
     createTask: 'Create Task',
     defaultName: 'New task',
     deleteDesc: 'You are about to delete the "{{task}}" task.',
+    deleteManyTitle: 'Are you sure you want to delete the selected tasks?',
     deleteTitle: 'Are you sure you want to delete the task?',
     descriptionPlaceholder: 'Optional, short text describing the task.',
     emptyTable: {
