@@ -1,7 +1,7 @@
 import type { Locale } from 'date-fns'
 import { format as originalFormat } from 'date-fns'
 import { it } from 'date-fns/locale'
-import type { RawView, View } from '@/types'
+import type { AnyItem, RawView, View } from '@/types'
 
 /**
  * Default values for a table view.
@@ -90,4 +90,17 @@ export function missingFn() {
  */
 export function formatDateForDB(date: Date) {
   return `${date.getFullYear()}-${(date.getMonth() + 1 + '').padStart(2, '0')}-${(date.getDate() + '').padStart(2, '0')}`
+}
+
+export function isObject(input: unknown): input is object {
+  return typeof input === 'object' && input !== null && !Array.isArray(input)
+}
+
+export function isAnyItem(input: unknown): input is AnyItem {
+  return (
+    isObject(input) &&
+    'id' in input &&
+    ['string', 'number'].includes(typeof input.id) &&
+    (!('name' in input) || typeof input.name === 'string')
+  )
 }

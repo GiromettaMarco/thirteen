@@ -26,6 +26,11 @@ export interface PasswordReport {
   level: number
 }
 
+export interface AnyItem {
+  id: string | number
+  name?: string
+}
+
 //#region Auth/Inertia
 export interface UsersPermissions {
   edit: boolean
