@@ -24,3 +24,12 @@ export const createTaskSchema = new Schema({
   profile_id,
   status
 })
+
+export const updateTaskSchema = new Schema({
+  description,
+  label,
+  name,
+  priority,
+  profile_id,
+  status
+})

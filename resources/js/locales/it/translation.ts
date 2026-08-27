@@ -308,6 +308,8 @@ export default {
     createInstructions: 'Aggiungi un nuovo compito per questo progetto.',
     createTask: 'Crea Compito',
     defaultName: 'Nuovo compito',
+    deleteDesc: 'Stai per cancellare il compito "{{task}}".',
+    deleteTitle: 'Sei sicuro di voler eliminare questo compito?',
     descriptionPlaceholder:
       "Facoltativo, breve testo descrittivo dell'attività.",
     emptyTable: {

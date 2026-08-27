@@ -309,6 +309,8 @@ export default {
     createInstructions: 'Add a new task for this project.',
     createTask: 'Create Task',
     defaultName: 'New task',
+    deleteDesc: 'You are about to delete the "{{task}}" task.',
+    deleteTitle: 'Are you sure you want to delete the task?',
     descriptionPlaceholder: 'Optional, short text describing the task.',
     emptyTable: {
       line1: "You haven't created any task yet.",

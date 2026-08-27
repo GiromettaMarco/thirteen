@@ -159,6 +159,7 @@ export interface Task extends WithTimestamps {
   label: TaskLabel | null
   name: string
   priority: TaskPriority
+  profile_id: number | null
   project_id: number
   status: TaskStatus
 }

@@ -265,7 +265,6 @@ export function ProjectsTable({
         accessorKey: 'name',
         cell: ({ row }) => (
           <NameCell
-            className="ps-2"
             href={show({
               project: row.original.id,
               team: teamId
@@ -276,7 +275,6 @@ export function ProjectsTable({
         enableHiding: false,
         header: ({ column }) => (
           <SortableColumnHeader
-            className="ps-2"
             column={column}
             title={t(($) => $.name)}
           />

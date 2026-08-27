@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property-read Project $project
  */
-#[Fillable(['name', 'description', 'label', 'priority', 'status'])]
+#[Fillable(['name', 'description', 'label', 'priority', 'profile_id', 'status'])]
 class Task extends Model
 {
     /**

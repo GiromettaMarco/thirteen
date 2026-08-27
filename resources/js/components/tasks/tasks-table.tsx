@@ -17,11 +17,12 @@ import {
   Calendar,
   Check,
   Ellipsis,
+  EllipsisVertical,
   Inbox,
   SquareCheckBig,
   X
 } from 'lucide-react'
-import { useContext, useEffect, useMemo } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NameCell } from '@/components/name-cell'
 import {
@@ -31,6 +32,7 @@ import {
 import { LabelBadge } from '@/components/tasks/label-badge'
 import { PriorityBadge } from '@/components/tasks/priority-badge'
 import { StatusBadge } from '@/components/tasks/status-badge'
+import { UpdateTaskDrawer } from '@/components/tasks/update-task-drawer'
 import TableMain, {
   AfterTable,
   ColumnsVisibility,
@@ -39,6 +41,14 @@ import TableMain, {
   getSelectColDef,
   SortableColumnHeader
 } from '@/components/ui/data-table'
+import { DestroyDialog } from '@/components/ui/destroy-dialog'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
 import {
   Empty,
   EmptyContent,
@@ -50,7 +60,87 @@ import {
 import UseTableStates from '@/hooks/use-table-states'
 import { format } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
-import type { Profile, TaskWithProfile, View, ViewStore } from '@/types'
+import { destroy } from '@/routes/tasks'
+import type { Profile, Task, TaskWithProfile, View, ViewStore } from '@/types'
+
+//#region MassDelete
+// @TODO
+
+//#region Actions
+export function Actions({
+  canEdit = false,
+  task,
+  teamId
+}: {
+  canEdit?: boolean
+  task: Task
+  teamId: number
+}) {
+  // i18n
+  const { t } = useTranslation()
+
+  // Global state
+  const { setActiveTask, setUpdateTaskOpen } = useContext(AppContext)
+
+  // Delete dialog state
+  const [deleteOpen, setDeleteOpen] = useState(false)
+
+  if (canEdit) {
+    return (
+      <>
+        <DestroyDialog
+          description={t(($) => $.tasks.deleteDesc, { task: task.name })}
+          open={deleteOpen}
+          route={destroy({
+            project: task.project_id,
+            task: task,
+            team: teamId
+          })}
+          setOpen={setDeleteOpen}
+          title={t(($) => $.tasks.deleteTitle)}
+        />
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              className="flex size-8 text-muted-foreground data-[state=open]:bg-muted"
+              size="icon"
+              variant="ghost"
+            >
+              <EllipsisVertical />
+              <span className="sr-only">{t(($) => $.openMenu)}</span>
+            </Button>
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent
+            align="end"
+            className="w-32"
+          >
+            <DropdownMenuItem
+              onClick={() => {
+                setActiveTask(task)
+                setUpdateTaskOpen(true)
+              }}
+            >
+              {t(($) => $.edit)}
+            </DropdownMenuItem>
+
+            <DropdownMenuSeparator />
+
+            <DropdownMenuItem
+              onClick={() => setDeleteOpen(true)}
+              variant="destructive"
+            >
+              {t(($) => $.delete)}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </>
+    )
+  }
+
+  return <div className="min-h-8" />
+}
 
 //#region TableToolbar
 function TableToolbar<TData>({ table }: { table: Table<TData> }) {
@@ -198,6 +288,9 @@ export function TasksTable({
   // i18n
   const { i18n, t } = useTranslation()
 
+  // Global state
+  const { setActiveTask, setUpdateTaskOpen } = useContext(AppContext)
+
   // Table states
   const {
     columnFilters,
@@ -236,6 +329,13 @@ export function TasksTable({
     [t]
   )
 
+  const openUpdateTaskDrawer = useMemo(() => {
+    return (task: Task) => {
+      setActiveTask(task)
+      setUpdateTaskOpen(true)
+    }
+  }, [setActiveTask, setUpdateTaskOpen])
+
   const columns = useMemo<ColumnDef<TaskWithProfile>[]>(
     () => [
       ...(canEdit ? [getSelectColDef<TaskWithProfile>()] : []),
@@ -243,14 +343,19 @@ export function TasksTable({
         accessorKey: 'name',
         cell: ({ row }) => (
           <NameCell
-            className="ps-2"
             name={row.original.name}
+            onClick={
+              canEdit
+                ? () => {
+                    openUpdateTaskDrawer(row.original)
+                  }
+                : undefined
+            }
           />
         ),
         enableHiding: false,
         header: ({ column }) => (
           <SortableColumnHeader
-            className="ps-2"
             column={column}
             title={t(($) => $.name)}
           />
@@ -321,11 +426,19 @@ export function TasksTable({
           />
         ),
         sortingFn: 'datetime'
+      },
+      {
+        cell: ({ row }) => (
+          <Actions
+            canEdit={canEdit}
+            task={row.original}
+            teamId={teamId}
+          />
+        ),
+        id: 'actions'
       }
-      // @TODO add actions
-      // ...(canEdit ? [getTaskActionsColDef(teamId)] : [])
     ],
-    [canEdit, i18n.language, t]
+    [canEdit, i18n.language, openUpdateTaskDrawer, t, teamId]
   )
 
   const table = useReactTable({
@@ -362,11 +475,10 @@ export function TasksTable({
             teamId={teamId}
             teamMembers={teamMembers}
           />
-          {/* <UpdateTaskDrawer
-            projectId={projectId}
+          <UpdateTaskDrawer
             teamId={teamId}
-            employees={teamMembers}
-          /> */}
+            teamMembers={teamMembers}
+          />
         </>
       )}
 
