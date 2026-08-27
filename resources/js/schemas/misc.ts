@@ -1,4 +1,10 @@
-import { InputEmailRule, InputNumberRule, InputTextRule } from '@gmcode/forms'
+import {
+  InputEmailRule,
+  InputNumberRule,
+  InputTextRule,
+  Schema
+} from '@gmcode/forms'
+import { ArrayRule } from '@gmcode/tsv-advanced'
 
 export const name = new InputTextRule({
   messages: {
@@ -21,3 +27,9 @@ export const email = new InputEmailRule({
 })
 
 export const user_id = new InputNumberRule()
+
+export const deleteSchema = new Schema({})
+
+export const massDeleteSchema = new Schema({
+  ids: new ArrayRule()
+})
