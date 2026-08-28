@@ -73,14 +73,12 @@ class TaskController extends Controller
         /** @var array<int> $ids */
         $ids = $request->validated('ids');
 
-        $tasks = $project->tasks->filter(function (Task $task) use ($ids) {
-            return in_array($task->id, $ids);
-        });
-
         // Delete all in one transaction
-        DB::transaction(function () use ($tasks) {
-            $tasks->each(function (Task $task) {
-                $task->delete();
+        DB::transaction(function () use ($ids, $project) {
+            $project->tasks->each(function (Task $task) use ($ids) {
+                if (in_array($task->id, $ids)) {
+                    $task->delete();
+                }
             });
         });
 

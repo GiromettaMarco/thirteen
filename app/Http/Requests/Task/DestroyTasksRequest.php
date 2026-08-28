@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Task;
 
 use App\Models\Project;
-use App\Rules\RelatedTasks;
+use App\Rules\TasksRelatedToProject;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -20,7 +20,7 @@ class DestroyTasksRequest extends FormRequest
         $project = $this->route('project');
 
         return [
-            'ids' => ['required', new RelatedTasks($project)],
+            'ids' => ['required', 'array', new TasksRelatedToProject($project)],
         ];
     }
 }

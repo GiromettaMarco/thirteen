@@ -18,21 +18,17 @@ use Inertia\Inertia;
 Route::prefix('dashboard')
     ->middleware(['auth', 'auth.session', 'verified'])
     ->group(function () {
-        // region Dashboard
+        // #region Dashboard
         Route::get('/', function () {
             return Inertia::render('dashboard/index');
         })->name('dashboard');
-
-        // region Views
         Route::post('/views', [ViewController::class, 'store'])
             ->name('views.store');
-
-        // region Settings
         Route::get('/settings', function () {
             return Inertia::render('dashboard/settings');
         })->name('settings');
 
-        // region Account
+        // #region Account
         Route::get('/account', [AccountController::class, 'edit'])
             ->name('account.edit');
         Route::put('/account', [AccountController::class, 'update'])
@@ -44,7 +40,7 @@ Route::prefix('dashboard')
         Route::delete('/account', [AccountController::class, 'destroy'])
             ->name('account.destroy');
 
-        // region Profile and Users
+        // #region Profile and Users
         Route::get('/profile/{profile}', [ProfileController::class, 'show'])
             ->can('view', 'profile')
             ->name('profile.show');
@@ -52,7 +48,7 @@ Route::prefix('dashboard')
             ->can('update', 'profile')
             ->name('profile.update');
 
-        // region Invitations
+        // #region Invitations
         Route::get('/invitations', [InvitationController::class, 'index'])
             ->can('viewAny', User::class)
             ->name('invitations.index');
@@ -66,7 +62,7 @@ Route::prefix('dashboard')
             ->can('delete', User::class)
             ->name('invitations.destroy');
 
-        // region Teams
+        // #region Teams
         Route::put('/current-team', [CurrentTeamController::class, 'update'])
             ->name('current-team.update');
         Route::get('/teams', [TeamController::class, 'index'])
@@ -82,7 +78,7 @@ Route::prefix('dashboard')
             ->can('delete', 'team')
             ->name('teams.destroy');
 
-        // region Team members
+        // #region Team members
         Route::get('/teams/{team}/member/{profile}', [TeamMemberController::class, 'show'])
             ->scopeBindings()
             ->name('members.show');
@@ -91,7 +87,7 @@ Route::prefix('dashboard')
             ->can('editMembers', 'team')
             ->name('members.update');
 
-        // region Projects
+        // #region Projects
         Route::get('/teams/{team}/projects', [ProjectController::class, 'index'])
             ->name('projects.index');
         Route::get('/teams/{team}/projects/{project}', [ProjectController::class, 'show'])
@@ -109,26 +105,23 @@ Route::prefix('dashboard')
             ->scopeBindings()
             ->can('editProjects', 'team')
             ->name('projects.destroy');
-        // Route::delete('/teams/{team}/projects', [ProjectController::class, 'destroyMany'])
-        //     ->can('editProjects', 'team')
-        //     ->name('projects.destroy-many');
+        Route::delete('/teams/{team}/projects', [ProjectController::class, 'destroyMany'])
+            ->can('editProjects', 'team')
+            ->name('projects.destroy-many');
 
-        // region Tasks
+        // #region Tasks
         Route::post('/teams/{team}/projects/{project}/tasks', [TaskController::class, 'store'])
             ->scopeBindings()
             ->can('editProjects', 'team')
             ->name('tasks.store');
-
         Route::put('/teams/{team}/projects/{project}/tasks/{task}', [TaskController::class, 'update'])
             ->scopeBindings()
             ->can('editProjects', 'team')
             ->name('tasks.update');
-
         Route::delete('/teams/{team}/projects/{project}/tasks/{task}', [TaskController::class, 'destroy'])
             ->scopeBindings()
             ->can('editProjects', 'team')
             ->name('tasks.destroy');
-
         Route::delete('/teams/{team}/projects/{project}/tasks', [TaskController::class, 'destroyMany'])
             ->scopeBindings()
             ->can('editProjects', 'team')

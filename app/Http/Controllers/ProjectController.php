@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Project\DestroyProjectsRequest;
 use App\Http\Requests\Project\StoreProjectRequest;
 use App\Models\Membership;
 use App\Models\Project;
@@ -9,6 +10,7 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 use Sliver\Format\FlashMessage;
@@ -119,6 +121,28 @@ class ProjectController extends Controller
         $project->delete();
 
         Inertia::flash('toast', new FlashMessage(__('strings.project.deleted'), 'success'));
+
+        return back();
+    }
+
+    /**
+     * Delete many resources at once.
+     */
+    public function destroyMany(
+        DestroyProjectsRequest $request,
+        Team $team
+    ): RedirectResponse {
+        /** @var array<int> $ids */
+        $ids = $request->validated('ids');
+
+        // Delete all in one transaction
+        DB::transaction(function () use ($ids, $team) {
+            $team->projects->each(function (Project $project) use ($ids) {
+                if (in_array($project->id, $ids)) {
+                    $project->delete();
+                }
+            });
+        });
 
         return back();
     }

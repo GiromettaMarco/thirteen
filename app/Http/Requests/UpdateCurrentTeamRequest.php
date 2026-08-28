@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\RelatedTeam;
+use App\Rules\TeamRelatedToUser;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -16,7 +16,7 @@ class UpdateCurrentTeamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['required', 'numeric', new RelatedTeam],
+            'id' => ['required', 'integer', new TeamRelatedToUser],
         ];
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Translation\PotentiallyTranslatedString;
 
-class RelatedTeam implements ValidationRule
+class TeamRelatedToUser implements ValidationRule
 {
     /**
      * Run the validation rule.
@@ -24,7 +24,7 @@ class RelatedTeam implements ValidationRule
         }
 
         if (! $user->profile->teams->contains($value)) {
-            $fail('validation.related_team')->translate();
+            $fail('validation.related.team_to_user')->translate();
         }
     }
 }
