@@ -562,10 +562,10 @@ function SortableColumnIcon<TData, TValue>({
 }) {
   switch (column.getIsSorted()) {
     case 'asc':
-      return <ArrowDown />
+      return <ArrowUp />
 
     case 'desc':
-      return <ArrowUp />
+      return <ArrowDown />
 
     default:
       return <ChevronsUpDown />
