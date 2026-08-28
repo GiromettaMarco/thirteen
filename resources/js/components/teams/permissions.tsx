@@ -50,17 +50,17 @@ export function ShowTeamPermissions({
       />
 
       <ReadonlyCheckbox
-        checked={permissions.can_edit}
-        id="can_edit"
+        checked={permissions.can_edit_team}
+        id="can_edit_team"
         label={t(($) => $.teamPermissions.canEdit)}
-        name="can_edit"
+        name="can_edit_team"
       />
 
       <ReadonlyCheckbox
-        checked={permissions.can_delete}
-        id="can_delete"
+        checked={permissions.can_delete_team}
+        id="can_delete_team"
         label={t(($) => $.teamPermissions.canDelete)}
-        name="can_delete"
+        name="can_delete_team"
       />
 
       <ReadonlyCheckbox
@@ -96,10 +96,10 @@ export function EditTeamPermissions({
     <Form
       defaults={{
         admin: profile.pivot.admin ? 'true' : '',
-        can_delete: profile.pivot.can_delete ? 'true' : '',
-        can_edit: profile.pivot.can_edit ? 'true' : '',
+        can_delete_team: profile.pivot.can_delete_team ? 'true' : '',
         can_edit_members: profile.pivot.can_edit_members ? 'true' : '',
-        can_edit_projects: profile.pivot.can_edit_projects ? 'true' : ''
+        can_edit_projects: profile.pivot.can_edit_projects ? 'true' : '',
+        can_edit_team: profile.pivot.can_edit_team ? 'true' : ''
       }}
       route={update({ profile: profile.id, team: teamId })}
       schema={updateTeamPermissionsSchema}
@@ -115,26 +115,26 @@ export function EditTeamPermissions({
               setIsAdmin(Boolean(checked))
 
               if (checked === true) {
-                form.setValue('can_edit', 'true')
-                form.setValue('can_delete', 'true')
+                form.setValue('can_delete_team', 'true')
                 form.setValue('can_edit_members', 'true')
                 form.setValue('can_edit_projects', 'true')
+                form.setValue('can_edit_team', 'true')
               }
             }}
           />
 
           <CheckboxField
             control={form.control}
-            inputId="can_edit"
-            inputName="can_edit"
+            inputId="can_edit_team"
+            inputName="can_edit_team"
             label={t(($) => $.teamPermissions.canEdit)}
             readOnly={isAdmin}
           />
 
           <CheckboxField
             control={form.control}
-            inputId="can_delete"
-            inputName="can_delete"
+            inputId="can_delete_team"
+            inputName="can_delete_team"
             label={t(($) => $.teamPermissions.canDelete)}
             readOnly={isAdmin}
           />

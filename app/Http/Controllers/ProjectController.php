@@ -59,10 +59,10 @@ class ProjectController extends Controller
         return Inertia::render('dashboard/projects/show', [
             'permissions' => [
                 'admin' => $membership->admin,
-                'can_delete' => $membership->can_delete,
-                'can_edit' => $membership->can_edit,
+                'can_delete_team' => $membership->can_delete_team,
                 'can_edit_members' => $membership->can_edit_members,
                 'can_edit_projects' => $membership->can_edit_projects,
+                'can_edit_team' => $membership->can_edit_team,
             ],
             'project' => $project,
             'tasks' => $project->tasks()->with('profile')->get(),

@@ -17,7 +17,7 @@ class TeamPolicy
         /** @var Membership $membership */
         $membership = $team->getRelation('pivot');
 
-        return $membership->can_edit
+        return $membership->can_edit_team
             ? Response::allow()
             : Response::deny();
     }
@@ -30,7 +30,7 @@ class TeamPolicy
         /** @var Membership $membership */
         $membership = $team->getRelation('pivot');
 
-        return $membership->can_delete
+        return $membership->can_delete_team
             ? Response::allow()
             : Response::deny();
     }

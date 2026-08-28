@@ -24,10 +24,10 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->boolean('admin')->default(false);
-            $table->boolean('can_edit')->default(false);
-            $table->boolean('can_delete')->default(false);
+            $table->boolean('can_delete_team')->default(false);
             $table->boolean('can_edit_members')->default(false);
             $table->boolean('can_edit_projects')->default(false);
+            $table->boolean('can_edit_team')->default(false);
             $table->timestamps();
         });
     }

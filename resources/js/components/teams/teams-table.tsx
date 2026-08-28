@@ -159,7 +159,7 @@ function Actions({
             </button>
           </DropdownMenuItem>
 
-          {team.pivot.can_edit && (
+          {team.pivot.can_edit_team && (
             <DropdownMenuItem asChild>
               <button
                 className="w-full"
@@ -175,7 +175,7 @@ function Actions({
             </DropdownMenuItem>
           )}
 
-          {team.pivot.can_delete && (
+          {team.pivot.can_delete_team && (
             <>
               <DropdownMenuSeparator />
 

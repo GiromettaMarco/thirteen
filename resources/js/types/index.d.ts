@@ -122,10 +122,10 @@ export interface Team extends WithTimestamps {
 
 export interface TeamPermissions {
   admin: boolean
-  can_delete: boolean
-  can_edit: boolean
+  can_delete_team: boolean
   can_edit_members: boolean
   can_edit_projects: boolean
+  can_edit_team: boolean
 }
 
 export interface WithTeamPermissions {

@@ -24,16 +24,16 @@ class TestSeeder extends Seeder
 
         $all_permissions = [
             'admin' => true,
-            'can_edit' => true,
-            'can_delete' => true,
+            'can_edit_team' => true,
+            'can_delete_team' => true,
             'can_edit_members' => true,
             'can_edit_projects' => true,
         ];
 
         $no_permissions = [
             'admin' => false,
-            'can_edit' => false,
-            'can_delete' => false,
+            'can_edit_team' => false,
+            'can_delete_team' => false,
             'can_edit_members' => false,
             'can_edit_projects' => false,
         ];

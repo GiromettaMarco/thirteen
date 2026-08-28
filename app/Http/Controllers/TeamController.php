@@ -100,8 +100,8 @@ class TeamController extends Controller
             $request->validated(),
             [
                 'admin' => true,
-                'can_edit' => true,
-                'can_delete' => true,
+                'can_edit_team' => true,
+                'can_delete_team' => true,
             ]
         );
 

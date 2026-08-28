@@ -54,10 +54,10 @@ class Team extends Model
             ->using(Membership::class)
             ->withPivot([
                 'admin',
-                'can_edit',
-                'can_delete',
+                'can_delete_team',
                 'can_edit_members',
                 'can_edit_projects',
+                'can_edit_team',
             ])
             ->withTimestamps();
     }
