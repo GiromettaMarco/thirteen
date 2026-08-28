@@ -17,7 +17,7 @@ import { isAnyItem } from '@/lib/utils'
 import { massDeleteSchema } from '@/schemas/misc'
 import type { RouteDefinition } from '@/wayfinder'
 
-export function MassDelete({
+export function DestroyMany({
   children,
   description,
   route,
@@ -99,7 +99,7 @@ export function MassDelete({
 
         <Form
           defaults={{ ids }}
-          id="destroy-dialog"
+          id="destroy-many-dialog-form"
           onSuccess={() => {
             setOpen(false)
             table.setRowSelection({})

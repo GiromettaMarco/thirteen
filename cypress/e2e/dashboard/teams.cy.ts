@@ -50,7 +50,7 @@ describe('Teams Page', () => {
 
     cy.get('#open-team-1-actions').click()
     cy.get('#open-delete-team-1-dialog').click()
-    cy.get('#destroy-dialog').then(($form) => {
+    cy.get('#destroy-dialog-form').then(($form) => {
       cy.get('button[type=submit]', { withinSubject: $form }).click()
     })
 

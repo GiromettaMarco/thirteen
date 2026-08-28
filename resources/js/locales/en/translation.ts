@@ -244,6 +244,7 @@ export default {
     deadlineIn_zero: 'Deadline today',
     defaultName: 'New project',
     deleteDesc: 'You are about to delete the "{{project}}" project.',
+    deleteManyTitle: 'Are you sure you want to delete the selected projects?',
     deleteTitle: 'Are you sure you want to delete the project?',
     deleteWarn: 'Any related task will be lost forever.',
     descriptionPlaceholder: 'Optional, short text describing the project.',

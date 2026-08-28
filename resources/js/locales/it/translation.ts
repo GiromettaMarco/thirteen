@@ -242,6 +242,7 @@ export default {
     deadlineIn_zero: 'Deadline oggi',
     defaultName: 'Nuovo progetto',
     deleteDesc: 'Stai per cancellare il progetto "{{project}}".',
+    deleteManyTitle: 'Sei sicuro di voler eliminare i progetti selezionati?',
     deleteTitle: 'Sei sicuro di voler eliminare il progetto?',
     deleteWarn: 'Tutti i compiti correlati andranno persi per sempre.',
     descriptionPlaceholder:

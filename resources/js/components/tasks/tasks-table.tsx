@@ -42,6 +42,7 @@ import TableMain, {
   SortableColumnHeader
 } from '@/components/ui/data-table'
 import { DestroyDialog } from '@/components/ui/destroy-dialog'
+import { DestroyMany } from '@/components/ui/destroy-many'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -57,7 +58,6 @@ import {
   EmptyMedia,
   EmptyTitle
 } from '@/components/ui/empty'
-import { MassDelete } from '@/components/ui/mass-delete'
 import UseTableStates from '@/hooks/use-table-states'
 import { format } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
@@ -494,7 +494,7 @@ export function TasksTable({
               {canEdit && (
                 <>
                   <AddTaskDrawerTrigger />
-                  <MassDelete
+                  <DestroyMany
                     route={destroyMany({
                       project: projectId,
                       team: teamId

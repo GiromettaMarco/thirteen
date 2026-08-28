@@ -27,6 +27,7 @@ import TableMain, {
   TableToolbar
 } from '@/components/ui/data-table'
 import { DestroyDialog } from '@/components/ui/destroy-dialog'
+import { DestroyMany } from '@/components/ui/destroy-many'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -45,57 +46,8 @@ import {
 import UseTableStates from '@/hooks/use-table-states'
 import { format } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
-import { destroy, show } from '@/routes/projects'
+import { destroy, destroyMany, show } from '@/routes/projects'
 import type { Project, View, ViewStore } from '@/types'
-
-//#region MassDelete
-// export function MassDelete({
-//   rowSelection,
-//   setRowSelection,
-//   teamId
-// }: {
-//   rowSelection: Record<number, boolean>
-//   setRowSelection: Dispatch<SetStateAction<Record<number, boolean>>>
-//   teamId: number
-// }) {
-//   // i18n
-//   const { t } = useTranslation()
-
-//   // Submit handler
-//   async function submit() {
-//     // Parse selection
-//     const ids: number[] = []
-//     for (const key in rowSelection) {
-//       ids.push(parseInt(key))
-//     }
-
-//     if (ids.length > 0) {
-//       // API
-//       await fetcher.submit(
-//         { ids },
-//         {
-//           action: route('projects.destroy-many', { team: teamId }),
-//           method: 'POST'
-//         }
-//       )
-
-//       // Reset selection
-//       setRowSelection({})
-//     }
-//   }
-
-//   return (
-//     <Button
-//       disabled={disabled}
-//       onClick={submit}
-//       size="sm"
-//       variant="destructive"
-//     >
-//       {t('delete')}
-//       <Trash2 />
-//     </Button>
-//   )
-// }
 
 //#region Actions
 export function Actions({
@@ -392,11 +344,11 @@ export function ProjectsTable({
               {canEdit && (
                 <>
                   <AddProjectDrawerTrigger />
-                  {/* <ProjectsTableMassDelete
-                    rowSelection={rowSelection}
-                    setRowSelection={setRowSelection}
-                    teamId={teamId}
-                  /> */}
+                  <DestroyMany
+                    route={destroyMany({ team: teamId })}
+                    table={table}
+                    title={t(($) => $.projects.deleteManyTitle)}
+                  />
                 </>
               )}
             </div>
