@@ -38,7 +38,7 @@
     "react-hook-form": "^7.71.2",
     "react-i18next": "^17.0.2",
     "tailwindcss": "^4.3.0",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vaul": "^1.1.2"
   },
   "devDependencies": {
