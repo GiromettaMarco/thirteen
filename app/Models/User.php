@@ -10,7 +10,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -44,6 +43,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function casts(): array
     {
         return [
+            'can_edit_users' => 'boolean',
+            'can_view_users' => 'boolean',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
@@ -78,16 +79,6 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Many to Many relationship.
-     *
-     * @return BelongsToMany<Permission, $this>
-     */
-    public function permissions(): BelongsToMany
-    {
-        return $this->belongsToMany(Permission::class)->withTimestamps();
-    }
-
-    /**
      * One to One relationship.
      *
      * @return HasOne<Invitation, $this>
@@ -95,18 +86,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function invitation(): HasOne
     {
         return $this->hasOne(Invitation::class);
-    }
-
-    /**
-     * Check an app permission by name.
-     */
-    public function hasPermission(string $permission): bool
-    {
-        return $this->permissions->contains(
-            function (Permission $permissionModel) use (&$permission) {
-                return $permissionModel->name === $permission;
-            }
-        );
     }
 
     /**

@@ -12,7 +12,7 @@ class UserPolicy
      */
     public function viewAny(User $user): Response
     {
-        return $user->hasPermission('view-users')
+        return $user->can_view_users
             ? Response::allow()
             : Response::denyAsNotFound();
     }
@@ -22,7 +22,7 @@ class UserPolicy
      */
     public function create(User $user): Response
     {
-        return $user->hasPermission('edit-users')
+        return $user->can_edit_users
             ? Response::allow()
             : Response::denyAsNotFound();
     }
@@ -34,7 +34,7 @@ class UserPolicy
      */
     public function update(User $user): Response
     {
-        return $user->hasPermission('edit-users')
+        return $user->can_edit_users
             ? Response::allow()
             : Response::denyAsNotFound();
     }
@@ -44,7 +44,7 @@ class UserPolicy
      */
     public function delete(User $user): Response
     {
-        return $user->hasPermission('edit-users')
+        return $user->can_edit_users
             ? Response::allow()
             : Response::denyAsNotFound();
     }

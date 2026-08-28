@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Permission;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -14,9 +13,6 @@ class TestSeeder extends Seeder
      */
     public function run(): void
     {
-        $view_users = Permission::create(['name' => 'view-users']);
-        $edit_users = Permission::create(['name' => 'edit-users']);
-
         $teams = Team::factory(3)->create();
 
         /** @var Team */
@@ -41,12 +37,12 @@ class TestSeeder extends Seeder
         /** @var User */
         $alice = User::factory()
             ->for($team_1, 'currentTeam')
-            ->hasAttached($view_users)
-            ->hasAttached($edit_users)
             ->withProfile('Alice Admin', 'manager')
             ->create([
                 'email' => 'alice@example.com',
                 'password' => 'AJf$hj7jn&bdMc',
+                'can_view_users' => true,
+                'can_edit_users' => true,
             ]);
 
         $alice->profile->teams()->attach([
