@@ -32,7 +32,7 @@ import { registerSchema } from '@/schemas/auth'
 
 export default function Register() {
   // i18n
-  const { i18n, t } = useTranslation()
+  const { t } = useTranslation()
   const { check, report } = usePasswordCheck()
 
   return (
@@ -50,15 +50,9 @@ export default function Register() {
         >
           {({ form, loading }) => (
             <>
-              <NameFieldPreset
-                control={form.control}
-                i18n={i18n}
-              />
+              <NameFieldPreset control={form.control} />
 
-              <EmailFieldPreset
-                control={form.control}
-                i18n={i18n}
-              />
+              <EmailFieldPreset control={form.control} />
 
               <Controller
                 control={form.control}
@@ -102,10 +96,7 @@ export default function Register() {
                           className="px-4 py-2.5"
                           variant="popover"
                         >
-                          <PasswordRequirements
-                            i18n={i18n}
-                            report={report}
-                          />
+                          <PasswordRequirements report={report} />
                         </HybridTooltipContent>
                       </HybridTooltip>
                     </InputGroup>
@@ -114,10 +105,7 @@ export default function Register() {
                 )}
               />
 
-              <ConfirmPasswordFieldPreset
-                control={form.control}
-                i18n={i18n}
-              />
+              <ConfirmPasswordFieldPreset control={form.control} />
 
               <Submit
                 className="mt-2 w-full"

@@ -8,7 +8,7 @@ import { passwordConfirmSchema } from '@/schemas/auth'
 
 export default function ConfirmPassword() {
   // i18n
-  const { i18n, t } = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <AuthLayout
@@ -25,7 +25,6 @@ export default function ConfirmPassword() {
           <>
             <PasswordFieldPreset
               control={form.control}
-              i18n={i18n}
               placeholder={false}
             />
 

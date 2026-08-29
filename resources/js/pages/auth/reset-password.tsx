@@ -17,7 +17,7 @@ export default function ResetPassword({
   token: string
 }) {
   // i18n
-  const { i18n, t } = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <AuthLayout
@@ -39,15 +39,9 @@ export default function ResetPassword({
               inputName="email"
             />
 
-            <PasswordFieldPreset
-              control={form.control}
-              i18n={i18n}
-            />
+            <PasswordFieldPreset control={form.control} />
 
-            <ConfirmPasswordFieldPreset
-              control={form.control}
-              i18n={i18n}
-            />
+            <ConfirmPasswordFieldPreset control={form.control} />
 
             <HiddenField
               control={form.control}

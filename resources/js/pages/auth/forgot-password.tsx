@@ -10,7 +10,7 @@ import { forgotPasswordSchema } from '@/schemas/auth'
 
 export default function ForgotPassword() {
   // i18n
-  const { i18n, t } = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <AuthLayout
@@ -27,10 +27,7 @@ export default function ForgotPassword() {
         >
           {({ form, loading }) => (
             <>
-              <EmailFieldPreset
-                control={form.control}
-                i18n={i18n}
-              />
+              <EmailFieldPreset control={form.control} />
 
               <Submit
                 className="w-full"

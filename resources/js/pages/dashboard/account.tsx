@@ -36,7 +36,7 @@ import type { Auth, Session } from '@/types'
 //#region ManageSessions
 function ManageSessions({ sessions }: { sessions: Session[] }) {
   // i18n
-  const { i18n, t } = useTranslation()
+  const { t } = useTranslation()
 
   // Dialog state
   const [open, setOpen] = useState(false)
@@ -115,7 +115,6 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
                 <>
                   <PasswordFieldPreset
                     control={form.control}
-                    i18n={i18n}
                     placeholder={false}
                   />
 
@@ -144,7 +143,7 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
 //#region UpdateEmail
 function UpdateEmail({ email }: { email: string }) {
   // i18n
-  const { i18n, t } = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <Format
@@ -165,10 +164,7 @@ function UpdateEmail({ email }: { email: string }) {
       >
         {({ form, loading }) => (
           <>
-            <EmailFieldPreset
-              control={form.control}
-              i18n={i18n}
-            />
+            <EmailFieldPreset control={form.control} />
 
             <Submit
               className="w-36"
@@ -186,7 +182,7 @@ function UpdateEmail({ email }: { email: string }) {
 //#region UpdatePassword
 function UpdatePassword() {
   // i18n
-  const { i18n, t } = useTranslation()
+  const { t } = useTranslation()
   const { check, report } = usePasswordCheck()
 
   return (
@@ -223,7 +219,6 @@ function UpdatePassword() {
 
             <ConfirmPasswordFieldPreset
               control={form.control}
-              i18n={i18n}
               placeholder={false}
             />
 
@@ -243,7 +238,7 @@ function UpdatePassword() {
 //#region DeleteAccount
 function DeleteAccount() {
   // i18n
-  const { i18n, t } = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <Format
@@ -282,7 +277,6 @@ function DeleteAccount() {
               <>
                 <PasswordFieldPreset
                   control={form.control}
-                  i18n={i18n}
                   placeholder={false}
                 />
 

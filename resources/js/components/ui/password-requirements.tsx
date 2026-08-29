@@ -1,5 +1,4 @@
 import { cn } from '@gmcode/react-ui'
-import type { i18n } from 'i18next'
 import { Check, X } from 'lucide-react'
 import type { PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -21,15 +20,9 @@ function Requirement({
   )
 }
 
-export function PasswordRequirements({
-  i18n,
-  report
-}: {
-  i18n?: i18n
-  report: PasswordReport
-}) {
+export function PasswordRequirements({ report }: { report: PasswordReport }) {
   // i18n
-  const { t } = useTranslation(undefined, { i18n })
+  const { t } = useTranslation()
 
   return (
     <div className="space-y-1 text-sm text-muted-foreground">

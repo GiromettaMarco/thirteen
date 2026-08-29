@@ -1,19 +1,16 @@
 import { EmailField, PasswordField, TextField } from '@gmcode/forms'
-import type { i18n } from 'i18next'
 import type { Control, FieldPath } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
 export function NameFieldPreset<TFieldValues extends { name: string }>({
   control,
-  i18n,
   placeholder = true
 }: {
   control: Control<TFieldValues>
-  i18n?: i18n
   placeholder?: boolean
 }) {
   // i18n
-  const { t } = useTranslation(undefined, { i18n })
+  const { t } = useTranslation()
 
   return (
     <TextField
@@ -28,15 +25,13 @@ export function NameFieldPreset<TFieldValues extends { name: string }>({
 
 export function EmailFieldPreset<TFieldValues extends { email: string }>({
   control,
-  i18n,
   placeholder = true
 }: {
   control: Control<TFieldValues>
-  i18n?: i18n
   placeholder?: boolean
 }) {
   // i18n
-  const { t } = useTranslation(undefined, { i18n })
+  const { t } = useTranslation()
 
   return (
     <EmailField
@@ -51,15 +46,13 @@ export function EmailFieldPreset<TFieldValues extends { email: string }>({
 
 export function PasswordFieldPreset<TFieldValues extends { password: string }>({
   control,
-  i18n,
   placeholder = true
 }: {
   control: Control<TFieldValues>
-  i18n?: i18n
   placeholder?: boolean
 }) {
   // i18n
-  const { t } = useTranslation(undefined, { i18n })
+  const { t } = useTranslation()
 
   return (
     <PasswordField
@@ -76,15 +69,13 @@ export function ConfirmPasswordFieldPreset<
   TFieldValues extends { password_confirmation: string }
 >({
   control,
-  i18n,
   placeholder = true
 }: {
   control: Control<TFieldValues>
-  i18n?: i18n
   placeholder?: boolean
 }) {
   // i18n
-  const { t } = useTranslation(undefined, { i18n })
+  const { t } = useTranslation()
 
   return (
     <PasswordField

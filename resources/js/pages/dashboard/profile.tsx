@@ -24,7 +24,7 @@ import type { Profile } from '@/types'
 //#region UpdateProfileDrawer
 function UpdateProfileDrawer({ profile }: { profile: Profile }) {
   // i18n
-  const { i18n, t } = useTranslation()
+  const { t } = useTranslation()
 
   const [open, setOpen] = useState(false)
 
@@ -87,10 +87,7 @@ function UpdateProfileDrawer({ profile }: { profile: Profile }) {
           {({ form, loading }) => (
             <>
               <div className="flex flex-col gap-6 px-4">
-                <NameFieldPreset
-                  control={form.control}
-                  i18n={i18n}
-                />
+                <NameFieldPreset control={form.control} />
 
                 <FancyRadioField
                   control={form.control}
