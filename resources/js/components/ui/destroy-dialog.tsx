@@ -16,6 +16,7 @@ import type { RouteDefinition } from '@/wayfinder'
 export function DestroyDialog({
   children,
   description,
+  labels,
   open,
   route,
   setOpen,
@@ -23,6 +24,10 @@ export function DestroyDialog({
   warning
 }: PropsWithChildren<{
   description?: string
+  labels?: {
+    cancel?: string
+    delete?: string
+  }
   open: boolean
   route: RouteDefinition<Method>
   setOpen: Dispatch<SetStateAction<boolean>>
@@ -58,11 +63,13 @@ export function DestroyDialog({
             <>
               <DialogFooter className="items-center">
                 <DialogClose asChild>
-                  <Button variant="secondary">{t(($) => $.cancel)}</Button>
+                  <Button variant="secondary">
+                    {labels?.cancel ?? t(($) => $.cancel)}
+                  </Button>
                 </DialogClose>
 
                 <Submit
-                  label={t(($) => $.delete)}
+                  label={labels?.delete ?? t(($) => $.delete)}
                   loading={loading}
                   variant="destructive"
                 />
