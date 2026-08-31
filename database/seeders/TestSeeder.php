@@ -37,7 +37,7 @@ class TestSeeder extends Seeder
         /** @var User */
         $alice = User::factory()
             ->for($team_1, 'currentTeam')
-            ->withProfile('Alice Admin', 'manager')
+            ->withProfile('Alice Admin', 'manager', true)
             ->create([
                 'email' => 'alice@example.com',
                 'password' => 'AJf$hj7jn&bdMc',

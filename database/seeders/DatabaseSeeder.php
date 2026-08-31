@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         /** @var User */
         $test_user = User::factory()
             ->for($team_1, 'currentTeam')
-            ->withProfile('Test User', 'manager')
+            ->withProfile('Test User', 'manager', true)
             ->create([
                 'email' => 'test@example.com',
                 'can_view_users' => true,
@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()
-            ->withProfile('Alfred M. Harrison', 'designer')
+            ->withProfile('Alfred M. Harrison', 'designer', true)
             ->create(['email' => 'alfredmharrison@example.com']);
 
         /** @var User */

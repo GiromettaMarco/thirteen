@@ -24,6 +24,11 @@ class UserFactory extends Factory
     protected static ?string $password;
 
     /**
+     * The profile privacy being used by the factory.
+     */
+    protected static ?bool $public;
+
+    /**
      * The profile role being used by the factory.
      */
     protected static ?string $role;
@@ -46,9 +51,13 @@ class UserFactory extends Factory
     /**
      * Add a related profile model.
      */
-    public function withProfile(string $name, string $role = 'guest'): UserFactory
-    {
+    public function withProfile(
+        string $name,
+        string $role = 'guest',
+        bool $public = false
+    ): UserFactory {
         static::$name = $name;
+        static::$public = $public;
 
         if (in_array($role, Config::get('custom.roles'))) {
             static::$role = $role;
@@ -65,6 +74,7 @@ class UserFactory extends Factory
         return $this->afterCreating(function (User $user) {
             $user->profile()->create([
                 'name' => static::$name ??= fake()->name(),
+                'public' => static::$public ??= false,
                 'role' => static::$role ??= 'guest',
             ]);
         });
