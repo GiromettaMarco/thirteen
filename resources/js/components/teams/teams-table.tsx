@@ -18,6 +18,7 @@ import {
   AddTeamDrawer,
   AddTeamDrawerTrigger
 } from '@/components/teams/add-team-drawer'
+import { LeaveTeamDialog } from '@/components/teams/members/destroy-member-dialog'
 import UpdateTeamDrawer from '@/components/teams/update-team-drawer'
 import TableMain, {
   ActionsButton,
@@ -106,44 +107,32 @@ function Actions({
   // Global state
   const { setActiveTeam, setUpdateTeamOpen } = useContext(AppContext)
 
-  // Delete dialog state
+  // Dialogs state
   const [deleteOpen, setDeleteOpen] = useState(false)
+  const [leaveOpen, setLeaveOpen] = useState(false)
 
   // Current team form
   const currentTeamForm = useForm({
     id: team.id
   })
 
-  // ======================================================================
-  // REMOVE TEAM MEMBER (leave team)
-  // ======================================================================
-
-  // /** Fetcher for remove user action */
-  // const { fetcher: removeFetcher } = useAutoFetcher<typeof removeAction>()
-
-  // // Remove api
-  // function removeMember() {
-  //   if (userId) {
-  //     removeFetcher.submit(
-  //       {},
-  //       {
-  //         action: route('members.destroy', { member: userId, team }),
-  //         method: 'DELETE'
-  //       }
-  //     )
-  //   }
-  // }
-
   return (
     <>
-      <DestroyDialog
-        description={t(($) => $.teams.deleteDesc, { team: team.name })}
-        open={deleteOpen}
-        route={destroy(team.id)}
-        setOpen={setDeleteOpen}
-        title={t(($) => $.teams.deleteTitle)}
-        warning={t(($) => $.teams.deleteWarn)}
+      <LeaveTeamDialog
+        open={leaveOpen}
+        setOpen={setLeaveOpen}
+        team={team}
       />
+      {team.pivot.can_delete_team && (
+        <DestroyDialog
+          description={t(($) => $.teams.deleteDesc, { team: team.name })}
+          open={deleteOpen}
+          route={destroy(team.id)}
+          setOpen={setDeleteOpen}
+          title={t(($) => $.teams.deleteTitle)}
+          warning={t(($) => $.teams.deleteWarn)}
+        />
+      )}
 
       <DropdownMenu>
         <ActionsButton
@@ -181,35 +170,37 @@ function Actions({
             </DropdownMenuItem>
           )}
 
-          {team.pivot.can_delete_team && (
-            <>
-              <DropdownMenuSeparator />
+          <DropdownMenuSeparator />
 
-              <DropdownMenuItem
-                asChild
-                variant="destructive"
-              >
-                <button
-                  className="w-full"
-                  id={`open-delete-team-${team.id}-dialog`}
-                  onClick={() => setDeleteOpen(true)}
-                  type="button"
-                >
-                  {t(($) => $.delete)}
-                </button>
-              </DropdownMenuItem>
-            </>
-          )}
-
-          {/* {userId && (
           <DropdownMenuItem
-            className="cursor-pointer"
-            onClick={removeMember}
+            asChild
             variant="destructive"
           >
-            {t('teams.leave')}
+            <button
+              className="w-full"
+              id={`open-leave-team-${team.id}-dialog`}
+              onClick={() => setLeaveOpen(true)}
+              type="button"
+            >
+              {t(($) => $.teams.leave)}
+            </button>
           </DropdownMenuItem>
-        )}*/}
+
+          {team.pivot.can_delete_team && (
+            <DropdownMenuItem
+              asChild
+              variant="destructive"
+            >
+              <button
+                className="w-full"
+                id={`open-delete-team-${team.id}-dialog`}
+                onClick={() => setDeleteOpen(true)}
+                type="button"
+              >
+                {t(($) => $.delete)}
+              </button>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </>
@@ -288,8 +279,8 @@ export function TeamsTable({
 
   const labels = useMemo<Record<string, string>>(
     () => ({
-      profiles_count: t(($) => $.member, { count: 2 })
-      // projectsCount: t(($) => $.project, { count: 2 })
+      profiles_count: t(($) => $.member, { count: 2 }),
+      projectsCount: t(($) => $.project, { count: 2 })
     }),
     [t]
   )
@@ -307,7 +298,6 @@ export function TeamsTable({
         header: () => null,
         id: 'current'
       },
-
       {
         accessorKey: 'name',
         cell: ({ row }) => (
@@ -319,7 +309,6 @@ export function TeamsTable({
         enableHiding: false,
         header: t(($) => $.name)
       },
-
       {
         accessorKey: 'profiles_count',
         header: ({ column }) => (
@@ -329,17 +318,15 @@ export function TeamsTable({
           />
         )
       },
-
-      // {
-      //   accessorKey: 'projectsCount',
-      //   header: ({ column }) => (
-      //     <SortableColumnHeader
-      //       column={column}
-      //       title={t(($) => $.project, { count: 2 })}
-      //     />
-      //   )
-      // }
-
+      {
+        accessorKey: 'projects_count',
+        header: ({ column }) => (
+          <SortableColumnHeader
+            column={column}
+            title={t(($) => $.project, { count: 2 })}
+          />
+        )
+      },
       {
         cell: ({ row }) => (
           <Actions

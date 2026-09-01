@@ -11,19 +11,17 @@ import {
   type Row
 } from '@tanstack/react-table'
 import { Check } from 'lucide-react'
-import {
-  useEffect,
-  useMemo,
-  useState,
-  type Dispatch,
-  type SetStateAction
-} from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NameCell } from '@/components/name-cell'
 import {
   AddMemberDrawer,
   AddMemberDrawerTrigger
 } from '@/components/teams/members/add-member-drawer'
+import {
+  LeaveTeamDialog,
+  RemoveMemberDialog
+} from '@/components/teams/members/destroy-member-dialog'
 import TableMain, {
   ActionsButton,
   AfterTable,
@@ -31,7 +29,6 @@ import TableMain, {
   SortableColumnHeader,
   TableToolbar
 } from '@/components/ui/data-table'
-import { DestroyDialog } from '@/components/ui/destroy-dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,63 +36,10 @@ import {
   DropdownMenuSeparator
 } from '@/components/ui/dropdown-menu'
 import UseTableStates from '@/hooks/use-table-states'
-import { destroy, show } from '@/routes/members'
-import { leave } from '@/routes/teams'
+import { show } from '@/routes/members'
 import type { Team, TeamMember, View, ViewStore } from '@/types'
 
 //#region Actions
-function RemoveDialog({
-  deleteOpen,
-  member,
-  setDeleteOpen,
-  team
-}: {
-  deleteOpen: boolean
-  member: TeamMember
-  setDeleteOpen: Dispatch<SetStateAction<boolean>>
-  team: Team
-}) {
-  // i18n
-  const { t } = useTranslation()
-
-  return (
-    <DestroyDialog
-      description={t(($) => $.teams.members.delete.description, {
-        member: member.name
-      })}
-      labels={{ delete: t(($) => $.remove) }}
-      open={deleteOpen}
-      route={destroy({ profile: member.id, team })}
-      setOpen={setDeleteOpen}
-      title={t(($) => $.teams.members.delete.title)}
-    />
-  )
-}
-
-function LeaveDialog({
-  deleteOpen,
-  setDeleteOpen,
-  team
-}: {
-  deleteOpen: boolean
-  setDeleteOpen: Dispatch<SetStateAction<boolean>>
-  team: Team
-}) {
-  // i18n
-  const { t } = useTranslation()
-
-  return (
-    <DestroyDialog
-      description={t(($) => $.teams.leaveDesc, { team: team.name })}
-      labels={{ delete: t(($) => $.teams.leave) }}
-      open={deleteOpen}
-      route={leave({ team })}
-      setOpen={setDeleteOpen}
-      title={t(($) => $.teams.leaveTitle)}
-    />
-  )
-}
-
 function Actions({
   canEdit,
   currentProfileId,
@@ -116,16 +60,16 @@ function Actions({
   return (
     <>
       {currentProfileId === member.id ? (
-        <LeaveDialog
-          deleteOpen={deleteOpen}
-          setDeleteOpen={setDeleteOpen}
+        <LeaveTeamDialog
+          open={deleteOpen}
+          setOpen={setDeleteOpen}
           team={team}
         />
       ) : canEdit ? (
-        <RemoveDialog
-          deleteOpen={deleteOpen}
+        <RemoveMemberDialog
           member={member}
-          setDeleteOpen={setDeleteOpen}
+          open={deleteOpen}
+          setOpen={setDeleteOpen}
           team={team}
         />
       ) : null}

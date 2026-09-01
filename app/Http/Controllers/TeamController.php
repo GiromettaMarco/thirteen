@@ -25,7 +25,7 @@ class TeamController extends Controller
             'teams' => $user
                 ->profile
                 ->teams()
-                ->withCount(['profiles'])
+                ->withCount(['profiles', 'projects'])
                 ->orderBy('updated_at', 'desc')
                 ->get(),
             'views' => [

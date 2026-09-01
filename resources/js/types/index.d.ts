@@ -139,7 +139,7 @@ export interface WithTeamPermissions {
 export type TeamMember = Profile & WithTeamPermissions & { tasks_count: number }
 
 export type TeamsTableEntry = Team &
-  WithTeamPermissions & { profiles_count: number }
+  WithTeamPermissions & { profiles_count: number; projects_count: number }
 
 //#region Project
 export interface Project extends WithTimestamps {
