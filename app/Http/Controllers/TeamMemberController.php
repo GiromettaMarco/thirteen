@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TeamMemberRemoved;
+use App\Http\Requests\TeamMember\StoreTeamMemberRequest;
 use App\Models\Profile;
 use App\Models\Team;
 use Illuminate\Http\RedirectResponse;
@@ -13,7 +15,7 @@ use Sliver\Format\FlashMessage;
 class TeamMemberController extends Controller
 {
     /**
-     * Show the team with related projects and users.
+     * Show the team member profile.
      */
     public function show(
         Request $request,
@@ -24,6 +26,28 @@ class TeamMemberController extends Controller
             'profile' => $profile,
             'team' => $team,
         ]);
+    }
+
+    /**
+     * Attach a new member to the team.
+     */
+    public function store(
+        StoreTeamMemberRequest $request,
+        Team $team
+    ): RedirectResponse {
+        $admin = $request->boolean('admin');
+
+        $team->profiles()->attach($request->validated('profile_id'), [
+            'admin' => $admin,
+            'can_delete_team' => $admin || $request->boolean('can_delete_team'),
+            'can_edit_members' => $admin || $request->boolean('can_edit_members'),
+            'can_edit_projects' => $admin || $request->boolean('can_edit_projects'),
+            'can_edit_team' => $admin || $request->boolean('can_edit_team'),
+        ]);
+
+        Inertia::flash('toast', new FlashMessage(__('strings.team_member.created'), 'success'));
+
+        return back();
     }
 
     /**
@@ -47,6 +71,24 @@ class TeamMemberController extends Controller
         $team->profiles()->updateExistingPivot($profile, $data);
 
         Inertia::flash('toast', new FlashMessage(__('strings.team_member.updated'), 'success'));
+
+        return back();
+    }
+
+    /**
+     * Detach a member from the team.
+     */
+    public function destroy(
+        Request $request,
+        Team $team,
+        Profile $profile
+    ): RedirectResponse {
+        $team->profiles()->detach($profile);
+
+        // Dispatch event
+        TeamMemberRemoved::dispatch($team, $profile->user);
+
+        Inertia::flash('toast', new FlashMessage(__('strings.team_member.deleted'), 'success'));
 
         return back();
     }

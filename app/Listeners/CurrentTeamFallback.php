@@ -3,8 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\TeamDeleting;
+use App\Events\TeamMemberRemoved;
 use App\Models\Profile;
-// use App\Events\TeamMemberRemoved;
 use Illuminate\Support\Facades\DB;
 
 class CurrentTeamFallback
@@ -17,50 +17,42 @@ class CurrentTeamFallback
     /**
      * Handle the event.
      */
-    // public function handle(TeamDeleting|TeamMemberRemoved $event): void
-    public function handle(TeamDeleting $event): void
+    public function handle(TeamDeleting|TeamMemberRemoved $event): void
     {
-        // if (is_a($event, TeamMemberRemoved::class)) {
-        //     $this->onMemberRemoved($event);
-        // }
+        if (is_a($event, TeamMemberRemoved::class)) {
+            $this->onMemberRemoved($event);
+        }
 
-        // if (is_a($event, TeamDeleting::class)) {
-        //     $this->onTeamDeleting($event);
-        // }
-
-        $this->onTeamDeleting($event);
+        if (is_a($event, TeamDeleting::class)) {
+            $this->onTeamDeleting($event);
+        }
     }
 
-    // /**
-    //  * Current team fallback for the TeamMemberRemoved event.
-    //  */
-    // protected function onMemberRemoved(TeamMemberRemoved $event): void
-    // {
-    //     // If team was current
-    //     if ($event->team->id === $event->user->current_team_id) {
-    //         $user = $event->user;
+    /**
+     * Current team fallback for the TeamMemberRemoved event.
+     */
+    protected function onMemberRemoved(TeamMemberRemoved $event): void
+    {
+        // If team was current
+        if ($event->team->id === $event->user->current_team_id) {
+            $user = $event->user;
 
-    //         // Load relation
-    //         $user->loadMissing('teams');
+            $another_team = $user->profile->teams()->first();
 
-    //         $another_team = $user->teams->first();
+            // Set another current team or null
+            if (is_null($another_team)) {
+                $user->currentTeam()->dissociate();
+            } else {
+                $user->currentTeam()->associate($another_team);
+            }
 
-    //         // Set another current team or null
-    //         if (is_null($another_team)) {
-    //             $user->currentTeam()->dissociate();
-    //         } else {
-    //             $user->currentTeam()->associate($another_team);
-    //         }
-
-    //         // Run query
-    //         $user->save();
-    //     }
-    // }
+            // Run query
+            $user->save();
+        }
+    }
 
     /**
      * Current team fallback for the TeamDeleting event.
-     *
-     * @TODO delete related views
      */
     protected function onTeamDeleting(TeamDeleting $event): void
     {

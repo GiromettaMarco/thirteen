@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Http\Requests\TeamMember;
+
+use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreTeamMemberRequest extends FormRequest
+{
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'profile_id' => ['required', 'integer', 'exists:App\Models\Profile,id'],
+        ];
+    }
+}

@@ -5,8 +5,10 @@ use App\Http\Controllers\Account\OtherSessionsController;
 use App\Http\Controllers\Account\PasswordController;
 use App\Http\Controllers\CurrentTeamController;
 use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\LeaveTeamController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SearchProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamMemberController;
@@ -47,6 +49,8 @@ Route::prefix('dashboard')
         Route::put('/profile/{profile}', [ProfileController::class, 'update'])
             ->can('update', 'profile')
             ->name('profile.update');
+        Route::get('/profile/search', SearchProfileController::class)
+            ->name('profile.search');
 
         // #region Invitations
         Route::get('/invitations', [InvitationController::class, 'index'])
@@ -77,15 +81,24 @@ Route::prefix('dashboard')
         Route::delete('/teams/{team}', [TeamController::class, 'destroy'])
             ->can('delete', 'team')
             ->name('teams.destroy');
+        Route::delete('/teams/{team}/leave', [LeaveTeamController::class, 'destroy'])
+            ->name('teams.leave');
 
         // #region Team members
         Route::get('/teams/{team}/member/{profile}', [TeamMemberController::class, 'show'])
             ->scopeBindings()
             ->name('members.show');
+        Route::post('/teams/{team}/member', [TeamMemberController::class, 'store'])
+            ->can('editMembers', 'team')
+            ->name('members.store');
         Route::put('/teams/{team}/member/{profile}', [TeamMemberController::class, 'update'])
             ->scopeBindings()
             ->can('editMembers', 'team')
             ->name('members.update');
+        Route::delete('/teams/{team}/member/{profile}', [TeamMemberController::class, 'destroy'])
+            ->scopeBindings()
+            ->can('editMembers', 'team')
+            ->name('members.destroy');
 
         // #region Projects
         Route::get('/teams/{team}/projects', [ProjectController::class, 'index'])
