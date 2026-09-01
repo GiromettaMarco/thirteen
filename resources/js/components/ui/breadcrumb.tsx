@@ -2,7 +2,6 @@ import { cn } from '@gmcode/react-ui'
 import { ChevronRight, MoreHorizontal } from 'lucide-react'
 import { Slot as SlotPrimitive } from 'radix-ui'
 import * as React from 'react'
-import { useTranslation } from 'react-i18next'
 
 function Breadcrumb({ ...props }: React.ComponentProps<'nav'>) {
   return (
@@ -88,11 +87,9 @@ function BreadcrumbSeparator({
 
 function BreadcrumbEllipsis({
   className,
+  more = 'More',
   ...props
-}: React.ComponentProps<'span'>) {
-  // i18n
-  const { t } = useTranslation()
-
+}: React.ComponentProps<'span'> & { more?: string }) {
   return (
     <span
       aria-hidden="true"
@@ -102,7 +99,7 @@ function BreadcrumbEllipsis({
       {...props}
     >
       <MoreHorizontal className="size-4" />
-      <span className="sr-only">{t(($) => $.more)}</span>
+      <span className="sr-only">{more}</span>
     </span>
   )
 }
