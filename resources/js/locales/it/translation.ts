@@ -272,6 +272,7 @@ export default {
   select: 'Seleziona',
   send: 'Invia',
   settings: 'Impostazioni',
+  show: 'Mostra',
   sidebar: {
     mobile: 'Visualizza la sidebar mobile.',
     sidebar: 'Sidebar',
@@ -352,12 +353,21 @@ export default {
   },
   team_one: 'Team',
   team_other: 'Teams',
+  teamPermission_one: 'Permesso del Team',
+  teamPermission_other: 'Permessi del Team',
   teamPermissions: {
     admin: 'Amministratore',
-    canDelete: 'Può cancellare il team',
-    canEdit: 'Può modificare il team',
+    canDeleteTeam: 'Può cancellare il team',
     canEditMembers: 'Può modificare i membri del team',
-    canEditProjects: 'Può modificare progetti e compiti correlati'
+    canEditProjects: 'Può modificare progetti e compiti correlati',
+    canEditTeam: 'Può modificare il team',
+    short: {
+      admin: 'admin',
+      canDeleteTeam: 'cancella',
+      canEditMembers: 'membri',
+      canEditProjects: 'progetti',
+      canEditTeam: 'modifica'
+    }
   },
   // teams: {
   //   addMembers: {
@@ -385,6 +395,24 @@ export default {
     emptyDesc1: 'Non hai ancora creato alcun team.',
     emptyDesc2: 'Inizia creando il tuo primo team.',
     emptyTitle: 'Ancora nessun team',
+    leave: 'Abbandona',
+    leaveDesc: 'Stai per lasciare il team "{{team}}".',
+    leaveTitle: 'Sei sicuro di voler abbandonare il team?',
+    members: {
+      actions: 'Azioni del membro "{{member}}"',
+      add: {
+        description:
+          'Cerca e aggiungi nuovi utenti per nome o indirizzo email.',
+        instructions:
+          'Cerca un utente, poi clicca sul suo nome per selezionarlo.',
+        nameOrEmail: 'Nome o email',
+        title: 'Aggiungi nuovi membri al team'
+      },
+      delete: {
+        description: 'Stai per rimuovere "{{member}}" dal team.',
+        title: 'Sei sicuro di voler rimuovere il membro del team?'
+      }
+    },
     namePlaceholder: 'Nome del team',
     setCurrent: 'Imposta "{{team}}" come team corrente',
     teamMembers: 'Membri del team',
@@ -420,13 +448,6 @@ export default {
         description: 'Informazioni profilo di {{name}}',
         title: 'Profilo utente'
       }
-    },
-    roles: {
-      admin: 'Admin',
-      editor: 'Editore',
-      reader: 'Lettore',
-      worker: 'Worker'
-    },
-    selectRole: 'Seleziona un ruolo'
+    }
   }
 } as const

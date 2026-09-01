@@ -273,6 +273,7 @@ export default {
   select: 'Select',
   send: 'Send',
   settings: 'Settings',
+  show: 'Show',
   sidebar: {
     mobile: 'Displays the mobile sidebar.',
     sidebar: 'Sidebar',
@@ -352,36 +353,51 @@ export default {
   },
   team_one: 'Team',
   team_other: 'Teams',
+  teamPermission_one: 'Team Permission',
+  teamPermission_other: 'Team Permissions',
   teamPermissions: {
     admin: 'Administrator',
-    canDelete: 'Can delete the team',
-    canEdit: 'Can edit the team',
+    canDeleteTeam: 'Can delete the team',
     canEditMembers: 'Can edit team members',
-    canEditProjects: 'Can edit related projects and tasks'
+    canEditProjects: 'Can edit related projects and tasks',
+    canEditTeam: 'Can edit the team',
+    short: {
+      admin: 'admin',
+      canDeleteTeam: 'delete',
+      canEditMembers: 'members',
+      canEditProjects: 'projects',
+      canEditTeam: 'edit'
+    }
   },
-  // teams: {
-  //   addMembers: {
-  //     description: 'Search and add users by name or email address.',
-  //     instructions: 'Search a for a user, then click on its name to select it.',
-  //     nameOrEmail: 'Name or email',
-  //     title: 'Add new team members'
-  //   },
-  //   descriptionPlaceholder: 'Optional, short text describing the team.',
-  //   leave: 'Leave',
-  // },
   teams: {
     actions: 'Team "{{team}}" actions',
     createDesc: 'Insert the team name to create a new team.',
     createTeam: 'Create Team',
     createTitle: 'New team',
     defaultName: 'New team',
-    deleteDesc: 'You are about to delete the  "{{team}}" team.',
+    deleteDesc: 'You are about to delete the "{{team}}" team.',
     deleteTitle: 'Are you sure you want to delete the team?',
     deleteWarn:
       'Any related resource (projects, tasks...) will be lost forever.',
     emptyDesc1: "You haven't created any team yet.",
     emptyDesc2: 'Get started by creating your first team.',
     emptyTitle: 'No Teams yet',
+    leave: 'Leave',
+    leaveDesc: 'You are about to leave the team "{{team}}".',
+    leaveTitle: 'Are you sure you want to leave the team?',
+    members: {
+      actions: 'Member "{{member}}" actions',
+      add: {
+        description: 'Search and add users by name or email address.',
+        instructions: 'Search for a user, then click on its name to select it.',
+        nameOrEmail: 'Name or email',
+        title: 'Add new team members'
+      },
+      delete: {
+        description: 'You are about to remove "{{member}}" from the team.',
+        title: 'Are you sure you want to remove the team member?'
+      }
+    },
     namePlaceholder: 'Team name',
     setCurrent: 'Set "{{team}}" as current team',
     teamMembers: 'Team members',
@@ -417,13 +433,6 @@ export default {
         description: 'Information about {{name}}',
         title: 'User profile'
       }
-    },
-    roles: {
-      admin: 'Admin',
-      editor: 'Editor',
-      reader: 'Reader',
-      worker: 'Worker'
-    },
-    selectRole: 'Select a role'
+    }
   }
 } as const

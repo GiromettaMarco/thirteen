@@ -26,6 +26,7 @@ return [
         ],
     ],
     'email_sent' => 'Email sent',
+    'leave_team' => 'You left the team',
     'invitation' => [
         'deleted' => 'Invitation revoked',
         'created' => 'Invitation sent',
@@ -50,6 +51,8 @@ return [
         'updated' => 'Team updated',
     ],
     'team_member' => [
+        'created' => 'A new member has joined the team',
+        'deleted' => 'Team member removed',
         'updated' => 'Team member updated',
     ],
     'throttle' => 'Too many attempts. Please try again in :seconds seconds.',

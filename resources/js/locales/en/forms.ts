@@ -1,4 +1,7 @@
+import { en } from '@gmcode/forms/locales'
+
 export default {
+  ...en,
   confirmPassword: {
     match: 'The passwords did not match',
     required: 'Confirm Password is required.'
@@ -24,6 +27,9 @@ export default {
     number: 'The password must contain at least one number.',
     required: 'The Password field is required.',
     symbol: 'The password must contain at least one symbol.'
+  },
+  search: {
+    minChars: 'Please enter at least 3 characters.'
   },
   token: {
     required: 'The Token field is required.'

@@ -1,4 +1,7 @@
+import { it } from '@gmcode/forms/locales'
+
 export default {
+  ...it,
   confirmPassword: {
     match: 'Le password non corrispondono',
     required: 'Il campo Conferma Password è obbligatorio.'
@@ -24,6 +27,9 @@ export default {
     number: 'La password deve contenere almeno un numero.',
     required: 'Il campo Password è obbligatorio.',
     symbol: 'La password deve contenere almeno un simbolo.'
+  },
+  search: {
+    minChars: 'Inserisci almeno 3 caratteri.'
   },
   token: {
     required: 'Il campo Token è obbligatorio.'
