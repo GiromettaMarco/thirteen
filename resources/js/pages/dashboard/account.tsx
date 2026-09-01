@@ -211,7 +211,7 @@ function UpdatePassword() {
               inputId="new-password"
               inputName="password"
               label={t(($) => $.auth.newPassword)}
-              // @TODO update forms package
+              // @NOTE wrong typing until react 20
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
                 check(event.target.value)
               }
