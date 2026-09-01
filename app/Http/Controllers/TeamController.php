@@ -50,40 +50,33 @@ class TeamController extends Controller
         /** @var User */
         $user = $request->user();
 
+        $views = $user
+            ->views()
+            ->where('page', "teams.show/$team->id")
+            ->whereIn('table', ['members', 'projects'])
+            ->orderBy('table')
+            ->limit(2)
+            ->get([
+                'filters',
+                'pagination',
+                'sorting',
+                'visibility',
+            ]);
+
+        $projects = $team->projects()->get();
+
         return Inertia::render('dashboard/teams/show', [
             'members' => $team
                 ->profiles()
-                // ->withCount([
-                //     'projects' => function ($query) use ($team) {
-                //         $query->where('team_id', $team->id);
-                //     },
-                //     'tasks' => function ($query) use ($team) {
-                //         $query->where('team_id', $team->id);
-                //     },
-                // ])
+                ->withCount(['tasks' => function ($query) use ($projects) {
+                    $query->whereIn('project_id', $projects->pluck('id')->all());
+                }])
                 ->get(),
             'projects' => $team->projects()->get(),
             'team' => $team,
             'views' => [
-                // @TODO merge queries
-                'members' => $user->views()->where([
-                    ['page', "teams.show/$team->id"],
-                    ['table', 'members'],
-                ])->first([
-                    'filters',
-                    'pagination',
-                    'sorting',
-                    'visibility',
-                ]),
-                'projects' => $user->views()->where([
-                    ['page', "teams.show/$team->id"],
-                    ['table', 'projects'],
-                ])->first([
-                    'filters',
-                    'pagination',
-                    'sorting',
-                    'visibility',
-                ]),
+                'members' => $views->get(0) ?? null,
+                'projects' => $views->get(1) ?? null,
             ],
         ]);
     }

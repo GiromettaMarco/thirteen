@@ -223,7 +223,8 @@ export function MembersTable({
       pivot_can_edit_projects: t(
         ($) => $.teamPermissions.short.canEditProjects
       ),
-      pivot_can_edit_team: t(($) => $.teamPermissions.short.canEditTeam)
+      pivot_can_edit_team: t(($) => $.teamPermissions.short.canEditTeam),
+      tasks_count: t(($) => $.task, { count: 2 })
     }),
     [t]
   )
@@ -249,6 +250,15 @@ export function MembersTable({
             className="ps-2"
             column={column}
             title={t(($) => $.name)}
+          />
+        )
+      },
+      {
+        accessorKey: 'tasks_count',
+        header: ({ column }) => (
+          <SortableColumnHeader
+            column={column}
+            title={t(($) => $.task, { count: 2 })}
           />
         )
       },
