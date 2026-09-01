@@ -18,6 +18,8 @@ class DeleteTeamViews
     public function handle(TeamDeleting $event): void
     {
         // Delete views but skip model events
-        View::where('page', 'teams.show/'.$event->team->id)->delete();
+        View::where('page', 'teams.show/'.$event->team->id)
+            ->orWhere('table', 'projects/team:'.$event->team->id)
+            ->delete();
     }
 }
