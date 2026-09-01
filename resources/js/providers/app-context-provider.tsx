@@ -1,4 +1,3 @@
-// import { useActiveProjectChartData } from '@/hooks/use-active-project-chart-data'
 import {
   createContext,
   useEffect,
@@ -11,72 +10,67 @@ import { missingFn } from '@/lib/utils'
 import type { Project, Task, Team } from '@/types'
 
 export const AppContext = createContext<{
-  // activeEmployee: EmployeeData | undefined
   activeProject: Project | undefined
-  // activeProjectChartData: ProjectChartItem[]
   activeTask: Task | undefined
   activeTeam: Team | undefined
+  addMemberOpen: boolean
   addProjectOpen: boolean
   addTaskOpen: boolean
   addTeamOpen: boolean
   isTouch: boolean | undefined
-  // setActiveEmployee: Dispatch<SetStateAction<EmployeeData | undefined>>
   setActiveProject: Dispatch<SetStateAction<Project | undefined>>
   setActiveTask: Dispatch<SetStateAction<Task | undefined>>
   setActiveTeam: Dispatch<SetStateAction<Team | undefined>>
+  setAddMemberOpen: Dispatch<SetStateAction<boolean>>
   setAddProjectOpen: Dispatch<SetStateAction<boolean>>
   setAddTaskOpen: Dispatch<SetStateAction<boolean>>
   setAddTeamOpen: Dispatch<SetStateAction<boolean>>
-  // setUpdateEmployeeOpen: Dispatch<SetStateAction<boolean>>
+  setUpdateMemberOpen: Dispatch<SetStateAction<boolean>>
   setUpdateProjectOpen: Dispatch<SetStateAction<boolean>>
   setUpdateTaskOpen: Dispatch<SetStateAction<boolean>>
   setUpdateTeamOpen: Dispatch<SetStateAction<boolean>>
-  // updateEmployeeOpen: boolean
+  updateMemberOpen: boolean
   updateProjectOpen: boolean
   updateTaskOpen: boolean
   updateTeamOpen: boolean
 }>({
-  // activeEmployee: undefined,
   activeProject: undefined,
-  // activeProjectChartData: [],
   activeTask: undefined,
   activeTeam: undefined,
+  addMemberOpen: false,
   addProjectOpen: false,
   addTaskOpen: false,
   addTeamOpen: false,
   isTouch: undefined,
-  // setActiveEmployee: missingFn,
   setActiveProject: missingFn,
   setActiveTask: missingFn,
   setActiveTeam: missingFn,
+  setAddMemberOpen: missingFn,
   setAddProjectOpen: missingFn,
   setAddTaskOpen: missingFn,
   setAddTeamOpen: missingFn,
-  // setUpdateEmployeeOpen: missingFn,
+  setUpdateMemberOpen: missingFn,
   setUpdateProjectOpen: missingFn,
   setUpdateTaskOpen: missingFn,
   setUpdateTeamOpen: missingFn,
-  // updateEmployeeOpen: false,
+  updateMemberOpen: false,
   updateProjectOpen: false,
   updateTaskOpen: false,
   updateTeamOpen: false
 })
 
 export default function AppContextProvider({ children }: PropsWithChildren) {
-  // const [activeEmployee, setActiveEmployee] = useState<
-  //   EmployeeData | undefined
-  // >(undefined)
   const [activeProject, setActiveProject] = useState<Project | undefined>(
     undefined
   )
-  // const activeProjectChartData = useActiveProjectChartData(activeProject)
   const [activeTask, setActiveTask] = useState<Task | undefined>(undefined)
   const [activeTeam, setActiveTeam] = useState<Team | undefined>(undefined)
+  const [addMemberOpen, setAddMemberOpen] = useState(false)
   const [addProjectOpen, setAddProjectOpen] = useState(false)
   const [addTaskOpen, setAddTaskOpen] = useState(false)
   const [addTeamOpen, setAddTeamOpen] = useState(false)
   const [isTouch, setIsTouch] = useState<boolean | undefined>(undefined)
-  // const [updateEmployeeOpen, setUpdateEmployeeOpen] = useState(false)
+  const [updateMemberOpen, setUpdateMemberOpen] = useState(false)
   const [updateProjectOpen, setUpdateProjectOpen] = useState(false)
   const [updateTaskOpen, setUpdateTaskOpen] = useState(false)
   const [updateTeamOpen, setUpdateTeamOpen] = useState(false)
@@ -99,27 +93,26 @@ export default function AppContextProvider({ children }: PropsWithChildren) {
   return (
     <AppContext
       value={{
-        // activeEmployee,
         activeProject,
-        // activeProjectChartData,
         activeTask,
         activeTeam,
+        addMemberOpen,
         addProjectOpen,
         addTaskOpen,
         addTeamOpen,
         isTouch,
-        // setActiveEmployee,
         setActiveProject,
         setActiveTask,
         setActiveTeam,
+        setAddMemberOpen,
         setAddProjectOpen,
         setAddTaskOpen,
         setAddTeamOpen,
-        // setUpdateEmployeeOpen,
+        setUpdateMemberOpen,
         setUpdateProjectOpen,
         setUpdateTaskOpen,
         setUpdateTeamOpen,
-        // updateEmployeeOpen,
+        updateMemberOpen,
         updateProjectOpen,
         updateTaskOpen,
         updateTeamOpen

@@ -4,13 +4,13 @@ import { TeamsTable } from '@/components/teams/teams-table'
 import { Container } from '@/components/ui/container'
 import DashboardLayout from '@/layouts/dashboard-layout'
 import { parseView } from '@/lib/utils'
-import type { RawView, Team, WithTeamPermissions } from '@/types'
+import type { RawView, TeamsTableEntry } from '@/types'
 
 export default function TeamsIndex({
   teams,
   views
 }: {
-  teams: Array<Team & WithTeamPermissions & { profiles_count: number }>
+  teams: TeamsTableEntry[]
   views: { teams: RawView | null }
 }) {
   // i18n

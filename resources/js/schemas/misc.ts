@@ -33,3 +33,13 @@ export const deleteSchema = new Schema({})
 export const massDeleteSchema = new Schema({
   ids: new ArrayRule()
 })
+
+export const searchProfileSchema = new Schema({
+  s: new InputTextRule({
+    messages: {
+      minChars: 'search.minChars',
+      required: 'search.minChars'
+    },
+    minChars: 3
+  })
+})

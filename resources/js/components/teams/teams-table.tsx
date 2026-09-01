@@ -45,7 +45,13 @@ import UseTableStates from '@/hooks/use-table-states'
 import { AppContext } from '@/providers/app-context-provider'
 import { update } from '@/routes/current-team'
 import { destroy, show } from '@/routes/teams'
-import type { Team, View, ViewStore, WithTeamPermissions } from '@/types'
+import type {
+  Team,
+  TeamsTableEntry,
+  View,
+  ViewStore,
+  WithTeamPermissions
+} from '@/types'
 
 //#region CurrentTeamCell
 function CurrentTeamCell({
@@ -243,14 +249,12 @@ function EmptyFiller() {
 }
 
 //#region TeamsTable
-type TeamRow = Team & WithTeamPermissions & { profiles_count: number }
-
 export function TeamsTable({
   teams,
   view,
   viewStore
 }: {
-  teams: TeamRow[]
+  teams: TeamsTableEntry[]
   view?: View
   viewStore?: ViewStore
 }) {
@@ -290,7 +294,7 @@ export function TeamsTable({
     [t]
   )
 
-  const columns = useMemo<ColumnDef<TeamRow>[]>(
+  const columns = useMemo<ColumnDef<TeamsTableEntry>[]>(
     () => [
       {
         cell: ({ row }) => (

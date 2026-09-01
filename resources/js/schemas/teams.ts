@@ -1,4 +1,4 @@
-import { InputRule, Schema } from '@gmcode/forms'
+import { InputCheckboxRule, InputRule, Schema } from '@gmcode/forms'
 import { name } from '@/schemas/misc'
 
 export const createTeamSchema = new Schema({
@@ -9,10 +9,19 @@ export const updateTeamSchema = new Schema({
   name
 })
 
+export const addTeamMemberSchema = new Schema({
+  admin: new InputCheckboxRule(),
+  can_delete_team: new InputCheckboxRule(),
+  can_edit_members: new InputCheckboxRule(),
+  can_edit_projects: new InputCheckboxRule(),
+  can_edit_team: new InputCheckboxRule(),
+  profile_id: new InputRule()
+})
+
 export const updateTeamPermissionsSchema = new Schema({
-  admin: new InputRule(),
-  can_delete_team: new InputRule(),
-  can_edit_members: new InputRule(),
-  can_edit_projects: new InputRule(),
-  can_edit_team: new InputRule()
+  admin: new InputCheckboxRule(),
+  can_delete_team: new InputCheckboxRule(),
+  can_edit_members: new InputCheckboxRule(),
+  can_edit_projects: new InputCheckboxRule(),
+  can_edit_team: new InputCheckboxRule()
 })

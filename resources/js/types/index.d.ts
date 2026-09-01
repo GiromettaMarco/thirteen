@@ -136,6 +136,11 @@ export interface WithTeamPermissions {
     }
 }
 
+export type TeamMember = Profile & WithTeamPermissions
+
+export type TeamsTableEntry = Team &
+  WithTeamPermissions & { profiles_count: number }
+
 //#region Project
 export interface Project extends WithTimestamps {
   archived: boolean

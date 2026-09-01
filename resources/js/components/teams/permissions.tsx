@@ -52,14 +52,14 @@ export function ShowTeamPermissions({
       <ReadonlyCheckbox
         checked={permissions.can_edit_team}
         id="can_edit_team"
-        label={t(($) => $.teamPermissions.canEdit)}
+        label={t(($) => $.teamPermissions.canEditTeam)}
         name="can_edit_team"
       />
 
       <ReadonlyCheckbox
         checked={permissions.can_delete_team}
         id="can_delete_team"
-        label={t(($) => $.teamPermissions.canDelete)}
+        label={t(($) => $.teamPermissions.canDeleteTeam)}
         name="can_delete_team"
       />
 
@@ -127,7 +127,7 @@ export function EditTeamPermissions({
             control={form.control}
             inputId="can_edit_team"
             inputName="can_edit_team"
-            label={t(($) => $.teamPermissions.canEdit)}
+            label={t(($) => $.teamPermissions.canEditTeam)}
             readOnly={isAdmin}
           />
 
@@ -135,7 +135,7 @@ export function EditTeamPermissions({
             control={form.control}
             inputId="can_delete_team"
             inputName="can_delete_team"
-            label={t(($) => $.teamPermissions.canDelete)}
+            label={t(($) => $.teamPermissions.canDeleteTeam)}
             readOnly={isAdmin}
           />
 

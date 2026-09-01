@@ -1,10 +1,11 @@
 import { Separator } from '@gmcode/react-ui'
-import { Head } from '@inertiajs/react'
+import { Head, usePage } from '@inertiajs/react'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { BreadcrumbLink } from '@/components/breadcrumbs'
 import { ProjectsTable } from '@/components/projects/projects-table'
-import { MembersTable } from '@/components/teams/members-table'
+import { MembersTable } from '@/components/teams/members/members-table'
+import UpdateTeamDrawer from '@/components/teams/update-team-drawer'
 import { Container } from '@/components/ui/container'
 import { Heading } from '@/components/ui/heading'
 import DashboardLayout from '@/layouts/dashboard-layout'
@@ -12,10 +13,10 @@ import { parseView } from '@/lib/utils'
 import { dashboard } from '@/routes'
 import { index } from '@/routes/teams'
 import type {
-  Profile,
   Project,
   RawView,
   Team,
+  TeamMember,
   WithTeamPermissions
 } from '@/types'
 
@@ -25,7 +26,7 @@ export default function TeamsShow({
   team,
   views
 }: {
-  members: Profile[]
+  members: TeamMember[]
   projects: Project[]
   team: Team & WithTeamPermissions
   views: {
@@ -35,6 +36,8 @@ export default function TeamsShow({
 }) {
   // i18n
   const { t } = useTranslation()
+
+  const { user } = usePage().props.auth
 
   const breadcrumbs = useMemo<BreadcrumbLink[]>(
     () => [
@@ -47,7 +50,7 @@ export default function TeamsShow({
   return (
     <DashboardLayout
       breadcrumbs={breadcrumbs}
-      // button={<UpdateTeamDrawer team={team} />}
+      button={<UpdateTeamDrawer team={team} />}
       title={team.name}
     >
       <Head title={team.name} />
@@ -78,10 +81,10 @@ export default function TeamsShow({
             variant="small"
           />
           <MembersTable
-            // canEdit={}
-            // currentUserId={}
+            canEdit={team.pivot.can_edit_members}
+            currentProfileId={user?.profile_id}
             members={members}
-            teamId={team.id}
+            team={team}
             view={parseView(views.members)}
             viewStore={{
               page: `teams.show/${team.id}`,
