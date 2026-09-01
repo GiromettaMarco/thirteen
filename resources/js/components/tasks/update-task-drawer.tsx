@@ -188,13 +188,12 @@ export function UpdateTaskDrawer({
                 </div>
 
                 <DrawerFooter>
-                  <Submit
-                    label={t(($) => $.submit)}
-                    loading={loading}
-                  />
+                  <Submit loading={loading} />
 
                   <DrawerClose asChild>
-                    <Button variant="outline">{t(($) => $.close)}</Button>
+                    <Button variant="outline">
+                      {t(($) => $.actions.close)}
+                    </Button>
                   </DrawerClose>
                 </DrawerFooter>
               </>

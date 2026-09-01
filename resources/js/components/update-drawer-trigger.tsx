@@ -22,7 +22,9 @@ export function UpdateDrawerTrigger({
         size="sm"
         variant="ghost"
       >
-        <span className="sr-only sm:not-sr-only">{t(($) => $.edit)}</span>
+        <span className="sr-only sm:not-sr-only">
+          {t(($) => $.actions.edit)}
+        </span>
         <Edit />
       </Button>
     </DrawerTrigger>

@@ -52,7 +52,7 @@ export function AddMemberDrawerTrigger(props: ComponentProps<typeof Button>) {
       size="sm"
       {...props}
     >
-      {t(($) => $.add)}
+      {t(($) => $.actions.add)}
       <Plus />
     </Button>
   )
@@ -200,7 +200,7 @@ export function AddMemberDrawer({
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
                 <FieldLabel htmlFor="search-profile">
-                  {t(($) => $.search)}
+                  {t(($) => $.actions.search)}
                 </FieldLabel>
                 <InputGroup>
                   <InputGroupInput
@@ -223,7 +223,7 @@ export function AddMemberDrawer({
                           className="size-3.5"
                         />
                       ) : (
-                        <Search aria-label={t(($) => $.search)} />
+                        <Search aria-label={t(($) => $.actions.search)} />
                       )}
                     </InputGroupButton>
                   </InputGroupAddon>
@@ -315,13 +315,10 @@ export function AddMemberDrawer({
               </div>
 
               <DrawerFooter>
-                <Submit
-                  label={t(($) => $.submit)}
-                  loading={loading}
-                />
+                <Submit loading={loading} />
 
                 <DrawerClose asChild>
-                  <Button variant="outline">{t(($) => $.close)}</Button>
+                  <Button variant="outline">{t(($) => $.actions.close)}</Button>
                 </DrawerClose>
               </DrawerFooter>
             </>

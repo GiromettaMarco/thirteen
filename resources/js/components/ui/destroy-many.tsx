@@ -70,7 +70,7 @@ export function DestroyMany({
           size="sm"
           variant="destructive"
         >
-          {t(($) => $.delete)}
+          {t(($) => $.actions.delete)}
           <Trash2 />
         </Button>
       </DialogTrigger>
@@ -86,7 +86,7 @@ export function DestroyMany({
 
         {selectedList && (
           <div className="grid gap-1 text-sm text-muted-foreground">
-            <p>{t(($) => $.deleteMany)}</p>
+            <p>{t(($) => $.dialogs.deleteMany.description)}</p>
             <ul className="list-disc ps-4">
               {selectedItems.map((item) => (
                 <li key={item.id}>{item.name}</li>
@@ -111,11 +111,13 @@ export function DestroyMany({
             <>
               <DialogFooter className="items-center">
                 <DialogClose asChild>
-                  <Button variant="secondary">{t(($) => $.cancel)}</Button>
+                  <Button variant="secondary">
+                    {t(($) => $.actions.cancel)}
+                  </Button>
                 </DialogClose>
 
                 <Submit
-                  label={t(($) => $.delete)}
+                  label={t(($) => $.actions.delete)}
                   loading={loading}
                   variant="destructive"
                 />

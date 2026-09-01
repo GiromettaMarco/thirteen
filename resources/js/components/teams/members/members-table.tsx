@@ -85,7 +85,7 @@ function Actions({
         >
           <DropdownMenuItem asChild>
             <Link href={show({ profile: member.id, team })}>
-              {canEdit ? t(($) => $.edit) : t(($) => $.show)}
+              {canEdit ? t(($) => $.actions.edit) : t(($) => $.actions.show)}
             </Link>
           </DropdownMenuItem>
 
@@ -104,8 +104,8 @@ function Actions({
                   type="button"
                 >
                   {currentProfileId === member.id
-                    ? t(($) => $.teams.leave)
-                    : t(($) => $.remove)}
+                    ? t(($) => $.actions.leave)
+                    : t(($) => $.actions.remove)}
                 </button>
               </DropdownMenuItem>
             </>

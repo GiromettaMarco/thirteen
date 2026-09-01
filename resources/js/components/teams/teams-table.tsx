@@ -125,12 +125,14 @@ function Actions({
       />
       {team.pivot.can_delete_team && (
         <DestroyDialog
-          description={t(($) => $.teams.deleteDesc, { team: team.name })}
+          description={t(($) => $.dialogs.deleteTeam.description, {
+            team: team.name
+          })}
           open={deleteOpen}
           route={destroy(team.id)}
           setOpen={setDeleteOpen}
-          title={t(($) => $.teams.deleteTitle)}
-          warning={t(($) => $.teams.deleteWarn)}
+          title={t(($) => $.dialogs.deleteTeam.title)}
+          warning={t(($) => $.dialogs.deleteTeam.warn)}
         />
       )}
 
@@ -150,7 +152,7 @@ function Actions({
               onClick={() => currentTeamForm.submit(update())}
               type="button"
             >
-              {t(($) => $.select)}
+              {t(($) => $.actions.select)}
             </button>
           </DropdownMenuItem>
 
@@ -165,7 +167,7 @@ function Actions({
                 }}
                 type="button"
               >
-                {t(($) => $.edit)}
+                {t(($) => $.actions.edit)}
               </button>
             </DropdownMenuItem>
           )}
@@ -182,7 +184,7 @@ function Actions({
               onClick={() => setLeaveOpen(true)}
               type="button"
             >
-              {t(($) => $.teams.leave)}
+              {t(($) => $.actions.leave)}
             </button>
           </DropdownMenuItem>
 
@@ -197,7 +199,7 @@ function Actions({
                 onClick={() => setDeleteOpen(true)}
                 type="button"
               >
-                {t(($) => $.delete)}
+                {t(($) => $.actions.delete)}
               </button>
             </DropdownMenuItem>
           )}
@@ -222,11 +224,11 @@ function EmptyFiller() {
           <UserStar />
         </EmptyMedia>
 
-        <EmptyTitle>{t(($) => $.teams.emptyTitle)}</EmptyTitle>
+        <EmptyTitle>{t(($) => $.teams.empty.title)}</EmptyTitle>
 
         <EmptyDescription>
-          <p>{t(($) => $.teams.emptyDesc1)}</p>
-          <p>{t(($) => $.teams.emptyDesc2)}</p>
+          <p>{t(($) => $.teams.empty.line1)}</p>
+          <p>{t(($) => $.teams.empty.line2)}</p>
         </EmptyDescription>
       </EmptyHeader>
 

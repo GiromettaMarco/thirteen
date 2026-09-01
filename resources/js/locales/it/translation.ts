@@ -1,6 +1,21 @@
 export default {
   account: 'Account',
-  add: 'Aggiungi',
+  actions: {
+    add: 'Aggiungi',
+    cancel: 'Annulla',
+    close: 'Chiudi',
+    delete: 'Elimina',
+    edit: 'Modifica',
+    leave: 'Abbandona',
+    remove: 'Rimuovi',
+    reset: 'Reset',
+    save: 'Salva',
+    search: 'Cerca',
+    select: 'Seleziona',
+    send: 'Invia',
+    show: 'Mostra',
+    submit: 'Invia'
+  },
   appearance: {
     appearance: 'Aspetto',
     change: 'Cambia aspetto',
@@ -26,20 +41,52 @@ export default {
     signIn: 'Accedi',
     signOut: 'Esci'
   },
-  cancel: 'Annulla',
-  close: 'Chiudi',
   dashboard: 'Dashboard',
   date: 'Data',
   dateCreated: 'Date creazione',
   dateModified: 'Ultima modifica',
-  delete: 'Elimina',
-  deleteMany: 'Stai per cancellare i seguenti elementi:',
   description: 'Descrizione',
-  edit: 'Modifica',
+  dialogs: {
+    deleteAccount: {
+      description:
+        'Una volta eliminato il tuo account, anche tutte le sue risorse e i suoi dati verranno eliminati definitivamente. Inserisci la tua password per confermare che desideri eliminare definitivamente il tuo account.',
+      title: 'Sei sicuro di voler eliminare il tuo account?',
+      trigger: 'Elimina account'
+    },
+    deleteMany: { description: 'Stai per cancellare i seguenti elementi:' },
+    deleteManyTasks: {
+      title: 'Sei sicuro di voler eliminare i compiti selezionati?'
+    },
+    deleteProject: {
+      description: 'Stai per cancellare il progetto "{{project}}".',
+      title: 'Sei sicuro di voler eliminare il progetto?',
+      warn: 'Tutti i compiti correlati andranno persi per sempre.'
+    },
+    deleteSessions: {
+      description:
+        'Inserisci la tua password per confermare che desideri disconnetterti dalle altre sessioni del browser su tutti i tuoi dispositivi.',
+      title: 'Eliminare le altre sessioni del browser?',
+      trigger: 'Disconnetti altre sessioni del browser'
+    },
+    deleteTask: {
+      description: 'Stai per cancellare il compito "{{task}}".',
+      title: 'Sei sicuro di voler eliminare questo compito?'
+    },
+    deleteTeam: {
+      description: 'Stai per cancellare il team "{{team}}".',
+      title: 'Sei sicuro di voler eliminare il team?',
+      warn: 'Tutte le risorse correlate (progetti, compiti...) andranno perse per sempre.'
+    },
+    leaveTeam: {
+      description: 'Stai per lasciare il team "{{team}}".',
+      title: 'Sei sicuro di voler abbandonare il team?'
+    },
+    removeMember: {
+      description: 'Stai per rimuovere "{{member}}" dal team.',
+      title: 'Sei sicuro di voler rimuovere il membro del team?'
+    }
+  },
   emailAddress: 'Indirizzo email',
-  employee_one: 'Impiegato',
-  employee_other: 'Impiegati',
-  employment: 'Impiego',
   fullName: 'Nome completo',
   help: 'Chiedi Aiuto',
   homepage: 'Pagina iniziale',
@@ -113,12 +160,6 @@ export default {
     dashboard: {
       account: {
         delete: {
-          dialog: {
-            description:
-              'Una volta eliminato il tuo account, anche tutte le sue risorse e i suoi dati verranno eliminati definitivamente. Inserisci la tua password per confermare che desideri eliminare definitivamente il tuo account.',
-            title: 'Sei sicuro di voler eliminare il tuo account?',
-            trigger: 'Elimina account'
-          },
           h2: 'Elimina account',
           info: 'Si prega di procedere con cautela, questa operazione non può essere annullata.',
           p: 'Elimina il tuo account e tutte le sue risorse'
@@ -134,12 +175,6 @@ export default {
           submit: 'Cambia password'
         },
         sessions: {
-          dialog: {
-            description:
-              'Inserisci la tua password per confermare che desideri disconnetterti dalle altre sessioni del browser su tutti i tuoi dispositivi.',
-            title: 'Eliminare le altre sessioni del browser?',
-            trigger: 'Disconnetti altre sessioni del browser'
-          },
           h2: 'Sessioni del Browser',
           info: 'Se necessario, puoi disconnetterti da tutte le altre sessioni del browser su tutti i tuoi dispositivi. Questo elenco potrebbe non essere esaustivo. Se ritieni che il tuo account sia stato compromesso, dovresti anche aggiornare la password.',
           lastActive: 'Ultima attività',
@@ -166,9 +201,11 @@ export default {
         title: 'Inviti'
       },
       profile: {
-        drawerDescription:
-          'Imposta il nome visualizzato, il ruolo e la visibilità del profilo.',
-        drawerTitle: 'Aggiorna il tuo profilo',
+        drawer: {
+          description:
+            'Imposta il nome visualizzato, il ruolo e la visibilità del profilo.',
+          title: 'Aggiorna il tuo profilo'
+        },
         info: 'Pubblicando il tuo profilo, consentirai agli altri utenti di trovare e leggere le informazioni in esso contenute.',
         public: 'Profilo pubblico',
         title: 'Profilo di {{name}}'
@@ -226,10 +263,6 @@ export default {
   project_one: 'Progetto',
   project_other: 'Progetti',
   projects: {
-    addEmployees: {
-      description: 'Assegna un membro del team al progetto.',
-      title: 'Aggiungi nuovi impiegati'
-    },
     chartText: 'Compiti raggruppati per stato e priorità',
     createInstructions: 'Inizia un nuovo progetto.',
     createProject: 'Crea Progetto',
@@ -241,25 +274,20 @@ export default {
     deadlineIn_other: 'Deadline in {{count}} giorni',
     deadlineIn_zero: 'Deadline oggi',
     defaultName: 'Nuovo progetto',
-    deleteDesc: 'Stai per cancellare il progetto "{{project}}".',
-    deleteManyTitle: 'Sei sicuro di voler eliminare i progetti selezionati?',
-    deleteTitle: 'Sei sicuro di voler eliminare il progetto?',
-    deleteWarn: 'Tutti i compiti correlati andranno persi per sempre.',
+    deleteManyDialog: {
+      title: 'Sei sicuro di voler eliminare i progetti selezionati?'
+    },
     descriptionPlaceholder:
       'Facoltativo, breve testo descrittivo del progetto.',
-    editEmployee: 'Modifica impiego e permessi.',
     emptyTable: {
       line1: 'Non hai ancora creato alcun progetto.',
       line2: 'Inizia creando il tuo primo progetto.',
       title: 'Ancora nessun progetto'
     },
-    leave: 'Abbandona',
     namePlaceholder: 'Nome del progetto',
     newProject: 'Nuovo progetto',
     projectDescription: 'Descrizione del progetto'
   },
-  remove: 'Rimuovi',
-  reset: 'Reset',
   role: 'Ruolo',
   roles: {
     designer: 'Designer',
@@ -267,18 +295,12 @@ export default {
     guest: 'Ospite',
     manager: 'Project Manager'
   },
-  save: 'Salva',
-  search: 'Cerca',
-  select: 'Seleziona',
-  send: 'Invia',
   settings: 'Impostazioni',
-  show: 'Mostra',
   sidebar: {
     mobile: 'Visualizza la sidebar mobile.',
     sidebar: 'Sidebar',
     toggle: 'Attiva/disattiva Sidebar'
   },
-  submit: 'Invia',
   table: {
     Asc: 'Asc',
     asc: 'asc',
@@ -311,9 +333,6 @@ export default {
     createInstructions: 'Aggiungi un nuovo compito per questo progetto.',
     createTask: 'Crea Compito',
     defaultName: 'Nuovo compito',
-    deleteDesc: 'Stai per cancellare il compito "{{task}}".',
-    deleteManyTitle: 'Sei sicuro di voler eliminare i compiti selezionati?',
-    deleteTitle: 'Sei sicuro di voler eliminare questo compito?',
     descriptionPlaceholder:
       "Facoltativo, breve testo descrittivo dell'attività.",
     emptyTable: {
@@ -369,35 +388,17 @@ export default {
       canEditTeam: 'modifica'
     }
   },
-  // teams: {
-  //   addMembers: {
-  //     description:
-  //       'Cerca e aggiungi nuovi utenti per nome o indirizzo email.',
-  //     instructions:
-  //       'Cerca un utente, poi clicca sul suo nome per selezionarlo.',
-  //     nameOrEmail: 'Nome o email',
-  //     title: 'Aggiungi nuovi membri al team'
-  //   },
-  //   descriptionPlaceholder:
-  //     'Facoltativo, breve testo descrittivo del team.',
-  //   leave: 'Abbandona',
-  // },
   teams: {
     actions: 'Azioni del team "{{team}}"',
     createDesc: 'Inserisci il nome del team per creare un nuovo team.',
     createTeam: 'Crea Team',
     createTitle: 'Nuovo team',
     defaultName: 'Nuovo team',
-    deleteDesc: 'Stai per cancellare il team "{{team}}".',
-    deleteTitle: 'Sei sicuro di voler eliminare il team?',
-    deleteWarn:
-      'Tutte le risorse correlate (progetti, compiti...) andranno perse per sempre.',
-    emptyDesc1: 'Non hai ancora creato alcun team.',
-    emptyDesc2: 'Inizia creando il tuo primo team.',
-    emptyTitle: 'Ancora nessun team',
-    leave: 'Abbandona',
-    leaveDesc: 'Stai per lasciare il team "{{team}}".',
-    leaveTitle: 'Sei sicuro di voler abbandonare il team?',
+    empty: {
+      line1: 'Non hai ancora creato alcun team.',
+      line2: 'Inizia creando il tuo primo team.',
+      title: 'Ancora nessun team'
+    },
     members: {
       actions: 'Azioni del membro "{{member}}"',
       add: {
@@ -407,10 +408,6 @@ export default {
           'Cerca un utente, poi clicca sul suo nome per selezionarlo.',
         nameOrEmail: 'Nome o email',
         title: 'Aggiungi nuovi membri al team'
-      },
-      delete: {
-        description: 'Stai per rimuovere "{{member}}" dal team.',
-        title: 'Sei sicuro di voler rimuovere il membro del team?'
       }
     },
     namePlaceholder: 'Nome del team',

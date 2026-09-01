@@ -28,10 +28,7 @@ export default function ConfirmPassword() {
               placeholder={false}
             />
 
-            <Submit
-              label={t(($) => $.submit)}
-              loading={loading}
-            />
+            <Submit loading={loading} />
           </>
         )}
       </Form>

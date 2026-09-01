@@ -25,7 +25,7 @@ export default function FlashNotifications() {
       position="bottom-center"
       theme={theme}
       toastOptions={{
-        closeButtonAriaLabel: t(($) => $.close)
+        closeButtonAriaLabel: t(($) => $.actions.close)
       }}
       // duration={500000}
       // richColors={true}

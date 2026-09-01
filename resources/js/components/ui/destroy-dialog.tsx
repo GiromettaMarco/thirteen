@@ -64,12 +64,12 @@ export function DestroyDialog({
               <DialogFooter className="items-center">
                 <DialogClose asChild>
                   <Button variant="secondary">
-                    {labels?.cancel ?? t(($) => $.cancel)}
+                    {labels?.cancel ?? t(($) => $.actions.cancel)}
                   </Button>
                 </DialogClose>
 
                 <Submit
-                  label={labels?.delete ?? t(($) => $.delete)}
+                  label={labels?.delete ?? t(($) => $.actions.delete)}
                   loading={loading}
                   variant="destructive"
                 />

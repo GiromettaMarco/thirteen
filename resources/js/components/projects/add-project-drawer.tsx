@@ -30,7 +30,7 @@ export function AddProjectDrawerTrigger(props: ComponentProps<typeof Button>) {
       size="sm"
       {...props}
     >
-      {t(($) => $.add)}
+      {t(($) => $.actions.add)}
       <Plus />
     </Button>
   )
@@ -96,13 +96,10 @@ export function AddProjectDrawer({ teamId }: { teamId: number }) {
               </div>
 
               <DrawerFooter>
-                <Submit
-                  label={t(($) => $.submit)}
-                  loading={loading}
-                />
+                <Submit loading={loading} />
 
                 <DrawerClose asChild>
-                  <Button variant="outline">{t(($) => $.close)}</Button>
+                  <Button variant="outline">{t(($) => $.actions.close)}</Button>
                 </DrawerClose>
               </DrawerFooter>
             </>

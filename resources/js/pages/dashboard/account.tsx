@@ -92,17 +92,17 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
               id="open-delete-sessions-dialog"
               variant="destructive"
             >
-              {t(($) => $.pages.dashboard.account.sessions.dialog.trigger)}
+              {t(($) => $.dialogs.deleteSessions.trigger)}
             </Button>
           </DialogTrigger>
 
           <DialogContent>
             <DialogTitle>
-              {t(($) => $.pages.dashboard.account.sessions.dialog.title)}
+              {t(($) => $.dialogs.deleteSessions.title)}
             </DialogTitle>
 
             <DialogDescription>
-              {t(($) => $.pages.dashboard.account.sessions.dialog.description)}
+              {t(($) => $.dialogs.deleteSessions.description)}
             </DialogDescription>
 
             <Form
@@ -120,11 +120,13 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
 
                   <DialogFooter className="items-center">
                     <DialogClose asChild>
-                      <Button variant="secondary">{t(($) => $.cancel)}</Button>
+                      <Button variant="secondary">
+                        {t(($) => $.actions.cancel)}
+                      </Button>
                     </DialogClose>
 
                     <Submit
-                      label={t(($) => $.delete)}
+                      label={t(($) => $.actions.delete)}
                       loading={loading}
                       variant="destructive"
                     />
@@ -168,7 +170,7 @@ function UpdateEmail({ email }: { email: string }) {
 
             <Submit
               className="w-36"
-              label={t(($) => $.save)}
+              label={t(($) => $.actions.save)}
               loading={loading}
             />
           </>
@@ -256,16 +258,14 @@ function DeleteAccount() {
             id="open-delete-account-dialog"
             variant="destructive"
           >
-            {t(($) => $.pages.dashboard.account.delete.dialog.trigger)}
+            {t(($) => $.dialogs.deleteAccount.trigger)}
           </Button>
         </DialogTrigger>
         <DialogContent>
-          <DialogTitle>
-            {t(($) => $.pages.dashboard.account.delete.dialog.title)}
-          </DialogTitle>
+          <DialogTitle>{t(($) => $.dialogs.deleteAccount.title)}</DialogTitle>
 
           <DialogDescription>
-            {t(($) => $.pages.dashboard.account.delete.dialog.description)}
+            {t(($) => $.dialogs.deleteAccount.description)}
           </DialogDescription>
 
           <Form
@@ -282,11 +282,13 @@ function DeleteAccount() {
 
                 <DialogFooter className="items-center">
                   <DialogClose asChild>
-                    <Button variant="secondary">{t(($) => $.cancel)}</Button>
+                    <Button variant="secondary">
+                      {t(($) => $.actions.cancel)}
+                    </Button>
                   </DialogClose>
 
                   <Submit
-                    label={t(($) => $.delete)}
+                    label={t(($) => $.actions.delete)}
                     loading={loading}
                     variant="destructive"
                   />

@@ -21,14 +21,14 @@ export function RemoveMemberDialog({
 
   return (
     <DestroyDialog
-      description={t(($) => $.teams.members.delete.description, {
+      description={t(($) => $.dialogs.removeMember.description, {
         member: member.name
       })}
-      labels={{ delete: t(($) => $.remove) }}
+      labels={{ delete: t(($) => $.actions.remove) }}
       open={open}
       route={destroy({ profile: member.id, team })}
       setOpen={setOpen}
-      title={t(($) => $.teams.members.delete.title)}
+      title={t(($) => $.dialogs.removeMember.title)}
     />
   )
 }
@@ -47,12 +47,14 @@ export function LeaveTeamDialog({
 
   return (
     <DestroyDialog
-      description={t(($) => $.teams.leaveDesc, { team: team.name })}
-      labels={{ delete: t(($) => $.teams.leave) }}
+      description={t(($) => $.dialogs.leaveTeam.description, {
+        team: team.name
+      })}
+      labels={{ delete: t(($) => $.actions.leave) }}
       open={open}
       route={leave({ team })}
       setOpen={setOpen}
-      title={t(($) => $.teams.leaveTitle)}
+      title={t(($) => $.dialogs.leaveTeam.title)}
     />
   )
 }

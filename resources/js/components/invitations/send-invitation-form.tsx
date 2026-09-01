@@ -84,7 +84,7 @@ export function SendInvitationForm({ teams }: { teams: Team[] }) {
 
           <Submit
             className="mt-4 w-36"
-            label={t(($) => $.send)}
+            label={t(($) => $.actions.send)}
             loading={loading}
           />
         </>

@@ -1,6 +1,21 @@
 export default {
   account: 'Account',
-  add: 'Add',
+  actions: {
+    add: 'Add',
+    cancel: 'Cancel',
+    close: 'Close',
+    delete: 'Delete',
+    edit: 'Edit',
+    leave: 'Leave',
+    remove: 'Remove',
+    reset: 'Reset',
+    save: 'Save',
+    search: 'Search',
+    select: 'Select',
+    send: 'Send',
+    show: 'Show',
+    submit: 'Submit'
+  },
   appearance: {
     appearance: 'Appearance',
     change: 'Change appearance',
@@ -26,20 +41,54 @@ export default {
     signIn: 'Sign In',
     signOut: 'Sign Out'
   },
-  cancel: 'Cancel',
-  close: 'Close',
   dashboard: 'Dashboard',
   date: 'Date',
   dateCreated: 'Date created',
   dateModified: 'Date modified',
-  delete: 'Delete',
-  deleteMany: 'You are about to delete the following items:',
   description: 'Description',
-  edit: 'Edit',
+  dialogs: {
+    deleteAccount: {
+      description:
+        'Once your account is deleted, all of its resources and data will also be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.',
+      title: 'Are you sure you want to delete your account?',
+      trigger: 'Delete account'
+    },
+    deleteMany: {
+      description: 'You are about to delete the following items:'
+    },
+    deleteManyTasks: {
+      title: 'Are you sure you want to delete the selected tasks?'
+    },
+    deleteProject: {
+      description: 'You are about to delete the "{{project}}" project.',
+      title: 'Are you sure you want to delete the project?',
+      warn: 'Any related task will be lost forever.'
+    },
+    deleteSessions: {
+      description:
+        'Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.',
+      title: 'Delete other browser sessions?',
+      trigger: 'Log Out Other Browser Sessions'
+    },
+    deleteTask: {
+      description: 'You are about to delete the "{{task}}" task.',
+      title: 'Are you sure you want to delete the task?'
+    },
+    deleteTeam: {
+      description: 'You are about to delete the "{{team}}" team.',
+      title: 'Are you sure you want to delete the team?',
+      warn: 'Any related resource (projects, tasks...) will be lost forever.'
+    },
+    leaveTeam: {
+      description: 'You are about to leave the team "{{team}}".',
+      title: 'Are you sure you want to leave the team?'
+    },
+    removeMember: {
+      description: 'You are about to remove "{{member}}" from the team.',
+      title: 'Are you sure you want to remove the team member?'
+    }
+  },
   emailAddress: 'Email address',
-  employee_one: 'Employee',
-  employee_other: 'Employees',
-  employment: 'Employment',
   fullName: 'Full name',
   help: 'Get Help',
   homepage: 'Homepage',
@@ -112,12 +161,6 @@ export default {
     dashboard: {
       account: {
         delete: {
-          dialog: {
-            description:
-              'Once your account is deleted, all of its resources and data will also be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.',
-            title: 'Are you sure you want to delete your account?',
-            trigger: 'Delete account'
-          },
           h2: 'Delete account',
           info: 'Please proceed with caution, this cannot be undone.',
           p: 'Delete your account and all of its resources'
@@ -133,12 +176,6 @@ export default {
           submit: 'Change password'
         },
         sessions: {
-          dialog: {
-            description:
-              'Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.',
-            title: 'Delete other browser sessions?',
-            trigger: 'Log Out Other Browser Sessions'
-          },
           h2: 'Browser Sessions',
           info: 'If necessary, you may log out of all of your other browser sessions across all of your devices. This list may not be exhaustive. If you feel your account has been compromised, you should also update your password.',
           lastActive: 'Last active',
@@ -168,9 +205,10 @@ export default {
         title: 'Invitations'
       },
       profile: {
-        drawerDescription:
-          'Set your display name, role and profile visibility.',
-        drawerTitle: 'Update your profile',
+        drawer: {
+          description: 'Set your display name, role and profile visibility.',
+          title: 'Update your profile'
+        },
         info: 'By setting your profile as public, you allow other users to discover and read your profile information.',
         public: 'Public profile',
         title: '{{name}} profile'
@@ -228,10 +266,6 @@ export default {
   project_one: 'Project',
   project_other: 'Projects',
   projects: {
-    addEmployees: {
-      description: 'Assign a team member to the project.',
-      title: 'Add new team employees'
-    },
     chartText: 'Tasks grouped by status and priority',
     createInstructions: 'Start a new project.',
     createProject: 'Create Project',
@@ -243,24 +277,19 @@ export default {
     deadlineIn_other: 'Deadline in {{count}} days',
     deadlineIn_zero: 'Deadline today',
     defaultName: 'New project',
-    deleteDesc: 'You are about to delete the "{{project}}" project.',
-    deleteManyTitle: 'Are you sure you want to delete the selected projects?',
-    deleteTitle: 'Are you sure you want to delete the project?',
-    deleteWarn: 'Any related task will be lost forever.',
+    deleteManyDialog: {
+      title: 'Are you sure you want to delete the selected projects?'
+    },
     descriptionPlaceholder: 'Optional, short text describing the project.',
-    editEmployee: 'Edit employment and permissions.',
     emptyTable: {
       line1: "You haven't created any project yet.",
       line2: 'Get started by creating your first project.',
       title: 'No Projects yet'
     },
-    leave: 'Leave',
     namePlaceholder: 'Project name',
     newProject: 'New project',
     projectDescription: 'Project description'
   },
-  remove: 'Remove',
-  reset: 'Reset',
   role: 'Role',
   roles: {
     designer: 'Designer',
@@ -268,18 +297,12 @@ export default {
     guest: 'Guest',
     manager: 'Project Manager'
   },
-  save: 'Save',
-  search: 'Search',
-  select: 'Select',
-  send: 'Send',
   settings: 'Settings',
-  show: 'Show',
   sidebar: {
     mobile: 'Displays the mobile sidebar.',
     sidebar: 'Sidebar',
     toggle: 'Toggle Sidebar'
   },
-  submit: 'Submit',
   table: {
     Asc: 'Asc',
     asc: 'asc',
@@ -312,9 +335,6 @@ export default {
     createInstructions: 'Add a new task for this project.',
     createTask: 'Create Task',
     defaultName: 'New task',
-    deleteDesc: 'You are about to delete the "{{task}}" task.',
-    deleteManyTitle: 'Are you sure you want to delete the selected tasks?',
-    deleteTitle: 'Are you sure you want to delete the task?',
     descriptionPlaceholder: 'Optional, short text describing the task.',
     emptyTable: {
       line1: "You haven't created any task yet.",
@@ -375,16 +395,11 @@ export default {
     createTeam: 'Create Team',
     createTitle: 'New team',
     defaultName: 'New team',
-    deleteDesc: 'You are about to delete the "{{team}}" team.',
-    deleteTitle: 'Are you sure you want to delete the team?',
-    deleteWarn:
-      'Any related resource (projects, tasks...) will be lost forever.',
-    emptyDesc1: "You haven't created any team yet.",
-    emptyDesc2: 'Get started by creating your first team.',
-    emptyTitle: 'No Teams yet',
-    leave: 'Leave',
-    leaveDesc: 'You are about to leave the team "{{team}}".',
-    leaveTitle: 'Are you sure you want to leave the team?',
+    empty: {
+      line1: "You haven't created any team yet.",
+      line2: 'Get started by creating your first team.',
+      title: 'No Teams yet'
+    },
     members: {
       actions: 'Member "{{member}}" actions',
       add: {
@@ -392,10 +407,6 @@ export default {
         instructions: 'Search for a user, then click on its name to select it.',
         nameOrEmail: 'Name or email',
         title: 'Add new team members'
-      },
-      delete: {
-        description: 'You are about to remove "{{member}}" from the team.',
-        title: 'Are you sure you want to remove the team member?'
       }
     },
     namePlaceholder: 'Team name',

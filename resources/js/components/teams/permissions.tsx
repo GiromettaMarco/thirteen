@@ -157,7 +157,7 @@ export function EditTeamPermissions({
 
           <Submit
             className="w-36"
-            label={t(($) => $.save)}
+            label={t(($) => $.actions.save)}
             loading={loading}
             size="sm"
           />

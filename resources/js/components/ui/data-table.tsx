@@ -646,7 +646,7 @@ export function SortableColumnHeader<TData, TValue>({
 
           <DropdownMenuItem onClick={() => column.clearSorting()}>
             <X className="h-3.5 w-3.5 text-muted-foreground/70" />
-            {t(($) => $.reset)}
+            {t(($) => $.actions.reset)}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -830,7 +830,7 @@ export function TableToolbar<TData>({
               onClick={() => table.resetColumnFilters()}
               variant="ghost"
             >
-              {t(($) => $.reset)}
+              {t(($) => $.actions.reset)}
               <X />
             </Button>
           )}

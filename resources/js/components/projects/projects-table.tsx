@@ -70,14 +70,14 @@ export function Actions({
     return (
       <>
         <DestroyDialog
-          description={t(($) => $.projects.deleteDesc, {
+          description={t(($) => $.dialogs.deleteProject.description, {
             project: project.name
           })}
           open={deleteOpen}
           route={destroy({ project, team: project.team_id })}
           setOpen={setDeleteOpen}
-          title={t(($) => $.projects.deleteTitle)}
-          warning={t(($) => $.projects.deleteWarn)}
+          title={t(($) => $.dialogs.deleteProject.title)}
+          warning={t(($) => $.dialogs.deleteProject.warn)}
         />
 
         <DropdownMenu>
@@ -102,7 +102,7 @@ export function Actions({
                 setUpdateProjectOpen(true)
               }}
             >
-              {t(($) => $.edit)}
+              {t(($) => $.actions.edit)}
             </DropdownMenuItem>
 
             <DropdownMenuSeparator />
@@ -111,7 +111,7 @@ export function Actions({
               onClick={() => setDeleteOpen(true)}
               variant="destructive"
             >
-              {t(($) => $.delete)}
+              {t(($) => $.actions.delete)}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -347,7 +347,7 @@ export function ProjectsTable({
                   <DestroyMany
                     route={destroyMany({ team: teamId })}
                     table={table}
-                    title={t(($) => $.projects.deleteManyTitle)}
+                    title={t(($) => $.projects.deleteManyDialog.title)}
                   />
                 </>
               )}

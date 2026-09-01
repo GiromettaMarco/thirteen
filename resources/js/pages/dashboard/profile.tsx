@@ -64,10 +64,10 @@ function UpdateProfileDrawer({ profile }: { profile: Profile }) {
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>
-            {t(($) => $.pages.dashboard.profile.drawerTitle)}
+            {t(($) => $.pages.dashboard.profile.drawer.title)}
           </DrawerTitle>
           <DrawerDescription>
-            {t(($) => $.pages.dashboard.profile.drawerDescription)}
+            {t(($) => $.pages.dashboard.profile.drawer.description)}
           </DrawerDescription>
         </DrawerHeader>
 
@@ -108,12 +108,12 @@ function UpdateProfileDrawer({ profile }: { profile: Profile }) {
 
               <DrawerFooter>
                 <Submit
-                  label={t(($) => $.save)}
+                  label={t(($) => $.actions.save)}
                   loading={loading}
                 />
 
                 <DrawerClose asChild>
-                  <Button variant="outline">{t(($) => $.close)}</Button>
+                  <Button variant="outline">{t(($) => $.actions.close)}</Button>
                 </DrawerClose>
               </DrawerFooter>
             </>
