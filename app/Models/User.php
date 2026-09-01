@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\UserDeleting;
 use App\Notifications\Invitation as InvitationNotification;
 use App\Notifications\ResetPassword as ResetPasswordNotification;
 use App\Notifications\VerifyEmail as VerifyEmailNotification;
@@ -49,6 +50,13 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * The event map for the model.
+     */
+    protected $dispatchesEvents = [
+        'deleting' => UserDeleting::class,
+    ];
 
     /**
      * Send the email verification notification.
