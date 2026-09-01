@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\ProjectDeleting;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,14 +21,12 @@ class Project extends Model
         'archived' => false,
     ];
 
-    // /**
-    //  * The event map for the model.
-    //  *
-    //  * @var array<string, string>
-    //  */
-    // protected $dispatchesEvents = [
-    //     'deleting' => ProjectDeleting::class,
-    // ];
+    /**
+     * The event map for the model.
+     */
+    protected $dispatchesEvents = [
+        'deleting' => ProjectDeleting::class,
+    ];
 
     /**
      * One to Many (inverse) relationship.
