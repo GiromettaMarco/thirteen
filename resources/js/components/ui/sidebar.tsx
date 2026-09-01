@@ -178,6 +178,7 @@ function Sidebar({
       >
         <SheetContent
           className="w-(--sidebar-width) bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+          close={t(($) => $.actions.close)}
           data-mobile="true"
           data-sidebar="sidebar"
           data-slot="sidebar"
@@ -272,11 +273,13 @@ function SidebarTrigger({
 }
 
 function SidebarRail({ className, ...props }: React.ComponentProps<'button'>) {
+  const { t } = useTranslation()
+
   const { toggleSidebar } = useSidebar()
 
   return (
     <button
-      aria-label="Toggle Sidebar"
+      aria-label={t(($) => $.sidebar.toggle)}
       className={cn(
         'absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:left-1/2 after:w-0.5 hover:after:bg-sidebar-border sm:flex',
         'in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize',
@@ -290,7 +293,7 @@ function SidebarRail({ className, ...props }: React.ComponentProps<'button'>) {
       data-slot="sidebar-rail"
       onClick={toggleSidebar}
       tabIndex={-1}
-      title="Toggle Sidebar"
+      title={t(($) => $.sidebar.toggle)}
       {...props}
     />
   )

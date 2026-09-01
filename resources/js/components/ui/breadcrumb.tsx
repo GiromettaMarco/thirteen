@@ -3,10 +3,13 @@ import { ChevronRight, MoreHorizontal } from 'lucide-react'
 import { Slot as SlotPrimitive } from 'radix-ui'
 import * as React from 'react'
 
-function Breadcrumb({ ...props }: React.ComponentProps<'nav'>) {
+function Breadcrumb({
+  'aria-label': ariaLabel = 'breadcrumb',
+  ...props
+}: React.ComponentProps<'nav'>) {
   return (
     <nav
-      aria-label="breadcrumb"
+      aria-label={ariaLabel}
       data-slot="breadcrumb"
       {...props}
     />

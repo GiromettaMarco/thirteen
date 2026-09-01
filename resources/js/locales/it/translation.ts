@@ -17,13 +17,11 @@ export default {
     submit: 'Invia'
   },
   appearance: {
-    appearance: 'Aspetto',
     change: 'Cambia aspetto',
     dark: 'Scuro',
     light: 'Chiaro',
     select: 'Select appearance',
-    system: 'Sistema',
-    theme: 'Tema'
+    system: 'Sistema'
   },
   auth: {
     confirmPassword: 'Conferma password',
@@ -41,6 +39,7 @@ export default {
     signIn: 'Accedi',
     signOut: 'Esci'
   },
+  breadcrumb: 'breadcrumb',
   dashboard: 'Dashboard',
   date: 'Data',
   dateCreated: 'Date creazione',
@@ -53,7 +52,9 @@ export default {
       title: 'Sei sicuro di voler eliminare il tuo account?',
       trigger: 'Elimina account'
     },
-    deleteMany: { description: 'Stai per cancellare i seguenti elementi:' },
+    deleteMany: {
+      description: 'Stai per cancellare i seguenti elementi:'
+    },
     deleteManyTasks: {
       title: 'Sei sicuro di voler eliminare i compiti selezionati?'
     },
@@ -94,15 +95,11 @@ export default {
   invitation_other: 'Inviti',
   language: {
     change: 'Cambia lingua',
-    language: 'Lingua',
     select: 'Seleziona lingua',
     system: 'Sistema'
   },
   loading: 'Caricamento...',
-  logout: 'Log out',
   management: 'Gestione',
-  manager: 'Manager',
-  manageTeams: 'Gestisci i Team',
   member_one: 'Membro',
   member_other: 'Membri',
   more: 'Altro',
@@ -171,17 +168,18 @@ export default {
         },
         password: {
           h2: 'Aggiorna la password',
-          p: 'Cambia la password del tuo account',
           submit: 'Cambia password'
         },
         sessions: {
           h2: 'Sessioni del Browser',
           info: 'Se necessario, puoi disconnetterti da tutte le altre sessioni del browser su tutti i tuoi dispositivi. Questo elenco potrebbe non essere esaustivo. Se ritieni che il tuo account sia stato compromesso, dovresti anche aggiornare la password.',
-          lastActive: 'Ultima attività',
           p: 'Gestisci e disconnetti le tue sessioni attive su altri browser e dispositivi.',
           thisDevice: 'Questo dispositivo'
         },
         title: 'Account'
+      },
+      index: {
+        title: 'Dashboard'
       },
       invitations: {
         first: 'Primo invito',
@@ -285,8 +283,7 @@ export default {
       title: 'Ancora nessun progetto'
     },
     namePlaceholder: 'Nome del progetto',
-    newProject: 'Nuovo progetto',
-    projectDescription: 'Descrizione del progetto'
+    newProject: 'Nuovo progetto'
   },
   role: 'Ruolo',
   roles: {
@@ -340,7 +337,6 @@ export default {
       line2: 'Inizia creando il tuo primo compito.',
       title: 'Ancora nessun compito'
     },
-    filterTasks: 'Filtra compiti...',
     label: 'Etichetta',
     labels: {
       bug: 'Bug',
@@ -359,7 +355,6 @@ export default {
     selectLabel: 'Seleziona una etichetta',
     selectPriority: 'Seleziona una priorità',
     selectStatus: 'Seleziona uno stato',
-    selectUser: 'Seleziona un membro del team',
     status: 'Stato',
     statuses: {
       backlog: 'Backlog',
@@ -367,8 +362,7 @@ export default {
       done: 'Fatto',
       inProgress: 'In Corso',
       todo: 'Da Fare'
-    },
-    taskDescription: 'Descrizione del compito'
+    }
   },
   team_one: 'Team',
   team_other: 'Teams',
@@ -404,8 +398,6 @@ export default {
       add: {
         description:
           'Cerca e aggiungi nuovi utenti per nome o indirizzo email.',
-        instructions:
-          'Cerca un utente, poi clicca sul suo nome per selezionarlo.',
         nameOrEmail: 'Nome o email',
         title: 'Aggiungi nuovi membri al team'
       }

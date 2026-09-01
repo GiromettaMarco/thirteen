@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react'
 import { Fragment, type ComponentProps } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -16,16 +17,22 @@ export interface BreadcrumbLink {
 }
 
 export function Breadcrumbs({
+  'aria-label': ariaLabel,
   links,
   ...props
 }: ComponentProps<'nav'> & { links: BreadcrumbLink[] }) {
+  const { t } = useTranslation()
+
   // Render nothing if empty
   if (!links) {
     return null
   }
 
   return (
-    <Breadcrumb {...props}>
+    <Breadcrumb
+      aria-label={ariaLabel ?? t(($) => $.breadcrumb)}
+      {...props}
+    >
       <BreadcrumbList>
         {links.map((item, index) => {
           // Omit separator at the end

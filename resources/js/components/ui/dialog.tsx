@@ -2,6 +2,7 @@ import { cn } from '@gmcode/react-ui'
 import { XIcon } from 'lucide-react'
 import { Dialog as DialogPrimitive } from 'radix-ui'
 import * as React from 'react'
+import { useTranslation } from 'react-i18next'
 
 function Dialog({
   ...props
@@ -71,6 +72,8 @@ function DialogContent({
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
   showCloseButton?: boolean
 }) {
+  const { t } = useTranslation()
+
   return (
     <DialogPortal data-slot="dialog-portal">
       <DialogOverlay />
@@ -89,7 +92,7 @@ function DialogContent({
             data-slot="dialog-close"
           >
             <XIcon />
-            <span className="sr-only">Close</span>
+            <span className="sr-only">{t(($) => $.actions.close)}</span>
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Content>

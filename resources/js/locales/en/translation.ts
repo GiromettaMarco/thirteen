@@ -17,13 +17,11 @@ export default {
     submit: 'Submit'
   },
   appearance: {
-    appearance: 'Appearance',
     change: 'Change appearance',
     dark: 'Dark',
     light: 'Light',
     select: 'Select appearance',
-    system: 'System',
-    theme: 'Theme'
+    system: 'System'
   },
   auth: {
     confirmPassword: 'Confirm password',
@@ -41,6 +39,7 @@ export default {
     signIn: 'Sign In',
     signOut: 'Sign Out'
   },
+  breadcrumb: 'breadcrumb',
   dashboard: 'Dashboard',
   date: 'Date',
   dateCreated: 'Date created',
@@ -96,14 +95,11 @@ export default {
   invitation_other: 'Invitations',
   language: {
     change: 'Change language',
-    language: 'Language',
     select: 'Select language',
     system: 'System'
   },
   loading: 'Loading...',
   management: 'Management',
-  manager: 'Manager',
-  manageTeams: 'Manage Teams',
   member_one: 'Member',
   member_other: 'Members',
   more: 'More',
@@ -172,13 +168,11 @@ export default {
         },
         password: {
           h2: 'Update password',
-          p: 'Change the password of your account',
           submit: 'Change password'
         },
         sessions: {
           h2: 'Browser Sessions',
           info: 'If necessary, you may log out of all of your other browser sessions across all of your devices. This list may not be exhaustive. If you feel your account has been compromised, you should also update your password.',
-          lastActive: 'Last active',
           p: 'Manage and log out your active sessions on other browsers and devices.',
           thisDevice: 'This device'
         },
@@ -287,8 +281,7 @@ export default {
       title: 'No Projects yet'
     },
     namePlaceholder: 'Project name',
-    newProject: 'New project',
-    projectDescription: 'Project description'
+    newProject: 'New project'
   },
   role: 'Role',
   roles: {
@@ -341,7 +334,6 @@ export default {
       line2: 'Get started by creating your first task.',
       title: 'No Tasks yet'
     },
-    filterTasks: 'Filter tasks...',
     label: 'Label',
     labels: {
       bug: 'Bug',
@@ -360,7 +352,6 @@ export default {
     selectLabel: 'Select a label',
     selectPriority: 'Select a priority',
     selectStatus: 'Select a status',
-    selectUser: 'Select a team member',
     status: 'Status',
     statuses: {
       backlog: 'Backlog',
@@ -368,8 +359,7 @@ export default {
       done: 'Done',
       inProgress: 'In Progress',
       todo: 'To Do'
-    },
-    taskDescription: 'Task description'
+    }
   },
   team_one: 'Team',
   team_other: 'Teams',
@@ -404,7 +394,6 @@ export default {
       actions: 'Member "{{member}}" actions',
       add: {
         description: 'Search and add users by name or email address.',
-        instructions: 'Search for a user, then click on its name to select it.',
         nameOrEmail: 'Name or email',
         title: 'Add new team members'
       }
