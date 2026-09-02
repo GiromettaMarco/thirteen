@@ -73,6 +73,8 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 
+// @NOTE 'use no memo' is required due to incompatibility between Tanstack and React Compiler.
+
 //#region SelectionMonitor
 export function SelectionMonitor<TData>({
   className,
@@ -81,10 +83,6 @@ export function SelectionMonitor<TData>({
   className?: string
   table: TanstackTable<TData>
 }) {
-  // @NOTE prevent this function from being optimized by React Compiler.
-  // @see https://github.com/TanStack/table/issues/5567
-  // @see https://github.com/TanStack/table/discussions/5834
-  // @see https://github.com/TanStack/table/discussions/5595
   'use no memo'
 
   // i18n
@@ -146,10 +144,6 @@ export function TablePagination<TData>({
   className?: string
   table: TanstackTable<TData>
 }) {
-  // @NOTE prevent this function from being optimized by React Compiler.
-  // @see https://github.com/TanStack/table/issues/5567
-  // @see https://github.com/TanStack/table/discussions/5834
-  // @see https://github.com/TanStack/table/discussions/5595
   'use no memo'
 
   // i18n
@@ -265,10 +259,6 @@ export function AfterTable<TData>({
   sortingState?: SortingState
   table: TanstackTable<TData>
 }) {
-  // @NOTE prevent this function from being optimized by React Compiler.
-  // @see https://github.com/TanStack/table/issues/5567
-  // @see https://github.com/TanStack/table/discussions/5834
-  // @see https://github.com/TanStack/table/discussions/5595
   'use no memo'
 
   // No pagination
@@ -349,10 +339,6 @@ export function ColumnsVisibility<TData>({
   labels?: Record<string, string>
   table: TanstackTable<TData>
 }) {
-  // @NOTE prevent this function from being optimized by React Compiler.
-  // @see https://github.com/TanStack/table/issues/5567
-  // @see https://github.com/TanStack/table/discussions/5834
-  // @see https://github.com/TanStack/table/discussions/5595
   'use no memo'
 
   // i18n
@@ -513,7 +499,7 @@ export function FacetedFilter<TData, TValue>({
                             : 'opacity-50 [&_svg]:invisible'
                         )}
                       >
-                        <Check />
+                        <Check className="text-primary-foreground" />
                       </div>
 
                       {option.icon && (
@@ -583,10 +569,6 @@ export function SortableColumnHeader<TData, TValue>({
   title: string
   tooltip?: string
 }) {
-  // @NOTE prevent this function from being optimized by React Compiler.
-  // @see https://github.com/TanStack/table/issues/5567
-  // @see https://github.com/TanStack/table/discussions/5834
-  // @see https://github.com/TanStack/table/discussions/5595
   'use no memo'
 
   // i18n
@@ -660,10 +642,6 @@ export default function TableMain<TData>({
 }: {
   table: TanstackTable<TData>
 }) {
-  // @NOTE prevent this function from being optimized by React Compiler.
-  // @see https://github.com/TanStack/table/issues/5567
-  // @see https://github.com/TanStack/table/discussions/5834
-  // @see https://github.com/TanStack/table/discussions/5595
   'use no memo'
 
   // i18n
@@ -727,10 +705,6 @@ export function SelectHeader<T extends object>({
 }: {
   table: TanstackTable<T>
 }) {
-  // @NOTE prevent this function from being optimized by React Compiler.
-  // @see https://github.com/TanStack/table/issues/5567
-  // @see https://github.com/TanStack/table/discussions/5834
-  // @see https://github.com/TanStack/table/discussions/5595
   'use no memo'
 
   // i18n
@@ -750,10 +724,6 @@ export function SelectHeader<T extends object>({
 }
 
 export function SelectCell<T extends object>({ row }: { row: Row<T> }) {
-  // @NOTE prevent this function from being optimized by React Compiler.
-  // @see https://github.com/TanStack/table/issues/5567
-  // @see https://github.com/TanStack/table/discussions/5834
-  // @see https://github.com/TanStack/table/discussions/5595
   'use no memo'
 
   // i18n
@@ -770,10 +740,6 @@ export function SelectCell<T extends object>({ row }: { row: Row<T> }) {
 }
 
 export function getSelectColDef<T extends object>() {
-  // @NOTE prevent this function from being optimized by React Compiler.
-  // @see https://github.com/TanStack/table/issues/5567
-  // @see https://github.com/TanStack/table/discussions/5834
-  // @see https://github.com/TanStack/table/discussions/5595
   'use no memo'
 
   return {
@@ -798,10 +764,6 @@ export function TableToolbar<TData>({
   columnId?: string
   table: TanstackTable<TData>
 }>) {
-  // @NOTE prevent this function from being optimized by React Compiler.
-  // @see https://github.com/TanStack/table/issues/5567
-  // @see https://github.com/TanStack/table/discussions/5834
-  // @see https://github.com/TanStack/table/discussions/5595
   'use no memo'
 
   // i18n

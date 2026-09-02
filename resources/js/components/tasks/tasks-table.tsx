@@ -144,6 +144,9 @@ export function Actions({
 
 //#region TableToolbar
 function TableToolbar<TData>({ table }: { table: Table<TData> }) {
+  // @NOTE 'use no memo' is required due to incompatibility between Tanstack and React Compiler.
+  'use no memo'
+
   // i18n
   const { t } = useTranslation()
 
