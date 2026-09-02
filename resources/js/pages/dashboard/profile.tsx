@@ -1,10 +1,12 @@
 import { FancyRadioField, Form, InfoCheckboxField, Submit } from '@gmcode/forms'
-import { Button } from '@gmcode/react-ui'
+import { Button, Separator } from '@gmcode/react-ui'
 import { Head } from '@inertiajs/react'
+import { differenceInCalendarDays } from 'date-fns'
 import { ChartNoAxesGantt, Code2, Handshake, Palette } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NameFieldPreset } from '@/components/auth/fields'
+import { EmailPill, ProfilePill, RolePill } from '@/components/profile-pill'
 import { Container } from '@/components/ui/container'
 import {
   Drawer,
@@ -15,8 +17,10 @@ import {
   DrawerHeader,
   DrawerTitle
 } from '@/components/ui/drawer'
+import { Format } from '@/components/ui/format'
 import { UpdateDrawerTrigger } from '@/components/update-drawer-trigger'
 import DashboardLayout from '@/layouts/dashboard-layout'
+import { format } from '@/lib/utils'
 import { update } from '@/routes/profile'
 import { updateProfileSchema } from '@/schemas/profile'
 import type { Profile } from '@/types'
@@ -123,23 +127,35 @@ function UpdateProfileDrawer({ profile }: { profile: Profile }) {
     </Drawer>
   )
 }
-//#endregion
 
 //#region Profile
 export default function Profile({
   canEdit,
-  profile
+  email,
+  profile,
+  tasksCount
 }: {
   canEdit: boolean
-  profile: Profile
+  email: string
+  profile: Profile & {
+    teams_count: number
+  }
+  tasksCount: {
+    done: number
+    inProgress: number
+    todo: number
+    total: number
+  }
 }) {
   // i18n
-  const { t } = useTranslation()
+  const { i18n, t } = useTranslation()
+
+  const joined = differenceInCalendarDays(new Date(), profile.created_at)
 
   return (
     <DashboardLayout
       button={canEdit ? <UpdateProfileDrawer profile={profile} /> : undefined}
-      title={t(($) => $.profile)}
+      title={profile.name}
     >
       <Head
         title={t(($) => $.pages.dashboard.profile.title, {
@@ -148,13 +164,70 @@ export default function Profile({
       />
 
       <Container className="grid gap-6">
-        <Button variant="outline">XXX</Button>
+        <Format
+          h2={t(($) => $.pages.dashboard.profile.user.title)}
+          p={t(($) => $.pages.dashboard.profile.user.description, {
+            name: profile.name
+          })}
+        >
+          <div className="flex flex-wrap gap-4">
+            <RolePill role={profile.role} />
+            <ProfilePill
+              description={t(($) => $.pages.dashboard.profile.joined, {
+                count: joined
+              })}
+              number={joined}
+              title={format(profile.created_at, i18n.language)}
+            />
+            <EmailPill email={email} />
+          </div>
+        </Format>
 
-        <p>{profile.name}</p>
-        <p>{profile.role}</p>
-        <p>{profile.public ? 'public' : 'private'}</p>
+        <Separator />
+
+        <Format
+          h2={t(($) => $.pages.dashboard.profile.activity.title)}
+          p={t(($) => $.pages.dashboard.profile.activity.description)}
+        >
+          <div className="flex flex-wrap gap-4">
+            <ProfilePill
+              description={t(($) => $.pages.dashboard.profile.teams, {
+                count: profile.teams_count
+              })}
+              number={profile.teams_count}
+              title={t(($) => $.team, { count: 2 })}
+            />
+            <ProfilePill
+              description={t(($) => $.pages.dashboard.profile.tasksTotal, {
+                count: tasksCount.total
+              })}
+              number={tasksCount.total}
+              title={t(($) => $.task, { count: 2 })}
+            />
+            <ProfilePill
+              description={t(($) => $.pages.dashboard.profile.tasksDone, {
+                count: tasksCount.done
+              })}
+              number={tasksCount.done}
+              title={t(($) => $.tasks.statuses.done)}
+            />
+            <ProfilePill
+              description={t(($) => $.pages.dashboard.profile.tasksInProgress, {
+                count: tasksCount.inProgress
+              })}
+              number={tasksCount.inProgress}
+              title={t(($) => $.tasks.statuses.inProgress)}
+            />
+            <ProfilePill
+              description={t(($) => $.pages.dashboard.profile.tasksTodo, {
+                count: tasksCount.todo
+              })}
+              number={tasksCount.todo}
+              title={t(($) => $.tasks.statuses.todo)}
+            />
+          </div>
+        </Format>
       </Container>
     </DashboardLayout>
   )
 }
-//#endregion

@@ -203,14 +203,34 @@ export default {
         title: 'Inviti'
       },
       profile: {
+        activity: {
+          description: "Dati relativi all'attività dell'utente.",
+          title: 'Attività'
+        },
         drawer: {
           description:
             'Imposta il nome visualizzato, il ruolo e la visibilità del profilo.',
           title: 'Aggiorna il tuo profilo'
         },
         info: 'Pubblicando il tuo profilo, consentirai agli altri utenti di trovare e leggere le informazioni in esso contenute.',
+        joined_one: 'Iscritto 1 giorno fa',
+        joined_other: 'Iscritto {{count}} giorni fa',
         public: 'Profilo pubblico',
-        title: 'Profilo di {{name}}'
+        tasksDone_one: 'Ha completato 1 compito',
+        tasksDone_other: 'Ha completato {{count}} compiti',
+        tasksInProgress_one: 'Sta lavorando a 1 compito',
+        tasksInProgress_other: 'Sta lavorando a {{count}} compiti',
+        tasksTodo_one: 'Ha 1 compito in programma',
+        tasksTodo_other: 'Ha {{count}} compiti in programma',
+        tasksTotal_one: 'Ha 1 compito assegnato in totale',
+        tasksTotal_other: 'Ha {{count}} compiti assegnati in totale',
+        teams_one: 'Attualmente membro di 1 team',
+        teams_other: 'Attualmente membro di {{count}} team',
+        title: 'Profilo di {{name}}',
+        user: {
+          description: 'Informazioni profilo di {{name}}',
+          title: 'Profilo utente'
+        }
       },
       projects: {
         index: {
@@ -414,33 +434,5 @@ export default {
   },
   user_one: 'Utente',
   user_other: 'Utenti',
-  userMenu: 'Menù Utente',
-  users: {
-    deleteUser: 'Cancella Utente',
-    profile: {
-      activity: {
-        description: "Dati relativi all'attività dell'utente.",
-        title: 'Attività'
-      },
-      joined_one: 'Iscritto 1 giorno fa',
-      joined_other: 'Iscritto {{count}} giorni fa',
-      project_one: 'Impiegato in 1 progetto',
-      project_other: 'Impiegato in {{count}} progetti',
-      task_one: 'Ha 1 compito assegnato in totale',
-      task_other: 'Ha {{count}} compiti assegnati in totale',
-      taskDone_one: 'Ha completato 1 compito',
-      taskDone_other: 'Ha completato {{count}} compiti',
-      taskInProgress_one: 'Sta lavorando a 1 compito',
-      taskInProgress_other: 'Sta lavorando a {{count}} compiti',
-      taskTodo_one: 'Ha 1 compito in programma',
-      taskTodo_other: 'Ha {{count}} compiti in programma',
-      team_one: 'Attualmente membro di 1 team',
-      team_other: 'Attualmente membro di {{count}} team',
-      totalTasks: 'Compiti totali',
-      userProfile: {
-        description: 'Informazioni profilo di {{name}}',
-        title: 'Profilo utente'
-      }
-    }
-  }
+  userMenu: 'Menù Utente'
 } as const

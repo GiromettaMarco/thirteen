@@ -203,13 +203,33 @@ export default {
         title: 'Invitations'
       },
       profile: {
+        activity: {
+          description: 'Data related to the user activity.',
+          title: 'Activity'
+        },
         drawer: {
           description: 'Set your display name, role and profile visibility.',
           title: 'Update your profile'
         },
         info: 'By setting your profile as public, you allow other users to discover and read your profile information.',
+        joined_one: 'Joined 1 day ago',
+        joined_other: 'Joined {{count}} days ago',
         public: 'Public profile',
-        title: '{{name}} profile'
+        tasksDone_one: 'Has completed 1 task',
+        tasksDone_other: 'Has completed {{count}} tasks',
+        tasksInProgress_one: 'Is working on 1 task right now',
+        tasksInProgress_other: 'Is working on {{count}} tasks right now',
+        tasksTodo_one: 'Has 1 task on schedule',
+        tasksTodo_other: 'Has {{count}} tasks on schedule',
+        tasksTotal_one: 'Has 1 task assigned in total',
+        tasksTotal_other: 'Has {{count}} tasks assigned in total',
+        teams_one: 'Currently member of 1 team',
+        teams_other: 'Currently member of {{count}} teams',
+        title: '{{name}} profile',
+        user: {
+          description: 'Information about {{name}}',
+          title: 'User profile'
+        }
       },
       projects: {
         index: {
@@ -410,33 +430,5 @@ export default {
   },
   user_one: 'User',
   user_other: 'Users',
-  userMenu: 'User Menu',
-  users: {
-    deleteUser: 'Delete User',
-    profile: {
-      activity: {
-        description: 'Data related to the user activity.',
-        title: 'Activity'
-      },
-      joined_one: 'Joined 1 day ago',
-      joined_other: 'Joined {{count}} days ago',
-      project_one: 'Employed in 1 project',
-      project_other: 'Employed in {{count}} projects',
-      task_one: 'Has 1 task assigned in total',
-      task_other: 'Has {{count}} tasks assigned in total',
-      taskDone_one: 'Has completed 1 task',
-      taskDone_other: 'Has completed {{count}} tasks',
-      taskInProgress_one: 'Is working on 1 task right now',
-      taskInProgress_other: 'Is working on {{count}} tasks right now',
-      taskTodo_one: 'Has 1 task on schedule',
-      taskTodo_other: 'Has {{count}} tasks on schedule',
-      team_one: 'Currently member of 1 team',
-      team_other: 'Currently member of {{count}} teams',
-      totalTasks: 'Total Tasks',
-      userProfile: {
-        description: 'Information about {{name}}',
-        title: 'User profile'
-      }
-    }
-  }
+  userMenu: 'User Menu'
 } as const

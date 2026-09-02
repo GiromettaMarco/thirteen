@@ -80,7 +80,7 @@ export interface Session {
 
 export type ProfileRole = 'guest' | 'developer' | 'designer' | 'manager'
 
-export interface Profile {
+export interface Profile extends WithTimestamps {
   id: number
   name: string
   public: boolean
