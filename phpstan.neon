@@ -11,3 +11,9 @@ parameters:
         - routes/
 
     level: 8
+
+    ignoreErrors:
+        -
+            rawMessages:
+                - 'Cannot access property $name on string.'
+                - 'Cannot access property $value on string.'
