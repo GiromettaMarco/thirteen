@@ -9,7 +9,7 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import TableMain, {
   ActionsButton,
@@ -18,6 +18,7 @@ import TableMain, {
   SortableColumnHeader,
   TableToolbar
 } from '@/components/ui/data-table'
+import { DestroyDialog } from '@/components/ui/destroy-dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,7 +30,7 @@ import { format } from '@/lib/utils'
 import { destroy, update } from '@/routes/invitations'
 import type { Invitation, View, ViewStore } from '@/types'
 
-//#region InvitationsTableActions
+//#region Actions
 function UpdateInvitationItem({ id }: { id: number }) {
   // i18n
   const { t } = useTranslation()
@@ -44,39 +45,45 @@ function UpdateInvitationItem({ id }: { id: number }) {
   )
 }
 
-function DeleteInvitationItem({ id }: { id: number }) {
+function Actions({ invitation }: { invitation: Invitation }) {
   // i18n
   const { t } = useTranslation()
 
-  // Inertia form
-  const { submit } = useForm()
+  // Delete dialog state
+  const [deleteOpen, setDeleteOpen] = useState(false)
 
   return (
-    <DropdownMenuItem
-      className="text-destructive"
-      onClick={() => submit(destroy(id))}
-    >
-      {t(($) => $.pages.dashboard.invitations.revoke)}
-    </DropdownMenuItem>
-  )
-}
+    <>
+      <DestroyDialog
+        description={t(($) => $.dialogs.deleteInvitation.description, {
+          email: invitation.user.email
+        })}
+        open={deleteOpen}
+        route={destroy(invitation)}
+        setOpen={setDeleteOpen}
+        title={t(($) => $.dialogs.deleteInvitation.title)}
+      />
 
-function InvitationsTableActions({ invitation }: { invitation: Invitation }) {
-  return (
-    <DropdownMenu>
-      <ActionsButton />
+      <DropdownMenu>
+        <ActionsButton />
 
-      <DropdownMenuContent
-        align="end"
-        className="w-32"
-      >
-        <UpdateInvitationItem id={invitation.id} />
+        <DropdownMenuContent
+          align="end"
+          className="w-32"
+        >
+          <UpdateInvitationItem id={invitation.id} />
 
-        <DropdownMenuSeparator />
+          <DropdownMenuSeparator />
 
-        <DeleteInvitationItem id={invitation.id} />
-      </DropdownMenuContent>
-    </DropdownMenu>
+          <DropdownMenuItem
+            onClick={() => setDeleteOpen(true)}
+            variant="destructive"
+          >
+            {t(($) => $.pages.dashboard.invitations.revoke)}
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
   )
 }
 
@@ -169,9 +176,7 @@ export function InvitationsTable({
         sortingFn: 'datetime'
       },
       {
-        cell: ({ row }) => (
-          <InvitationsTableActions invitation={row.original} />
-        ),
+        cell: ({ row }) => <Actions invitation={row.original} />,
         id: 'actions'
       }
     ],

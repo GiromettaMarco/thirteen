@@ -52,6 +52,10 @@ export default {
       title: 'Sei sicuro di voler eliminare il tuo account?',
       trigger: 'Elimina account'
     },
+    deleteInvitation: {
+      description: "Stai per eliminare l'invito per {{email}}.",
+      title: "Sei sicuro di voler revocare l'invito?"
+    },
     deleteMany: {
       description: 'Stai per cancellare i seguenti elementi:'
     },

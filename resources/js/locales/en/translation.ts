@@ -52,6 +52,10 @@ export default {
       title: 'Are you sure you want to delete your account?',
       trigger: 'Delete account'
     },
+    deleteInvitation: {
+      description: 'You are about to delete the invitation for {{email}}.',
+      title: 'Are you sure you want to revoke the invitation?'
+    },
     deleteMany: {
       description: 'You are about to delete the following items:'
     },
