@@ -1,4 +1,4 @@
-import { Button, cn, Separator } from '@gmcode/react-ui'
+import { cn, Separator } from '@gmcode/react-ui'
 import { Link, usePage } from '@inertiajs/react'
 import {
   CircleUser,
@@ -22,7 +22,6 @@ import type {
 import { useTranslation } from 'react-i18next'
 import { Breadcrumbs, type BreadcrumbLink } from '@/components/breadcrumbs'
 import { Logo } from '@/components/ui/brand'
-import { GitHub } from '@/components/ui/brand-icons'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -361,26 +360,9 @@ export default function DashboardLayout({
 
           <h1 className="text-base font-medium">{title}</h1>
 
-          <div className="ml-auto flex items-center gap-2">
-            {button ?? (
-              <Button
-                asChild
-                className="hidden sm:flex"
-                size="icon"
-                variant="ghost"
-              >
-                <a
-                  className="dark:text-foreground"
-                  href="https://github.com/GiromettaMarco/thirteen"
-                  rel="noreferrer"
-                  target="_blank"
-                  title="GitHub"
-                >
-                  <GitHub className="size-6" />
-                </a>
-              </Button>
-            )}
-          </div>
+          {button && (
+            <div className="ml-auto flex items-center gap-2">{button}</div>
+          )}
         </header>
 
         <Breadcrumbs
