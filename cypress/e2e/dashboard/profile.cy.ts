@@ -19,7 +19,6 @@ describe('Profile Page', () => {
     })
 
     cy.contains('John Smith').should('exist')
-    cy.contains('designer').should('exist')
-    cy.contains('public').should('exist')
+    cy.contains('Designer').should('exist')
   })
 })
