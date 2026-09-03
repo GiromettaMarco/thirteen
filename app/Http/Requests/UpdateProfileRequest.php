@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ProfileRole;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Validation\Rule;
 
 class UpdateProfileRequest extends FormRequest
@@ -32,7 +32,7 @@ class UpdateProfileRequest extends FormRequest
             'role' => [
                 'required',
                 'string',
-                Rule::in(Config::get('custom.roles')),
+                Rule::in(ProfileRole::values()),
             ],
         ];
     }

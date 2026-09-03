@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TaskStatus;
 use App\Events\TeamMemberRemoved;
 use App\Http\Requests\TeamMember\StoreTeamMemberRequest;
 use App\Models\Profile;
+use App\Models\Task;
 use App\Models\Team;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -25,6 +27,7 @@ class TeamMemberController extends Controller
         // Takes about the same time as using "WhereIn" and "GroupBy"
         $tasks = $profile->tasks()->get(['status', 'priority']);
 
+        /** @var array<string, array{low: int, medium: int, high: int}> */
         $tasks_count = [
             'todo' => [
                 'low' => 0,
@@ -48,13 +51,14 @@ class TeamMemberController extends Controller
             ],
         ];
 
-        $tasks->each(function ($task) use (&$tasks_count) {
+        $tasks->each(function (Task $task) use (&$tasks_count) {
             $group = 'other';
 
-            if (in_array($task->status->value, ['todo', 'in_progress', 'done'])) {
+            if (TaskStatus::isActive($task->status)) {
                 $group = $task->status->value;
             }
 
+            // @phpstan-ignore offsetAccess.notFound
             $tasks_count[$group][$task->priority->value]++;
         });
 

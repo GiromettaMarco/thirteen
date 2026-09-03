@@ -12,7 +12,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * @property TaskLabel|null $label
+ * @property TaskPriority $priority
  * @property-read Project $project
+ * @property TaskStatus $status
  */
 #[Fillable(['name', 'description', 'label', 'priority', 'profile_id', 'status'])]
 class Task extends Model

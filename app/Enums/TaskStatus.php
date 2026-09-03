@@ -9,4 +9,9 @@ enum TaskStatus: string
     case Done = 'done';
     case InProgress = 'in_progress';
     case Todo = 'todo';
+
+    public static function isActive(TaskStatus $status): bool
+    {
+        return in_array($status, [self::Todo, self::InProgress, self::Done]);
+    }
 }

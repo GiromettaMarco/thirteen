@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
+ * @property ProfileRole $role
  * @property-read User $user
  */
 #[Fillable(['name', 'public', 'role'])]

@@ -39,15 +39,4 @@ return [
         'locale' => env('COOKIE_LOCALE', 'locale'),
         'sidebar' => env('COOKIE_SIDEBAR', 'sidebar'),
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Roles
-    |--------------------------------------------------------------------------
-    |
-    | List of user available roles.
-    |
-    */
-
-    'roles' => ['guest', 'developer', 'designer', 'manager'],
 ];

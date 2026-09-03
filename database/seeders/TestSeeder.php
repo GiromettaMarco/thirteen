@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\ProfileRole;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -37,7 +38,7 @@ class TestSeeder extends Seeder
         /** @var User */
         $alice = User::factory()
             ->for($team_1, 'currentTeam')
-            ->withProfile('Alice Admin', 'manager', true)
+            ->withProfile('Alice Admin', ProfileRole::Manager, true)
             ->create([
                 'email' => 'alice@example.com',
                 'password' => 'AJf$hj7jn&bdMc',

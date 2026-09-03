@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Enums\ProfileRole;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -31,7 +31,7 @@ class UserFactory extends Factory
     /**
      * The profile role being used by the factory.
      */
-    protected static ?string $role;
+    protected static ?ProfileRole $role;
 
     /**
      * Define the model's default state.
@@ -53,15 +53,12 @@ class UserFactory extends Factory
      */
     public function withProfile(
         string $name,
-        string $role = 'guest',
+        ProfileRole $role = ProfileRole::Guest,
         bool $public = false
     ): UserFactory {
         static::$name = $name;
         static::$public = $public;
-
-        if (in_array($role, Config::get('custom.roles'))) {
-            static::$role = $role;
-        }
+        static::$role = $role;
 
         return $this;
     }
@@ -75,7 +72,7 @@ class UserFactory extends Factory
             $user->profile()->create([
                 'name' => static::$name ??= fake()->name(),
                 'public' => static::$public ??= false,
-                'role' => static::$role ??= 'guest',
+                'role' => static::$role ??= ProfileRole::Guest,
             ]);
         });
     }

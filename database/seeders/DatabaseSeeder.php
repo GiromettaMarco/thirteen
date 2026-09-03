@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\ProfileRole;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -37,7 +38,7 @@ class DatabaseSeeder extends Seeder
         /** @var User */
         $test_user = User::factory()
             ->for($team_1, 'currentTeam')
-            ->withProfile('Test User', 'manager', true)
+            ->withProfile('Test User', ProfileRole::Manager, true)
             ->create([
                 'email' => 'test@example.com',
                 'can_view_users' => true,
@@ -50,7 +51,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()
-            ->withProfile('Alfred M. Harrison', 'designer', true)
+            ->withProfile('Alfred M. Harrison', ProfileRole::Designer, true)
             ->create(['email' => 'alfredmharrison@example.com']);
 
         /** @var User */

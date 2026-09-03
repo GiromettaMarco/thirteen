@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ProfileRole;
 use App\Models\User;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -37,10 +37,7 @@ class StoreInvitationRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class),
             ],
-            'role' => [
-                'required',
-                Rule::in(Config::get('custom.roles')),
-            ],
+            'role' => ['required', Rule::in(ProfileRole::values())],
             'teams' => ['required', 'string', 'json'],
         ];
     }

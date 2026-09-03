@@ -23,10 +23,7 @@ class TaskFactory extends Factory
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    protected function getRandomLabel()
+    protected function getRandomLabel(): ?TaskLabel
     {
         $cases = TaskLabel::cases();
 
@@ -37,13 +34,10 @@ class TaskFactory extends Factory
             return null;
         }
 
-        return $cases[$seed]->value;
+        return $cases[$seed];
     }
 
-    /**
-     * @return string
-     */
-    protected function getRandomStatus()
+    protected function getRandomStatus(): TaskStatus
     {
         $seed = rand(0, 10);
 
@@ -51,35 +45,32 @@ class TaskFactory extends Factory
             case 0:
             case 1:
             case 2:
-                return TaskStatus::Todo->value;
+                return TaskStatus::Todo;
 
             case 3:
             case 4:
             case 5:
-                return TaskStatus::InProgress->value;
+                return TaskStatus::InProgress;
 
             case 6:
             case 7:
             case 8:
-                return TaskStatus::Done->value;
+                return TaskStatus::Done;
 
             case 9:
-                return TaskStatus::Backlog->value;
+                return TaskStatus::Backlog;
 
             case 10:
             default:
-                return TaskStatus::Canceled->value;
+                return TaskStatus::Canceled;
         }
     }
 
-    /**
-     * @return string
-     */
-    protected function getRandomPriority()
+    protected function getRandomPriority(): TaskPriority
     {
         $cases = TaskPriority::cases();
 
-        return $cases[rand(0, count($cases) - 1)]->value;
+        return $cases[rand(0, count($cases) - 1)];
     }
 
     /**
