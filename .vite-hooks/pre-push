@@ -2,3 +2,4 @@ vp check
 composer run lint
 vp build
 composer run test
+vpr e2e
