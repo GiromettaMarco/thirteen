@@ -271,6 +271,13 @@ function EmptyFiller() {
 }
 
 //#region TasksTable
+function applyFacetFix(rawTasks: TaskWithProfile[]): TaskWithProfile[] {
+  return rawTasks.map((rawTask) => ({
+    ...rawTask,
+    label: rawTask.label ?? 'none'
+  }))
+}
+
 export function TasksTable({
   canEdit = false,
   projectId,
@@ -309,14 +316,14 @@ export function TasksTable({
     setRowSelection,
     sorting
   } = UseTableStates({
-    data: tasks,
+    data: applyFacetFix(tasks),
     view,
     viewStore
   })
 
   // Watch for data revalidation
   useEffect(() => {
-    setData(() => tasks)
+    setData(() => applyFacetFix(tasks))
   }, [setData, tasks])
 
   const labels = useMemo<Record<string, string>>(

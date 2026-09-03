@@ -166,7 +166,8 @@ export type TaskStatus =
 export interface Task extends WithTimestamps {
   description: string | null
   id: number
-  label: TaskLabel | null
+  // tanstack facet fix
+  label: TaskLabel | null | 'none'
   name: string
   priority: TaskPriority
   profile_id: number | null
