@@ -64,5 +64,10 @@ class DatabaseSeeder extends Seeder
             2 => $all_permissions,
             3 => $all_permissions,
         ]);
+
+        // Run other seeders
+        $this->call([
+            TasksSeeder::class,
+        ]);
     }
 }

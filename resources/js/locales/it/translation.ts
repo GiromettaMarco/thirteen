@@ -116,6 +116,7 @@ export default {
   },
   notifications: 'Notifiche',
   openMenu: 'Apri menu',
+  other: 'Altro',
   pages: {
     auth: {
       confirmPassword: {
@@ -424,6 +425,21 @@ export default {
           'Cerca e aggiungi nuovi utenti per nome o indirizzo email.',
         nameOrEmail: 'Nome o email',
         title: 'Aggiungi nuovi membri al team'
+      },
+      show: {
+        permissions: {
+          description: 'I permessi del membro per questo team.',
+          title: 'Permessi'
+        },
+        role: {
+          description:
+            'Questo è il ruolo del membro in generale (non solo in questo team).',
+          title: 'Ruolo del membro'
+        },
+        tasks: {
+          description: 'Conteggio dei compiti assegnati a questo membro.',
+          title: 'Compiti Assegnati'
+        }
       }
     },
     namePlaceholder: 'Nome del team',

@@ -178,3 +178,16 @@ export interface Task extends WithTimestamps {
 export interface TaskWithProfile extends Task {
   profile: Profile
 }
+
+export interface TaskPrioritiesCount {
+  high: number
+  low: number
+  medium: number
+}
+
+export interface TasksCount {
+  done: TaskPrioritiesCount
+  in_progress: TaskPrioritiesCount
+  other: TaskPrioritiesCount
+  todo: TaskPrioritiesCount
+}

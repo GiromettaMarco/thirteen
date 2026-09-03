@@ -19,11 +19,11 @@ class CurrentTeamFallback
      */
     public function handle(TeamDeleting|TeamMemberRemoved $event): void
     {
-        if (is_a($event, TeamMemberRemoved::class)) {
+        if ($event instanceof TeamMemberRemoved) {
             $this->onMemberRemoved($event);
         }
 
-        if (is_a($event, TeamDeleting::class)) {
+        if ($event instanceof TeamDeleting) {
             $this->onTeamDeleting($event);
         }
     }

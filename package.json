@@ -37,6 +37,7 @@
     "react-dom": "^19.2.7",
     "react-hook-form": "^7.71.2",
     "react-i18next": "^17.0.13",
+    "recharts": "3.8.0",
     "tailwindcss": "^4.3.0",
     "typescript": "^7.0.2",
     "vaul": "^1.1.2"

@@ -116,6 +116,7 @@ export default {
   },
   notifications: 'Notifications',
   openMenu: 'Open menu',
+  other: 'Other',
   pages: {
     auth: {
       confirmPassword: {
@@ -420,6 +421,21 @@ export default {
         description: 'Search and add users by name or email address.',
         nameOrEmail: 'Name or email',
         title: 'Add new team members'
+      },
+      show: {
+        permissions: {
+          description: 'The member permissions for this team.',
+          title: 'Permissions'
+        },
+        role: {
+          description:
+            'This is what this member does in general (not just in this team).',
+          title: 'Member Role'
+        },
+        tasks: {
+          description: 'Counting of tasks assigned to this member.',
+          title: 'Assigned Tasks'
+        }
       }
     },
     namePlaceholder: 'Team name',

@@ -22,8 +22,45 @@ class TeamMemberController extends Controller
         Team $team,
         Profile $profile
     ): Response {
+        // Takes about the same time as using "WhereIn" and "GroupBy"
+        $tasks = $profile->tasks()->get(['status', 'priority']);
+
+        $tasks_count = [
+            'todo' => [
+                'low' => 0,
+                'medium' => 0,
+                'high' => 0,
+            ],
+            'in_progress' => [
+                'low' => 0,
+                'medium' => 0,
+                'high' => 0,
+            ],
+            'done' => [
+                'low' => 0,
+                'medium' => 0,
+                'high' => 0,
+            ],
+            'other' => [
+                'low' => 0,
+                'medium' => 0,
+                'high' => 0,
+            ],
+        ];
+
+        $tasks->each(function ($task) use (&$tasks_count) {
+            $group = 'other';
+
+            if (in_array($task->status->value, ['todo', 'in_progress', 'done'])) {
+                $group = $task->status->value;
+            }
+
+            $tasks_count[$group][$task->priority->value]++;
+        });
+
         return Inertia::render('dashboard/teams/members/show', [
             'profile' => $profile,
+            'tasksCount' => $tasks_count,
             'team' => $team,
         ]);
     }

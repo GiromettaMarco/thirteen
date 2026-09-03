@@ -19,11 +19,11 @@ class DeleteEmptyTeams
      */
     public function handle(TeamMemberRemoved|UserDeleting $event): void
     {
-        if (is_a($event, TeamMemberRemoved::class)) {
+        if ($event instanceof TeamMemberRemoved) {
             $this->onMemberRemoved($event);
         }
 
-        if (is_a($event, UserDeleting::class)) {
+        if ($event instanceof UserDeleting) {
             $this->onProfileDeleting($event);
         }
     }
