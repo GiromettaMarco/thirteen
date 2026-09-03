@@ -15,5 +15,4 @@ parameters:
     ignoreErrors:
         -
             rawMessages:
-                - 'Cannot access property $name on string.'
                 - 'Cannot access property $value on string.'
