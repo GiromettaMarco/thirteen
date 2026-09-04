@@ -43,7 +43,7 @@
       "type": "shell"
     },
     {
-      "command": "composer run test",
+      "command": "composer run test:cache",
       "detail": "Run PHP unit tests with Pest.",
       "label": "$(beaker) Unit Tests",
       "options": {

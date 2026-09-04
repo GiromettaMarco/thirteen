@@ -65,8 +65,12 @@
     ],
     "test": [
       "@php artisan config:clear --ansi",
-      "@php artisan test --parallel",
+      "./vendor/bin/pest --parallel --no-tia",
       "bin/php-coverage"
+    ],
+    "test:cache": [
+      "@php artisan config:clear --ansi",
+      "./vendor/bin/pest --parallel"
     ],
     "format": [
       "pint --parallel"
@@ -102,7 +106,8 @@
     "dev": "Start php and vite dev servers",
     "dev:ssr": "Start the php dev server and start the app with SSR enabled",
     "e2e": "Start the php server for e2e tests",
-    "test": "Run http tests",
+    "test": "Run http tests and generate a coverage badge",
+    "test:cache": "Run only tests with changes",
     "format": "Format php code",
     "lint": "Run static analysis",
     "check": "Format php code and run static analysis"
