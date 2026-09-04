@@ -59,18 +59,11 @@ import {
   EmptyTitle
 } from '@/components/ui/empty'
 import UseTableStates from '@/hooks/use-table-states'
-import { format } from '@/lib/utils'
+import { format, sortName, sortPriority } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
 import { show } from '@/routes/members'
 import { destroy, destroyMany } from '@/routes/tasks'
-import type {
-  Profile,
-  Task,
-  TaskPriority,
-  TaskWithProfile,
-  View,
-  ViewStore
-} from '@/types'
+import type { Profile, Task, TaskWithProfile, View, ViewStore } from '@/types'
 
 //#region Actions
 export function Actions({
@@ -151,7 +144,7 @@ export function Actions({
 }
 
 //#region TableToolbar
-function TableToolbar<TData>({ table }: { table: Table<TData> }) {
+export function TableToolbar<TData>({ table }: { table: Table<TData> }) {
   // @NOTE 'use no memo' is required due to incompatibility between Tanstack and React Compiler.
   'use no memo'
 
@@ -351,16 +344,6 @@ export function TasksTable({
       setUpdateTaskOpen(true)
     }
   }, [setActiveTask, setUpdateTaskOpen])
-
-  function sortName(a = '', b = '') {
-    return a > b ? 1 : a < b ? -1 : 0
-  }
-
-  function sortPriority(priorityA: TaskPriority, priorityB: TaskPriority) {
-    const a = priorityA === 'high' ? 3 : priorityA === 'medium' ? 2 : 1
-    const b = priorityB === 'high' ? 3 : priorityB === 'medium' ? 2 : 1
-    return a > b ? 1 : a < b ? -1 : 0
-  }
 
   const columns = useMemo<ColumnDef<TaskWithProfile>[]>(
     () => [

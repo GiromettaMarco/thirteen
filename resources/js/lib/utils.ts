@@ -1,7 +1,7 @@
 import type { Locale } from 'date-fns'
 import { format as originalFormat } from 'date-fns'
 import { it } from 'date-fns/locale'
-import type { AnyItem, RawView, View } from '@/types'
+import type { AnyItem, RawView, TaskPriority, View } from '@/types'
 
 /**
  * Default values for a table view.
@@ -103,4 +103,19 @@ export function isAnyItem(input: unknown): input is AnyItem {
     ['string', 'number'].includes(typeof input.id) &&
     (!('name' in input) || typeof input.name === 'string')
   )
+}
+
+//#region Sorting
+export function sortBoolean(a: boolean, b: boolean) {
+  return a === b ? 0 : a === true ? 1 : -1
+}
+
+export function sortName(a = '', b = '') {
+  return a > b ? 1 : a < b ? -1 : 0
+}
+
+export function sortPriority(priorityA: TaskPriority, priorityB: TaskPriority) {
+  const a = priorityA === 'high' ? 3 : priorityA === 'medium' ? 2 : 1
+  const b = priorityB === 'high' ? 3 : priorityB === 'medium' ? 2 : 1
+  return a > b ? 1 : a < b ? -1 : 0
 }

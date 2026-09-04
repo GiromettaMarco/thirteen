@@ -36,6 +36,7 @@ import {
   DropdownMenuSeparator
 } from '@/components/ui/dropdown-menu'
 import UseTableStates from '@/hooks/use-table-states'
+import { sortBoolean } from '@/lib/utils'
 import { show } from '@/routes/members'
 import type { Team, TeamMember, View, ViewStore } from '@/types'
 
@@ -172,10 +173,6 @@ export function MembersTable({
     }),
     [t]
   )
-
-  function sortBoolean(a: boolean, b: boolean) {
-    return a === b ? 0 : a === true ? 1 : -1
-  }
 
   const columns = useMemo<ColumnDef<TeamMember>[]>(
     () => [
