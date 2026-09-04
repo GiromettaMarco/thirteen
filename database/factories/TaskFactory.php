@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Enums\TaskLabel;
 use App\Enums\TaskPriority;
 use App\Enums\TaskStatus;
-use App\Models\Profile;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -14,15 +13,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TaskFactory extends Factory
 {
-    protected static ?string $profile_id;
-
-    public function withProfile(string|int|Profile $profile): TaskFactory
-    {
-        static::$profile_id = (string) ($profile instanceof Profile ? $profile->id : $profile);
-
-        return $this;
-    }
-
     protected function getRandomLabel(): ?TaskLabel
     {
         $cases = TaskLabel::cases();
@@ -84,9 +74,8 @@ class TaskFactory extends Factory
         return [
             'label' => $this->getRandomLabel(),
             // @phpstan-ignore argument.type (missing generic)
-            'name' => ucwords(fake()->words(2, true)),
+            'name' => ucwords(fake()->words(rand(2, 10), true)),
             'priority' => $this->getRandomPriority(),
-            'profile_id' => static::$profile_id,
             'status' => $this->getRandomStatus(),
         ];
     }
