@@ -16,7 +16,7 @@ it('may accept a confirm password request', function () {
     actingAs($user)
         ->post(route('password.validate', absolute: false), [
             'email' => $user->email,
-            'password' => 'password',
+            'password' => 'AJf$hj7jn&bdMc',
         ])
         ->assertSessionHasNoErrors()
         ->assertSessionHas('auth.password_confirmed_at');

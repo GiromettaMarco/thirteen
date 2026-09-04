@@ -32,7 +32,7 @@ it('may validate and throttle register requests when email is already taken', fu
     $uri = route('register.store', absolute: false);
     $data = [
         'name' => 'Test User',
-        'email' => 'test@example.com',
+        'email' => 'alice@example.com',
         'password' => 'New_Password_1234',
         'password_confirmation' => 'New_Password_1234',
     ];

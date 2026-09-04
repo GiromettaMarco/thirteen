@@ -12,7 +12,7 @@ it('may accept a password update request', function () {
 
     actingAs(User::first())
         ->put(route('password.update', absolute: false), [
-            'current_password' => 'password',
+            'current_password' => 'AJf$hj7jn&bdMc',
             'password' => 'New_Password_1234',
             'password_confirmation' => 'New_Password_1234',
         ])

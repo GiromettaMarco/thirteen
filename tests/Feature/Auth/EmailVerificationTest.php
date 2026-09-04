@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Profile;
 use App\Models\User;
 use App\Notifications\VerifyEmail;
 use Illuminate\Auth\Events\Verified;
@@ -12,7 +13,13 @@ use function Pest\Laravel\post;
 use function PHPUnit\Framework\assertTrue;
 
 it('may display the verify email page', function () {
-    actingAs(User::factory()->unverified()->create())
+    /** @var User */
+    $user = User::factory()
+        ->has(Profile::factory())
+        ->unverified()
+        ->createOne();
+
+    actingAs($user)
         ->get(route('verification.notice', absolute: false))
         ->assertOk();
 });
@@ -20,7 +27,11 @@ it('may display the verify email page', function () {
 it('may accept a send verification request', function () {
     Notification::fake();
 
-    $user = User::factory()->unverified()->create();
+    /** @var User */
+    $user = User::factory()
+        ->has(Profile::factory())
+        ->unverified()
+        ->createOne();
 
     actingAs($user)
         ->post(route('verification.send', absolute: false))
@@ -32,7 +43,13 @@ it('may accept a send verification request', function () {
 it('may throttle send verification requests', function () {
     Notification::fake();
 
-    actingAs(User::factory()->unverified()->create());
+    /** @var User */
+    $user = User::factory()
+        ->has(Profile::factory())
+        ->unverified()
+        ->createOne();
+
+    actingAs($user);
 
     $uri = route('verification.send', absolute: false);
 
@@ -44,7 +61,11 @@ it('may throttle send verification requests', function () {
 it('may accept a verify verification request', function () {
     Event::fake();
 
-    $user = User::factory()->unverified()->create();
+    /** @var User */
+    $user = User::factory()
+        ->has(Profile::factory())
+        ->unverified()
+        ->createOne();
 
     $verificationUrl = URL::temporarySignedRoute(
         'verification.verify',

@@ -11,7 +11,7 @@ it('may accept a destroy other sessions request', function () {
 
     actingAs(User::first())
         ->delete(route('sessions.destroy', absolute: false), [
-            'password' => 'password',
+            'password' => 'AJf$hj7jn&bdMc',
         ])
         ->assertSessionHasNoErrors();
 

@@ -25,7 +25,7 @@ it('may authenticate the user', function () {
 
     $response = post(route('login.store', absolute: false), [
         'email' => $user->email,
-        'password' => 'password',
+        'password' => 'AJf$hj7jn&bdMc',
     ]);
 
     Event::assertDispatched(UserLoggedIn::class);
@@ -40,7 +40,7 @@ it('may validate and throttle login requests', function () {
 
     $uri = route('login.store', absolute: false);
     $data = [
-        'email' => 'test@example.com',
+        'email' => 'alice@example.com',
         'password' => 'wrong_password',
     ];
 

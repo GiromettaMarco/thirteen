@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Profile;
 use App\Models\User;
 use App\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\Notification;
@@ -29,18 +30,23 @@ it('may accept an email update request', function () {
 
 it('may validate an email update request', function () {
     /** @var User */
-    $user = User::factory()->createOne();
+    $user = User::factory()
+        ->has(Profile::factory())
+        ->createOne();
 
     actingAs($user)
         ->put(route('account.update', absolute: false), [
-            'email' => 'test@example.com',
+            'email' => 'alice@example.com',
         ])
         ->assertSessionHasErrors('email');
 });
 
 it('may accept a destroy account request', function () {
     actingAs(User::first())
-        ->delete(route('account.destroy', absolute: false), ['password' => 'password'])
+        ->delete(
+            route('account.destroy', absolute: false),
+            ['password' => 'AJf$hj7jn&bdMc']
+        )
         ->assertSessionHasNoErrors();
 
     assertGuest();
@@ -48,6 +54,9 @@ it('may accept a destroy account request', function () {
 
 it('may validate a destroy account request', function () {
     actingAs(User::first())
-        ->delete(route('account.destroy', absolute: false), ['password' => 'wrong_password'])
+        ->delete(
+            route('account.destroy', absolute: false),
+            ['password' => 'wrong_password']
+        )
         ->assertSessionHasErrors('password');
 });

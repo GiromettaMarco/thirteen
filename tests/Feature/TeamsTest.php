@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Profile;
 use App\Models\User;
 
 use function Pest\Laravel\actingAs;
@@ -42,9 +43,10 @@ it('may accept a create team request', function () {
 });
 
 it('may auto assign current team on create if missing', function () {
-    // @see https://github.com/laravel/vs-code-extension/issues/573
-    /** @var User $user */
-    $user = User::find(2);
+    /** @var User */
+    $user = User::factory()
+        ->has(Profile::factory())
+        ->createOne();
 
     actingAs($user)
         ->post(route('teams.store'), ['name' => 'New Team'])
@@ -52,8 +54,7 @@ it('may auto assign current team on create if missing', function () {
 
     $user->refresh();
 
-    expect($user->current_team_id)
-        ->toBe(4);
+    expect($user->currentTeam->name)->toBe('New Team');
 });
 
 it('may accept an update team request', function () {
@@ -98,6 +99,6 @@ it('may apply policies to a delete team request', function () {
     $user = User::first();
 
     actingAs($user)
-        ->put(route('teams.destroy', ['team' => 2]))
+        ->delete(route('teams.destroy', ['team' => 2]))
         ->assertStatus(403);
 });
