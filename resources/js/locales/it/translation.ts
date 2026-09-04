@@ -184,6 +184,12 @@ export default {
         title: 'Account'
       },
       index: {
+        tasks: {
+          empty: {
+            description: 'Puoi rilassarti ⛱️',
+            title: 'Nessun compito assegnato'
+          }
+        },
         title: 'Dashboard'
       },
       invitations: {

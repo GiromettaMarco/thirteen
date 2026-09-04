@@ -4,6 +4,7 @@ use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Account\OtherSessionsController;
 use App\Http\Controllers\Account\PasswordController;
 use App\Http\Controllers\CurrentTeamController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\LeaveTeamController;
 use App\Http\Controllers\ProfileController;
@@ -21,9 +22,8 @@ Route::prefix('dashboard')
     ->middleware(['auth', 'auth.session', 'verified'])
     ->group(function () {
         // #region Dashboard
-        Route::get('/', function () {
-            return Inertia::render('dashboard/index');
-        })->name('dashboard');
+        Route::get('/', DashboardController::class)
+            ->name('dashboard');
         Route::post('/views', [ViewController::class, 'store'])
             ->name('views.store');
         Route::get('/settings', function () {
