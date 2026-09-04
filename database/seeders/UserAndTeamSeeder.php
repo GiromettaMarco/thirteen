@@ -80,7 +80,7 @@ class UserAndTeamSeeder extends Seeder
 
             $permissions = rand(0, 1) ? self::$team_permissions['reader'] : self::$team_permissions['editor'];
 
-            $user->profile->teams()->attach($team_ids, $permissions);
+            $user->profile->teams()->syncWithPivotValues($team_ids, $permissions, false);
         });
     }
 }
