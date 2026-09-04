@@ -9,25 +9,27 @@ import { Heading } from '@/components/ui/heading'
 import DashboardLayout from '@/layouts/dashboard-layout'
 import { parseView } from '@/lib/utils'
 import { dashboard } from '@/routes'
-import { index } from '@/routes/projects'
+import { index as projectsIndex } from '@/routes/projects'
+import { show as teamsShow, index as teamsIndex } from '@/routes/teams'
 import type {
   Profile,
   Project,
   RawView,
   TaskWithProfile,
-  TeamPermissions
+  Team,
+  WithTeamPermissions
 } from '@/types'
 
 export default function ProjectsShow({
-  permissions,
   project,
   tasks,
+  team,
   team_members,
   views
 }: {
-  permissions: TeamPermissions
   project: Project
   tasks: TaskWithProfile[]
+  team: Team & WithTeamPermissions
   team_members: Profile[]
   views: { tasks: RawView | null }
 }) {
@@ -38,20 +40,22 @@ export default function ProjectsShow({
   const breadcrumbs = useMemo<BreadcrumbLink[]>(
     () => [
       { href: dashboard(), key: 1, label: t(($) => $.dashboard) },
+      { href: teamsIndex(), key: 2, label: t(($) => $.team, { count: 2 }) },
+      { href: teamsShow(team), key: 3, label: team.name },
       {
-        href: index({ team: project.team_id }),
-        key: 2,
+        href: projectsIndex({ team }),
+        key: 4,
         label: t(($) => $.project, { count: 2 })
       }
     ],
-    [project.team_id, t]
+    [team, t]
   )
 
   return (
     <DashboardLayout
       breadcrumbs={breadcrumbs}
       button={
-        permissions.can_edit_projects ? (
+        team.pivot.can_edit_projects ? (
           <UpdateProjectDrawer project={project} />
         ) : undefined
       }
@@ -66,7 +70,7 @@ export default function ProjectsShow({
             variant="small"
           />
           <TasksTable
-            canEdit={permissions.can_edit_projects}
+            canEdit={team.pivot.can_edit_projects}
             projectId={project.id}
             tasks={tasks}
             teamId={project.team_id}

@@ -47,7 +47,7 @@ import UseTableStates from '@/hooks/use-table-states'
 import { format } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
 import { destroy, destroyMany, show } from '@/routes/projects'
-import type { Project, View, ViewStore } from '@/types'
+import type { Project, ProjectWithTasksCount, View, ViewStore } from '@/types'
 
 //#region Actions
 export function Actions({
@@ -165,7 +165,7 @@ export function ProjectsTable({
   viewStore
 }: {
   canEdit?: boolean
-  projects: Project[]
+  projects: ProjectWithTasksCount[]
   teamId: number
   view?: View
   viewStore?: ViewStore
@@ -200,19 +200,18 @@ export function ProjectsTable({
 
   const labels = useMemo<Record<string, string>>(
     () => ({
-      // usersCount: t('user_other'),
-      // tasksCount: t('task_other'),
-      createdAt: t(($) => $.dateCreated),
+      created_at: t(($) => $.dateCreated),
       deadline: t(($) => $.projects.deadline),
       name: t(($) => $.name),
-      updatedAt: t(($) => $.dateModified)
+      tasks_count: t(($) => $.task, { count: 2 }),
+      updated_at: t(($) => $.dateModified)
     }),
     [t]
   )
 
-  const columns = useMemo<ColumnDef<Project>[]>(
+  const columns = useMemo<ColumnDef<ProjectWithTasksCount>[]>(
     () => [
-      ...(canEdit ? [getSelectColDef<Project>()] : []),
+      ...(canEdit ? [getSelectColDef<ProjectWithTasksCount>()] : []),
       {
         accessorKey: 'name',
         cell: ({ row }) => (
@@ -232,26 +231,8 @@ export function ProjectsTable({
           />
         )
       },
-      // {
-      //   accessorKey: 'usersCount',
-      //   header: ({ column }) => (
-      //     <SortableColumnHeader
-      //       column={column}
-      //       title={t('user_other')}
-      //     />
-      //   )
-      // },
-      // {
-      //   accessorKey: 'tasksCount',
-      //   header: ({ column }) => (
-      //     <SortableColumnHeader
-      //       column={column}
-      //       title={t('task_other')}
-      //     />
-      //   )
-      // },
       {
-        accessorKey: 'createdAt',
+        accessorKey: 'created_at',
         cell: ({ row }) => format(row.original.created_at, i18n.language, 'Pp'),
         header: ({ column }) => (
           <SortableColumnHeader
@@ -262,7 +243,7 @@ export function ProjectsTable({
         sortingFn: 'datetime'
       },
       {
-        accessorKey: 'updatedAt',
+        accessorKey: 'updated_at',
         cell: ({ row }) => format(row.original.updated_at, i18n.language, 'Pp'),
         header: ({ column }) => (
           <SortableColumnHeader
@@ -282,6 +263,15 @@ export function ProjectsTable({
           />
         ),
         sortingFn: 'datetime'
+      },
+      {
+        accessorKey: 'tasks_count',
+        header: ({ column }) => (
+          <SortableColumnHeader
+            column={column}
+            title={t(($) => $.task, { count: 2 })}
+          />
+        )
       },
       {
         cell: ({ row }) => (

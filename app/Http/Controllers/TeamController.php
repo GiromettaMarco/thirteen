@@ -72,7 +72,10 @@ class TeamController extends Controller
                     $query->whereIn('project_id', $projects->pluck('id')->all());
                 }])
                 ->get(),
-            'projects' => $team->projects()->get(),
+            'projects' => $team
+                ->projects()
+                ->withCount('tasks')
+                ->get(),
             'team' => $team,
             'views' => [
                 'members' => $views->get(0) ?? null,

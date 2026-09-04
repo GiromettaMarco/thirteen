@@ -13,7 +13,7 @@ import { parseView } from '@/lib/utils'
 import { dashboard } from '@/routes'
 import { index } from '@/routes/teams'
 import type {
-  Project,
+  ProjectWithTasksCount,
   RawView,
   Team,
   TeamMember,
@@ -27,7 +27,7 @@ export default function TeamsShow({
   views
 }: {
   members: TeamMember[]
-  projects: Project[]
+  projects: ProjectWithTasksCount[]
   team: Team & WithTeamPermissions
   views: {
     members: RawView | null

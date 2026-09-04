@@ -151,6 +151,8 @@ export interface Project extends WithTimestamps {
   team_id: number
 }
 
+export type ProjectWithTasksCount = Project & { tasks_count: number }
+
 //#region Task
 export type TaskLabel = 'bug' | 'documentation' | 'feature'
 

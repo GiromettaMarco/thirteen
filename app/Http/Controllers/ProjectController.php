@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Project\DestroyProjectsRequest;
 use App\Http\Requests\Project\StoreProjectRequest;
-use App\Models\Membership;
 use App\Models\Project;
 use App\Models\Team;
 use App\Models\User;
@@ -26,7 +25,10 @@ class ProjectController extends Controller
         $user = $request->user();
 
         return Inertia::render('dashboard/projects/index', [
-            'projects' => $team->projects()->get(),
+            'projects' => $team
+                ->projects()
+                ->withCount('tasks')
+                ->get(),
             'team' => $team,
             'views' => [
                 'projects' => $user->views()->where([
@@ -53,19 +55,10 @@ class ProjectController extends Controller
         /** @var User $user */
         $user = $request->user();
 
-        /** @var Membership $membership */
-        $membership = $team->getRelation('pivot');
-
         return Inertia::render('dashboard/projects/show', [
-            'permissions' => [
-                'admin' => $membership->admin,
-                'can_delete_team' => $membership->can_delete_team,
-                'can_edit_members' => $membership->can_edit_members,
-                'can_edit_projects' => $membership->can_edit_projects,
-                'can_edit_team' => $membership->can_edit_team,
-            ],
             'project' => $project,
             'tasks' => $project->tasks()->with('profile')->get(),
+            'team' => $team,
             'team_members' => $team->profiles()->get(),
             'views' => [
                 'tasks' => $user->views()->where([

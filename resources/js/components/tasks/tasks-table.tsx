@@ -61,6 +61,7 @@ import {
 import UseTableStates from '@/hooks/use-table-states'
 import { format } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
+import { show } from '@/routes/members'
 import { destroy, destroyMany } from '@/routes/tasks'
 import type {
   Profile,
@@ -229,13 +230,11 @@ function TableToolbar<TData>({ table }: { table: Table<TData> }) {
         options={labels}
         title={t(($) => $.tasks.label)}
       />
-
       <FacetedFilter
         column={table.getColumn('status')}
         options={statuses}
         title={t(($) => $.tasks.status)}
       />
-
       <FacetedFilter
         column={table.getColumn('priority')}
         options={priorities}
@@ -335,13 +334,13 @@ export function TasksTable({
 
   const labels = useMemo<Record<string, string>>(
     () => ({
-      createdAt: t(($) => $.dateCreated),
+      created_at: t(($) => $.dateCreated),
       label: t(($) => $.tasks.label),
       name: t(($) => $.name),
       priority: t(($) => $.tasks.priority),
       profile: t(($) => $.tasks.assignedTo),
       status: t(($) => $.tasks.status),
-      updatedAt: t(($) => $.dateModified)
+      updated_at: t(($) => $.dateModified)
     }),
     [t]
   )
@@ -426,7 +425,13 @@ export function TasksTable({
       },
       {
         accessorKey: 'profile',
-        cell: ({ row }) => row.original.profile?.name,
+        cell: ({ row }) =>
+          row.original.profile ? (
+            <NameCell
+              href={show({ profile: row.original.profile, team: teamId })}
+              name={row.original.profile?.name}
+            />
+          ) : null,
         header: ({ column }) => (
           <SortableColumnHeader
             column={column}
@@ -437,7 +442,7 @@ export function TasksTable({
           sortName(rowA.original.profile?.name, rowB.original.profile?.name)
       },
       {
-        accessorKey: 'createdAt',
+        accessorKey: 'created_at',
         cell: ({ row }) => format(row.original.created_at, i18n.language, 'Pp'),
         header: ({ column }) => (
           <SortableColumnHeader
@@ -448,7 +453,7 @@ export function TasksTable({
         sortingFn: 'datetime'
       },
       {
-        accessorKey: 'updatedAt',
+        accessorKey: 'updated_at',
         cell: ({ row }) => format(row.original.updated_at, i18n.language, 'Pp'),
         header: ({ column }) => (
           <SortableColumnHeader

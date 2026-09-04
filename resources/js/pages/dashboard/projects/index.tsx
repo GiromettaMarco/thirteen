@@ -1,47 +1,62 @@
 import { Head } from '@inertiajs/react'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { BreadcrumbLink } from '@/components/breadcrumbs'
 import { ProjectsTable } from '@/components/projects/projects-table'
-import { NoCurrentTeam } from '@/components/teams/no-current-team'
 import { Container } from '@/components/ui/container'
 import DashboardLayout from '@/layouts/dashboard-layout'
 import { parseView } from '@/lib/utils'
-import type { Auth, Project, RawView, Team, WithTeamPermissions } from '@/types'
+import { dashboard } from '@/routes'
+import { show as teamsShow, index as teamsIndex } from '@/routes/teams'
+import type {
+  Auth,
+  ProjectWithTasksCount,
+  RawView,
+  Team,
+  WithTeamPermissions
+} from '@/types'
 
 export default function ProjectsIndex({
-  auth,
   projects,
   team,
   views
 }: {
   auth: Auth<false>
-  projects: Project[]
+  projects: ProjectWithTasksCount[]
   team: Team & WithTeamPermissions
   views: { projects: RawView | null }
 }) {
   // i18n
   const { t } = useTranslation()
 
-  const teamId = auth.user?.current_team_id
+  // Breadcrumbs
+  const breadcrumbs = useMemo<BreadcrumbLink[]>(
+    () => [
+      { href: dashboard(), key: 1, label: t(($) => $.dashboard) },
+      { href: teamsIndex(), key: 2, label: t(($) => $.team, { count: 2 }) },
+      { href: teamsShow(team), key: 3, label: team.name }
+    ],
+    [team, t]
+  )
 
   return (
-    <DashboardLayout title={t(($) => $.project, { count: 2 })}>
+    <DashboardLayout
+      breadcrumbs={breadcrumbs}
+      title={t(($) => $.project, { count: 2 })}
+    >
       <Head title={t(($) => $.pages.dashboard.projects.index.title)} />
 
       <Container>
-        {teamId ? (
-          <ProjectsTable
-            canEdit={team.pivot.can_edit_projects}
-            projects={projects}
-            teamId={teamId}
-            view={parseView(views.projects)}
-            viewStore={{
-              page: 'projects.index',
-              table: `projects/team:${teamId}`
-            }}
-          />
-        ) : (
-          <NoCurrentTeam />
-        )}
+        <ProjectsTable
+          canEdit={team.pivot.can_edit_projects}
+          projects={projects}
+          teamId={team.id}
+          view={parseView(views.projects)}
+          viewStore={{
+            page: 'projects.index',
+            table: `projects/team:${team.id}`
+          }}
+        />
       </Container>
     </DashboardLayout>
   )
