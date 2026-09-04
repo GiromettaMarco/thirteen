@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TaskStatus;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\Profile;
 use App\Models\Task;
@@ -25,26 +26,29 @@ class ProfileController extends Controller
         $profile->loadCount('teams');
 
         $tasks = $profile->tasks()->get(['status']);
-        $total = 0;
-        $done = 0;
-        $in_progress = 0;
-        $todo = 0;
+
+        $tasks_count = [
+            'total' => 0,
+            'todo' => 0,
+            'in_progress' => 0,
+            'done' => 0,
+        ];
 
         // Count tasks by status
-        $tasks->each(function (Task $task) use (&$total, &$done, &$in_progress, &$todo) {
-            $total++;
+        $tasks->each(function (Task $task) use (&$tasks_count) {
+            $tasks_count['total']++;
 
             switch ($task->status) {
-                case 'done':
-                    $done++;
+                case TaskStatus::Done:
+                    $tasks_count['done']++;
                     break;
 
-                case 'in_progress':
-                    $in_progress++;
+                case TaskStatus::InProgress:
+                    $tasks_count['in_progress']++;
                     break;
 
-                case 'todo':
-                    $todo++;
+                case TaskStatus::Todo:
+                    $tasks_count['todo']++;
                     break;
 
                 default:
@@ -56,12 +60,7 @@ class ProfileController extends Controller
             'canEdit' => $user->can('update', $profile),
             'email' => $user->email,
             'profile' => $profile,
-            'tasksCount' => [
-                'done' => $done,
-                'inProgress' => $in_progress,
-                'todo' => $todo,
-                'total' => $total,
-            ],
+            'tasksCount' => $tasks_count,
         ]);
     }
 

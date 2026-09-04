@@ -142,7 +142,7 @@ export default function Profile({
   }
   tasksCount: {
     done: number
-    inProgress: number
+    in_progress: number
     todo: number
     total: number
   }
@@ -213,9 +213,9 @@ export default function Profile({
             />
             <ProfilePill
               description={t(($) => $.pages.dashboard.profile.tasksInProgress, {
-                count: tasksCount.inProgress
+                count: tasksCount.in_progress
               })}
-              number={tasksCount.inProgress}
+              number={tasksCount.in_progress}
               title={t(($) => $.tasks.statuses.inProgress)}
             />
             <ProfilePill
