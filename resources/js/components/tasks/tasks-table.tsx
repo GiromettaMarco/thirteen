@@ -62,7 +62,14 @@ import UseTableStates from '@/hooks/use-table-states'
 import { format } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
 import { destroy, destroyMany } from '@/routes/tasks'
-import type { Profile, Task, TaskWithProfile, View, ViewStore } from '@/types'
+import type {
+  Profile,
+  Task,
+  TaskPriority,
+  TaskWithProfile,
+  View,
+  ViewStore
+} from '@/types'
 
 //#region Actions
 export function Actions({
@@ -346,6 +353,16 @@ export function TasksTable({
     }
   }, [setActiveTask, setUpdateTaskOpen])
 
+  function sortName(a = '', b = '') {
+    return a > b ? 1 : a < b ? -1 : 0
+  }
+
+  function sortPriority(priorityA: TaskPriority, priorityB: TaskPriority) {
+    const a = priorityA === 'high' ? 3 : priorityA === 'medium' ? 2 : 1
+    const b = priorityB === 'high' ? 3 : priorityB === 'medium' ? 2 : 1
+    return a > b ? 1 : a < b ? -1 : 0
+  }
+
   const columns = useMemo<ColumnDef<TaskWithProfile>[]>(
     () => [
       ...(canEdit ? [getSelectColDef<TaskWithProfile>()] : []),
@@ -392,7 +409,9 @@ export function TasksTable({
             column={column}
             title={t(($) => $.tasks.priority)}
           />
-        )
+        ),
+        sortingFn: (rowA, rowB) =>
+          sortPriority(rowA.original.priority, rowB.original.priority)
       },
       {
         accessorKey: 'status',
@@ -413,7 +432,9 @@ export function TasksTable({
             column={column}
             title={t(($) => $.tasks.assignedTo)}
           />
-        )
+        ),
+        sortingFn: (rowA, rowB) =>
+          sortName(rowA.original.profile?.name, rowB.original.profile?.name)
       },
       {
         accessorKey: 'createdAt',
