@@ -252,7 +252,7 @@ export function AddMemberDrawer({
           {({ form, loading }) => (
             <>
               <AddProfileList
-                className="min-h-15 px-4"
+                className="min-h-15 flex-none px-4"
                 disable={currentProfiles}
                 hide={currentProfileId ? [currentProfileId] : []}
                 onChange={(profile) =>
