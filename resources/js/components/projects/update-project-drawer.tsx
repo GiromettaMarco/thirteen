@@ -57,7 +57,7 @@ export function UpdateProjectDrawer({
             defaults={{
               deadline: project.deadline ?? '',
               description: project.description ?? '',
-              name: t(($) => $.projects.defaultName)
+              name: project.name
             }}
             onSuccess={() => setOpen(false)}
             route={update({
