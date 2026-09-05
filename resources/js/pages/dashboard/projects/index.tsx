@@ -3,7 +3,6 @@ import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { BreadcrumbLink } from '@/components/breadcrumbs'
 import { ProjectsTable } from '@/components/projects/projects-table'
-import { Container } from '@/components/ui/container'
 import DashboardLayout from '@/layouts/dashboard-layout'
 import { parseView } from '@/lib/utils'
 import { dashboard } from '@/routes'
@@ -46,18 +45,20 @@ export default function ProjectsIndex({
     >
       <Head title={t(($) => $.pages.dashboard.projects.index.title)} />
 
-      <Container>
-        <ProjectsTable
-          canEdit={team.pivot.can_edit_projects}
-          projects={projects}
-          teamId={team.id}
-          view={parseView(views.projects)}
-          viewStore={{
-            page: 'projects.index',
-            table: `projects/team:${team.id}`
-          }}
-        />
-      </Container>
+      <div className="px-4 lg:px-6">
+        <section>
+          <ProjectsTable
+            canEdit={team.pivot.can_edit_projects}
+            projects={projects}
+            teamId={team.id}
+            view={parseView(views.projects)}
+            viewStore={{
+              page: 'projects.index',
+              table: `projects/team:${team.id}`
+            }}
+          />
+        </section>
+      </div>
     </DashboardLayout>
   )
 }

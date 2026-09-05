@@ -327,7 +327,7 @@ export function MembersTable({
   })
 
   return (
-    <section className="grid gap-3">
+    <div className="grid gap-3">
       {canEdit && (
         <AddMemberDrawer
           currentProfileId={currentProfileId}
@@ -360,6 +360,6 @@ export function MembersTable({
         sortingState={sorting}
         table={table}
       />
-    </section>
+    </div>
   )
 }

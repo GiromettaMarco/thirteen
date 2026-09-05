@@ -366,7 +366,7 @@ export function TeamsTable({
   })
 
   return (
-    <section className="grid gap-3">
+    <div className="grid gap-3">
       <AddTeamDrawer />
 
       <UpdateTeamDrawer />
@@ -401,6 +401,6 @@ export function TeamsTable({
       ) : (
         <EmptyFiller />
       )}
-    </section>
+    </div>
   )
 }

@@ -34,10 +34,7 @@ export function ProjectDeadline({
   return (
     <>
       {deadlineCountdown > 7 ? (
-        <p className={className}>
-          {t(($) => $.projects.deadline)}:{' '}
-          {format(parsedDeadline, i18n.language)}
-        </p>
+        <p className={className}>{format(parsedDeadline, i18n.language)}</p>
       ) : deadlineCountdown > 1 ? (
         <p className={cn('text-warning-foreground', className)}>
           {t(($) => $.projects.deadlineIn, { count: deadlineCountdown })}

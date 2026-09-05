@@ -207,7 +207,7 @@ export function InvitationsTable({
   })
 
   return (
-    <section className="grid gap-3">
+    <div className="grid gap-3">
       <div className="grid items-center justify-between gap-2 xl:flex">
         <TableToolbar
           columnId="user_profile_name"
@@ -228,6 +228,6 @@ export function InvitationsTable({
         sortingState={sorting}
         table={table}
       />
-    </section>
+    </div>
   )
 }

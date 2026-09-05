@@ -6,7 +6,6 @@ import type { BreadcrumbLink } from '@/components/breadcrumbs'
 import { ProjectsTable } from '@/components/projects/projects-table'
 import { MembersTable } from '@/components/teams/members/members-table'
 import UpdateTeamDrawer from '@/components/teams/update-team-drawer'
-import { Container } from '@/components/ui/container'
 import { Heading } from '@/components/ui/heading'
 import DashboardLayout from '@/layouts/dashboard-layout'
 import { parseView } from '@/lib/utils'
@@ -55,7 +54,7 @@ export default function TeamsShow({
     >
       <Head title={team.name} />
 
-      <Container className="grid gap-6">
+      <div className="grid gap-6 px-4 lg:px-6">
         <section className="grid gap-1">
           <Heading
             h={t(($) => $.project, { count: 2 })}
@@ -92,7 +91,7 @@ export default function TeamsShow({
             }}
           />
         </section>
-      </Container>
+      </div>
     </DashboardLayout>
   )
 }

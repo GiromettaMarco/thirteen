@@ -486,7 +486,7 @@ export function TasksTable({
   })
 
   return (
-    <section className="grid gap-3">
+    <div className="grid gap-3">
       {canEdit && (
         <>
           <AddTaskDrawer
@@ -540,6 +540,6 @@ export function TasksTable({
       ) : (
         <EmptyFiller />
       )}
-    </section>
+    </div>
   )
 }

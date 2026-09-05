@@ -312,7 +312,7 @@ export function ProjectsTable({
   })
 
   return (
-    <section className="grid gap-3">
+    <div className="grid gap-3">
       {canEdit && (
         <>
           <AddProjectDrawer teamId={teamId} />
@@ -356,6 +356,6 @@ export function ProjectsTable({
       ) : (
         <EmptyFiller canCreate={canEdit} />
       )}
-    </section>
+    </div>
   )
 }

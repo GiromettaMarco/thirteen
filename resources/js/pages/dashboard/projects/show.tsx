@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import type { BreadcrumbLink } from '@/components/breadcrumbs'
 import { UpdateProjectDrawer } from '@/components/projects/update-project-drawer'
 import { TasksTable } from '@/components/tasks/tasks-table'
-import { Container } from '@/components/ui/container'
 import { Heading } from '@/components/ui/heading'
 import DashboardLayout from '@/layouts/dashboard-layout'
 import { parseView } from '@/lib/utils'
@@ -63,7 +62,7 @@ export default function ProjectsShow({
     >
       <Head title={project.name} />
 
-      <Container className="grid gap-6">
+      <div className="grid gap-6 px-4 lg:px-6">
         <section className="grid gap-1">
           <Heading
             h={t(($) => $.task, { count: 2 })}
@@ -82,7 +81,7 @@ export default function ProjectsShow({
             }}
           />
         </section>
-      </Container>
+      </div>
     </DashboardLayout>
   )
 }

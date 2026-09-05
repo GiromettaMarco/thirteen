@@ -105,7 +105,7 @@ function Deadlines({ projects }: { projects: Project[] }) {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
+    <section className="grid grid-cols-1 gap-4 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
       {projects.map((project) => (
         <DeadlineCard
           deadline={project.deadline}
@@ -115,7 +115,7 @@ function Deadlines({ projects }: { projects: Project[] }) {
           teamId={project.team_id}
         />
       ))}
-    </div>
+    </section>
   )
 }
 
