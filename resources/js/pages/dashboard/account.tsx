@@ -140,7 +140,6 @@ function ManageSessions({ sessions }: { sessions: Session[] }) {
     </Format>
   )
 }
-//#endregion
 
 //#region UpdateEmail
 function UpdateEmail({ email }: { email: string }) {
@@ -179,7 +178,6 @@ function UpdateEmail({ email }: { email: string }) {
     </Format>
   )
 }
-//#endregion
 
 //#region UpdatePassword
 function UpdatePassword() {
@@ -235,7 +233,6 @@ function UpdatePassword() {
     </Format>
   )
 }
-//#endregion
 
 //#region DeleteAccount
 function DeleteAccount() {
@@ -301,7 +298,6 @@ function DeleteAccount() {
     </Format>
   )
 }
-//#endregion
 
 //#region Account (page)
 export default function Account({
@@ -336,4 +332,3 @@ export default function Account({
     </DashboardLayout>
   )
 }
-//#endregion
