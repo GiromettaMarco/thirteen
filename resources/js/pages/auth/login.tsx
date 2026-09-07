@@ -19,7 +19,7 @@ export default function Login({
   canReset?: boolean
 }) {
   // i18n
-  const { t } = useTranslation()
+  const { i18n, t } = useTranslation()
 
   return (
     <AuthLayout
@@ -97,6 +97,7 @@ export default function Login({
             <Trans
               components={{ a: <TextLink href={register()} /> }}
               i18nKey={($) => $.pages.auth.login.registerCTA}
+              lang={i18n.language}
             />
           </div>
         )}

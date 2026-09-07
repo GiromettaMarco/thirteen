@@ -10,7 +10,7 @@ import { forgotPasswordSchema } from '@/schemas/auth'
 
 export default function ForgotPassword() {
   // i18n
-  const { t } = useTranslation()
+  const { i18n, t } = useTranslation()
 
   return (
     <AuthLayout
@@ -42,6 +42,7 @@ export default function ForgotPassword() {
           <Trans
             components={{ a: <TextLink href={login()} /> }}
             i18nKey={($) => $.pages.auth.forgotPassword.loginCTA}
+            lang={i18n.language}
           />
         </div>
       </div>

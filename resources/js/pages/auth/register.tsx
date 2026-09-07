@@ -32,7 +32,7 @@ import { registerSchema } from '@/schemas/auth'
 
 export default function Register() {
   // i18n
-  const { t } = useTranslation()
+  const { i18n, t } = useTranslation()
   const { check, report } = usePasswordCheck()
 
   return (
@@ -120,6 +120,7 @@ export default function Register() {
           <Trans
             components={{ a: <TextLink href={login()} /> }}
             i18nKey={($) => $.pages.auth.register.loginCTA}
+            lang={i18n.language}
           />
         </div>
       </div>
