@@ -99,8 +99,7 @@ export default {
   invitation_other: 'Inviti',
   language: {
     change: 'Cambia lingua',
-    select: 'Seleziona lingua',
-    system: 'Sistema'
+    select: 'Seleziona lingua'
   },
   layouts: {
     public: {
@@ -112,7 +111,6 @@ export default {
         },
         e2eTesting: 'Test E2E',
         forms: 'Forms',
-        home: 'Home',
         http: {
           description: 'Test delle richieste HTTP con Pest',
           title: 'HTTP'
@@ -126,14 +124,7 @@ export default {
   management: 'Gestione',
   member_one: 'Membro',
   member_other: 'Membri',
-  more: 'Altro',
   name: 'Nome',
-  noCurrentTeam: {
-    dashboard:
-      'Non hai ancora un "team corrente". Puoi creare nuovi team e impostare il tuo team corrente nella sezione Teams.',
-    description: 'Devi creare un team prima di poter gestire i progetti',
-    title: 'Nessun team'
-  },
   notifications: 'Notifiche',
   openMenu: 'Apri menu',
   other: 'Altro',
