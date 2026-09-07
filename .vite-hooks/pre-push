@@ -1,3 +1,4 @@
+php artisan wayfinder:generate
 vp check
 composer run lint
 vp build
