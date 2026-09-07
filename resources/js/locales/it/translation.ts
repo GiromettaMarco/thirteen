@@ -102,6 +102,26 @@ export default {
     select: 'Seleziona lingua',
     system: 'Sistema'
   },
+  layouts: {
+    public: {
+      menu: {
+        authentication: 'Autenticazione',
+        e2e: {
+          description: 'Test end-to-end con Cypress',
+          title: 'E2E'
+        },
+        e2eTesting: 'Test E2E',
+        forms: 'Forms',
+        home: 'Home',
+        http: {
+          description: 'Test delle richieste HTTP con Pest',
+          title: 'HTTP'
+        },
+        httpTesting: 'Test HTTP',
+        tests: 'Test'
+      }
+    }
+  },
   loading: 'Caricamento...',
   management: 'Gestione',
   member_one: 'Membro',
@@ -279,6 +299,40 @@ export default {
       }
     },
     public: {
+      authentication: {
+        configuration: {
+          default: 'Default',
+          description: 'Descrizione',
+          feature: 'Funzionalità',
+          h2: 'Configurazione',
+          register: "Consenti l'auto-registrazione dei nuovi utenti",
+          reset:
+            'Consenti agli utenti registrati di reimpostare la propria password utilizzando il modulo "password dimenticata"',
+          verification:
+            "Richiedi la verifica dell'indirizzo email per i nuovi utenti",
+          verifyOnReset:
+            "Verifica l'indirizzo email dell'utente dopo il ripristino della password"
+        },
+        description: 'Funzionalità di autenticazione personalizzabili',
+        emailVerification: {
+          h2: 'Verifica Email',
+          p: "Se disabiliti le funzionalità di verifica dell'email, ricorda di rimuovere il contratto <code>MustVerifyEmail</code> dallo <code>User</code> model ed il middleware <code>verified</code> dal gruppo di route della dashboard."
+        },
+        h1: 'Autenticazione',
+        p1: "Le funzionalità di autenticazione sono abilitate di default nell'applicazione e proteggono le route del gruppo <code>dashboard</code>.",
+        p2: 'Usando il file di configurazione <code>config/custom.php</code> è possibile disabilitare le funzionalità lato server assieme alle relative route.',
+        requestThrottling: {
+          h2: 'Limite delle Richieste',
+          p1: 'Le richieste di autenticazione sono limitate di default per ip/utente a diverse frequenze.',
+          p2: 'Per aggiungere velocemente un limitatore ad una nuova richiesta, puoi estendere la classe <code>ThrottledRequest</code>.'
+        },
+        title: 'Strategia di autenticazione'
+      },
+      forms: {
+        h1: 'Forms',
+        title:
+          'Form automatizzati con campi predefiniti e validazione lato client.'
+      },
       home: {
         CTA: 'Iniziamo!',
         h1: 'Benvenuto su {{appName}}',

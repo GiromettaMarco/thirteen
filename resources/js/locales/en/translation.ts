@@ -102,6 +102,26 @@ export default {
     select: 'Select language',
     system: 'System'
   },
+  layouts: {
+    public: {
+      menu: {
+        authentication: 'Authentication',
+        e2e: {
+          description: 'End-to-end testing with Cypress',
+          title: 'E2E'
+        },
+        e2eTesting: 'E2E testing',
+        forms: 'Forms',
+        home: 'Home',
+        http: {
+          description: 'Test HTTP requests with Pest',
+          title: 'HTTP'
+        },
+        httpTesting: 'HTTP testing',
+        tests: 'Tests'
+      }
+    }
+  },
   loading: 'Loading...',
   management: 'Management',
   member_one: 'Member',
@@ -278,6 +298,38 @@ export default {
       }
     },
     public: {
+      authentication: {
+        configuration: {
+          default: 'Default',
+          description: 'Description',
+          feature: 'Feature',
+          h2: 'Configuration',
+          register: 'Allow self registration of new users',
+          reset:
+            'Allow registered users to reset their password using the "forgot password" form',
+          verification: 'Require email verification for new users',
+          verifyOnReset: 'Verify the user email after a password reset'
+        },
+        description: 'Customizable authentication features',
+        emailVerification: {
+          h2: 'Email Verification',
+          p: 'If you disable the email verification features, remember to remove the <code>MustVerifyEmail</code> contract from the <code>User</code> model and the <code>verified</code> middleware to the dashboard route group.'
+        },
+        h1: 'Authentication',
+        p1: 'Authentication features are enabled by default in the application and they protect the <code>dashboard</code> routes.',
+        p2: 'Through <code>config/custom.php</code> it is possible to disable features server-side and the related routes.',
+        requestThrottling: {
+          h2: 'Request Throttling',
+          p1: 'Authentication requests are rete limited by default per ip/user at various rates.',
+          p2: 'To quickly add a rate limiter to a new request, you can extend the <code>ThrottledRequest</code> class.'
+        },
+        title: 'Authentication strategy'
+      },
+      forms: {
+        h1: 'Forms',
+        title:
+          'Automated forms with predefined fields and client-side validations.'
+      },
       home: {
         CTA: "Let's get started!",
         h1: 'Welcome to {{appName}}',

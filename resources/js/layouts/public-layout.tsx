@@ -1,13 +1,6 @@
 import { Button, cn, Separator } from '@gmcode/react-ui'
 import { Link } from '@inertiajs/react'
-import {
-  Circle,
-  CircleCheck,
-  CircleHelp,
-  Menu,
-  UserRound,
-  X
-} from 'lucide-react'
+import { Menu, UserRound, X } from 'lucide-react'
 import {
   useEffect,
   useState,
@@ -34,7 +27,7 @@ import {
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
-import { dashboard, home } from '@/routes'
+import { authentication, dashboard, forms, home } from '@/routes'
 
 const PUBLIC_MOBILE_MENU_BREAKPOINT = 1024
 
@@ -63,7 +56,6 @@ function MobileMenu({
             className="flex flex-initial items-center gap-4"
           />
         </Link>
-
         <Button
           onClick={() => setOpen(false)}
           variant="ghost"
@@ -71,30 +63,31 @@ function MobileMenu({
           <X />
         </Button>
       </div>
-
+      <Link
+        className="rounded px-2 py-1 text-accent-foreground hover:bg-accent"
+        href={authentication()}
+      >
+        {t(($) => $.layouts.public.menu.authentication)}
+      </Link>
+      <Link
+        className="rounded px-2 py-1 text-accent-foreground hover:bg-accent"
+        href={forms()}
+      >
+        {t(($) => $.layouts.public.menu.forms)}
+      </Link>
       <Link
         className="rounded px-2 py-1 text-accent-foreground hover:bg-accent"
         href="#"
       >
-        Components
+        {t(($) => $.layouts.public.menu.httpTesting)}
       </Link>
-
       <Link
         className="rounded px-2 py-1 text-accent-foreground hover:bg-accent"
-        href="#"
+        href="https://github.com/GiromettaMarco/thirteen/actions/workflows/tests.yml"
       >
-        Docs
+        {t(($) => $.layouts.public.menu.e2eTesting)}
       </Link>
-
-      <Link
-        className="rounded px-2 py-1 text-accent-foreground hover:bg-accent"
-        href="#"
-      >
-        List
-      </Link>
-
       <Separator />
-
       <Link
         className="rounded px-2 py-1 text-accent-foreground hover:bg-accent"
         href={dashboard()}
@@ -104,235 +97,58 @@ function MobileMenu({
     </nav>
   )
 }
-//#endregion
 
 //#region Public Menu
 function PublicMenu() {
+  // i18n
+  const { t } = useTranslation()
+
   return (
     <NavigationMenu viewport={false}>
       <NavigationMenuList className="flex-wrap">
-        {/* Any content */}
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Home</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-2 md:w-100 lg:w-124 lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-3">
-                <NavigationMenuLink asChild>
-                  <Link
-                    className="flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b from-muted/50 to-muted p-4 no-underline outline-hidden transition-all duration-200 select-none focus:shadow-md md:p-6"
-                    href="#"
-                  >
-                    <div className="mb-2 text-lg font-medium sm:mt-4">
-                      shadcn/ui
-                    </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
-                      Beautifully designed components built with Tailwind CSS.
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link href="#">
-                    <div className="text-sm leading-none font-medium">
-                      Introduction
-                    </div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                      Re-usable components built using Radix UI and Tailwind
-                      CSS.
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link href="#">
-                    <div className="text-sm leading-none font-medium">
-                      Installation
-                    </div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                      How to install dependencies and structure your app.
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link href="#">
-                    <div className="text-sm leading-none font-medium">
-                      Typography
-                    </div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                      Styles for headings, paragraphs, lists...etc
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        {/* Two columns list */}
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-2 sm:w-100 md:w-124 md:grid-cols-2 lg:w-148">
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link href="#">
-                    <div className="text-sm leading-none font-medium">
-                      Alert Dialog
-                    </div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                      A modal dialog that interrupts the user with important
-                      content and expects a response.
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link href="#">
-                    <div className="text-sm leading-none font-medium">
-                      Hover Card
-                    </div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                      For sighted users to preview content available behind a
-                      link.
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link href="#">
-                    <div className="text-sm leading-none font-medium">
-                      Progress
-                    </div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                      Displays an indicator showing the completion progress of a
-                      task, typically displayed as a progress bar.
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link href="#">
-                    <div className="text-sm leading-none font-medium">
-                      Scroll-area
-                    </div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                      Visually or semantically separates content.
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link href="#">
-                    <div className="text-sm leading-none font-medium">Tabs</div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                      A set of layered sections of content—known as tab
-                      panels—that are displayed one at a time.
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link href="#">
-                    <div className="text-sm leading-none font-medium">
-                      Tooltip
-                    </div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                      A popup that displays information related to an element
-                      when the element receives keyboard focus or the mouse
-                      hovers over it.
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        {/* Single link */}
         <NavigationMenuItem>
           <NavigationMenuLink
             asChild
             className={navigationMenuTriggerStyle()}
           >
-            <Link href="#">Docs</Link>
+            <Link href={authentication()}>
+              {t(($) => $.layouts.public.menu.authentication)}
+            </Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
-
-        {/* List */}
+        <NavigationMenuItem>
+          <NavigationMenuLink
+            asChild
+            className={navigationMenuTriggerStyle()}
+          >
+            <Link href={forms()}>{t(($) => $.layouts.public.menu.forms)}</Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
         <NavigationMenuItem className="hidden md:block">
-          <NavigationMenuTrigger>List</NavigationMenuTrigger>
+          <NavigationMenuTrigger>
+            {t(($) => $.layouts.public.menu.tests)}
+          </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-72 gap-4">
               <li>
                 <NavigationMenuLink asChild>
-                  <Link href="#">
-                    <div className="font-medium">Components</div>
+                  <Link href="https://github.com/GiromettaMarco/thirteen/actions/workflows/tests.yml">
+                    <div className="font-medium">
+                      {t(($) => $.layouts.public.menu.http.title)}
+                    </div>
                     <div className="text-muted-foreground">
-                      Browse all components in the library.
+                      {t(($) => $.layouts.public.menu.http.description)}
                     </div>
                   </Link>
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
                   <Link href="#">
-                    <div className="font-medium">Documentation</div>
-                    <div className="text-muted-foreground">
-                      Learn how to use the library.
+                    <div className="font-medium">
+                      {t(($) => $.layouts.public.menu.e2e.title)}
                     </div>
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link href="#">
-                    <div className="font-medium">Blog</div>
                     <div className="text-muted-foreground">
-                      Read our latest blog posts.
+                      {t(($) => $.layouts.public.menu.e2e.description)}
                     </div>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        {/* With Icon */}
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>With Icon</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-48 gap-4">
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link
-                    className="flex-row items-center gap-2"
-                    href="#"
-                  >
-                    <CircleHelp />
-                    Backlog
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link
-                    className="flex-row items-center gap-2"
-                    href="#"
-                  >
-                    <Circle />
-                    TODO
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link
-                    className="flex-row items-center gap-2"
-                    href="#"
-                  >
-                    <CircleCheck />
-                    Done
                   </Link>
                 </NavigationMenuLink>
               </li>
@@ -343,7 +159,6 @@ function PublicMenu() {
     </NavigationMenu>
   )
 }
-//#endregion
 
 //#region Layout
 export default function PublicLayout({ children }: PropsWithChildren) {
@@ -449,7 +264,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
         </header>
 
         <main className="border-b border-dashed">
-          <div className="container mx-auto flex min-h-[calc(100dvh-7rem-2px)] border-x border-dashed p-4 sm:p-6">
+          <div className="container mx-auto min-h-[calc(100dvh-7rem-2px)] border-x border-dashed p-4 sm:p-6">
             {children}
           </div>
         </main>
@@ -480,4 +295,3 @@ export default function PublicLayout({ children }: PropsWithChildren) {
     </>
   )
 }
-//#endregion
