@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TaskPriority;
+use App\Enums\TaskStatus;
 use App\Http\Requests\Task\DestroyTasksRequest;
 use App\Http\Requests\Task\StoreTaskRequest;
 use App\Models\Project;
@@ -23,7 +25,12 @@ class TaskController extends Controller
         Team $team,
         Project $project
     ): RedirectResponse {
-        $project->tasks()->create($request->validated());
+        $project->tasks()->create(
+            array_merge([
+                'priority' => TaskPriority::Medium->value,
+                'status' => TaskStatus::Todo->value,
+            ], $request->validated())
+        );
 
         Inertia::flash('toast', new FlashMessage(__('strings.task.created'), 'success'));
 
