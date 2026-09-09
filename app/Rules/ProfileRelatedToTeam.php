@@ -7,9 +7,6 @@ use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Translation\PotentiallyTranslatedString;
 
-/**
- * Validate that an attribute is an array of task ids related to a project.
- */
 class ProfileRelatedToTeam implements ValidationRule
 {
     /**
