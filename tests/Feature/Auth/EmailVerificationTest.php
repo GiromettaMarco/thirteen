@@ -24,6 +24,18 @@ it('may display the verify email page', function () {
         ->assertOk();
 });
 
+it('may redirect unverified users', function () {
+    /** @var User */
+    $user = User::factory()
+        ->has(Profile::factory())
+        ->unverified()
+        ->createOne();
+
+    actingAs($user)
+        ->get(route('dashboard'))
+        ->assertRedirect(route('verification.notice'));
+});
+
 it('may accept a send verification request', function () {
     Notification::fake();
 
@@ -41,8 +53,6 @@ it('may accept a send verification request', function () {
 });
 
 it('may throttle send verification requests', function () {
-    Notification::fake();
-
     /** @var User */
     $user = User::factory()
         ->has(Profile::factory())
@@ -81,10 +91,15 @@ it('may accept a verify verification request', function () {
     assertTrue($user->fresh()->hasVerifiedEmail());
 });
 
-it('may redirect', function () {
-    // ...
-})->todo();
-
 it('may send a verify email notification after a new user registration', function () {
-    // ...
-})->todo();
+    Notification::fake();
+
+    post(route('register.store', absolute: false), [
+        'name' => 'John Smith',
+        'email' => 'jhonsmith@example.com',
+        'password' => 'New_Password_1234',
+        'password_confirmation' => 'New_Password_1234',
+    ])->assertSessionHasNoErrors();
+
+    Notification::assertSentTimes(VerifyEmail::class, 1);
+});

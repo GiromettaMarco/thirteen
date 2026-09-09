@@ -4,7 +4,7 @@ use App\Events\UserLoggedIn;
 use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Event;
-use Inertia\Testing\AssertableInertia as Assert;
+use Inertia\Testing\AssertableInertia;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertAuthenticatedAs;
@@ -47,7 +47,7 @@ it('may validate and throttle login requests', function () {
     followingRedirects()
         ->post($uri, $data)
         ->assertInertia(
-            fn (Assert $page) => $page->has('errors.root')
+            fn (AssertableInertia $page) => $page->has('errors.root')
         );
 
     assertGuest();

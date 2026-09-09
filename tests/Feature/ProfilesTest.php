@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Testing\Fluent\AssertableJson;
 
 use function Pest\Laravel\actingAs;
 
@@ -12,7 +13,7 @@ it('may display a profile page', function () {
         ->assertOk();
 });
 
-it('may accept a profile update request', function () {
+it('may accept an update profile request', function () {
     $user = User::first();
 
     actingAs($user)
@@ -25,4 +26,17 @@ it('may accept a profile update request', function () {
             ]
         )
         ->assertSessionHasNoErrors();
+});
+
+it('may accept a search profile request', function () {
+    actingAs(User::first())
+        ->get(route('profile.search', ['s' => '@example.com']))
+        ->assertOk()
+        ->assertJson(
+            fn (AssertableJson $json) => $json->first(
+                fn (AssertableJson $json) => $json->whereType('id', 'integer')
+                    ->whereType('name', 'string')
+                    ->whereType('email', 'string')
+            )
+        );
 });

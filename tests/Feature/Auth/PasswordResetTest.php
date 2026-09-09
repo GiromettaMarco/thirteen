@@ -42,9 +42,12 @@ it('may accept a forgot and reset password request', function () {
 
     $token = '';
 
-    Notification::assertSentTo($user, ResetPassword::class, function ($notification) use (&$token) {
-        return (bool) ($token = $notification->token);
-    });
+    Notification::assertSentTo(
+        $user,
+        function (ResetPassword $notification) use (&$token) {
+            return (bool) ($token = $notification->token);
+        }
+    );
 
     post(route('password.store', absolute: false), [
         'token' => $token,
