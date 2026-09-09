@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Database\Factories\InvitationFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -10,6 +12,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Invitation extends Model
 {
+    /** @use HasFactory<InvitationFactory> */
+    use HasFactory;
+
     /**
      * One to One (inverse) relationship.
      *

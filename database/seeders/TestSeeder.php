@@ -40,10 +40,10 @@ class TestSeeder extends Seeder
      */
     public function run(): void
     {
-        $teams = Team::factory(2)->create();
-
+        $all_teams = Team::factory(3)->create();
+        $admin_teams = $all_teams->slice(0, 2);
         /** @var Team */
-        $team = $teams->first();
+        $current_team = $all_teams->first();
 
         User::factory()
             ->has(Profile::factory()
@@ -53,11 +53,11 @@ class TestSeeder extends Seeder
                     'public' => true,
                 ])
                 // @phpstan-ignore argument.type
-                ->hasAttached($teams, [
+                ->hasAttached($admin_teams, [
                     self::$team_permissions['admin'],
-                    self::$team_permissions['reader'],
+                    self::$team_permissions['admin'],
                 ]))
-            ->for($team, 'currentTeam')
+            ->for($current_team, 'currentTeam')
             ->create([
                 'email' => 'alice@example.com',
                 'password' => 'AJf$hj7jn&bdMc',
@@ -69,19 +69,38 @@ class TestSeeder extends Seeder
             ->has(Profile::factory()
                 ->state([
                     'name' => 'Bob Brown',
-                    'role' => ProfileRole::Guest,
+                    'role' => ProfileRole::Designer,
                     'public' => true,
                 ])
                     // @phpstan-ignore argument.type
-                ->hasAttached($teams, [
+                ->hasAttached($all_teams, [
+                    self::$team_permissions['reader'],
                     self::$team_permissions['reader'],
                     self::$team_permissions['admin'],
                 ])
             )
-            ->for($team, 'currentTeam')
+            ->for($current_team, 'currentTeam')
             ->create([
                 'email' => 'bob@example.com',
                 'password' => 'KL$M(bgd#bhd42',
             ]);
+
+        User::factory()
+            ->has(Profile::factory()
+                ->state([
+                    'name' => 'Stray User',
+                    'role' => ProfileRole::Guest,
+                    'public' => false,
+                ])
+            )
+            ->create([
+                'email' => 'stray@example.com',
+                'password' => 'J&jnd_9jkn4ll3JK',
+            ]);
+
+        $this->call([
+            ProjectAndTaskSeeder::class,
+            // InvitationSeeder::class,
+        ]);
     }
 }

@@ -50,13 +50,14 @@ class UserAndTeamSeeder extends Seeder
         $first_team = $teams->first();
 
         User::factory()
-            ->has(Profile::factory()
-                ->state([
-                    'name' => 'Test User',
-                    'role' => ProfileRole::Manager,
-                    'public' => true,
-                ])
-                ->hasAttached($teams, self::$team_permissions['admin'])
+            ->has(
+                Profile::factory()
+                    ->state([
+                        'name' => 'Test User',
+                        'role' => ProfileRole::Manager,
+                        'public' => true,
+                    ])
+                    ->hasAttached($teams, self::$team_permissions['admin'])
             )
             ->for($first_team, 'currentTeam')
             ->create([
