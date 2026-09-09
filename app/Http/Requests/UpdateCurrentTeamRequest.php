@@ -16,7 +16,7 @@ class UpdateCurrentTeamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['required', 'integer', new TeamRelatedToUser],
+            'id' => ['bail', 'required', 'integer', new TeamRelatedToUser],
         ];
     }
 }

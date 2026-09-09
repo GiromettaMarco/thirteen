@@ -20,7 +20,7 @@ class DestroyProjectsRequest extends FormRequest
         $team = $this->route('team');
 
         return [
-            'ids' => ['required', 'array', new ProjectsRelatedToTeam($team)],
+            'ids' => ['bail', 'required', 'array', new ProjectsRelatedToTeam($team)],
         ];
     }
 }

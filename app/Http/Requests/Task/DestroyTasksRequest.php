@@ -20,7 +20,7 @@ class DestroyTasksRequest extends FormRequest
         $project = $this->route('project');
 
         return [
-            'ids' => ['required', 'array', new TasksRelatedToProject($project)],
+            'ids' => ['bail', 'required', 'array', new TasksRelatedToProject($project)],
         ];
     }
 }
