@@ -16,6 +16,11 @@
         <include>
             <directory>app</directory>
         </include>
+        <exclude>
+            <directory>app/Notifications</directory>
+            <file>app/Providers/TelescopeServiceProvider.php</file>
+            <file>app/Helpers/Agent.php</file>
+        </exclude>
     </source>
     <php>
         <env name="APP_ENV" value="testing"/>

@@ -20,7 +20,7 @@ class TeamRelatedToUser implements ValidationRule
         $user = Auth::user();
 
         if (! ($user instanceof User)) {
-            abort(401, 'Unauthenticated.');
+            abort(401, 'Unauthenticated.'); // @codeCoverageIgnore
         }
 
         if (! $user->profile->teams->contains($value)) {
