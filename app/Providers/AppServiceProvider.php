@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Date;
@@ -20,7 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        EncryptCookies::except([
+            Config::get('custom.cookie.appearance', 'appearance'),
+            Config::get('custom.cookie.locale', 'locale'),
+            Config::get('custom.cookie.sidebar', 'sidebar'),
+        ]);
     }
 
     /**

@@ -19,12 +19,6 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->encryptCookies(except: [
-            'appearance',
-            'locale',
-            'sidebar',
-        ]);
-
         $middleware->web(append: [
             ThrottleRequests::using('global'),
             HandleAppearance::class,
@@ -62,4 +56,5 @@ return Application::configure(basePath: dirname(__DIR__))
 
             return $response;
         });
-    })->create();
+    })
+    ->create();
