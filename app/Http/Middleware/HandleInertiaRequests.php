@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Helpers\Permissions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Inertia\Middleware;
 
@@ -17,6 +18,15 @@ class HandleInertiaRequests extends Middleware
      * @var string
      */
     protected $rootView = 'app';
+
+    /**
+     * Defines the routes that should not use SSR.
+     *
+     * @var array<int, string>
+     */
+    protected $withoutSsr = [
+        'dashboard*',
+    ];
 
     /**
      * Determines the current asset version.
@@ -40,6 +50,7 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'auth' => Permissions::getAuth(),
+            'locale' => App::getLocale(),
             'sidebarOpen' => $request->cookie(Config::get('custom.cookie.sidebar', 'sidebar'), 'true') === 'true',
         ];
     }

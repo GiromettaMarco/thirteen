@@ -1,9 +1,10 @@
-import type { Appearance, Auth, FlashMessage } from '@/types'
+import type { Appearance, Auth, FlashMessage, Locale } from '@/types'
 
 export interface SharedPageProps {
   [key: string]: unknown
   appearance: Appearance
   auth: Auth
+  locale: Locale
   sidebarOpen: boolean
 }
 
