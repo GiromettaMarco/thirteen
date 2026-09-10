@@ -39,4 +39,11 @@ return [
         'locale' => env('COOKIE_LOCALE', 'locale'),
         'sidebar' => env('COOKIE_SIDEBAR', 'sidebar'),
     ],
+
+    /*
+    | Maximum requests per minute that the application will accept from a single
+    | ip. Set to 0 to disable.
+    */
+
+    'global_limiter' => env('GLOBAL_LIMITER', 0),
 ];

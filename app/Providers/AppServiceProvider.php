@@ -5,7 +5,7 @@ namespace App\Providers;
 use Carbon\CarbonImmutable;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\RateLimiter;
@@ -65,7 +65,12 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting(): void
     {
-        RateLimiter::for('global', fn () => Limit::perMinute(120)->by(request()->ip()));
+        $max_attempts = Config::get('custom.global_limiter', 0);
+
+        RateLimiter::for('global', fn () => $max_attempts
+            ? Limit::perMinute($max_attempts)->by(request()->ip())
+            : Limit::none()
+        );
     }
 
     /**
