@@ -1,3 +1,4 @@
+import { useHttp } from '@inertiajs/react'
 import type {
   ColumnFiltersState,
   PaginationState,
@@ -28,6 +29,18 @@ export default function UseTableStates<TData extends RowData>({
     () => view?.filters ?? viewDefaults.filters
   )
 
+  const { post, setData: setStoreData } = useHttp<{
+    filters?: string
+    page?: string
+    pagination?: string
+    sorting?: string
+    table?: string
+    visibility?: string
+  }>({
+    page: viewStore?.page,
+    table: viewStore?.table
+  })
+
   /**
    * Update column filters state and save it in the database.
    *
@@ -54,16 +67,14 @@ export default function UseTableStates<TData extends RowData>({
         }
 
         if (newFiltersWithoutName.length !== oldFiltersSizeWithoutName) {
-          void axios.post(store().url, {
-            filters: JSON.stringify(newFiltersWithoutName),
-            ...viewStore
-          })
+          setStoreData('filters', JSON.stringify(newFiltersWithoutName))
+          void post(store().url)
         }
       }
 
       setColumnFilters(updater)
     },
-    [columnFilters, viewStore]
+    [columnFilters, post, setStoreData, viewStore]
   )
 
   // Columns visibility
@@ -77,17 +88,18 @@ export default function UseTableStates<TData extends RowData>({
   const onColumnVisibilityChange = useMemo(
     () => (updater: Updater<VisibilityState>) => {
       if (viewStore) {
-        void axios.post(store().url, {
-          visibility: JSON.stringify(
+        setStoreData(
+          'visibility',
+          JSON.stringify(
             updater instanceof Function ? updater(columnVisibility) : updater
-          ),
-          ...viewStore
-        })
+          )
+        )
+        void post(store().url)
       }
 
       setColumnVisibility(updater)
     },
-    [columnVisibility, viewStore]
+    [columnVisibility, post, setStoreData, viewStore]
   )
 
   // Pagination
@@ -111,10 +123,8 @@ export default function UseTableStates<TData extends RowData>({
           newPagination.pageIndex != pagination.pageIndex ||
           newPagination.pageSize != pagination.pageSize
         ) {
-          void axios.post(store().url, {
-            pagination: JSON.stringify(newPagination),
-            ...viewStore
-          })
+          setStoreData('pagination', JSON.stringify(newPagination))
+          void post(store().url)
 
           setPagination(updater)
         }
@@ -122,7 +132,7 @@ export default function UseTableStates<TData extends RowData>({
         setPagination(updater)
       }
     },
-    [pagination, viewStore]
+    [pagination, post, setStoreData, viewStore]
   )
 
   // Row selection
@@ -139,17 +149,18 @@ export default function UseTableStates<TData extends RowData>({
   const onSortingChange = useMemo(
     () => (updater: Updater<SortingState>) => {
       if (viewStore) {
-        void axios.post(store().url, {
-          sorting: JSON.stringify(
+        setStoreData(
+          'sorting',
+          JSON.stringify(
             updater instanceof Function ? updater(sorting) : updater
-          ),
-          ...viewStore
-        })
+          )
+        )
+        void post(store().url)
       }
 
       setSorting(updater)
     },
-    [sorting, viewStore]
+    [post, setStoreData, sorting, viewStore]
   )
 
   return {

@@ -1,5 +1,3 @@
-import './bootstrap'
-
 import { createInertiaApp, type ResolvedComponent } from '@inertiajs/react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createRoot, hydrateRoot } from 'react-dom/client'
