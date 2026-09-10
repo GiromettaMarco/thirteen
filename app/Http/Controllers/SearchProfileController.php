@@ -25,6 +25,7 @@ class SearchProfileController extends Controller
                 'profiles.name as name',
                 'users.email as email',
             ])
+            ->limit(7)
             ->get();
 
         return response()->json($users);

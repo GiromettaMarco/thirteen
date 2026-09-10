@@ -17,8 +17,15 @@ import {
   InputGroupInput,
   Spinner
 } from '@gmcode/react-ui'
+import { useHttp } from '@inertiajs/react'
 import { Plus, Search, UserPlus } from 'lucide-react'
-import { useContext, useState, type ComponentProps } from 'react'
+import {
+  useContext,
+  useState,
+  type ComponentProps,
+  type Dispatch,
+  type SetStateAction
+} from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import {
@@ -139,6 +146,80 @@ function AddProfileList({
   )
 }
 
+//#region SearchProfiles
+function SearchProfiles({
+  setEntries
+}: {
+  setEntries: Dispatch<SetStateAction<ProfileEntry[]>>
+}) {
+  // i18n
+  const { t } = useTranslation()
+
+  const form = useForm<InferSchema<typeof searchProfileSchema>>({
+    defaultValues: { s: '' },
+    resolver: useTsvResolver(searchProfileSchema)
+  })
+
+  const { get, processing, setData } = useHttp({ s: '' })
+
+  async function onSearchSubmit(values: { s: string }) {
+    setData('s', values.s)
+    void get(search().url, {
+      onSuccess: (response) => {
+        setEntries(response as ProfileEntry[])
+      }
+    })
+  }
+
+  return (
+    <form
+      className="flex items-end gap-2 px-4 pb-2"
+      id="search-profile-form"
+      method="GET"
+      onSubmit={form.handleSubmit(onSearchSubmit)}
+    >
+      <Controller
+        control={form.control}
+        name="s"
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor="search-profile">
+              {t(($) => $.actions.search)}
+            </FieldLabel>
+            <InputGroup>
+              <InputGroupInput
+                aria-invalid={fieldState.invalid}
+                autoComplete="off"
+                id="search-profile"
+                placeholder={t(($) => $.teams.members.add.nameOrEmail)}
+                type="text"
+                {...field}
+              />
+              <InputGroupAddon align="inline-end">
+                <InputGroupButton
+                  className="disabled:opacity-100"
+                  disabled={processing}
+                  type="submit"
+                >
+                  {processing ? (
+                    <Spinner
+                      aria-label={t(($) => $.loading)}
+                      className="size-3.5"
+                    />
+                  ) : (
+                    <Search aria-label={t(($) => $.actions.search)} />
+                  )}
+                </InputGroupButton>
+              </InputGroupAddon>
+            </InputGroup>
+            <ErrorMonitor error={fieldState.error} />
+          </Field>
+        )}
+      />
+    </form>
+  )
+}
+
 //#region AddMemberDrawer
 export function AddMemberDrawer({
   currentProfileId,
@@ -157,23 +238,8 @@ export function AddMemberDrawer({
   const { addMemberOpen: open, setAddMemberOpen: setOpen } =
     useContext(AppContext)
 
-  const searchForm = useForm<InferSchema<typeof searchProfileSchema>>({
-    defaultValues: { s: '' },
-    resolver: useTsvResolver(searchProfileSchema)
-  })
-
   const [isAdmin, setIsAdmin] = useState(false)
-  const [searchLoading, setSearchLoading] = useState(false)
-  const [profileEntries, setProfileEntries] = useState<ProfileEntry[]>([])
-
-  async function onSearchSubmit(values: { s: string }) {
-    setSearchLoading(true)
-    await axios
-      .get(search.url({ query: { s: values.s } }))
-      .then((value) => setProfileEntries(value.data))
-      .catch(() => setProfileEntries([]))
-      .finally(() => setSearchLoading(false))
-  }
+  const [entries, setEntries] = useState<ProfileEntry[]>([])
 
   return (
     <Drawer
@@ -188,51 +254,7 @@ export function AddMemberDrawer({
           </DrawerDescription>
         </DrawerHeader>
 
-        <form
-          className="flex items-end gap-2 px-4 pb-2"
-          id="search-profile-form"
-          method="GET"
-          onSubmit={searchForm.handleSubmit(onSearchSubmit)}
-        >
-          <Controller
-            control={searchForm.control}
-            name="s"
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor="search-profile">
-                  {t(($) => $.actions.search)}
-                </FieldLabel>
-                <InputGroup>
-                  <InputGroupInput
-                    aria-invalid={fieldState.invalid}
-                    autoComplete="off"
-                    id="search-profile"
-                    placeholder={t(($) => $.teams.members.add.nameOrEmail)}
-                    type="text"
-                    {...field}
-                  />
-                  <InputGroupAddon align="inline-end">
-                    <InputGroupButton
-                      className="disabled:opacity-100"
-                      disabled={searchLoading}
-                      type="submit"
-                    >
-                      {searchLoading ? (
-                        <Spinner
-                          aria-label={t(($) => $.loading)}
-                          className="size-3.5"
-                        />
-                      ) : (
-                        <Search aria-label={t(($) => $.actions.search)} />
-                      )}
-                    </InputGroupButton>
-                  </InputGroupAddon>
-                </InputGroup>
-                <ErrorMonitor error={fieldState.error} />
-              </Field>
-            )}
-          />
-        </form>
+        <SearchProfiles setEntries={setEntries} />
 
         <Form
           className="flex h-full flex-col overflow-y-auto"
@@ -258,7 +280,7 @@ export function AddMemberDrawer({
                 onChange={(profile) =>
                   form.setValue('profile_id', profile.id.toString())
                 }
-                profiles={profileEntries}
+                profiles={entries}
               />
 
               <div className="mt-auto flex h-full items-end px-4">
