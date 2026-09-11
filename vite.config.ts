@@ -84,6 +84,7 @@ export default defineConfig({
       'prefer-rest-params': 'error',
       'prefer-spread': 'error',
       'react/exhaustive-deps': 'warn',
+      'react/incompatible-library': 'off',
       'react/rules-of-hooks': 'error',
       'sort-vars': 'warn',
       'typescript/ban-ts-comment': 'error',
