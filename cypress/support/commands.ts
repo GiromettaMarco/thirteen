@@ -43,7 +43,7 @@ Cypress.Commands.add('login', (email, password, username) => {
 })
 
 Cypress.Commands.add('refreshDB', () => {
-  cy.exec('php artisan migrate:fresh --seed --seeder=TestSeeder --env=testing')
+  cy.task('refreshDB')
   void Cypress.session.clearAllSavedSessions()
 })
 
