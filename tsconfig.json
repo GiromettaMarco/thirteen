@@ -31,5 +31,5 @@
     },
     "jsx": "react-jsx"
   },
-  "include": ["cypress", "resources/js"]
+  "include": ["cypress.config.ts", "cypress", "resources/js"]
 }
