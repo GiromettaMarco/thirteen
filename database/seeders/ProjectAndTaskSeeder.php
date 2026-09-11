@@ -8,6 +8,8 @@ use App\Models\Team;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 
+// @NOTE keep a minimum of 2 projects and 1 task for testing purpose
+
 class ProjectAndTaskSeeder extends Seeder
 {
     public function run(): void
@@ -17,14 +19,14 @@ class ProjectAndTaskSeeder extends Seeder
         $teams->each(function ($team) {
             /** @var Collection<int, Project> */
             $projects = Project::factory()
-                ->count(rand(1, 5))
+                ->count(rand(2, 5))
                 ->for($team)
                 ->create();
 
             $projects->each(function ($project) use ($team) {
                 $team->profiles->each(function ($profile) use ($project) {
                     Task::factory()
-                        ->count(rand(0, 10))
+                        ->count(rand(1, 10))
                         ->for($project)
                         ->create([
                             'profile_id' => $profile->id,
@@ -32,7 +34,7 @@ class ProjectAndTaskSeeder extends Seeder
                 });
 
                 Task::factory()
-                    ->count(rand(0, 10))
+                    ->count(rand(1, 10))
                     ->for($project)
                     ->create();
             });
