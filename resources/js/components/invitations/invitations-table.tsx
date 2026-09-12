@@ -11,39 +11,18 @@ import {
 } from '@tanstack/react-table'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ActionsMenu, type ActionProps } from '@/components/actions-menu'
 import TableMain, {
-  ActionsButton,
   AfterTable,
   ColumnsVisibility,
   SortableColumnHeader,
   TableToolbar
 } from '@/components/ui/data-table'
 import { DestroyDialog } from '@/components/ui/destroy-dialog'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator
-} from '@/components/ui/dropdown-menu'
 import UseTableStates from '@/hooks/use-table-states'
 import { format } from '@/lib/utils'
 import { destroy, update } from '@/routes/invitations'
 import type { Invitation, View, ViewStore } from '@/types'
-
-//#region Actions
-function UpdateInvitationItem({ id }: { id: number }) {
-  // i18n
-  const { t } = useTranslation()
-
-  // Inertia form
-  const { submit } = useForm()
-
-  return (
-    <DropdownMenuItem onClick={() => submit(update(id))}>
-      {t(($) => $.pages.dashboard.invitations.renew)}
-    </DropdownMenuItem>
-  )
-}
 
 function Actions({ invitation }: { invitation: Invitation }) {
   // i18n
@@ -51,6 +30,26 @@ function Actions({ invitation }: { invitation: Invitation }) {
 
   // Delete dialog state
   const [deleteOpen, setDeleteOpen] = useState(false)
+
+  // Update invitation form
+  const { submit: renewInvitation } = useForm()
+
+  const mainActions: ActionProps[] = [
+    {
+      label: t(($) => $.pages.dashboard.invitations.renew),
+      name: 'renew',
+      onClick: () => renewInvitation(update(invitation.id))
+    }
+  ]
+
+  const secondaryActions: ActionProps[] = [
+    {
+      label: t(($) => $.pages.dashboard.invitations.revoke),
+      name: 'open-delete-dialog',
+      onClick: () => setDeleteOpen(true),
+      variant: 'destructive'
+    }
+  ]
 
   return (
     <>
@@ -63,26 +62,10 @@ function Actions({ invitation }: { invitation: Invitation }) {
         setOpen={setDeleteOpen}
         title={t(($) => $.dialogs.deleteInvitation.title)}
       />
-
-      <DropdownMenu>
-        <ActionsButton />
-
-        <DropdownMenuContent
-          align="end"
-          className="w-32"
-        >
-          <UpdateInvitationItem id={invitation.id} />
-
-          <DropdownMenuSeparator />
-
-          <DropdownMenuItem
-            onClick={() => setDeleteOpen(true)}
-            variant="destructive"
-          >
-            {t(($) => $.pages.dashboard.invitations.revoke)}
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <ActionsMenu
+        actions={mainActions}
+        secondary={secondaryActions}
+      />
     </>
   )
 }
@@ -220,7 +203,10 @@ export function InvitationsTable({
         />
       </div>
 
-      <TableMain table={table} />
+      <TableMain
+        id="invitations-table"
+        table={table}
+      />
 
       <AfterTable
         selection={false}

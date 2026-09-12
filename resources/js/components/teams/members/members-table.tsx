@@ -1,4 +1,3 @@
-import { Link } from '@inertiajs/react'
 import {
   getCoreRowModel,
   getFacetedRowModel,
@@ -13,6 +12,7 @@ import {
 import { Check } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ActionsMenu, type ActionProps } from '@/components/actions-menu'
 import { NameCell } from '@/components/name-cell'
 import {
   AddMemberDrawer,
@@ -23,18 +23,11 @@ import {
   RemoveMemberDialog
 } from '@/components/teams/members/destroy-member-dialog'
 import TableMain, {
-  ActionsButton,
   AfterTable,
   ColumnsVisibility,
   SortableColumnHeader,
   TableToolbar
 } from '@/components/ui/data-table'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator
-} from '@/components/ui/dropdown-menu'
 import UseTableStates from '@/hooks/use-table-states'
 import { sortBoolean } from '@/lib/utils'
 import { show } from '@/routes/members'
@@ -58,6 +51,28 @@ function Actions({
   // Delete dialog state
   const [deleteOpen, setDeleteOpen] = useState(false)
 
+  const mainActions: ActionProps[] = [
+    {
+      href: show({ profile: member.id, team }),
+      label: canEdit ? t(($) => $.actions.edit) : t(($) => $.actions.show),
+      name: 'show'
+    }
+  ]
+
+  const secondaryActions: ActionProps[] = []
+
+  if (canEdit || currentProfileId === member.id) {
+    secondaryActions.push({
+      label:
+        currentProfileId === member.id
+          ? t(($) => $.actions.leave)
+          : t(($) => $.actions.remove),
+      name: 'open-delete-dialog',
+      onClick: () => setDeleteOpen(true),
+      variant: 'destructive'
+    })
+  }
+
   return (
     <>
       {currentProfileId === member.id ? (
@@ -75,44 +90,10 @@ function Actions({
         />
       ) : null}
 
-      <DropdownMenu>
-        <ActionsButton
-          id={`open-team-${team.id}-member-${member.id}-actions`}
-          label={t(($) => $.teams.members.actions, { member: member.name })}
-        />
-        <DropdownMenuContent
-          align="end"
-          className="w-32"
-        >
-          <DropdownMenuItem asChild>
-            <Link href={show({ profile: member.id, team })}>
-              {canEdit ? t(($) => $.actions.edit) : t(($) => $.actions.show)}
-            </Link>
-          </DropdownMenuItem>
-
-          {(canEdit || currentProfileId === member.id) && (
-            <>
-              <DropdownMenuSeparator />
-
-              <DropdownMenuItem
-                asChild
-                variant="destructive"
-              >
-                <button
-                  className="w-full"
-                  id={`open-team-${team.id}-delete-member-${member.id}-dialog`}
-                  onClick={() => setDeleteOpen(true)}
-                  type="button"
-                >
-                  {currentProfileId === member.id
-                    ? t(($) => $.actions.leave)
-                    : t(($) => $.actions.remove)}
-                </button>
-              </DropdownMenuItem>
-            </>
-          )}
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <ActionsMenu
+        actions={mainActions}
+        secondary={secondaryActions}
+      />
     </>
   )
 }
@@ -352,7 +333,10 @@ export function MembersTable({
         </div>
       </div>
 
-      <TableMain table={table} />
+      <TableMain
+        id="members-table"
+        table={table}
+      />
 
       <AfterTable
         selection={false}

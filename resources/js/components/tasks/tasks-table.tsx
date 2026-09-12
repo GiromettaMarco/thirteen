@@ -17,13 +17,13 @@ import {
   Calendar,
   Check,
   Ellipsis,
-  EllipsisVertical,
   Inbox,
   SquareCheckBig,
   X
 } from 'lucide-react'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ActionsMenu, type ActionProps } from '@/components/actions-menu'
 import { NameCell } from '@/components/name-cell'
 import {
   AddTaskDrawer,
@@ -43,13 +43,6 @@ import TableMain, {
 } from '@/components/ui/data-table'
 import { DestroyDialog } from '@/components/ui/destroy-dialog'
 import { DestroyMany } from '@/components/ui/destroy-many'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
 import {
   Empty,
   EmptyContent,
@@ -84,63 +77,51 @@ export function Actions({
   // Delete dialog state
   const [deleteOpen, setDeleteOpen] = useState(false)
 
-  if (canEdit) {
-    return (
-      <>
-        <DestroyDialog
-          description={t(($) => $.dialogs.deleteTask.description, {
-            task: task.name
-          })}
-          open={deleteOpen}
-          route={destroy({
-            project: task.project_id,
-            task: task,
-            team: teamId
-          })}
-          setOpen={setDeleteOpen}
-          title={t(($) => $.dialogs.deleteTask.title)}
-        />
-
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              className="flex size-8 text-muted-foreground data-[state=open]:bg-muted"
-              size="icon"
-              variant="ghost"
-            >
-              <EllipsisVertical />
-              <span className="sr-only">{t(($) => $.openMenu)}</span>
-            </Button>
-          </DropdownMenuTrigger>
-
-          <DropdownMenuContent
-            align="end"
-            className="w-32"
-          >
-            <DropdownMenuItem
-              onClick={() => {
-                setActiveTask(task)
-                setUpdateTaskOpen(true)
-              }}
-            >
-              {t(($) => $.actions.edit)}
-            </DropdownMenuItem>
-
-            <DropdownMenuSeparator />
-
-            <DropdownMenuItem
-              onClick={() => setDeleteOpen(true)}
-              variant="destructive"
-            >
-              {t(($) => $.actions.delete)}
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </>
-    )
+  if (!canEdit) {
+    return <div className="min-h-8" />
   }
 
-  return <div className="min-h-8" />
+  const mainActions: ActionProps[] = [
+    {
+      label: t(($) => $.actions.edit),
+      name: 'open-update-drawer',
+      onClick: () => {
+        setActiveTask(task)
+        setUpdateTaskOpen(true)
+      }
+    }
+  ]
+
+  const secondaryActions: ActionProps[] = [
+    {
+      label: t(($) => $.actions.delete),
+      name: 'open-delete-dialog',
+      onClick: () => setDeleteOpen(true),
+      variant: 'destructive'
+    }
+  ]
+
+  return (
+    <>
+      <DestroyDialog
+        description={t(($) => $.dialogs.deleteTask.description, {
+          task: task.name
+        })}
+        open={deleteOpen}
+        route={destroy({
+          project: task.project_id,
+          task: task,
+          team: teamId
+        })}
+        setOpen={setDeleteOpen}
+        title={t(($) => $.dialogs.deleteTask.title)}
+      />
+      <ActionsMenu
+        actions={mainActions}
+        secondary={secondaryActions}
+      />
+    </>
+  )
 }
 
 //#region TableToolbar
@@ -528,7 +509,10 @@ export function TasksTable({
             </div>
           </div>
 
-          <TableMain table={table} />
+          <TableMain
+            id="tasks-table"
+            table={table}
+          />
 
           <AfterTable
             selection={canEdit}

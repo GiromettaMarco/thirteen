@@ -13,6 +13,7 @@ import {
 import { Star, UserStar } from 'lucide-react'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ActionsMenu, type ActionProps } from '@/components/actions-menu'
 import { NameCell } from '@/components/name-cell'
 import {
   AddTeamDrawer,
@@ -21,19 +22,12 @@ import {
 import { LeaveTeamDialog } from '@/components/teams/members/destroy-member-dialog'
 import UpdateTeamDrawer from '@/components/teams/update-team-drawer'
 import TableMain, {
-  ActionsButton,
   AfterTable,
   ColumnsVisibility,
   SortableColumnHeader,
   TableToolbar
 } from '@/components/ui/data-table'
 import { DestroyDialog } from '@/components/ui/destroy-dialog'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator
-} from '@/components/ui/dropdown-menu'
 import {
   Empty,
   EmptyContent,
@@ -65,9 +59,7 @@ function CurrentTeamCell({
   // i18n
   const { t } = useTranslation()
 
-  const { submit } = useForm({
-    id: team.id
-  })
+  const { submit } = useForm({ id: team.id })
 
   function setCurrentTeam() {
     if (currentTeamId != team.id) {
@@ -78,7 +70,8 @@ function CurrentTeamCell({
   return (
     <button
       className="flex justify-center"
-      id={`set-current-team-${team.id}`}
+      data-action="set-current-team"
+      data-team-id={team.id}
       onClick={setCurrentTeam}
       type="button"
     >
@@ -94,13 +87,7 @@ function CurrentTeamCell({
 }
 
 //#region Actions
-function Actions({
-  // userId,
-  team
-}: {
-  // userId?: number
-  team: Team & WithTeamPermissions
-}) {
+function Actions({ team }: { team: Team & WithTeamPermissions }) {
   // i18n
   const { t } = useTranslation()
 
@@ -112,9 +99,44 @@ function Actions({
   const [leaveOpen, setLeaveOpen] = useState(false)
 
   // Current team form
-  const currentTeamForm = useForm({
-    id: team.id
-  })
+  const { submit: updateCurrentTeam } = useForm({ id: team.id })
+
+  const mainActions: ActionProps[] = [
+    {
+      label: t(($) => $.actions.select),
+      name: 'select',
+      onClick: () => updateCurrentTeam(update())
+    }
+  ]
+
+  const secondaryActions: ActionProps[] = [
+    {
+      label: t(($) => $.actions.leave),
+      name: 'open-leave-dialog',
+      onClick: () => setLeaveOpen(true),
+      variant: 'destructive'
+    }
+  ]
+
+  if (team.pivot.can_edit_team) {
+    mainActions.push({
+      label: t(($) => $.actions.edit),
+      name: 'open-update-drawer',
+      onClick: () => {
+        setActiveTeam(team)
+        setUpdateTeamOpen(true)
+      }
+    })
+  }
+
+  if (team.pivot.can_delete_team) {
+    secondaryActions.push({
+      label: t(($) => $.actions.delete),
+      name: 'open-delete-dialog',
+      onClick: () => setDeleteOpen(true),
+      variant: 'destructive'
+    })
+  }
 
   return (
     <>
@@ -135,76 +157,10 @@ function Actions({
           warning={t(($) => $.dialogs.deleteTeam.warn)}
         />
       )}
-
-      <DropdownMenu>
-        <ActionsButton
-          id={`open-team-${team.id}-actions`}
-          label={t(($) => $.teams.actions, { team: team.name })}
-        />
-
-        <DropdownMenuContent
-          align="end"
-          className="w-32"
-        >
-          <DropdownMenuItem asChild>
-            <button
-              className="w-full"
-              onClick={() => currentTeamForm.submit(update())}
-              type="button"
-            >
-              {t(($) => $.actions.select)}
-            </button>
-          </DropdownMenuItem>
-
-          {team.pivot.can_edit_team && (
-            <DropdownMenuItem asChild>
-              <button
-                className="w-full"
-                id={`open-update-team-${team.id}-drawer`}
-                onClick={() => {
-                  setActiveTeam(team)
-                  setUpdateTeamOpen(true)
-                }}
-                type="button"
-              >
-                {t(($) => $.actions.edit)}
-              </button>
-            </DropdownMenuItem>
-          )}
-
-          <DropdownMenuSeparator />
-
-          <DropdownMenuItem
-            asChild
-            variant="destructive"
-          >
-            <button
-              className="w-full"
-              id={`open-leave-team-${team.id}-dialog`}
-              onClick={() => setLeaveOpen(true)}
-              type="button"
-            >
-              {t(($) => $.actions.leave)}
-            </button>
-          </DropdownMenuItem>
-
-          {team.pivot.can_delete_team && (
-            <DropdownMenuItem
-              asChild
-              variant="destructive"
-            >
-              <button
-                className="w-full"
-                id={`open-delete-team-${team.id}-dialog`}
-                onClick={() => setDeleteOpen(true)}
-                type="button"
-              >
-                {t(($) => $.actions.delete)}
-              </button>
-            </DropdownMenuItem>
-          )}
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <ActionsMenu
+        actions={mainActions}
+        secondary={secondaryActions}
+      />
     </>
   )
 }
@@ -389,7 +345,10 @@ export function TeamsTable({
             </div>
           </div>
 
-          <TableMain table={table} />
+          <TableMain
+            id="teams-table"
+            table={table}
+          />
 
           <AfterTable
             selection={false}

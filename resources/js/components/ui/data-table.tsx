@@ -53,11 +53,10 @@ import {
   ChevronsRight,
   ChevronsUpDown,
   Columns2,
-  EllipsisVertical,
   PlusCircle,
   X
 } from 'lucide-react'
-import type { ComponentProps, PropsWithChildren } from 'react'
+import type { PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Table,
@@ -638,8 +637,10 @@ export function SortableColumnHeader<TData, TValue>({
 
 //#region TableMain
 export default function TableMain<TData>({
+  id,
   table
 }: {
+  id?: string
   table: TanstackTable<TData>
 }) {
   'use no memo'
@@ -649,7 +650,7 @@ export default function TableMain<TData>({
 
   return (
     <div className="overflow-hidden rounded-md border">
-      <Table>
+      <Table id={id}>
         <TableHeader className="sticky top-0 z-10 bg-muted">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -799,34 +800,5 @@ export function TableToolbar<TData>({
         </div>
       )}
     </div>
-  )
-}
-
-//#region ActionsButton
-export function ActionsButton({
-  className,
-  label,
-  size = 'icon',
-  variant = 'ghost',
-  ...props
-}: ComponentProps<typeof Button> & { label?: string }) {
-  // i18n
-  const { t } = useTranslation()
-
-  return (
-    <DropdownMenuTrigger asChild>
-      <Button
-        className={cn(
-          'size-8 text-muted-foreground data-[state=open]:bg-muted',
-          className
-        )}
-        size={size}
-        variant={variant}
-        {...props}
-      >
-        <EllipsisVertical />
-        <span className="sr-only">{label || t(($) => $.openMenu)}</span>
-      </Button>
-    </DropdownMenuTrigger>
   )
 }

@@ -126,6 +126,7 @@ export default {
   member_other: 'Members',
   name: 'Name',
   notifications: 'Notifications',
+  openActions: 'Open actions menu',
   openMenu: 'Open menu',
   other: 'Other',
   pages: {
@@ -454,7 +455,6 @@ export default {
     }
   },
   teams: {
-    actions: 'Team "{{team}}" actions',
     createDesc: 'Insert the team name to create a new team.',
     createTeam: 'Create Team',
     createTitle: 'New team',
@@ -465,7 +465,6 @@ export default {
       title: 'No Teams yet'
     },
     members: {
-      actions: 'Member "{{member}}" actions',
       add: {
         description: 'Search and add users by name or email address.',
         nameOrEmail: 'Name or email',

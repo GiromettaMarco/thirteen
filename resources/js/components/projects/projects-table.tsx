@@ -9,9 +9,10 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
-import { EllipsisVertical, Folder } from 'lucide-react'
+import { Folder } from 'lucide-react'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ActionsMenu, type ActionProps } from '@/components/actions-menu'
 import { NameCell } from '@/components/name-cell'
 import {
   AddProjectDrawer,
@@ -28,13 +29,6 @@ import TableMain, {
 } from '@/components/ui/data-table'
 import { DestroyDialog } from '@/components/ui/destroy-dialog'
 import { DestroyMany } from '@/components/ui/destroy-many'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
 import {
   Empty,
   EmptyContent,
@@ -66,60 +60,48 @@ export function Actions({
   // Delete dialog state
   const [deleteOpen, setDeleteOpen] = useState(false)
 
-  if (canEdit) {
-    return (
-      <>
-        <DestroyDialog
-          description={t(($) => $.dialogs.deleteProject.description, {
-            project: project.name
-          })}
-          open={deleteOpen}
-          route={destroy({ project, team: project.team_id })}
-          setOpen={setDeleteOpen}
-          title={t(($) => $.dialogs.deleteProject.title)}
-          warning={t(($) => $.dialogs.deleteProject.warn)}
-        />
-
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              className="flex size-8 text-muted-foreground data-[state=open]:bg-muted"
-              size="icon"
-              variant="ghost"
-            >
-              <EllipsisVertical />
-              <span className="sr-only">{t(($) => $.openMenu)}</span>
-            </Button>
-          </DropdownMenuTrigger>
-
-          <DropdownMenuContent
-            align="end"
-            className="w-32"
-          >
-            <DropdownMenuItem
-              onClick={() => {
-                setActiveProject(project)
-                setUpdateProjectOpen(true)
-              }}
-            >
-              {t(($) => $.actions.edit)}
-            </DropdownMenuItem>
-
-            <DropdownMenuSeparator />
-
-            <DropdownMenuItem
-              onClick={() => setDeleteOpen(true)}
-              variant="destructive"
-            >
-              {t(($) => $.actions.delete)}
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </>
-    )
+  if (!canEdit) {
+    return <div className="min-h-8" />
   }
 
-  return <div className="min-h-8" />
+  const mainActions: ActionProps[] = [
+    {
+      label: t(($) => $.actions.edit),
+      name: 'open-update-drawer',
+      onClick: () => {
+        setActiveProject(project)
+        setUpdateProjectOpen(true)
+      }
+    }
+  ]
+
+  const secondaryActions: ActionProps[] = [
+    {
+      label: t(($) => $.actions.delete),
+      name: 'open-delete-dialog',
+      onClick: () => setDeleteOpen(true),
+      variant: 'destructive'
+    }
+  ]
+
+  return (
+    <>
+      <DestroyDialog
+        description={t(($) => $.dialogs.deleteProject.description, {
+          project: project.name
+        })}
+        open={deleteOpen}
+        route={destroy({ project, team: project.team_id })}
+        setOpen={setDeleteOpen}
+        title={t(($) => $.dialogs.deleteProject.title)}
+        warning={t(($) => $.dialogs.deleteProject.warn)}
+      />
+      <ActionsMenu
+        actions={mainActions}
+        secondary={secondaryActions}
+      />
+    </>
+  )
 }
 
 //#region EmptyFiller
@@ -344,7 +326,10 @@ export function ProjectsTable({
             </div>
           </div>
 
-          <TableMain table={table} />
+          <TableMain
+            id="projects-table"
+            table={table}
+          />
 
           <AfterTable
             selection={canEdit}
