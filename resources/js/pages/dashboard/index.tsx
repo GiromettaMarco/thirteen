@@ -323,7 +323,7 @@ function TasksTable({
     <section className={cn('grid', { 'gap-4': tasks.length == 0 })}>
       {tasks.length > 0 ? (
         <div className="grid gap-3">
-          <div className="grid items-center justify-between gap-2 xl:flex">
+          <div className="grid items-center justify-between gap-2 @5xl/main:flex">
             <TableToolbar table={table} />
             <div className="flex gap-2">
               <ColumnsVisibility

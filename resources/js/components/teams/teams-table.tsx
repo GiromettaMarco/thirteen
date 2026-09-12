@@ -329,7 +329,7 @@ export function TeamsTable({
 
       {teams.length > 0 ? (
         <>
-          <div className="grid items-center justify-between gap-2 xl:flex">
+          <div className="grid items-center justify-between gap-2 @5xl/main:flex">
             <TableToolbar
               className="md:flex"
               table={table}

@@ -281,7 +281,7 @@ export function AfterTable<TData>({
     return (
       <div
         className={cn(
-          'flex flex-col gap-2 xl:flex-row-reverse xl:items-center xl:justify-between',
+          'flex flex-col gap-2 @5xl/main:flex-row-reverse @5xl/main:items-center @5xl/main:justify-between',
           className
         )}
       >
@@ -302,7 +302,7 @@ export function AfterTable<TData>({
     return (
       <div
         className={cn(
-          'flex flex-col gap-2 xl:flex-row-reverse xl:items-center xl:justify-between',
+          'flex flex-col gap-2 @5xl/main:flex-row-reverse @5xl/main:items-center @5xl/main:justify-between',
           className
         )}
       >
@@ -316,7 +316,7 @@ export function AfterTable<TData>({
   // All
   return (
     <div className={cn('flex flex-col gap-2', className)}>
-      <div className="flex flex-col gap-2 xl:flex-row-reverse xl:items-center xl:justify-between">
+      <div className="flex flex-col gap-2 @5xl/main:flex-row-reverse @5xl/main:items-center @5xl/main:justify-between">
         <TablePagination table={table} />
 
         <SelectionMonitor table={table} />
@@ -773,7 +773,7 @@ export function TableToolbar<TData>({
   const isFiltered = table.getState().columnFilters.length > 0
 
   return (
-    <div className={cn('grid items-center gap-2 xl:flex', className)}>
+    <div className={cn('grid items-center gap-2 @5xl/main:flex', className)}>
       <Input
         className="h-8 w-full 2xl:w-64"
         onChange={(event) =>

@@ -484,7 +484,7 @@ export function TasksTable({
 
       {tasks.length > 0 ? (
         <>
-          <div className="grid items-center justify-between gap-2 xl:flex">
+          <div className="grid items-center justify-between gap-2 @5xl/main:flex">
             <TableToolbar table={table} />
 
             <div className="flex gap-2">

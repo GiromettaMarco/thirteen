@@ -191,7 +191,7 @@ export function InvitationsTable({
 
   return (
     <div className="grid gap-3">
-      <div className="grid items-center justify-between gap-2 xl:flex">
+      <div className="grid items-center justify-between gap-2 @5xl/main:flex">
         <TableToolbar
           columnId="user_profile_name"
           table={table}
