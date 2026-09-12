@@ -26,6 +26,20 @@ class Membership extends Pivot
     public $incrementing = true;
 
     /**
+     * Get the attributes that should be cast.
+     */
+    protected function casts(): array
+    {
+        return [
+            'admin' => 'boolean',
+            'can_delete_team' => 'boolean',
+            'can_edit_members' => 'boolean',
+            'can_edit_projects' => 'boolean',
+            'can_edit_team' => 'boolean',
+        ];
+    }
+
+    /**
      * Get the profile that belongs to this membership.
      *
      * @return BelongsTo<Profile, $this>
