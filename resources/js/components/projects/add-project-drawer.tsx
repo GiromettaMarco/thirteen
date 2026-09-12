@@ -26,6 +26,7 @@ export function AddProjectDrawerTrigger(props: ComponentProps<typeof Button>) {
 
   return (
     <Button
+      id="open-create-project-drawer"
       onClick={() => setOpen(true)}
       size="sm"
       {...props}
@@ -64,6 +65,7 @@ export function AddProjectDrawer({ teamId }: { teamId: number }) {
             description: '',
             name: t(($) => $.projects.defaultName)
           }}
+          id="create-project-form"
           onSuccess={() => setOpen(false)}
           route={store({ team: teamId })}
           schema={createProjectSchema}

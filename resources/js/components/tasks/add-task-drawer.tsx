@@ -34,6 +34,7 @@ export function AddTaskDrawerTrigger(props: ComponentProps<typeof Button>) {
 
   return (
     <Button
+      id="open-create-task-drawer"
       onClick={() => setOpen(true)}
       size="sm"
       {...props}
@@ -131,6 +132,7 @@ export function AddTaskDrawer({
             profile_id: '',
             status: 'todo'
           }}
+          id="create-task-form"
           onSuccess={() => setOpen(false)}
           route={store({ project: projectId, team: teamId })}
           schema={createTaskSchema}

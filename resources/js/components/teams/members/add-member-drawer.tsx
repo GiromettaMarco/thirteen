@@ -54,7 +54,7 @@ export function AddMemberDrawerTrigger(props: ComponentProps<typeof Button>) {
 
   return (
     <Button
-      id="open-add-team-member"
+      id="open-add-team-member-drawer"
       onClick={() => setOpen(true)}
       size="sm"
       {...props}
@@ -77,6 +77,7 @@ function AddProfileList({
   className,
   disable = [],
   hide = [],
+  id,
   invalid = false,
   onChange,
   profiles
@@ -87,6 +88,7 @@ function AddProfileList({
   disable?: number[]
   /** Array of profile ids to hide from search results */
   hide?: number[]
+  id?: string
   invalid?: boolean
   onChange?: (profile: ProfileEntry) => void
   profiles: ProfileEntry[]
@@ -110,6 +112,7 @@ function AddProfileList({
         { 'border border-destructive': invalid },
         className
       )}
+      id={id}
     >
       {profiles.map((profile) => (
         <li
@@ -277,6 +280,7 @@ export function AddMemberDrawer({
                 className="min-h-15 flex-none px-4"
                 disable={currentProfiles}
                 hide={currentProfileId ? [currentProfileId] : []}
+                id="profiles-list"
                 onChange={(profile) =>
                   form.setValue('profile_id', profile.id.toString())
                 }

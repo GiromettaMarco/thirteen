@@ -33,6 +33,7 @@ export function SendInvitationForm({ teams }: { teams: Team[] }) {
         role: 'guest',
         teams: '[]'
       }}
+      id="create-invitation-form"
       route={store()}
       schema={createInvitationSchema}
     >

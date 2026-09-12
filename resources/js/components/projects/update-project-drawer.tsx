@@ -59,6 +59,7 @@ export function UpdateProjectDrawer({
               description: project.description ?? '',
               name: project.name
             }}
+            id="update-project-form"
             onSuccess={() => setOpen(false)}
             route={update({
               project: project.id,

@@ -62,11 +62,13 @@ function SidebarItem({
   active = false,
   href,
   Icon,
+  id,
   label
 }: {
   active?: boolean
   href: RouteDefinition<'get'>
   Icon: FC<SVGProps<SVGSVGElement>>
+  id?: string
   label: string
 }) {
   return (
@@ -76,7 +78,10 @@ function SidebarItem({
         className={cn({ 'bg-accent': active })}
         tooltip={label}
       >
-        <Link href={href}>
+        <Link
+          href={href}
+          id={id}
+        >
           <Icon />
           <span>{label}</span>
         </Link>
@@ -108,17 +113,16 @@ function Navigation({
               active={url === dashboard.url()}
               href={dashboard()}
               Icon={Gauge}
+              id="to-dashboard"
               label={t(($) => $.dashboard)}
             />
-
-            {/* @TODO add no current team fallback (projects page) */}
-
             {currentTeamId && (
               <>
                 <SidebarItem
                   active={url === projectsIndex.url({ team: currentTeamId })}
                   href={projectsIndex({ team: currentTeamId })}
                   Icon={Folder}
+                  id="to-projects"
                   label={t(($) => $.project, { count: 2 })}
                 />
 
@@ -126,6 +130,7 @@ function Navigation({
                   active={url === teamsShow.url({ team: currentTeamId })}
                   href={teamsShow({ team: currentTeamId })}
                   Icon={Users}
+                  id="to-current-team"
                   label={t(($) => $.team, { count: 1 })}
                 />
               </>
@@ -141,6 +146,7 @@ function Navigation({
             active={url === teamsIndex.url()}
             href={teamsIndex()}
             Icon={UserStar}
+            id="to-teams"
             label={t(($) => $.team, { count: 2 })}
           />
 
@@ -149,6 +155,7 @@ function Navigation({
               active={url === invitationsIndex.url()}
               href={invitationsIndex()}
               Icon={Mail}
+              id="to-invitations"
               label={t(($) => $.invitation, { count: 2 })}
             />
           )}
@@ -162,6 +169,7 @@ function Navigation({
               active={url === settings.url()}
               href={settings()}
               Icon={Settings}
+              id="to-settings"
               label={t(($) => $.settings)}
             />
 
@@ -245,7 +253,10 @@ function UserDropdown({
                 asChild
                 className="cursor-pointer"
               >
-                <Link href={accountEdit()}>
+                <Link
+                  href={accountEdit()}
+                  id="to-account"
+                >
                   <CircleUser />
                   {t(($) => $.account)}
                 </Link>
