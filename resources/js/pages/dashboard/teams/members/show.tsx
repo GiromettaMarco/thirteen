@@ -76,22 +76,18 @@ export default function TeamMembersShow({
           <MemberTasksChart tasksCount={tasksCount} />
         </Format>
 
-        {team.pivot.can_edit_members && (
-          <>
-            <Separator />
+        <Separator />
 
-            <Format
-              h2={t(($) => $.teams.members.show.permissions.title)}
-              p={t(($) => $.teams.members.show.permissions.description)}
-            >
-              <TeamPermissions
-                canEdit={team.pivot.can_edit_members}
-                profile={profile}
-                teamId={team.id}
-              />
-            </Format>
-          </>
-        )}
+        <Format
+          h2={t(($) => $.teams.members.show.permissions.title)}
+          p={t(($) => $.teams.members.show.permissions.description)}
+        >
+          <TeamPermissions
+            canEdit={team.pivot.can_edit_members}
+            profile={profile}
+            teamId={team.id}
+          />
+        </Format>
       </Container>
     </DashboardLayout>
   )
