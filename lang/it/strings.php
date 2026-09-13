@@ -38,11 +38,13 @@ return [
     'project' => [
         'created' => 'Progetto creato',
         'deleted' => 'Progetto eliminato',
+        'deleted_many' => 'Progetti eliminati',
         'updated' => 'Progetto aggiornato',
     ],
     'task' => [
         'created' => 'Compito created',
         'deleted' => 'Compito eliminato',
+        'deleted_many' => 'Compiti eliminati',
         'updated' => 'Compito aggiornato',
     ],
     'team' => [

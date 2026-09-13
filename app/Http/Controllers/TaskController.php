@@ -89,6 +89,8 @@ class TaskController extends Controller
             });
         });
 
+        Inertia::flash('toast', new FlashMessage(__('strings.task.deleted_many'), 'success'));
+
         return back();
     }
 }

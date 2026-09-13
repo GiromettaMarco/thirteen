@@ -137,6 +137,8 @@ class ProjectController extends Controller
             });
         });
 
+        Inertia::flash('toast', new FlashMessage(__('strings.project.deleted_many'), 'success'));
+
         return back();
     }
 }
