@@ -90,7 +90,7 @@ class TestSeeder extends Seeder
                 ->state([
                     'name' => 'Stray User',
                     'role' => ProfileRole::Guest,
-                    'public' => false,
+                    'public' => true,
                 ])
             )
             ->create([

@@ -83,5 +83,17 @@ class UserAndTeamSeeder extends Seeder
 
             $user->profile->teams()->syncWithPivotValues($team_ids, $permissions, false);
         });
+
+        User::factory()
+            ->has(Profile::factory()
+                ->state([
+                    'name' => 'Stray User',
+                    'role' => ProfileRole::Guest,
+                    'public' => true,
+                ])
+            )
+            ->create([
+                'email' => 'stray@example.com',
+            ]);
     }
 }
