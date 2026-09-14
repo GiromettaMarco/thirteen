@@ -1,4 +1,4 @@
-describe('Settings Page', () => {
+describe('Settings page', () => {
   before(() => {
     cy.refreshDB()
   })

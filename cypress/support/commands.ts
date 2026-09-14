@@ -3,6 +3,7 @@ declare global {
     interface Chainable {
       login(email: string, password: string, username: string): Chainable<void>
       loginAsAdmin(): Chainable<void>
+      loginAsStrayUser(): Chainable<void>
       loginAsUser(): Chainable<void>
       refreshDB(): Chainable<void>
     }
@@ -29,6 +30,17 @@ Cypress.Commands.add('loginAsUser', () => {
   })
   cy.url().should('include', '/dashboard')
   cy.get('#open-user-menu').should('contain', 'Bob Brown')
+})
+
+Cypress.Commands.add('loginAsStrayUser', () => {
+  cy.visit('/login')
+  cy.get('#login-form').then(($form) => {
+    const options = { withinSubject: $form }
+    cy.get('input[name=email]', options).type('stray@example.com')
+    cy.get('input[name=password]', options).type('J&jnd_9jkn4ll3JK{enter}')
+  })
+  cy.url().should('include', '/dashboard')
+  cy.get('#open-user-menu').should('contain', 'Stray User')
 })
 
 Cypress.Commands.add('login', (email, password, username) => {

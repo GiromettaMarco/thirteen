@@ -1,4 +1,4 @@
-describe('Account Page', () => {
+describe('Account page', () => {
   beforeEach(() => {
     cy.refreshDB()
     cy.loginAsUser()

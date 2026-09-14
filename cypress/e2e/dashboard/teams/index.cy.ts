@@ -1,4 +1,4 @@
-describe('Teams Page', () => {
+describe('Teams index page', () => {
   before(() => {
     cy.refreshDB()
   })
@@ -20,7 +20,9 @@ describe('Teams Page', () => {
   })
 
   it('may change the current team', function () {
-    cy.get('#set-current-team-2').click()
+    cy.get(
+      '#teams-table>tbody>tr:nth-child(2) button[data-action="set-current-team"]'
+    ).click()
 
     cy.contains('Current team changed').should('exist')
   })
@@ -37,9 +39,11 @@ describe('Teams Page', () => {
     cy.contains('Team created').should('exist')
   })
 
-  it('may update and delete a team from the teams index', function () {
-    cy.get('#open-team-1-actions').click()
-    cy.get('#open-update-team-1-drawer').click()
+  it('may update a team from the teams index', function () {
+    cy.get(
+      '#teams-table>tbody>tr:first-child button[data-action="open-actions"]'
+    ).click()
+    cy.get('button[data-action="open-update-drawer"]').click()
     cy.get('#update-team-form').then(($form) => {
       cy.get('input[name=name]', { withinSubject: $form })
         .clear()
@@ -47,9 +51,13 @@ describe('Teams Page', () => {
     })
 
     cy.contains('Team updated').should('exist')
+  })
 
-    cy.get('#open-team-1-actions').click()
-    cy.get('#open-delete-team-1-dialog').click()
+  it('may delete a team from the teams index', function () {
+    cy.get(
+      '#teams-table>tbody>tr:first-child button[data-action="open-actions"]'
+    ).click()
+    cy.get('button[data-action="open-delete-dialog"]').click()
     cy.get('#destroy-dialog-form').then(($form) => {
       cy.get('button[type=submit]', { withinSubject: $form }).click()
     })

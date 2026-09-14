@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="114" height="20">
-    <title>TS coverage - 53%</title>
+    <title>TS coverage - 87%</title>
     <defs>
         <linearGradient id="workflow-fill" x1="50%" y1="0%" x2="50%" y2="100%">
             <stop stop-color="#444D56" offset="0%" />
             <stop stop-color="#24292E" offset="100%" />
         </linearGradient>
         <linearGradient id="state-fill" x1="50%" y1="0%" x2="50%" y2="100%">
-            <stop stop-color="#D73A49" offset="0%" />
-            <stop stop-color="#CB2431" offset="100%" />
+            <stop stop-color="#FFD53D" offset="0%" />
+            <stop stop-color="#B99614" offset="100%" />
         </linearGradient>
     </defs>
     <g>
@@ -18,8 +18,8 @@
         <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
             <text x="49" y="15" fill="#010101" fill-opacity=".3" aria-hidden="true">coverage</text>
             <text x="49" y="14">coverage</text>
-            <text x="97" y="15" fill="#010101" fill-opacity=".3" aria-hidden="true">53%</text>
-            <text x="97" y="14">53%</text>
+            <text x="97" y="15" fill="#010101" fill-opacity=".3" aria-hidden="true">87%</text>
+            <text x="97" y="14">87%</text>
         </g>
         <svg x="5" y="3" fill="none" height="14" viewBox="0 0 128 128" width="14" xmlns="http://www.w3.org/2000/svg">
             <rect fill="#3178c6" height="128" rx="6" width="128" />
