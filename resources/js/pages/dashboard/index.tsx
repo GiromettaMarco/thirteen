@@ -19,7 +19,7 @@ import { ProjectDeadline } from '@/components/projects/project-deadline'
 import { LabelBadge } from '@/components/tasks/label-badge'
 import { PriorityBadge } from '@/components/tasks/priority-badge'
 import { StatusBadge } from '@/components/tasks/status-badge'
-import { TableToolbar } from '@/components/tasks/tasks-table'
+import { TableFilters } from '@/components/tasks/tasks-table'
 import {
   Card,
   CardAction,
@@ -28,10 +28,11 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import TableMain, {
+import {
   AfterTable,
   ColumnsVisibility,
-  SortableColumnHeader
+  SortableColumnHeader,
+  TableMain
 } from '@/components/ui/data-table'
 import {
   Empty,
@@ -92,7 +93,11 @@ function DeadlineCard({
           </CardAction>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          {deadlineCountdown < 7 && <ProjectDeadline deadline={deadline} />}
+          {deadlineCountdown < 7 ? (
+            <ProjectDeadline deadline={deadline} />
+          ) : (
+            <p>&nbsp;</p>
+          )}
         </CardFooter>
       </Card>
     </Link>
@@ -151,10 +156,12 @@ function applyFacetFix(rawTasks: TaskWithProject[]): TaskWithProject[] {
 }
 
 function TasksTable({
+  slug = 'your-tasks',
   tasks,
   view,
   viewStore
 }: {
+  slug?: string
   tasks: TaskWithProject[]
   view?: View
   viewStore?: ViewStore
@@ -208,6 +215,7 @@ function TasksTable({
         header: ({ column }) => (
           <SortableColumnHeader
             column={column}
+            data-action="sort-by-name"
             title={t(($) => $.name)}
           />
         )
@@ -220,6 +228,7 @@ function TasksTable({
         header: ({ column }) => (
           <SortableColumnHeader
             column={column}
+            data-action="sort-by-label"
             title={t(($) => $.tasks.label)}
           />
         )
@@ -231,6 +240,7 @@ function TasksTable({
         header: ({ column }) => (
           <SortableColumnHeader
             column={column}
+            data-action="sort-by-priority"
             title={t(($) => $.tasks.priority)}
           />
         ),
@@ -244,6 +254,7 @@ function TasksTable({
         header: ({ column }) => (
           <SortableColumnHeader
             column={column}
+            data-action="sort-by-status"
             title={t(($) => $.tasks.status)}
           />
         )
@@ -262,6 +273,7 @@ function TasksTable({
         header: ({ column }) => (
           <SortableColumnHeader
             column={column}
+            data-action="sort-by-project"
             title={t(($) => $.project, { count: 1 })}
           />
         ),
@@ -274,6 +286,7 @@ function TasksTable({
         header: ({ column }) => (
           <SortableColumnHeader
             column={column}
+            data-action="sort-by-created-at"
             title={t(($) => $.dateCreated)}
           />
         ),
@@ -285,6 +298,7 @@ function TasksTable({
         header: ({ column }) => (
           <SortableColumnHeader
             column={column}
+            data-action="sort-by-updated-at"
             title={t(($) => $.dateModified)}
           />
         ),
@@ -323,8 +337,11 @@ function TasksTable({
     <section className={cn('grid', { 'gap-4': tasks.length == 0 })}>
       {tasks.length > 0 ? (
         <div className="grid gap-3">
-          <div className="grid items-center justify-between gap-2 @5xl/main:flex">
-            <TableToolbar table={table} />
+          <div
+            className="grid items-center justify-between gap-2 @5xl/main:flex"
+            id={`${slug}-table-toolbar`}
+          >
+            <TableFilters table={table} />
             <div className="flex gap-2">
               <ColumnsVisibility
                 labels={labels}
@@ -332,9 +349,13 @@ function TasksTable({
               />
             </div>
           </div>
-          <TableMain table={table} />
+          <TableMain
+            slug={slug}
+            table={table}
+          />
           <AfterTable
             selection={false}
+            slug={slug}
             sortingLabels={labels}
             sortingState={sorting}
             table={table}

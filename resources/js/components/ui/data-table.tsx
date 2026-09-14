@@ -1,27 +1,3 @@
-import { Badge } from '@/components/ui/badge'
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator
-} from '@/components/ui/command'
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger
-} from '@/components/ui/popover'
-
 import {
   Button,
   Checkbox,
@@ -58,6 +34,29 @@ import {
 } from 'lucide-react'
 import type { PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Badge } from '@/components/ui/badge'
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator
+} from '@/components/ui/command'
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from '@/components/ui/popover'
 import {
   Table,
   TableBody,
@@ -138,9 +137,11 @@ export function SortingMonitor({
 //#region TablePagination
 export function TablePagination<TData>({
   className,
+  slug,
   table
 }: {
   className?: string
+  slug?: string
   table: TanstackTable<TData>
 }) {
   'use no memo'
@@ -148,12 +149,17 @@ export function TablePagination<TData>({
   // i18n
   const { t } = useTranslation()
 
+  const selectId = slug ? `${slug}-rows-per-page` : 'rows-per-page'
+
   return (
-    <div className={cn('flex w-full items-center gap-8 lg:w-fit', className)}>
+    <div
+      className={cn('flex w-full items-center gap-8 lg:w-fit', className)}
+      id={slug ? `${slug}-pagination` : undefined}
+    >
       <div className="hidden items-center gap-2 lg:flex">
         <Label
           className="text-sm font-medium"
-          htmlFor="rows-per-page"
+          htmlFor={selectId}
         >
           {t(($) => $.table.rowsPerPage)}
         </Label>
@@ -166,7 +172,7 @@ export function TablePagination<TData>({
         >
           <SelectTrigger
             className="w-20"
-            id="rows-per-page"
+            id={selectId}
             size="sm"
           >
             <SelectValue placeholder={table.getState().pagination.pageSize} />
@@ -245,6 +251,7 @@ export function AfterTable<TData>({
   className,
   pagination = true,
   selection = true,
+  slug,
   sorting = true,
   sortingLabels,
   sortingState = [],
@@ -253,6 +260,7 @@ export function AfterTable<TData>({
   className?: string
   pagination?: boolean
   selection?: boolean
+  slug?: string
   sorting?: boolean
   sortingLabels?: Record<string, string>
   sortingState?: SortingState
@@ -260,10 +268,15 @@ export function AfterTable<TData>({
 }) {
   'use no memo'
 
+  const id = `${slug}-after-table`
+
   // No pagination
   if (!pagination) {
     return (
-      <div className={cn('flex flex-col gap-2', className)}>
+      <div
+        className={cn('flex flex-col gap-2', className)}
+        id={id}
+      >
         {selection && <SelectionMonitor table={table} />}
 
         {sorting && (
@@ -284,8 +297,12 @@ export function AfterTable<TData>({
           'flex flex-col gap-2 @5xl/main:flex-row-reverse @5xl/main:items-center @5xl/main:justify-between',
           className
         )}
+        id={id}
       >
-        <TablePagination table={table} />
+        <TablePagination
+          slug={slug}
+          table={table}
+        />
 
         {sorting && (
           <SortingMonitor
@@ -305,8 +322,12 @@ export function AfterTable<TData>({
           'flex flex-col gap-2 @5xl/main:flex-row-reverse @5xl/main:items-center @5xl/main:justify-between',
           className
         )}
+        id={id}
       >
-        <TablePagination table={table} />
+        <TablePagination
+          slug={slug}
+          table={table}
+        />
 
         {selection && <SelectionMonitor table={table} />}
       </div>
@@ -315,9 +336,15 @@ export function AfterTable<TData>({
 
   // All
   return (
-    <div className={cn('flex flex-col gap-2', className)}>
+    <div
+      className={cn('flex flex-col gap-2', className)}
+      id={id}
+    >
       <div className="flex flex-col gap-2 @5xl/main:flex-row-reverse @5xl/main:items-center @5xl/main:justify-between">
-        <TablePagination table={table} />
+        <TablePagination
+          slug={slug}
+          table={table}
+        />
 
         <SelectionMonitor table={table} />
       </div>
@@ -347,6 +374,7 @@ export function ColumnsVisibility<TData>({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
+          data-action="toggle-columns-visibility"
           size="sm"
           variant="outline"
         >
@@ -370,6 +398,7 @@ export function ColumnsVisibility<TData>({
             return (
               <DropdownMenuCheckboxItem
                 checked={column.getIsVisible()}
+                data-action={`toggle-${column.id}`}
                 key={column.id}
                 onCheckedChange={(value) => column.toggleVisibility(!!value)}
               >
@@ -385,6 +414,7 @@ export function ColumnsVisibility<TData>({
 //#region FacetedFilter
 interface FacetedFilterProps<TData, TValue> {
   column?: Column<TData, TValue>
+  'data-action'?: string
   options: {
     icon?: React.ComponentType<{ className?: string }>
     label: string
@@ -395,6 +425,7 @@ interface FacetedFilterProps<TData, TValue> {
 
 export function FacetedFilter<TData, TValue>({
   column,
+  'data-action': dataAction,
   options,
   title
 }: FacetedFilterProps<TData, TValue>) {
@@ -410,6 +441,7 @@ export function FacetedFilter<TData, TValue>({
         <PopoverTrigger asChild>
           <Button
             className="h-8"
+            data-action={dataAction}
             size="sm"
             variant="outline"
           >
@@ -476,6 +508,8 @@ export function FacetedFilter<TData, TValue>({
 
                   return (
                     <CommandItem
+                      asChild
+                      className="w-full"
                       key={option.value ?? 'none'}
                       onSelect={() => {
                         if (isSelected) {
@@ -490,28 +524,33 @@ export function FacetedFilter<TData, TValue>({
                         )
                       }}
                     >
-                      <div
-                        className={cn(
-                          'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
-                          isSelected
-                            ? 'bg-primary text-primary-foreground'
-                            : 'opacity-50 [&_svg]:invisible'
-                        )}
+                      <button
+                        data-action={`select-${option.value}`}
+                        type="button"
                       >
-                        <Check className="text-primary-foreground" />
-                      </div>
+                        <div
+                          className={cn(
+                            'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
+                            isSelected
+                              ? 'bg-primary text-primary-foreground'
+                              : 'opacity-50 [&_svg]:invisible'
+                          )}
+                        >
+                          <Check className="text-primary-foreground" />
+                        </div>
 
-                      {option.icon && (
-                        <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-                      )}
+                        {option.icon && (
+                          <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+                        )}
 
-                      <span>{option.label}</span>
+                        <span>{option.label}</span>
 
-                      {facets?.get(option.value) && (
-                        <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
-                          {facets.get(option.value)}
-                        </span>
-                      )}
+                        {facets?.get(option.value) && (
+                          <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
+                            {facets.get(option.value)}
+                          </span>
+                        )}
+                      </button>
                     </CommandItem>
                   )
                 })}
@@ -523,10 +562,16 @@ export function FacetedFilter<TData, TValue>({
 
                   <CommandGroup>
                     <CommandItem
-                      className="justify-center text-center"
+                      asChild
+                      className="w-full justify-center text-center"
                       onSelect={() => column?.setFilterValue(undefined)}
                     >
-                      {t(($) => $.table.clearFilters)}
+                      <button
+                        data-action="clear-filters"
+                        type="button"
+                      >
+                        {t(($) => $.table.clearFilters)}
+                      </button>
                     </CommandItem>
                   </CommandGroup>
                 </>
@@ -560,11 +605,13 @@ function SortableColumnIcon<TData, TValue>({
 export function SortableColumnHeader<TData, TValue>({
   className,
   column,
+  'data-action': dataAction,
   title,
   tooltip
 }: {
   className?: string
   column: Column<TData, TValue>
+  'data-action'?: string
   title: string
   tooltip?: string
 }) {
@@ -589,6 +636,7 @@ export function SortableColumnHeader<TData, TValue>({
               <DropdownMenuTrigger asChild>
                 <Button
                   className="h-8 has-[>svg]:px-1.5"
+                  data-action={dataAction}
                   size="sm"
                   variant="ghost"
                 >
@@ -603,6 +651,7 @@ export function SortableColumnHeader<TData, TValue>({
           <DropdownMenuTrigger asChild>
             <Button
               className="h-8 has-[>svg]:px-1.5"
+              data-action={dataAction}
               size="sm"
               variant="ghost"
             >
@@ -613,21 +662,42 @@ export function SortableColumnHeader<TData, TValue>({
         )}
 
         <DropdownMenuContent align="start">
-          <DropdownMenuItem onClick={() => column.toggleSorting(false, true)}>
-            <ArrowUp className="h-3.5 w-3.5 text-muted-foreground/70" />
-            {t(($) => $.table.Asc)}
+          <DropdownMenuItem asChild>
+            <button
+              className="w-full"
+              data-action="sort-ascending"
+              onClick={() => column.toggleSorting(false, true)}
+              type="button"
+            >
+              <ArrowUp className="h-3.5 w-3.5 text-muted-foreground/70" />
+              {t(($) => $.table.Asc)}
+            </button>
           </DropdownMenuItem>
 
-          <DropdownMenuItem onClick={() => column.toggleSorting(true, true)}>
-            <ArrowDown className="h-3.5 w-3.5 text-muted-foreground/70" />
-            {t(($) => $.table.Desc)}
+          <DropdownMenuItem asChild>
+            <button
+              className="w-full"
+              data-action="sort-descending"
+              onClick={() => column.toggleSorting(true, true)}
+              type="button"
+            >
+              <ArrowDown className="h-3.5 w-3.5 text-muted-foreground/70" />
+              {t(($) => $.table.Desc)}
+            </button>
           </DropdownMenuItem>
 
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem onClick={() => column.clearSorting()}>
-            <X className="h-3.5 w-3.5 text-muted-foreground/70" />
-            {t(($) => $.actions.reset)}
+          <DropdownMenuItem asChild>
+            <button
+              className="w-full"
+              data-action="remove-sorting"
+              onClick={() => column.clearSorting()}
+              type="button"
+            >
+              <X className="h-3.5 w-3.5 text-muted-foreground/70" />
+              {t(($) => $.actions.reset)}
+            </button>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -636,11 +706,11 @@ export function SortableColumnHeader<TData, TValue>({
 }
 
 //#region TableMain
-export default function TableMain<TData>({
-  id,
+export function TableMain<TData>({
+  slug,
   table
 }: {
-  id?: string
+  slug?: string
   table: TanstackTable<TData>
 }) {
   'use no memo'
@@ -650,7 +720,7 @@ export default function TableMain<TData>({
 
   return (
     <div className="overflow-hidden rounded-md border">
-      <Table id={id}>
+      <Table id={slug ? `${slug}-table` : undefined}>
         <TableHeader className="sticky top-0 z-10 bg-muted">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -754,8 +824,8 @@ export function getSelectColDef<T extends object>() {
   }
 }
 
-//#region TableToolbar
-export function TableToolbar<TData>({
+//#region TableFilters
+export function TableFilters<TData>({
   children,
   className,
   columnId = 'name',
@@ -784,12 +854,13 @@ export function TableToolbar<TData>({
       />
 
       {(isFiltered || children) && (
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {children}
 
           {isFiltered && (
             <Button
               className="h-8 px-2 lg:px-3"
+              data-action="clear-filters"
               onClick={() => table.resetColumnFilters()}
               variant="ghost"
             >

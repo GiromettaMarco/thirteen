@@ -21,11 +21,12 @@ import {
 } from '@/components/teams/add-team-drawer'
 import { LeaveTeamDialog } from '@/components/teams/members/destroy-member-dialog'
 import UpdateTeamDrawer from '@/components/teams/update-team-drawer'
-import TableMain, {
+import {
   AfterTable,
   ColumnsVisibility,
   SortableColumnHeader,
-  TableToolbar
+  TableFilters,
+  TableMain
 } from '@/components/ui/data-table'
 import { DestroyDialog } from '@/components/ui/destroy-dialog'
 import {
@@ -174,7 +175,10 @@ function EmptyFiller() {
   const { setAddTeamOpen: setOpen } = useContext(AppContext)
 
   return (
-    <Empty className="rounded-md border border-solid">
+    <Empty
+      className="rounded-md border border-solid"
+      id="teams-table-filler"
+    >
       <EmptyHeader>
         <EmptyMedia variant="icon">
           <UserStar />
@@ -189,7 +193,10 @@ function EmptyFiller() {
       </EmptyHeader>
 
       <EmptyContent>
-        <Button onClick={() => setOpen(true)}>
+        <Button
+          id="open-create-team-drawer"
+          onClick={() => setOpen(true)}
+        >
           {t(($) => $.teams.createTeam)}
         </Button>
       </EmptyContent>
@@ -199,10 +206,12 @@ function EmptyFiller() {
 
 //#region TeamsTable
 export function TeamsTable({
+  slug = 'teams',
   teams,
   view,
   viewStore
 }: {
+  slug?: string
   teams: TeamsTableEntry[]
   view?: View
   viewStore?: ViewStore
@@ -329,8 +338,11 @@ export function TeamsTable({
 
       {teams.length > 0 ? (
         <>
-          <div className="grid items-center justify-between gap-2 @5xl/main:flex">
-            <TableToolbar
+          <div
+            className="grid items-center justify-between gap-2 @5xl/main:flex"
+            id={`${slug}-table-toolbar`}
+          >
+            <TableFilters
               className="md:flex"
               table={table}
             />
@@ -346,7 +358,7 @@ export function TeamsTable({
           </div>
 
           <TableMain
-            id="teams-table"
+            slug={slug}
             table={table}
           />
 

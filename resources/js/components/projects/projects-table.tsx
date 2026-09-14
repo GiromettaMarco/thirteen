@@ -20,12 +20,13 @@ import {
 } from '@/components/projects/add-project-drawer'
 import { ProjectDeadline } from '@/components/projects/project-deadline'
 import { UpdateProjectDrawer } from '@/components/projects/update-project-drawer'
-import TableMain, {
+import {
   AfterTable,
   ColumnsVisibility,
   getSelectColDef,
   SortableColumnHeader,
-  TableToolbar
+  TableFilters,
+  TableMain
 } from '@/components/ui/data-table'
 import { DestroyDialog } from '@/components/ui/destroy-dialog'
 import { DestroyMany } from '@/components/ui/destroy-many'
@@ -113,7 +114,10 @@ function EmptyFiller({ canCreate = false }: { canCreate?: boolean }) {
   const { setAddProjectOpen: setOpen } = useContext(AppContext)
 
   return (
-    <Empty className="rounded-md border border-solid">
+    <Empty
+      className="rounded-md border border-solid"
+      id="projects-table-filler"
+    >
       <EmptyHeader>
         <EmptyMedia variant="icon">
           <Folder />
@@ -129,7 +133,10 @@ function EmptyFiller({ canCreate = false }: { canCreate?: boolean }) {
 
       {canCreate && (
         <EmptyContent>
-          <Button onClick={() => setOpen(true)}>
+          <Button
+            id="open-create-project-drawer"
+            onClick={() => setOpen(true)}
+          >
             {t(($) => $.projects.createProject)}
           </Button>
         </EmptyContent>
@@ -142,12 +149,14 @@ function EmptyFiller({ canCreate = false }: { canCreate?: boolean }) {
 export function ProjectsTable({
   canEdit = false,
   projects,
+  slug = 'projects',
   teamId,
   view,
   viewStore
 }: {
   canEdit?: boolean
   projects: ProjectWithTasksCount[]
+  slug?: string
   teamId: number
   view?: View
   viewStore?: ViewStore
@@ -304,8 +313,11 @@ export function ProjectsTable({
 
       {projects.length > 0 ? (
         <>
-          <div className="grid items-center justify-between gap-2 @5xl/main:flex">
-            <TableToolbar table={table} />
+          <div
+            className="grid items-center justify-between gap-2 @5xl/main:flex"
+            id={`${slug}-table-toolbar`}
+          >
+            <TableFilters table={table} />
 
             <div className="flex gap-2">
               <ColumnsVisibility
@@ -327,12 +339,13 @@ export function ProjectsTable({
           </div>
 
           <TableMain
-            id="projects-table"
+            slug={slug}
             table={table}
           />
 
           <AfterTable
             selection={canEdit}
+            slug={slug}
             sortingLabels={labels}
             sortingState={sorting}
             table={table}

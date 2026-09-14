@@ -22,11 +22,12 @@ import {
   LeaveTeamDialog,
   RemoveMemberDialog
 } from '@/components/teams/members/destroy-member-dialog'
-import TableMain, {
+import {
   AfterTable,
   ColumnsVisibility,
   SortableColumnHeader,
-  TableToolbar
+  TableFilters,
+  TableMain
 } from '@/components/ui/data-table'
 import UseTableStates from '@/hooks/use-table-states'
 import { sortBoolean } from '@/lib/utils'
@@ -103,6 +104,7 @@ export function MembersTable({
   canEdit = false,
   currentProfileId,
   members,
+  slug = 'members',
   team,
   view,
   viewStore
@@ -110,6 +112,7 @@ export function MembersTable({
   canEdit?: boolean
   currentProfileId?: number
   members: TeamMember[]
+  slug?: string
   team: Team
   view?: View
   viewStore?: ViewStore
@@ -317,8 +320,11 @@ export function MembersTable({
         />
       )}
 
-      <div className="grid items-center justify-between gap-2 @5xl/main:flex">
-        <TableToolbar
+      <div
+        className="grid items-center justify-between gap-2 @5xl/main:flex"
+        id={`${slug}-table-toolbar`}
+      >
+        <TableFilters
           className="md:flex"
           table={table}
         />
@@ -334,12 +340,13 @@ export function MembersTable({
       </div>
 
       <TableMain
-        id="members-table"
+        slug={slug}
         table={table}
       />
 
       <AfterTable
         selection={false}
+        slug={slug}
         sortingLabels={labels}
         sortingState={sorting}
         table={table}

@@ -67,6 +67,7 @@ export function DestroyMany({
         disabled={selectedItems.length < 1}
       >
         <Button
+          data-action="open-destroy-many-dialog"
           size="sm"
           variant="destructive"
         >

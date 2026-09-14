@@ -19,6 +19,7 @@ export function NameCell({
       <Button
         asChild
         className={cn('w-fit px-0', className)}
+        data-action="resource"
         onClick={onClick}
         variant="link"
       >
@@ -31,6 +32,7 @@ export function NameCell({
     return (
       <Button
         className={cn('w-fit px-0', className)}
+        data-action="resource"
         onClick={onClick}
         variant="link"
       >

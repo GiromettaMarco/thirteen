@@ -12,11 +12,12 @@ import {
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ActionsMenu, type ActionProps } from '@/components/actions-menu'
-import TableMain, {
+import {
   AfterTable,
   ColumnsVisibility,
   SortableColumnHeader,
-  TableToolbar
+  TableFilters,
+  TableMain
 } from '@/components/ui/data-table'
 import { DestroyDialog } from '@/components/ui/destroy-dialog'
 import UseTableStates from '@/hooks/use-table-states'
@@ -73,10 +74,12 @@ function Actions({ invitation }: { invitation: Invitation }) {
 //#region InvitationsTable
 export function InvitationsTable({
   invitations,
+  slug = 'invitations',
   view,
   viewStore
 }: {
   invitations: Invitation[]
+  slug?: string
   view?: View
   viewStore?: ViewStore
 }) {
@@ -191,8 +194,11 @@ export function InvitationsTable({
 
   return (
     <div className="grid gap-3">
-      <div className="grid items-center justify-between gap-2 @5xl/main:flex">
-        <TableToolbar
+      <div
+        className="grid items-center justify-between gap-2 @5xl/main:flex"
+        id={`${slug}-table-toolbar`}
+      >
+        <TableFilters
           columnId="user_profile_name"
           table={table}
         />
@@ -204,12 +210,13 @@ export function InvitationsTable({
       </div>
 
       <TableMain
-        id="invitations-table"
+        slug={slug}
         table={table}
       />
 
       <AfterTable
         selection={false}
+        slug={slug}
         sortingLabels={labels}
         sortingState={sorting}
         table={table}

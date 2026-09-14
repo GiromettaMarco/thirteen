@@ -33,10 +33,11 @@ import { LabelBadge } from '@/components/tasks/label-badge'
 import { PriorityBadge } from '@/components/tasks/priority-badge'
 import { StatusBadge } from '@/components/tasks/status-badge'
 import { UpdateTaskDrawer } from '@/components/tasks/update-task-drawer'
-import TableMain, {
+import {
   AfterTable,
   ColumnsVisibility,
-  TableToolbar as DataTableToolbar,
+  TableMain,
+  TableFilters as DataTableFilters,
   FacetedFilter,
   getSelectColDef,
   SortableColumnHeader
@@ -124,8 +125,8 @@ export function Actions({
   )
 }
 
-//#region TableToolbar
-export function TableToolbar<TData>({ table }: { table: Table<TData> }) {
+//#region TableFilters
+export function TableFilters<TData>({ table }: { table: Table<TData> }) {
   // @NOTE 'use no memo' is required due to incompatibility between Tanstack and React Compiler.
   'use no memo'
 
@@ -198,23 +199,26 @@ export function TableToolbar<TData>({ table }: { table: Table<TData> }) {
   ]
 
   return (
-    <DataTableToolbar table={table}>
+    <DataTableFilters table={table}>
       <FacetedFilter
         column={table.getColumn('label')}
+        data-action="filter-by-label"
         options={labels}
         title={t(($) => $.tasks.label)}
       />
       <FacetedFilter
         column={table.getColumn('status')}
+        data-action="filter-by-status"
         options={statuses}
         title={t(($) => $.tasks.status)}
       />
       <FacetedFilter
         column={table.getColumn('priority')}
+        data-action="filter-by-priority"
         options={priorities}
         title={t(($) => $.tasks.priority)}
       />
-    </DataTableToolbar>
+    </DataTableFilters>
   )
 }
 
@@ -227,7 +231,10 @@ function EmptyFiller() {
   const { setAddTaskOpen: setOpen } = useContext(AppContext)
 
   return (
-    <Empty className="rounded-md border border-solid">
+    <Empty
+      className="rounded-md border border-solid"
+      id="tasks-table-filler"
+    >
       <EmptyHeader>
         <EmptyMedia variant="icon">
           <SquareCheckBig />
@@ -242,7 +249,10 @@ function EmptyFiller() {
       </EmptyHeader>
 
       <EmptyContent>
-        <Button onClick={() => setOpen(true)}>
+        <Button
+          id="open-create-task-drawer"
+          onClick={() => setOpen(true)}
+        >
           {t(($) => $.tasks.createTask)}
         </Button>
       </EmptyContent>
@@ -261,6 +271,7 @@ function applyFacetFix(rawTasks: TaskWithProfile[]): TaskWithProfile[] {
 export function TasksTable({
   canEdit = false,
   projectId,
+  slug = 'tasks',
   tasks,
   teamId,
   teamMembers,
@@ -269,6 +280,7 @@ export function TasksTable({
 }: {
   canEdit?: boolean
   projectId: number
+  slug?: string
   tasks: TaskWithProfile[]
   teamId: number
   teamMembers?: Profile[]
@@ -484,8 +496,11 @@ export function TasksTable({
 
       {tasks.length > 0 ? (
         <>
-          <div className="grid items-center justify-between gap-2 @5xl/main:flex">
-            <TableToolbar table={table} />
+          <div
+            className="grid items-center justify-between gap-2 @5xl/main:flex"
+            id={`${slug}-table-toolbar`}
+          >
+            <TableFilters table={table} />
 
             <div className="flex gap-2">
               <ColumnsVisibility
@@ -510,12 +525,13 @@ export function TasksTable({
           </div>
 
           <TableMain
-            id="tasks-table"
+            slug={slug}
             table={table}
           />
 
           <AfterTable
             selection={canEdit}
+            slug={slug}
             sortingLabels={labels}
             sortingState={sorting}
             table={table}
