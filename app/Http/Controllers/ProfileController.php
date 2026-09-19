@@ -58,7 +58,7 @@ class ProfileController extends Controller
 
         return Inertia::render('dashboard/profile', [
             'canEdit' => $user->can('update', $profile),
-            'email' => $user->email,
+            'email' => $profile->user->email,
             'profile' => $profile,
             'tasksCount' => $tasks_count,
         ]);
