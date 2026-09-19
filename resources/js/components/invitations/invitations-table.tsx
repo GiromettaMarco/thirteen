@@ -62,7 +62,7 @@ export function InvitationsTable({
   id = 'invitations-table',
   invitations,
   storage,
-  title = 'Invitations'
+  title
 }: {
   id?: string
   invitations: Invitation[]

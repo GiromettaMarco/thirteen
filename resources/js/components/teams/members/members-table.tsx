@@ -90,7 +90,7 @@ export function MembersTable({
   members,
   storage,
   team,
-  title = 'Team Members'
+  title
 }: {
   canEdit?: boolean
   currentProfileId?: number

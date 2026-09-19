@@ -140,7 +140,7 @@ export function ProjectsTable({
   projects,
   storage,
   teamId,
-  title = 'Projects'
+  title
 }: {
   canEdit?: boolean
   id?: string

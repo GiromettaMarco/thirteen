@@ -153,7 +153,7 @@ export function TasksTable({
   tasks,
   teamId,
   teamMembers,
-  title = 'Tasks'
+  title
 }: {
   canEdit?: boolean
   id?: string
