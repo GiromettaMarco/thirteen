@@ -376,14 +376,13 @@ export default {
     toggle: 'Attiva/disattiva Sidebar'
   },
   table: {
+    allColumns: 'Tutte le Colonne',
     Asc: 'Asc',
-    asc: 'asc',
-    clearFilters: 'Rimuovi filtri',
     columns: 'Colonne',
     Desc: 'Disc',
-    desc: 'disc',
-    filterSelected_one: '{{count}} selezionato',
-    filterSelected_other: '{{count}} selezionati',
+    emptyFilter: '[vuoto]',
+    filter: 'Filtra',
+    filterAll: 'Tutti',
     goToFirst: 'Vai alla prima pagina',
     goToLast: "Vai all'ultima pagina",
     goToNext: 'Vai alla prossima pagina',
@@ -392,12 +391,14 @@ export default {
     pageOf: 'Pagina {{page}} di {{total}}',
     rowsPerPage: 'Righe per pagina',
     search: 'Ricerca...',
-    searchByName: 'Ricerca per nome...',
     selectAll: 'Seleziona tutto',
-    selectedRows_one: '{{count}} di {{total}} righe selezionate.',
-    selectedRows_other: '{{count}} di {{total}} righe selezionate.',
+    selectedRows_one: '{{count}} di {{total}} righe selezionate',
+    selectedRows_other: '{{count}} di {{total}} righe selezionate',
     selectRow: 'Seleziona riga',
-    sorting: 'Ordinamento'
+    sorting: 'Ordinamento',
+    sortingAsc: '(asc)',
+    sortingColon: 'Ordinamento:',
+    sortingDesc: '(disc)'
   },
   task_one: 'Compito',
   task_other: 'Compiti',
@@ -418,8 +419,7 @@ export default {
     labels: {
       bug: 'Bug',
       documentation: 'Documentazione',
-      feature: 'Feature',
-      none: 'nessuna'
+      feature: 'Feature'
     },
     namePlaceholder: 'Nome del compito',
     newTask: 'New task',

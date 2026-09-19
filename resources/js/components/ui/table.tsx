@@ -4,7 +4,7 @@ import * as React from 'react'
 function Table({ className, ...props }: React.ComponentProps<'table'>) {
   return (
     <div
-      className="relative w-full overflow-x-auto"
+      className="relative w-full overflow-auto"
       data-slot="table-container"
     >
       <table
@@ -53,7 +53,7 @@ function TableRow({ className, ...props }: React.ComponentProps<'tr'>) {
   return (
     <tr
       className={cn(
-        'border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted',
+        'border-b transition-colors hover:bg-muted/50 data-selected:bg-muted',
         className
       )}
       data-slot="table-row"
@@ -66,7 +66,7 @@ function TableHead({ className, ...props }: React.ComponentProps<'th'>) {
   return (
     <th
       className={cn(
-        'h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-foreground first:pl-4 last:pr-4',
+        'h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-foreground first:ps-4 last:pe-4',
         className
       )}
       data-slot="table-head"
@@ -79,7 +79,7 @@ function TableCell({ className, ...props }: React.ComponentProps<'td'>) {
   return (
     <td
       className={cn(
-        'p-2 align-middle whitespace-nowrap first:pl-4 last:pr-4',
+        'p-2 align-middle whitespace-nowrap first:ps-4 last:pe-4',
         className
       )}
       data-slot="table-cell"

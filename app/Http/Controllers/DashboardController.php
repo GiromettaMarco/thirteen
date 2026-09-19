@@ -31,17 +31,6 @@ class DashboardController extends Controller
                 ->tasks()
                 ->with('project')
                 ->get(),
-            'views' => [
-                'tasks' => $user->views()->where([
-                    ['page', 'dashboard'],
-                    ['table', 'tasks'],
-                ])->first([
-                    'filters',
-                    'pagination',
-                    'sorting',
-                    'visibility',
-                ]),
-            ],
         ]);
     }
 }

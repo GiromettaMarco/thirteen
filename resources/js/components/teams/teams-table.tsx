@@ -1,33 +1,19 @@
 import { Button } from '@gmcode/react-ui'
 import { useForm, usePage } from '@inertiajs/react'
-import type { ColumnDef } from '@tanstack/react-table'
-import {
-  getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable
-} from '@tanstack/react-table'
 import { Star, UserStar } from 'lucide-react'
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ActionsMenu, type ActionProps } from '@/components/actions-menu'
-import { NameCell } from '@/components/name-cell'
+import { CellAction } from '@/components/data-table/components/cell-action'
+import { ColumnHeader } from '@/components/data-table/components/column-header'
+import { DataTable } from '@/components/data-table/data-table'
+import { createColumnHelper } from '@/components/data-table/utility'
 import {
   AddTeamDrawer,
   AddTeamDrawerTrigger
 } from '@/components/teams/add-team-drawer'
 import { LeaveTeamDialog } from '@/components/teams/members/destroy-member-dialog'
 import UpdateTeamDrawer from '@/components/teams/update-team-drawer'
-import {
-  AfterTable,
-  ColumnsVisibility,
-  SortableColumnHeader,
-  TableFilters,
-  TableMain
-} from '@/components/ui/data-table'
 import { DestroyDialog } from '@/components/ui/destroy-dialog'
 import {
   Empty,
@@ -37,17 +23,10 @@ import {
   EmptyMedia,
   EmptyTitle
 } from '@/components/ui/empty'
-import UseTableStates from '@/hooks/use-table-states'
 import { AppContext } from '@/providers/app-context-provider'
 import { update } from '@/routes/current-team'
 import { destroy, show } from '@/routes/teams'
-import type {
-  Team,
-  TeamsTableEntry,
-  View,
-  ViewStore,
-  WithTeamPermissions
-} from '@/types'
+import type { Team, TeamsTableEntry, WithTeamPermissions } from '@/types'
 
 //#region CurrentTeamCell
 function CurrentTeamCell({
@@ -205,173 +184,100 @@ function EmptyFiller() {
 }
 
 //#region TeamsTable
+// @TODO add canEdit
+
 export function TeamsTable({
-  slug = 'teams',
+  id = 'teams-table',
+  storage,
   teams,
-  view,
-  viewStore
+  title
 }: {
-  slug?: string
+  id?: string
+  storage?: string
   teams: TeamsTableEntry[]
-  view?: View
-  viewStore?: ViewStore
+  title?: string
 }) {
   // i18n
   const { t } = useTranslation()
 
   const { user } = usePage().props.auth
 
-  // Table states
-  const {
-    columnFilters,
-    columnVisibility,
-    data,
-    onColumnFiltersChange,
-    onColumnVisibilityChange,
-    onPaginationChange,
-    onSortingChange,
-    pagination,
-    setData,
-    sorting
-  } = UseTableStates({
-    data: teams,
-    view,
-    viewStore
-  })
+  const columnHelper = createColumnHelper<TeamsTableEntry>()
 
-  // Watch for data revalidation
-  useEffect(() => {
-    setData(() => teams)
-  }, [setData, teams])
-
-  const labels = useMemo<Record<string, string>>(
-    () => ({
-      profiles_count: t(($) => $.member, { count: 2 }),
-      projectsCount: t(($) => $.project, { count: 2 })
-    }),
-    [t]
+  const columns = useMemo(
+    () =>
+      columnHelper.columns([
+        columnHelper.display({
+          cell: ({ row }) => (
+            <CurrentTeamCell
+              currentTeamId={user?.current_team_id}
+              team={row.original}
+            />
+          ),
+          enableHiding: false,
+          id: 'current'
+        }),
+        columnHelper.accessor('name', {
+          cell: ({ cell, row }) => (
+            <CellAction
+              href={show(row.original.id)}
+              value={cell.getValue()}
+            />
+          ),
+          enableHiding: false,
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              filter="search"
+              sorting
+            />
+          ),
+          meta: { label: t(($) => $.name) }
+        }),
+        columnHelper.accessor('profiles_count', {
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              sorting
+            />
+          ),
+          meta: { label: t(($) => $.member, { count: 2 }) }
+        }),
+        columnHelper.accessor('projects_count', {
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              sorting
+            />
+          ),
+          meta: { label: t(($) => $.project, { count: 2 }) }
+        }),
+        columnHelper.display({
+          cell: ({ row }) => <Actions team={row.original} />,
+          enableHiding: false,
+          id: 'actions'
+        })
+      ]),
+    [columnHelper, t, user?.current_team_id]
   )
-
-  const columns = useMemo<ColumnDef<TeamsTableEntry>[]>(
-    () => [
-      {
-        cell: ({ row }) => (
-          <CurrentTeamCell
-            currentTeamId={user?.current_team_id}
-            team={row.original}
-          />
-        ),
-        enableHiding: false,
-        header: () => null,
-        id: 'current'
-      },
-      {
-        accessorKey: 'name',
-        cell: ({ row }) => (
-          <NameCell
-            href={show(row.original.id)}
-            name={row.original.name}
-          />
-        ),
-        enableHiding: false,
-        header: t(($) => $.name)
-      },
-      {
-        accessorKey: 'profiles_count',
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.member, { count: 2 })}
-          />
-        )
-      },
-      {
-        accessorKey: 'projects_count',
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.project, { count: 2 })}
-          />
-        )
-      },
-      {
-        cell: ({ row }) => (
-          <Actions
-            team={row.original}
-            // userId={userId}
-          />
-        ),
-        id: 'actions'
-      }
-    ],
-    [t, user?.current_team_id]
-  )
-
-  const table = useReactTable({
-    columns,
-    data,
-    enableRowSelection: false,
-    getCoreRowModel: getCoreRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getRowId: (row) => row.id.toString(),
-    getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange,
-    onColumnVisibilityChange,
-    onPaginationChange,
-    onSortingChange,
-    state: {
-      columnFilters,
-      columnVisibility,
-      pagination,
-      sorting
-    }
-  })
 
   return (
-    <div className="grid gap-3">
+    <section className="grid gap-3">
       <AddTeamDrawer />
-
       <UpdateTeamDrawer />
 
       {teams.length > 0 ? (
-        <>
-          <div
-            className="grid items-center justify-between gap-2 @5xl/main:flex"
-            id={`${slug}-table-toolbar`}
-          >
-            <TableFilters
-              className="md:flex"
-              table={table}
-            />
-
-            <div className="flex gap-2">
-              <ColumnsVisibility
-                labels={labels}
-                table={table}
-              />
-
-              <AddTeamDrawerTrigger />
-            </div>
-          </div>
-
-          <TableMain
-            slug={slug}
-            table={table}
-          />
-
-          <AfterTable
-            selection={false}
-            sortingLabels={labels}
-            sortingState={sorting}
-            table={table}
-          />
-        </>
+        <DataTable
+          actions={() => <AddTeamDrawerTrigger />}
+          columns={columns}
+          data={teams}
+          id={id}
+          storage={storage}
+          title={title}
+        />
       ) : (
         <EmptyFiller />
       )}
-    </div>
+    </section>
   )
 }

@@ -44,14 +44,6 @@ export function UpdateTaskDrawer({
     updateTaskOpen: open
   } = useContext(AppContext)
 
-  // Revert tanstack table "none" fix
-  const fixedTask: Task | undefined = task
-    ? {
-        ...task,
-        label: task?.label === 'none' ? null : task?.label
-      }
-    : undefined
-
   const labelOptions = useMemo<Option[]>(
     () => [
       { key: 1, label: t(($) => $.tasks.labels.bug), value: 'bug' },
@@ -112,25 +104,25 @@ export function UpdateTaskDrawer({
 
       <DrawerContent>
         <DrawerHeader className="gap-1">
-          <DrawerTitle>{fixedTask?.name}</DrawerTitle>
+          <DrawerTitle>{task?.name}</DrawerTitle>
         </DrawerHeader>
 
-        {fixedTask && (
+        {task && (
           <Form
             className="h-full overflow-y-auto"
             defaults={{
-              description: fixedTask.description ?? '',
-              label: fixedTask.label ?? '',
-              name: fixedTask.name,
-              priority: fixedTask.priority ?? '',
-              profile_id: fixedTask.profile_id?.toString() ?? '',
-              status: fixedTask.status ?? ''
+              description: task.description ?? '',
+              label: task.label ?? '',
+              name: task.name,
+              priority: task.priority ?? '',
+              profile_id: task.profile_id?.toString() ?? '',
+              status: task.status ?? ''
             }}
             id="update-task-form"
             onSuccess={() => setOpen(false)}
             route={update({
-              project: fixedTask.project_id,
-              task: fixedTask.id,
+              project: task.project_id,
+              task: task.id,
               team: teamId
             })}
             schema={updateTaskSchema}

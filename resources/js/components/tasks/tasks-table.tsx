@@ -1,30 +1,16 @@
 import { Button } from '@gmcode/react-ui'
-import {
-  getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-  type ColumnDef,
-  type Table
-} from '@tanstack/react-table'
-import {
-  ArrowDown,
-  ArrowRight,
-  ArrowUp,
-  Calendar,
-  Check,
-  Ellipsis,
-  Inbox,
-  SquareCheckBig,
-  X
-} from 'lucide-react'
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { SquareCheckBig } from 'lucide-react'
+import { useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ActionsMenu, type ActionProps } from '@/components/actions-menu'
-import { NameCell } from '@/components/name-cell'
+import { CellAction } from '@/components/data-table/components/cell-action'
+import { ColumnHeader } from '@/components/data-table/components/column-header'
+import {
+  SelectionHeader,
+  SelectionRow
+} from '@/components/data-table/components/selection'
+import { DataTable } from '@/components/data-table/data-table'
+import { createColumnHelper } from '@/components/data-table/utility'
 import {
   AddTaskDrawer,
   AddTaskDrawerTrigger
@@ -33,15 +19,6 @@ import { LabelBadge } from '@/components/tasks/label-badge'
 import { PriorityBadge } from '@/components/tasks/priority-badge'
 import { StatusBadge } from '@/components/tasks/status-badge'
 import { UpdateTaskDrawer } from '@/components/tasks/update-task-drawer'
-import {
-  AfterTable,
-  ColumnsVisibility,
-  TableMain,
-  TableFilters as DataTableFilters,
-  FacetedFilter,
-  getSelectColDef,
-  SortableColumnHeader
-} from '@/components/ui/data-table'
 import { DestroyDialog } from '@/components/ui/destroy-dialog'
 import { DestroyMany } from '@/components/ui/destroy-many'
 import {
@@ -52,12 +29,16 @@ import {
   EmptyMedia,
   EmptyTitle
 } from '@/components/ui/empty'
-import UseTableStates from '@/hooks/use-table-states'
-import { format, sortName, sortPriority } from '@/lib/utils'
+import {
+  useTaskLabelFilters,
+  useTaskPriorityFilters,
+  useTaskStatusFilters
+} from '@/hooks/use-table-filters'
+import { format, sortPriority } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
-import { show } from '@/routes/members'
+import { show as memberShow } from '@/routes/members'
 import { destroy, destroyMany } from '@/routes/tasks'
-import type { Profile, Task, TaskWithProfile, View, ViewStore } from '@/types'
+import type { Profile, Task, TaskWithProfile } from '@/types'
 
 //#region Actions
 export function Actions({
@@ -125,103 +106,6 @@ export function Actions({
   )
 }
 
-//#region TableFilters
-export function TableFilters<TData>({ table }: { table: Table<TData> }) {
-  // @NOTE 'use no memo' is required due to incompatibility between Tanstack and React Compiler.
-  'use no memo'
-
-  // i18n
-  const { t } = useTranslation()
-
-  const labels = [
-    {
-      label: t(($) => $.tasks.labels.bug),
-      value: 'bug'
-    },
-    {
-      label: t(($) => $.tasks.labels.documentation),
-      value: 'documentation'
-    },
-    {
-      label: t(($) => $.tasks.labels.feature),
-      value: 'feature'
-    },
-    {
-      label: t(($) => $.tasks.labels.none),
-      value: 'none'
-    }
-  ]
-
-  const statuses = [
-    {
-      icon: Inbox,
-      label: t(($) => $.tasks.statuses.backlog),
-      value: 'backlog'
-    },
-    {
-      icon: Calendar,
-      label: t(($) => $.tasks.statuses.todo),
-      value: 'todo'
-    },
-    {
-      icon: Ellipsis,
-      label: t(($) => $.tasks.statuses.inProgress),
-      value: 'in_progress'
-    },
-    {
-      icon: Check,
-      label: t(($) => $.tasks.statuses.done),
-      value: 'done'
-    },
-    {
-      icon: X,
-      label: t(($) => $.tasks.statuses.canceled),
-      value: 'canceled'
-    }
-  ]
-
-  const priorities = [
-    {
-      icon: ArrowDown,
-      label: t(($) => $.tasks.priorities.low),
-      value: 'low'
-    },
-    {
-      icon: ArrowRight,
-      label: t(($) => $.tasks.priorities.medium),
-      value: 'medium'
-    },
-    {
-      icon: ArrowUp,
-      label: t(($) => $.tasks.priorities.high),
-      value: 'high'
-    }
-  ]
-
-  return (
-    <DataTableFilters table={table}>
-      <FacetedFilter
-        column={table.getColumn('label')}
-        data-action="filter-by-label"
-        options={labels}
-        title={t(($) => $.tasks.label)}
-      />
-      <FacetedFilter
-        column={table.getColumn('status')}
-        data-action="filter-by-status"
-        options={statuses}
-        title={t(($) => $.tasks.status)}
-      />
-      <FacetedFilter
-        column={table.getColumn('priority')}
-        data-action="filter-by-priority"
-        options={priorities}
-        title={t(($) => $.tasks.priority)}
-      />
-    </DataTableFilters>
-  )
-}
-
 //#region EmptyFiller
 function EmptyFiller() {
   // i18n
@@ -261,75 +145,30 @@ function EmptyFiller() {
 }
 
 //#region TasksTable
-function applyFacetFix(rawTasks: TaskWithProfile[]): TaskWithProfile[] {
-  return rawTasks.map((rawTask) => ({
-    ...rawTask,
-    label: rawTask.label ?? 'none'
-  }))
-}
-
 export function TasksTable({
   canEdit = false,
+  id = 'tasks-table',
   projectId,
-  slug = 'tasks',
+  storage,
   tasks,
   teamId,
   teamMembers,
-  view,
-  viewStore
+  title = 'Tasks'
 }: {
   canEdit?: boolean
+  id?: string
   projectId: number
-  slug?: string
+  storage?: string
   tasks: TaskWithProfile[]
   teamId: number
   teamMembers?: Profile[]
-  view?: View
-  viewStore?: ViewStore
+  title?: string
 }) {
   // i18n
   const { i18n, t } = useTranslation()
 
   // Global state
   const { setActiveTask, setUpdateTaskOpen } = useContext(AppContext)
-
-  // Table states
-  const {
-    columnFilters,
-    columnVisibility,
-    data,
-    onColumnFiltersChange,
-    onColumnVisibilityChange,
-    onPaginationChange,
-    onSortingChange,
-    pagination,
-    rowSelection,
-    setData,
-    setRowSelection,
-    sorting
-  } = UseTableStates({
-    data: applyFacetFix(tasks),
-    view,
-    viewStore
-  })
-
-  // Watch for data revalidation
-  useEffect(() => {
-    setData(() => applyFacetFix(tasks))
-  }, [setData, tasks])
-
-  const labels = useMemo<Record<string, string>>(
-    () => ({
-      created_at: t(($) => $.dateCreated),
-      label: t(($) => $.tasks.label),
-      name: t(($) => $.name),
-      priority: t(($) => $.tasks.priority),
-      profile: t(($) => $.tasks.assignedTo),
-      status: t(($) => $.tasks.status),
-      updated_at: t(($) => $.dateModified)
-    }),
-    [t]
-  )
 
   const openUpdateTaskDrawer = useMemo(() => {
     return (task: Task) => {
@@ -338,148 +177,159 @@ export function TasksTable({
     }
   }, [setActiveTask, setUpdateTaskOpen])
 
-  const columns = useMemo<ColumnDef<TaskWithProfile>[]>(
-    () => [
-      ...(canEdit ? [getSelectColDef<TaskWithProfile>()] : []),
-      {
-        accessorKey: 'name',
-        cell: ({ row }) => (
-          <NameCell
-            name={row.original.name}
-            onClick={
-              canEdit
-                ? () => {
-                    openUpdateTaskDrawer(row.original)
-                  }
-                : undefined
-            }
-          />
-        ),
-        enableHiding: false,
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.name)}
-          />
-        )
-      },
-      {
-        accessorKey: 'label',
-        // @NOTE tanstack table filter fix
-        cell: ({ row }) => <LabelBadge label={row.original.label ?? 'none'} />,
-        filterFn: 'arrIncludesSome',
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.tasks.label)}
-          />
-        )
-      },
-      {
-        accessorKey: 'priority',
-        cell: ({ row }) => <PriorityBadge priority={row.original.priority} />,
-        filterFn: 'arrIncludesSome',
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.tasks.priority)}
-          />
-        ),
-        sortingFn: (rowA, rowB) =>
-          sortPriority(rowA.original.priority, rowB.original.priority)
-      },
-      {
-        accessorKey: 'status',
-        cell: ({ row }) => <StatusBadge status={row.original.status} />,
-        filterFn: 'arrIncludesSome',
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.tasks.status)}
-          />
-        )
-      },
-      {
-        accessorKey: 'profile',
-        cell: ({ row }) =>
-          row.original.profile ? (
-            <NameCell
-              href={show({ profile: row.original.profile, team: teamId })}
-              name={row.original.profile?.name}
+  const columnHelper = createColumnHelper<TaskWithProfile>()
+
+  const labelFilters = useTaskLabelFilters()
+  const priorityFilters = useTaskPriorityFilters()
+  const statusFilters = useTaskStatusFilters()
+
+  const columns = useMemo(
+    () =>
+      columnHelper.columns([
+        ...(canEdit
+          ? [
+              columnHelper.display({
+                cell: ({ row }) => <SelectionRow row={row} />,
+                enableHiding: false,
+                header: ({ table }) => <SelectionHeader table={table} />,
+                id: 'select'
+              })
+            ]
+          : []),
+        columnHelper.accessor('name', {
+          cell: ({ cell, row }) => (
+            <CellAction
+              onClick={
+                canEdit ? () => openUpdateTaskDrawer(row.original) : undefined
+              }
+              value={cell.getValue()}
             />
-          ) : null,
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.tasks.assignedTo)}
-          />
-        ),
-        sortingFn: (rowA, rowB) =>
-          sortName(rowA.original.profile?.name, rowB.original.profile?.name)
-      },
-      {
-        accessorKey: 'created_at',
-        cell: ({ row }) => format(row.original.created_at, i18n.language, 'Pp'),
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.dateCreated)}
-          />
-        ),
-        sortingFn: 'datetime'
-      },
-      {
-        accessorKey: 'updated_at',
-        cell: ({ row }) => format(row.original.updated_at, i18n.language, 'Pp'),
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.dateModified)}
-          />
-        ),
-        sortingFn: 'datetime'
-      },
-      {
-        cell: ({ row }) => (
-          <Actions
-            canEdit={canEdit}
-            task={row.original}
-            teamId={teamId}
-          />
-        ),
-        id: 'actions'
-      }
-    ],
-    [canEdit, i18n.language, openUpdateTaskDrawer, t, teamId]
+          ),
+          enableHiding: false,
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              filter="search"
+              sorting
+            />
+          ),
+          meta: { label: t(($) => $.name) }
+        }),
+        columnHelper.accessor('label', {
+          cell: ({ getValue }) => <LabelBadge label={getValue()} />,
+          filterFn: 'calcSheetFilter',
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              filter="defined"
+              sorting
+            />
+          ),
+          meta: {
+            filters: labelFilters,
+            label: t(($) => $.tasks.label)
+          }
+        }),
+        columnHelper.accessor('priority', {
+          cell: ({ getValue }) => <PriorityBadge priority={getValue()} />,
+          filterFn: 'calcSheetFilter',
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              filter="defined"
+              sorting
+            />
+          ),
+          meta: {
+            filters: priorityFilters,
+            label: t(($) => $.tasks.priority)
+          },
+          sortFn: (rowA, rowB) =>
+            sortPriority(rowA.original.priority, rowB.original.priority)
+        }),
+        columnHelper.accessor('status', {
+          cell: ({ getValue }) => <StatusBadge status={getValue()} />,
+          filterFn: 'calcSheetFilter',
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              filter="defined"
+              sorting
+            />
+          ),
+          meta: {
+            filters: statusFilters,
+            label: t(($) => $.tasks.status)
+          }
+        }),
+        columnHelper.accessor('profile', {
+          cell: ({ row }) =>
+            row.original.profile ? (
+              <CellAction
+                href={memberShow({
+                  profile: row.original.profile,
+                  team: teamId
+                })}
+                value={row.original.profile.name}
+              />
+            ) : null,
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              sorting
+            />
+          ),
+          meta: { label: t(($) => $.tasks.assignedTo) }
+        }),
+        columnHelper.accessor('created_at', {
+          cell: ({ cell }) => format(cell.getValue(), i18n.language, 'Pp'),
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              sorting
+            />
+          ),
+          meta: { label: t(($) => $.dateCreated) },
+          sortFn: 'datetime'
+        }),
+        columnHelper.accessor('updated_at', {
+          cell: ({ cell }) => format(cell.getValue(), i18n.language, 'Pp'),
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              sorting
+            />
+          ),
+          meta: { label: t(($) => $.dateModified) },
+          sortFn: 'datetime'
+        }),
+        columnHelper.display({
+          cell: ({ row }) => (
+            <Actions
+              canEdit={canEdit}
+              task={row.original}
+              teamId={teamId}
+            />
+          ),
+          enableHiding: false,
+          id: 'actions'
+        })
+      ]),
+    [
+      canEdit,
+      columnHelper,
+      i18n.language,
+      labelFilters,
+      openUpdateTaskDrawer,
+      priorityFilters,
+      statusFilters,
+      t,
+      teamId
+    ]
   )
 
-  const table = useReactTable({
-    columns,
-    data,
-    enableRowSelection: canEdit,
-    getCoreRowModel: getCoreRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getRowId: (row) => row.id.toString(),
-    getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange,
-    onColumnVisibilityChange,
-    onPaginationChange,
-    onRowSelectionChange: setRowSelection,
-    onSortingChange,
-    state: {
-      columnFilters,
-      columnVisibility,
-      pagination,
-      rowSelection,
-      sorting
-    }
-  })
-
   return (
-    <div className="grid gap-3">
+    <section className="grid gap-3">
       {canEdit && (
         <>
           <AddTaskDrawer
@@ -495,51 +345,34 @@ export function TasksTable({
       )}
 
       {tasks.length > 0 ? (
-        <>
-          <div
-            className="grid items-center justify-between gap-2 @5xl/main:flex"
-            id={`${slug}-table-toolbar`}
-          >
-            <TableFilters table={table} />
-
-            <div className="flex gap-2">
-              <ColumnsVisibility
-                labels={labels}
-                table={table}
-              />
-
-              {canEdit && (
-                <>
-                  <AddTaskDrawerTrigger />
-                  <DestroyMany
-                    route={destroyMany({
-                      project: projectId,
-                      team: teamId
-                    })}
-                    table={table}
-                    title={t(($) => $.dialogs.deleteManyTasks.title)}
-                  />
-                </>
-              )}
-            </div>
-          </div>
-
-          <TableMain
-            slug={slug}
-            table={table}
-          />
-
-          <AfterTable
-            selection={canEdit}
-            slug={slug}
-            sortingLabels={labels}
-            sortingState={sorting}
-            table={table}
-          />
-        </>
+        <DataTable
+          actions={(table) =>
+            canEdit && (
+              <>
+                <AddTaskDrawerTrigger />
+                <DestroyMany
+                  route={destroyMany({
+                    project: projectId,
+                    team: teamId
+                  })}
+                  table={table}
+                  title={t(($) => $.dialogs.deleteManyTasks.title)}
+                />
+              </>
+            )
+          }
+          columns={columns}
+          data={tasks}
+          id={id}
+          macros={{
+            selectionMonitor: canEdit
+          }}
+          storage={storage}
+          title={title}
+        />
       ) : (
         <EmptyFiller />
       )}
-    </div>
+    </section>
   )
 }

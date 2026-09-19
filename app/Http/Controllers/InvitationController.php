@@ -26,17 +26,6 @@ class InvitationController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->get(),
             'teams' => $user->profile->teams,
-            'views' => [
-                'invitations' => $user->views()->where([
-                    ['page', 'invitations.index'],
-                    ['table', 'invitations'],
-                ])->first([
-                    'filters',
-                    'pagination',
-                    'sorting',
-                    'visibility',
-                ]),
-            ],
         ]);
     }
 

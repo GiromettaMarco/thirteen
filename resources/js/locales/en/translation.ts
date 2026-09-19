@@ -372,14 +372,13 @@ export default {
     toggle: 'Toggle Sidebar'
   },
   table: {
+    allColumns: 'All Columns',
     Asc: 'Asc',
-    asc: 'asc',
-    clearFilters: 'Clear filters',
     columns: 'Columns',
     Desc: 'Desc',
-    desc: 'desc',
-    filterSelected_one: '{{count}} selected',
-    filterSelected_other: '{{count}} selected',
+    emptyFilter: '[empty]',
+    filter: 'Filter',
+    filterAll: 'All',
     goToFirst: 'Go to first page',
     goToLast: 'Go to last page',
     goToNext: 'Go to next page',
@@ -388,12 +387,14 @@ export default {
     pageOf: 'Page {{page}} of {{total}}',
     rowsPerPage: 'Rows per page',
     search: 'Search...',
-    searchByName: 'Search by name...',
     selectAll: 'Select all',
-    selectedRows_one: '{{count}} of {{total}} row selected.',
-    selectedRows_other: '{{count}} of {{total}} rows selected.',
+    selectedRows_one: '{{count}} of {{total}} row selected',
+    selectedRows_other: '{{count}} of {{total}} rows selected',
     selectRow: 'Select row',
-    sorting: 'Sorting'
+    sorting: 'Sorting',
+    sortingAsc: '(asc)',
+    sortingColon: 'Sorting: ',
+    sortingDesc: '(desc)'
   },
   task_one: 'Task',
   task_other: 'Tasks',
@@ -413,8 +414,7 @@ export default {
     labels: {
       bug: 'Bug',
       documentation: 'Documentation',
-      feature: 'Feature',
-      none: 'none'
+      feature: 'Feature'
     },
     namePlaceholder: 'Task name',
     newTask: 'New task',

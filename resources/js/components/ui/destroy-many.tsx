@@ -4,6 +4,7 @@ import type { Table } from '@tanstack/react-table'
 import { Trash2 } from 'lucide-react'
 import { useState, type PropsWithChildren } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { Features, RowData } from '@/components/data-table/utility'
 import {
   Dialog,
   DialogClose,
@@ -17,7 +18,7 @@ import { isAnyItem } from '@/lib/utils'
 import { massDeleteSchema } from '@/schemas/misc'
 import type { RouteDefinition } from '@/wayfinder'
 
-export function DestroyMany({
+export function DestroyMany<TData extends RowData>({
   children,
   description,
   route,
@@ -29,8 +30,7 @@ export function DestroyMany({
   description?: string
   route: RouteDefinition<Method>
   selectedList?: boolean
-  // oxlint-disable-next-line typescript/no-explicit-any
-  table: Table<any>
+  table: Table<Features, TData>
   title?: string
   warning?: string
 }>) {

@@ -28,17 +28,6 @@ class TeamController extends Controller
                 ->withCount(['profiles', 'projects'])
                 ->orderBy('updated_at', 'desc')
                 ->get(),
-            'views' => [
-                'teams' => $user->views()->where([
-                    ['page', 'teams.index'],
-                    ['table', 'teams'],
-                ])->first([
-                    'filters',
-                    'pagination',
-                    'sorting',
-                    'visibility',
-                ]),
-            ],
         ]);
     }
 
@@ -47,22 +36,6 @@ class TeamController extends Controller
      */
     public function show(Request $request, Team $team): Response
     {
-        /** @var User */
-        $user = $request->user();
-
-        $views = $user
-            ->views()
-            ->where('page', "teams.show/$team->id")
-            ->whereIn('table', ['members', 'projects'])
-            ->orderBy('table')
-            ->limit(2)
-            ->get([
-                'filters',
-                'pagination',
-                'sorting',
-                'visibility',
-            ]);
-
         $projects = $team->projects()->get();
 
         return Inertia::render('dashboard/teams/show', [
@@ -77,10 +50,6 @@ class TeamController extends Controller
                 ->withCount('tasks')
                 ->get(),
             'team' => $team,
-            'views' => [
-                'members' => $views->get(0) ?? null,
-                'projects' => $views->get(1) ?? null,
-            ],
         ]);
     }
 

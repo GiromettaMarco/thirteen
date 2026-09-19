@@ -1,7 +1,8 @@
-import type { Locale } from 'date-fns'
+import type { CheckedState } from '@gmcode/react-ui'
+import type { Locale as DateFnsLocale } from 'date-fns'
 import { format as originalFormat } from 'date-fns'
 import { it } from 'date-fns/locale'
-import type { AnyItem, RawView, TaskPriority, View } from '@/types'
+import type { AnyItem, TaskPriority } from '@/types'
 
 /**
  * Default values for a table view.
@@ -11,32 +12,6 @@ export const viewDefaults = {
   pagination: { pageIndex: 0, pageSize: 10 },
   sorting: [],
   visibility: {}
-}
-
-/**
- * Transform raw view data from the database to a JS object.
- */
-export function parseView(view: RawView | null, fallback?: View): View {
-  if (view === null) {
-    return fallback ?? viewDefaults
-  }
-
-  // @NOTE replace import.meta.env.DEV with APP_DEBUG ?
-
-  try {
-    return {
-      filters: JSON.parse(view.filters),
-      pagination: JSON.parse(view.pagination),
-      sorting: JSON.parse(view.sorting),
-      visibility: JSON.parse(view.visibility)
-    }
-  } catch (error) {
-    if (import.meta.env.DEV) {
-      console.error('Invalid view format.', error)
-    }
-  }
-
-  return fallback ?? viewDefaults
 }
 
 /**
@@ -53,7 +28,7 @@ export function delay(ms: number = 300) {
  * Additional supported locales for date-fns.
  */
 export const dateLocales: {
-  [key: string]: Locale
+  [key: string]: DateFnsLocale
 } = { it }
 
 /**
@@ -92,6 +67,7 @@ export function formatDateForDB(date: Date) {
   return `${date.getFullYear()}-${(date.getMonth() + 1 + '').padStart(2, '0')}-${(date.getDate() + '').padStart(2, '0')}`
 }
 
+//#region Type Guards
 export function isObject(input: unknown): input is object {
   return typeof input === 'object' && input !== null && !Array.isArray(input)
 }
@@ -118,4 +94,17 @@ export function sortPriority(priorityA: TaskPriority, priorityB: TaskPriority) {
   const a = priorityA === 'high' ? 3 : priorityA === 'medium' ? 2 : 1
   const b = priorityB === 'high' ? 3 : priorityB === 'medium' ? 2 : 1
   return a > b ? 1 : a < b ? -1 : 0
+}
+
+//#region Checkbox
+export function isIndeterminate(checked: CheckedState | undefined) {
+  return checked === 'indeterminate'
+}
+
+export function getCheckedState(checked: CheckedState | undefined) {
+  return isIndeterminate(checked)
+    ? 'indeterminate'
+    : checked
+      ? 'checked'
+      : 'unchecked'
 }

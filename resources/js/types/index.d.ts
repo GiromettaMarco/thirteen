@@ -1,8 +1,8 @@
 import type {
   ColumnFiltersState,
+  ColumnVisibilityState,
   PaginationState,
-  SortingState,
-  VisibilityState
+  SortingState
 } from '@tanstack/react-table'
 
 //#region App
@@ -94,26 +94,6 @@ export interface Invitation extends WithTimestamps {
   user_id: number
 }
 
-//#region View
-export interface RawView {
-  filters: string
-  pagination: string
-  sorting: string
-  visibility: string
-}
-
-export interface View {
-  filters: ColumnFiltersState
-  pagination: PaginationState
-  sorting: SortingState
-  visibility: VisibilityState
-}
-
-export interface ViewStore {
-  page: string
-  table: string
-}
-
 //#region Team
 export interface Team extends WithTimestamps {
   id: number
@@ -168,8 +148,7 @@ export type TaskStatus =
 export interface Task extends WithTimestamps {
   description: string | null
   id: number
-  // tanstack facet fix
-  label: TaskLabel | null | 'none'
+  label: TaskLabel | null
   name: string
   priority: TaskPriority
   profile_id: number | null
@@ -178,7 +157,11 @@ export interface Task extends WithTimestamps {
 }
 
 export interface TaskWithProfile extends Task {
-  profile: Profile
+  profile: Profile | null
+}
+
+export interface TaskWithProject extends Task {
+  project: Project
 }
 
 export interface TaskPrioritiesCount {

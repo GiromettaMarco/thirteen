@@ -1,33 +1,22 @@
 import { Button } from '@gmcode/react-ui'
-import type { ColumnDef } from '@tanstack/react-table'
-import {
-  getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable
-} from '@tanstack/react-table'
 import { Folder } from 'lucide-react'
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ActionsMenu, type ActionProps } from '@/components/actions-menu'
-import { NameCell } from '@/components/name-cell'
+import { CellAction } from '@/components/data-table/components/cell-action'
+import { ColumnHeader } from '@/components/data-table/components/column-header'
+import {
+  SelectionHeader,
+  SelectionRow
+} from '@/components/data-table/components/selection'
+import { DataTable } from '@/components/data-table/data-table'
+import { createColumnHelper } from '@/components/data-table/utility'
 import {
   AddProjectDrawer,
   AddProjectDrawerTrigger
 } from '@/components/projects/add-project-drawer'
 import { ProjectDeadline } from '@/components/projects/project-deadline'
 import { UpdateProjectDrawer } from '@/components/projects/update-project-drawer'
-import {
-  AfterTable,
-  ColumnsVisibility,
-  getSelectColDef,
-  SortableColumnHeader,
-  TableFilters,
-  TableMain
-} from '@/components/ui/data-table'
 import { DestroyDialog } from '@/components/ui/destroy-dialog'
 import { DestroyMany } from '@/components/ui/destroy-many'
 import {
@@ -38,11 +27,10 @@ import {
   EmptyMedia,
   EmptyTitle
 } from '@/components/ui/empty'
-import UseTableStates from '@/hooks/use-table-states'
 import { format } from '@/lib/utils'
 import { AppContext } from '@/providers/app-context-provider'
 import { destroy, destroyMany, show } from '@/routes/projects'
-import type { Project, ProjectWithTasksCount, View, ViewStore } from '@/types'
+import type { Project, ProjectWithTasksCount } from '@/types'
 
 //#region Actions
 export function Actions({
@@ -148,162 +136,112 @@ function EmptyFiller({ canCreate = false }: { canCreate?: boolean }) {
 //#region ProjectsTable
 export function ProjectsTable({
   canEdit = false,
+  id = 'project-table',
   projects,
-  slug = 'projects',
+  storage,
   teamId,
-  view,
-  viewStore
+  title = 'Projects'
 }: {
   canEdit?: boolean
+  id?: string
   projects: ProjectWithTasksCount[]
-  slug?: string
+  storage?: string
   teamId: number
-  view?: View
-  viewStore?: ViewStore
+  title?: string
 }) {
   // i18n
   const { i18n, t } = useTranslation()
 
-  // Table states
-  const {
-    columnFilters,
-    columnVisibility,
-    data,
-    onColumnFiltersChange,
-    onColumnVisibilityChange,
-    onPaginationChange,
-    onSortingChange,
-    pagination,
-    rowSelection,
-    setData,
-    setRowSelection,
-    sorting
-  } = UseTableStates({
-    data: projects,
-    view,
-    viewStore
-  })
+  const columnHelper = createColumnHelper<ProjectWithTasksCount>()
 
-  // Watch for data revalidation
-  useEffect(() => {
-    setData(() => projects)
-  }, [projects, setData])
-
-  const labels = useMemo<Record<string, string>>(
-    () => ({
-      created_at: t(($) => $.dateCreated),
-      deadline: t(($) => $.projects.deadline),
-      name: t(($) => $.name),
-      tasks_count: t(($) => $.task, { count: 2 }),
-      updated_at: t(($) => $.dateModified)
-    }),
-    [t]
+  const columns = useMemo(
+    () =>
+      columnHelper.columns([
+        ...(canEdit
+          ? [
+              columnHelper.display({
+                cell: ({ row }) => <SelectionRow row={row} />,
+                enableHiding: false,
+                header: ({ table }) => <SelectionHeader table={table} />,
+                id: 'select'
+              })
+            ]
+          : []),
+        columnHelper.accessor('name', {
+          cell: ({ cell, row }) => (
+            <CellAction
+              href={show({ project: row.original.id, team: teamId })}
+              value={cell.getValue()}
+            />
+          ),
+          enableHiding: false,
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              filter="search"
+              sorting
+            />
+          ),
+          meta: { label: t(($) => $.name) }
+        }),
+        columnHelper.accessor('created_at', {
+          cell: ({ cell }) => format(cell.getValue(), i18n.language, 'Pp'),
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              sorting
+            />
+          ),
+          meta: { label: t(($) => $.dateCreated) },
+          sortFn: 'datetime'
+        }),
+        columnHelper.accessor('updated_at', {
+          cell: ({ cell }) => format(cell.getValue(), i18n.language, 'Pp'),
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              sorting
+            />
+          ),
+          meta: { label: t(($) => $.dateModified) },
+          sortFn: 'datetime'
+        }),
+        columnHelper.accessor('deadline', {
+          cell: ({ cell }) => <ProjectDeadline deadline={cell.getValue()} />,
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              sorting
+            />
+          ),
+          meta: { label: t(($) => $.projects.deadline) },
+          sortFn: 'datetime'
+        }),
+        columnHelper.accessor('tasks_count', {
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              sorting
+            />
+          ),
+          meta: { label: t(($) => $.task, { count: 2 }) }
+        }),
+        columnHelper.display({
+          cell: ({ row }) => (
+            <Actions
+              canEdit={canEdit}
+              project={row.original}
+            />
+          ),
+          enableHiding: false,
+          id: 'actions'
+        })
+      ]),
+    [canEdit, columnHelper, i18n.language, t, teamId]
   )
-
-  const columns = useMemo<ColumnDef<ProjectWithTasksCount>[]>(
-    () => [
-      ...(canEdit ? [getSelectColDef<ProjectWithTasksCount>()] : []),
-      {
-        accessorKey: 'name',
-        cell: ({ row }) => (
-          <NameCell
-            href={show({
-              project: row.original.id,
-              team: teamId
-            })}
-            name={row.original.name}
-          />
-        ),
-        enableHiding: false,
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.name)}
-          />
-        )
-      },
-      {
-        accessorKey: 'created_at',
-        cell: ({ row }) => format(row.original.created_at, i18n.language, 'Pp'),
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.dateCreated)}
-          />
-        ),
-        sortingFn: 'datetime'
-      },
-      {
-        accessorKey: 'updated_at',
-        cell: ({ row }) => format(row.original.updated_at, i18n.language, 'Pp'),
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.dateModified)}
-          />
-        ),
-        sortingFn: 'datetime'
-      },
-      {
-        accessorKey: 'deadline',
-        cell: ({ row }) => <ProjectDeadline deadline={row.original.deadline} />,
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.projects.deadline)}
-          />
-        ),
-        sortingFn: 'datetime'
-      },
-      {
-        accessorKey: 'tasks_count',
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.task, { count: 2 })}
-          />
-        )
-      },
-      {
-        cell: ({ row }) => (
-          <Actions
-            canEdit={canEdit}
-            project={row.original}
-          />
-        ),
-        id: 'actions'
-      }
-    ],
-    [canEdit, i18n.language, t, teamId]
-  )
-
-  const table = useReactTable({
-    columns,
-    data,
-    enableRowSelection: true,
-    getCoreRowModel: getCoreRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getRowId: (row) => row.id.toString(),
-    getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange,
-    onColumnVisibilityChange,
-    onPaginationChange,
-    onRowSelectionChange: setRowSelection,
-    onSortingChange,
-    state: {
-      columnFilters,
-      columnVisibility,
-      pagination,
-      rowSelection,
-      sorting
-    }
-  })
 
   return (
-    <div className="grid gap-3">
+    <section className="grid gap-3">
       {canEdit && (
         <>
           <AddProjectDrawer teamId={teamId} />
@@ -312,48 +250,31 @@ export function ProjectsTable({
       )}
 
       {projects.length > 0 ? (
-        <>
-          <div
-            className="grid items-center justify-between gap-2 @5xl/main:flex"
-            id={`${slug}-table-toolbar`}
-          >
-            <TableFilters table={table} />
-
-            <div className="flex gap-2">
-              <ColumnsVisibility
-                labels={labels}
-                table={table}
-              />
-
-              {canEdit && (
-                <>
-                  <AddProjectDrawerTrigger />
-                  <DestroyMany
-                    route={destroyMany({ team: teamId })}
-                    table={table}
-                    title={t(($) => $.projects.deleteManyDialog.title)}
-                  />
-                </>
-              )}
-            </div>
-          </div>
-
-          <TableMain
-            slug={slug}
-            table={table}
-          />
-
-          <AfterTable
-            selection={canEdit}
-            slug={slug}
-            sortingLabels={labels}
-            sortingState={sorting}
-            table={table}
-          />
-        </>
+        <DataTable
+          actions={(table) =>
+            canEdit && (
+              <>
+                <AddProjectDrawerTrigger />
+                <DestroyMany
+                  route={destroyMany({ team: teamId })}
+                  table={table}
+                  title={t(($) => $.projects.deleteManyDialog.title)}
+                />
+              </>
+            )
+          }
+          columns={columns}
+          data={projects}
+          id={id}
+          macros={{
+            selectionMonitor: canEdit
+          }}
+          storage={storage}
+          title={title}
+        />
       ) : (
         <EmptyFiller canCreate={canEdit} />
       )}
-    </div>
+    </section>
   )
 }

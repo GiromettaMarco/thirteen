@@ -13,7 +13,6 @@ use App\Http\Controllers\SearchProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TeamMemberController;
-use App\Http\Controllers\ViewController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,8 +23,6 @@ Route::prefix('dashboard')
         // #region Dashboard
         Route::get('/', DashboardController::class)
             ->name('dashboard');
-        Route::post('/views', [ViewController::class, 'store'])
-            ->name('views.store');
         Route::get('/settings', function () {
             return Inertia::render('dashboard/settings');
         })->name('settings');

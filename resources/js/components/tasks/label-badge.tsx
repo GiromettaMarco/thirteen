@@ -17,21 +17,23 @@ export function LabelName({ label }: { label: TaskLabel }) {
       return t(($) => $.tasks.labels.feature)
 
     default:
-      return
+      return null
   }
 }
 
-export function LabelBadge({ label }: { label: TaskLabel | 'none' }) {
+export function LabelBadge({ label }: { label: TaskLabel | null }) {
+  if (!label) {
+    return null
+  }
+
   return (
     <div className="w-32">
-      {label !== 'none' && (
-        <Badge
-          className="px-1.5 text-muted-foreground"
-          variant="outline"
-        >
-          <LabelName label={label} />
-        </Badge>
-      )}
+      <Badge
+        className="px-1.5 text-muted-foreground"
+        variant="outline"
+      >
+        <LabelName label={label} />
+      </Badge>
     </div>
   )
 }

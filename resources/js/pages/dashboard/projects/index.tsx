@@ -4,26 +4,16 @@ import { useTranslation } from 'react-i18next'
 import type { BreadcrumbLink } from '@/components/breadcrumbs'
 import { ProjectsTable } from '@/components/projects/projects-table'
 import DashboardLayout from '@/layouts/dashboard-layout'
-import { parseView } from '@/lib/utils'
 import { dashboard } from '@/routes'
 import { show as teamsShow, index as teamsIndex } from '@/routes/teams'
-import type {
-  Auth,
-  ProjectWithTasksCount,
-  RawView,
-  Team,
-  WithTeamPermissions
-} from '@/types'
+import type { ProjectWithTasksCount, Team, WithTeamPermissions } from '@/types'
 
 export default function ProjectsIndex({
   projects,
-  team,
-  views
+  team
 }: {
-  auth: Auth<false>
   projects: ProjectWithTasksCount[]
   team: Team & WithTeamPermissions
-  views: { projects: RawView | null }
 }) {
   // i18n
   const { t } = useTranslation()
@@ -50,12 +40,8 @@ export default function ProjectsIndex({
           <ProjectsTable
             canEdit={team.pivot.can_edit_projects}
             projects={projects}
+            storage={`team-${team.id}-projects:projects`}
             teamId={team.id}
-            view={parseView(views.projects)}
-            viewStore={{
-              page: 'projects.index',
-              table: `projects/team:${team.id}`
-            }}
           />
         </section>
       </div>

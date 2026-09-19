@@ -1,25 +1,9 @@
-import { cn } from '@gmcode/react-ui'
 import { Head, Link } from '@inertiajs/react'
-import {
-  getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-  type ColumnDef
-} from '@tanstack/react-table'
 import { differenceInCalendarDays } from 'date-fns'
 import { OctagonX, SquareCheckBig, TriangleAlert } from 'lucide-react'
-import { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { NameCell } from '@/components/name-cell'
+import { AssignedTasksTable } from '@/components/dashboard/assigned-tasks-table'
 import { ProjectDeadline } from '@/components/projects/project-deadline'
-import { LabelBadge } from '@/components/tasks/label-badge'
-import { PriorityBadge } from '@/components/tasks/priority-badge'
-import { StatusBadge } from '@/components/tasks/status-badge'
-import { TableFilters } from '@/components/tasks/tasks-table'
 import {
   Card,
   CardAction,
@@ -29,23 +13,16 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import {
-  AfterTable,
-  ColumnsVisibility,
-  SortableColumnHeader,
-  TableMain
-} from '@/components/ui/data-table'
-import {
   Empty,
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
   EmptyTitle
 } from '@/components/ui/empty'
-import UseTableStates from '@/hooks/use-table-states'
 import DashboardLayout from '@/layouts/dashboard-layout'
-import { format, parseView, sortName, sortPriority } from '@/lib/utils'
+import { format } from '@/lib/utils'
 import { show as projectsShow } from '@/routes/projects'
-import type { Project, RawView, Task, View, ViewStore } from '@/types'
+import type { Project, TaskWithProject } from '@/types'
 
 //#region Deadlines
 function DeadlineCard({
@@ -79,7 +56,7 @@ function DeadlineCard({
       <Card className="@container/card bg-linear-to-t from-primary/5 to-card shadow-xs transition-all hover:-translate-y-2 dark:from-background">
         <CardHeader>
           <CardDescription>{name}</CardDescription>
-          <CardTitle className="text-xl font-semibold tabular-nums @[250px]/card:text-2xl">
+          <CardTitle className="text-sm font-semibold tabular-nums @[250px]/card:text-base @[300px]/card:text-lg @[350px]/card:text-xl @[400px]/card:text-2xl">
             {format(parsedDeadline, i18n.language)}
           </CardTitle>
           <CardAction>
@@ -125,9 +102,7 @@ function Deadlines({ projects }: { projects: Project[] }) {
 }
 
 //#region TasksTable
-type TaskWithProject = Task & { project: Project }
-
-function TasksEmptyFiller() {
+function EmptyFiller() {
   // i18n
   const { t } = useTranslation()
 
@@ -148,235 +123,13 @@ function TasksEmptyFiller() {
   )
 }
 
-function applyFacetFix(rawTasks: TaskWithProject[]): TaskWithProject[] {
-  return rawTasks.map((rawTask) => ({
-    ...rawTask,
-    label: rawTask.label ?? 'none'
-  }))
-}
-
-function TasksTable({
-  slug = 'your-tasks',
-  tasks,
-  view,
-  viewStore
-}: {
-  slug?: string
-  tasks: TaskWithProject[]
-  view?: View
-  viewStore?: ViewStore
-}) {
-  // i18n
-  const { i18n, t } = useTranslation()
-
-  // Table states
-  const {
-    columnFilters,
-    columnVisibility,
-    data,
-    onColumnFiltersChange,
-    onColumnVisibilityChange,
-    onPaginationChange,
-    onSortingChange,
-    pagination,
-    rowSelection,
-    setData,
-    setRowSelection,
-    sorting
-  } = UseTableStates({
-    data: applyFacetFix(tasks),
-    view,
-    viewStore
-  })
-
-  // Watch for data revalidation
-  useEffect(() => {
-    setData(() => applyFacetFix(tasks))
-  }, [setData, tasks])
-
-  const labels = useMemo<Record<string, string>>(
-    () => ({
-      created_at: t(($) => $.dateCreated),
-      label: t(($) => $.tasks.label),
-      name: t(($) => $.name),
-      priority: t(($) => $.tasks.priority),
-      project: t(($) => $.project, { count: 1 }),
-      status: t(($) => $.tasks.status),
-      updated_at: t(($) => $.dateModified)
-    }),
-    [t]
-  )
-
-  const columns = useMemo<ColumnDef<TaskWithProject>[]>(
-    () => [
-      {
-        accessorKey: 'name',
-        enableHiding: false,
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            data-action="sort-by-name"
-            title={t(($) => $.name)}
-          />
-        )
-      },
-      {
-        accessorKey: 'label',
-        // @NOTE tanstack table filter fix
-        cell: ({ row }) => <LabelBadge label={row.original.label ?? 'none'} />,
-        filterFn: 'arrIncludesSome',
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            data-action="sort-by-label"
-            title={t(($) => $.tasks.label)}
-          />
-        )
-      },
-      {
-        accessorKey: 'priority',
-        cell: ({ row }) => <PriorityBadge priority={row.original.priority} />,
-        filterFn: 'arrIncludesSome',
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            data-action="sort-by-priority"
-            title={t(($) => $.tasks.priority)}
-          />
-        ),
-        sortingFn: (rowA, rowB) =>
-          sortPriority(rowA.original.priority, rowB.original.priority)
-      },
-      {
-        accessorKey: 'status',
-        cell: ({ row }) => <StatusBadge status={row.original.status} />,
-        filterFn: 'arrIncludesSome',
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            data-action="sort-by-status"
-            title={t(($) => $.tasks.status)}
-          />
-        )
-      },
-      {
-        accessorKey: 'project',
-        cell: ({ row }) => (
-          <NameCell
-            href={projectsShow({
-              project: row.original.project,
-              team: row.original.project.team_id
-            })}
-            name={row.original.project.name}
-          />
-        ),
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            data-action="sort-by-project"
-            title={t(($) => $.project, { count: 1 })}
-          />
-        ),
-        sortingFn: (rowA, rowB) =>
-          sortName(rowA.original.project.name, rowB.original.project.name)
-      },
-      {
-        accessorKey: 'created_at',
-        cell: ({ row }) => format(row.original.created_at, i18n.language, 'Pp'),
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            data-action="sort-by-created-at"
-            title={t(($) => $.dateCreated)}
-          />
-        ),
-        sortingFn: 'datetime'
-      },
-      {
-        accessorKey: 'updated_at',
-        cell: ({ row }) => format(row.original.updated_at, i18n.language, 'Pp'),
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            data-action="sort-by-updated-at"
-            title={t(($) => $.dateModified)}
-          />
-        ),
-        sortingFn: 'datetime'
-      }
-    ],
-    [i18n.language, t]
-  )
-
-  const table = useReactTable({
-    columns,
-    data,
-    enableRowSelection: false,
-    getCoreRowModel: getCoreRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getRowId: (row) => row.id.toString(),
-    getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange,
-    onColumnVisibilityChange,
-    onPaginationChange,
-    onRowSelectionChange: setRowSelection,
-    onSortingChange,
-    state: {
-      columnFilters,
-      columnVisibility,
-      pagination,
-      rowSelection,
-      sorting
-    }
-  })
-
-  return (
-    <section className={cn('grid', { 'gap-4': tasks.length == 0 })}>
-      {tasks.length > 0 ? (
-        <div className="grid gap-3">
-          <div
-            className="grid items-center justify-between gap-2 @5xl/main:flex"
-            id={`${slug}-table-toolbar`}
-          >
-            <TableFilters table={table} />
-            <div className="flex gap-2">
-              <ColumnsVisibility
-                labels={labels}
-                table={table}
-              />
-            </div>
-          </div>
-          <TableMain
-            slug={slug}
-            table={table}
-          />
-          <AfterTable
-            selection={false}
-            slug={slug}
-            sortingLabels={labels}
-            sortingState={sorting}
-            table={table}
-          />
-        </div>
-      ) : (
-        <TasksEmptyFiller />
-      )}
-    </section>
-  )
-}
-
 //#region Page
 export default function Dashboard({
   projects,
-  tasks,
-  views
+  tasks
 }: {
   projects: Project[]
   tasks: TaskWithProject[]
-  views: { tasks: RawView | null }
 }) {
   // i18n
   const { t } = useTranslation()
@@ -388,14 +141,16 @@ export default function Dashboard({
       <div className="grid gap-6 px-4 lg:px-6">
         <Deadlines projects={projects} />
 
-        <TasksTable
-          tasks={tasks}
-          view={parseView(views.tasks)}
-          viewStore={{
-            page: 'dashboard',
-            table: 'tasks'
-          }}
-        />
+        <section>
+          {tasks.length > 0 ? (
+            <AssignedTasksTable
+              storage="dashboard:tasks"
+              tasks={tasks}
+            />
+          ) : (
+            <EmptyFiller />
+          )}
+        </section>
       </div>
     </DashboardLayout>
   )

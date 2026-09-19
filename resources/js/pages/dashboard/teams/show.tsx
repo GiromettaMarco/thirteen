@@ -6,14 +6,11 @@ import type { BreadcrumbLink } from '@/components/breadcrumbs'
 import { ProjectsTable } from '@/components/projects/projects-table'
 import { MembersTable } from '@/components/teams/members/members-table'
 import UpdateTeamDrawer from '@/components/teams/update-team-drawer'
-import { Heading } from '@/components/ui/heading'
 import DashboardLayout from '@/layouts/dashboard-layout'
-import { parseView } from '@/lib/utils'
 import { dashboard } from '@/routes'
 import { index } from '@/routes/teams'
 import type {
   ProjectWithTasksCount,
-  RawView,
   Team,
   TeamMember,
   WithTeamPermissions
@@ -22,16 +19,11 @@ import type {
 export default function TeamsShow({
   members,
   projects,
-  team,
-  views
+  team
 }: {
   members: TeamMember[]
   projects: ProjectWithTasksCount[]
   team: Team & WithTeamPermissions
-  views: {
-    members: RawView | null
-    projects: RawView | null
-  }
 }) {
   // i18n
   const { t } = useTranslation()
@@ -55,42 +47,24 @@ export default function TeamsShow({
       <Head title={team.name} />
 
       <div className="grid gap-6 px-4 lg:px-6">
-        <section className="grid gap-1">
-          <Heading
-            h={t(($) => $.project, { count: 2 })}
-            variant="small"
-          />
-          <ProjectsTable
-            canEdit={team.pivot.can_edit_projects}
-            projects={projects}
-            teamId={team.id}
-            view={parseView(views.projects)}
-            viewStore={{
-              page: `teams.show/${team.id}`,
-              table: 'projects'
-            }}
-          />
-        </section>
+        <ProjectsTable
+          canEdit={team.pivot.can_edit_projects}
+          projects={projects}
+          storage={`team-${team.id}:projects`}
+          teamId={team.id}
+          title={t(($) => $.project, { count: 2 })}
+        />
 
         <Separator />
 
-        <section className="grid gap-1">
-          <Heading
-            h={t(($) => $.teams.teamMembers)}
-            variant="small"
-          />
-          <MembersTable
-            canEdit={team.pivot.can_edit_members}
-            currentProfileId={user?.profile_id}
-            members={members}
-            team={team}
-            view={parseView(views.members)}
-            viewStore={{
-              page: `teams.show/${team.id}`,
-              table: 'members'
-            }}
-          />
-        </section>
+        <MembersTable
+          canEdit={team.pivot.can_edit_members}
+          currentProfileId={user?.profile_id}
+          members={members}
+          storage={`team-${team.id}:members`}
+          team={team}
+          title={t(($) => $.teams.teamMembers)}
+        />
       </div>
     </DashboardLayout>
   )

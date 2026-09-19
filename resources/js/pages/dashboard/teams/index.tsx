@@ -2,16 +2,9 @@ import { Head } from '@inertiajs/react'
 import { useTranslation } from 'react-i18next'
 import { TeamsTable } from '@/components/teams/teams-table'
 import DashboardLayout from '@/layouts/dashboard-layout'
-import { parseView } from '@/lib/utils'
-import type { RawView, TeamsTableEntry } from '@/types'
+import type { TeamsTableEntry } from '@/types'
 
-export default function TeamsIndex({
-  teams,
-  views
-}: {
-  teams: TeamsTableEntry[]
-  views: { teams: RawView | null }
-}) {
+export default function TeamsIndex({ teams }: { teams: TeamsTableEntry[] }) {
   // i18n
   const { t } = useTranslation()
 
@@ -22,12 +15,8 @@ export default function TeamsIndex({
       <div className="px-4 lg:px-6">
         <section>
           <TeamsTable
+            storage="teams:teams"
             teams={teams}
-            view={parseView(views.teams)}
-            viewStore={{
-              page: 'teams.index',
-              table: 'teams'
-            }}
           />
         </section>
       </div>

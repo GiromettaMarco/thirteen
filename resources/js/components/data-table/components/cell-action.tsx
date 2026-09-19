@@ -3,16 +3,16 @@ import type { UrlMethodPair } from '@inertiajs/core'
 import { Link } from '@inertiajs/react'
 import type { MouseEventHandler } from 'react'
 
-export function NameCell({
+export function CellAction({
   className,
   href,
-  name,
-  onClick
+  onClick,
+  value
 }: {
   className?: string
   href?: string | UrlMethodPair | undefined
-  name: string
   onClick?: MouseEventHandler<HTMLButtonElement>
+  value: string | number | null | undefined
 }) {
   if (href) {
     return (
@@ -23,7 +23,7 @@ export function NameCell({
         onClick={onClick}
         variant="link"
       >
-        <Link href={href}>{name}</Link>
+        <Link href={href}>{value}</Link>
       </Button>
     )
   }
@@ -36,10 +36,10 @@ export function NameCell({
         onClick={onClick}
         variant="link"
       >
-        {name}
+        {value}
       </Button>
     )
   }
 
-  return <span>{name}</span>
+  return <span>{value}</span>
 }

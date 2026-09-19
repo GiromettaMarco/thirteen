@@ -4,16 +4,13 @@ import { useTranslation } from 'react-i18next'
 import type { BreadcrumbLink } from '@/components/breadcrumbs'
 import { UpdateProjectDrawer } from '@/components/projects/update-project-drawer'
 import { TasksTable } from '@/components/tasks/tasks-table'
-import { Heading } from '@/components/ui/heading'
 import DashboardLayout from '@/layouts/dashboard-layout'
-import { parseView } from '@/lib/utils'
 import { dashboard } from '@/routes'
 import { index as projectsIndex } from '@/routes/projects'
 import { show as teamsShow, index as teamsIndex } from '@/routes/teams'
 import type {
   Profile,
   Project,
-  RawView,
   TaskWithProfile,
   Team,
   WithTeamPermissions
@@ -23,14 +20,12 @@ export default function ProjectsShow({
   project,
   tasks,
   team,
-  team_members,
-  views
+  team_members
 }: {
   project: Project
   tasks: TaskWithProfile[]
   team: Team & WithTeamPermissions
   team_members: Profile[]
-  views: { tasks: RawView | null }
 }) {
   // i18n
   const { t } = useTranslation()
@@ -63,24 +58,15 @@ export default function ProjectsShow({
       <Head title={project.name} />
 
       <div className="grid gap-6 px-4 lg:px-6">
-        <section className="grid gap-1">
-          <Heading
-            h={t(($) => $.task, { count: 2 })}
-            variant="small"
-          />
-          <TasksTable
-            canEdit={team.pivot.can_edit_projects}
-            projectId={project.id}
-            tasks={tasks}
-            teamId={project.team_id}
-            teamMembers={team_members}
-            view={parseView(views.tasks)}
-            viewStore={{
-              page: `projects.show/${project.id}`,
-              table: 'tasks'
-            }}
-          />
-        </section>
+        <TasksTable
+          canEdit={team.pivot.can_edit_projects}
+          projectId={project.id}
+          storage={`project-${project.id}:tasks`}
+          tasks={tasks}
+          teamId={project.team_id}
+          teamMembers={team_members}
+          title={t(($) => $.task, { count: 2 })}
+        />
       </div>
     </DashboardLayout>
   )

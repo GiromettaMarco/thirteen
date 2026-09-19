@@ -6,7 +6,6 @@ use App\Http\Requests\Project\DestroyProjectsRequest;
 use App\Http\Requests\Project\StoreProjectRequest;
 use App\Models\Project;
 use App\Models\Team;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,26 +20,12 @@ class ProjectController extends Controller
      */
     public function index(Request $request, Team $team): Response
     {
-        /** @var User $user */
-        $user = $request->user();
-
         return Inertia::render('dashboard/projects/index', [
             'projects' => $team
                 ->projects()
                 ->withCount('tasks')
                 ->get(),
             'team' => $team,
-            'views' => [
-                'projects' => $user->views()->where([
-                    ['page', 'projects.index'],
-                    ['table', "projects/team:$team->id"],
-                ])->first([
-                    'filters',
-                    'pagination',
-                    'sorting',
-                    'visibility',
-                ]),
-            ],
         ]);
     }
 
@@ -52,25 +37,11 @@ class ProjectController extends Controller
         Team $team,
         Project $project
     ): Response {
-        /** @var User $user */
-        $user = $request->user();
-
         return Inertia::render('dashboard/projects/show', [
             'project' => $project,
             'tasks' => $project->tasks()->with('profile')->get(),
             'team' => $team,
             'team_members' => $team->profiles()->get(),
-            'views' => [
-                'tasks' => $user->views()->where([
-                    ['page', "projects.show/$project->id"],
-                    ['table', 'tasks'],
-                ])->first([
-                    'filters',
-                    'pagination',
-                    'sorting',
-                    'visibility',
-                ]),
-            ],
         ]);
     }
 

@@ -1,7 +1,13 @@
 import { cn } from '@gmcode/react-ui'
-import { CheckIcon, ChevronRightIcon, CircleIcon } from 'lucide-react'
+import {
+  CheckIcon,
+  ChevronRightIcon,
+  CircleIcon,
+  MinusIcon
+} from 'lucide-react'
 import { DropdownMenu as DropdownMenuPrimitive } from 'radix-ui'
 import * as React from 'react'
+import { getCheckedState } from '@/lib/utils'
 
 function DropdownMenu({
   ...props
@@ -110,6 +116,37 @@ function DropdownMenuCheckboxItem({
         <DropdownMenuPrimitive.ItemIndicator>
           <CheckIcon className="size-4" />
         </DropdownMenuPrimitive.ItemIndicator>
+      </span>
+      {children}
+    </DropdownMenuPrimitive.CheckboxItem>
+  )
+}
+
+function DropdownMenuCheckboxElement({
+  checked,
+  children,
+  className,
+  ...props
+}: React.ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem>) {
+  return (
+    <DropdownMenuPrimitive.CheckboxItem
+      checked={checked}
+      className={cn(
+        "relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
+      data-slot="dropdown-menu-checkbox-item"
+      {...props}
+    >
+      <span
+        className={cn(
+          'pointer-events-none me-2 flex size-4 flex-none items-center justify-center rounded-sm border border-primary/50',
+          'data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground'
+        )}
+        data-state={getCheckedState(checked)}
+      >
+        {checked === 'indeterminate' && <MinusIcon />}
+        {checked === true && <CheckIcon />}
       </span>
       {children}
     </DropdownMenuPrimitive.CheckboxItem>
@@ -253,6 +290,7 @@ function DropdownMenuSubContent({
 
 export {
   DropdownMenu,
+  DropdownMenuCheckboxElement,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuGroup,

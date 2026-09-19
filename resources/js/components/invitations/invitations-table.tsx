@@ -1,30 +1,16 @@
 import { useForm } from '@inertiajs/react'
-import type { ColumnDef } from '@tanstack/react-table'
-import {
-  getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable
-} from '@tanstack/react-table'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ActionsMenu, type ActionProps } from '@/components/actions-menu'
-import {
-  AfterTable,
-  ColumnsVisibility,
-  SortableColumnHeader,
-  TableFilters,
-  TableMain
-} from '@/components/ui/data-table'
+import { ColumnHeader } from '@/components/data-table/components/column-header'
+import { DataTable } from '@/components/data-table/data-table'
+import { createColumnHelper } from '@/components/data-table/utility'
 import { DestroyDialog } from '@/components/ui/destroy-dialog'
-import UseTableStates from '@/hooks/use-table-states'
 import { format } from '@/lib/utils'
 import { destroy, update } from '@/routes/invitations'
-import type { Invitation, View, ViewStore } from '@/types'
+import type { Invitation } from '@/types'
 
+//#region Actions
 function Actions({ invitation }: { invitation: Invitation }) {
   // i18n
   const { t } = useTranslation()
@@ -73,154 +59,83 @@ function Actions({ invitation }: { invitation: Invitation }) {
 
 //#region InvitationsTable
 export function InvitationsTable({
+  id = 'invitations-table',
   invitations,
-  slug = 'invitations',
-  view,
-  viewStore
+  storage,
+  title = 'Invitations'
 }: {
+  id?: string
   invitations: Invitation[]
-  slug?: string
-  view?: View
-  viewStore?: ViewStore
+  storage?: string
+  title?: string
 }) {
   // i18n
   const { i18n, t } = useTranslation()
 
-  // Table states
-  const {
-    columnFilters,
-    columnVisibility,
-    data,
-    onColumnFiltersChange,
-    onColumnVisibilityChange,
-    onPaginationChange,
-    onSortingChange,
-    pagination,
-    setData,
-    sorting
-  } = UseTableStates({
-    data: invitations,
-    view,
-    viewStore
-  })
+  const columnHelper = createColumnHelper<Invitation>()
 
-  // Watch for data revalidation
-  useEffect(() => {
-    setData(() => invitations)
-  }, [invitations, setData])
-
-  const labels = useMemo<Record<string, string>>(
-    () => ({
-      created_at: t(($) => $.pages.dashboard.invitations.first),
-      updated_at: t(($) => $.pages.dashboard.invitations.last),
-      user_email: t(($) => $.emailAddress)
-    }),
-    [t]
+  const columns = useMemo(
+    () =>
+      columnHelper.columns([
+        columnHelper.accessor('user.profile.name', {
+          enableHiding: false,
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              sorting
+            />
+          ),
+          id: 'name',
+          meta: { label: t(($) => $.name) }
+        }),
+        columnHelper.accessor('user.email', {
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              sorting
+            />
+          ),
+          id: 'email',
+          meta: { label: t(($) => $.emailAddress) }
+        }),
+        columnHelper.accessor('created_at', {
+          cell: ({ cell }) => format(cell.getValue(), i18n.language, 'Pp'),
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              sorting
+            />
+          ),
+          meta: { label: t(($) => $.pages.dashboard.invitations.first) },
+          sortFn: 'datetime'
+        }),
+        columnHelper.accessor('updated_at', {
+          cell: ({ cell }) => format(cell.getValue(), i18n.language, 'Pp'),
+          header: ({ column }) => (
+            <ColumnHeader
+              column={column}
+              sorting
+            />
+          ),
+          meta: { label: t(($) => $.pages.dashboard.invitations.last) },
+          sortFn: 'datetime'
+        }),
+        columnHelper.display({
+          cell: ({ row }) => <Actions invitation={row.original} />,
+          enableHiding: false,
+          id: 'actions'
+        })
+      ]),
+    [columnHelper, i18n.language, t]
   )
-
-  const columns = useMemo<ColumnDef<Invitation>[]>(
-    () => [
-      {
-        accessorKey: 'user.profile.name',
-        enableHiding: false,
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.name)}
-          />
-        )
-      },
-      {
-        accessorKey: 'user.email',
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.emailAddress)}
-          />
-        )
-      },
-      {
-        accessorKey: 'created_at',
-        cell: ({ row }) => format(row.original.created_at, i18n.language, 'Pp'),
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.pages.dashboard.invitations.first)}
-          />
-        ),
-        sortingFn: 'datetime'
-      },
-      {
-        accessorKey: 'updated_at',
-        cell: ({ row }) => format(row.original.updated_at, i18n.language, 'Pp'),
-        header: ({ column }) => (
-          <SortableColumnHeader
-            column={column}
-            title={t(($) => $.pages.dashboard.invitations.last)}
-          />
-        ),
-        sortingFn: 'datetime'
-      },
-      {
-        cell: ({ row }) => <Actions invitation={row.original} />,
-        id: 'actions'
-      }
-    ],
-    [i18n.language, t]
-  )
-
-  const table = useReactTable({
-    columns,
-    data,
-    enableRowSelection: false,
-    getCoreRowModel: getCoreRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getRowId: (row) => row.id.toString(),
-    getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange,
-    onColumnVisibilityChange,
-    onPaginationChange,
-    onSortingChange,
-    state: {
-      columnFilters,
-      columnVisibility,
-      pagination,
-      sorting
-    }
-  })
 
   return (
-    <div className="grid gap-3">
-      <div
-        className="grid items-center justify-between gap-2 @5xl/main:flex"
-        id={`${slug}-table-toolbar`}
-      >
-        <TableFilters
-          columnId="user_profile_name"
-          table={table}
-        />
-
-        <ColumnsVisibility
-          labels={labels}
-          table={table}
-        />
-      </div>
-
-      <TableMain
-        slug={slug}
-        table={table}
-      />
-
-      <AfterTable
-        selection={false}
-        slug={slug}
-        sortingLabels={labels}
-        sortingState={sorting}
-        table={table}
-      />
-    </div>
+    <DataTable
+      columns={columns}
+      data={invitations}
+      id={id}
+      storage={storage}
+      title={title}
+    />
   )
 }

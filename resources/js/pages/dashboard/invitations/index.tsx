@@ -6,17 +6,14 @@ import { SendInvitationForm } from '@/components/invitations/send-invitation-for
 import { Container } from '@/components/ui/container'
 import { Format } from '@/components/ui/format'
 import DashboardLayout from '@/layouts/dashboard-layout'
-import { parseView } from '@/lib/utils'
-import type { Invitation, RawView, Team } from '@/types'
+import type { Invitation, Team } from '@/types'
 
 export default function InvitationsIndex({
   invitations,
-  teams,
-  views
+  teams
 }: {
   invitations: Invitation[]
   teams: Team[]
-  views: { invitations: RawView | null }
 }) {
   // i18n
   const { t } = useTranslation()
@@ -41,11 +38,7 @@ export default function InvitationsIndex({
         >
           <InvitationsTable
             invitations={invitations}
-            view={parseView(views.invitations)}
-            viewStore={{
-              page: 'invitations.index',
-              table: 'invitations'
-            }}
+            storage="invitations:invitations"
           />
         </Format>
       </Container>
