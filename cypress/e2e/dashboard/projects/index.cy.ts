@@ -33,7 +33,7 @@ describe('Projects index page', () => {
 
   it('may update a project from the projects index', function () {
     cy.get(
-      '#projects-table>tbody>tr:first-child button[data-action="open-actions"]'
+      '#projects-table tbody>tr:first-child button[data-action="open-actions"]'
     ).click()
     cy.get('button[data-action="open-update-drawer"]').click()
     cy.get('#update-project-form').then(($form) => {
@@ -47,7 +47,7 @@ describe('Projects index page', () => {
 
   it('may delete a project from the projects index', function () {
     cy.get(
-      '#projects-table>tbody>tr:first-child button[data-action="open-actions"]'
+      '#projects-table tbody>tr:first-child button[data-action="open-actions"]'
     ).click()
     cy.get('button[data-action="open-delete-dialog"]').click()
     cy.get('#destroy-dialog-form').then(($form) => {
@@ -58,12 +58,15 @@ describe('Projects index page', () => {
   })
 
   it('may delete many projects at once', function () {
-    cy.get('#projects-table>tbody>tr:first-child button[role=checkbox]').click()
-    cy.get('#projects-table-toolbar').then(($toolbar) => {
+    cy.get('#projects-table').then(($table) => {
+      cy.get('tbody>tr:first-child button[role=checkbox]', {
+        withinSubject: $table
+      }).click()
       cy.get('button[data-action="open-destroy-many-dialog"]', {
-        withinSubject: $toolbar
+        withinSubject: $table
       }).click()
     })
+
     cy.get('#destroy-many-dialog-form').then(($form) => {
       cy.get('button[type=submit]', { withinSubject: $form }).click()
     })

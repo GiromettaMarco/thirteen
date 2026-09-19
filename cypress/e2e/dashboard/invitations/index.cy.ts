@@ -32,7 +32,7 @@ describe('Invitations index page', () => {
 
   it('may renew an existing invitation', function () {
     cy.get(
-      '#invitations-table>tbody>tr:first-child button[data-action="open-actions"]'
+      '#invitations-table tbody>tr:first-child button[data-action="open-actions"]'
     ).click()
     cy.get('button[data-action="renew"]').click()
 
@@ -41,7 +41,7 @@ describe('Invitations index page', () => {
 
   it('may delete an invitation', function () {
     cy.get(
-      '#invitations-table>tbody>tr:first-child button[data-action="open-actions"]'
+      '#invitations-table tbody>tr:first-child button[data-action="open-actions"]'
     ).click()
     cy.get('button[data-action="open-delete-dialog"]').click()
     cy.get('#destroy-dialog-form').then(($form) => {

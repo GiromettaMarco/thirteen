@@ -22,35 +22,29 @@ describe('Dashboard index page', () => {
   it('may edit and preserve table states', function () {
     cy.viewport(1920, 1080)
 
+    // Initial state
+    cy.contains('Priority').should('exist')
+
     // Filters
-    cy.get('#your-tasks-table-toolbar').then(($toolbar) => {
-      cy.get('button[data-action="filter-by-label"]', {
-        withinSubject: $toolbar
-      }).click()
-    })
-    cy.get('button[data-action="select-documentation"]').click()
+    cy.get('button[data-action="filter-label"]').click()
+    cy.get('div[data-action="select-documentation"]').click().type('{esc}')
 
     // Columns visibility
-    cy.get('#your-tasks-table-toolbar').then(($toolbar) => {
-      cy.get('button[data-action="toggle-columns-visibility"]', {
-        withinSubject: $toolbar
-      }).click()
-    })
-    cy.get('div[data-action="toggle-priority"]').click()
+    cy.get('button[data-slot="columns-visibility"]').click()
+    cy.get('div[data-action="toggle-priority-visibility"]')
+      .click()
+      .type('{esc}')
 
     // Sorting
-    cy.get('#your-tasks-table>thead button[data-action="sort-by-name"]').click()
+    cy.get('button[data-action="sort-name"]').click()
     cy.get('button[data-action="sort-ascending"]').click()
 
     // Pagination
-    // cy.get('#your-tasks-rows-per-page').scrollIntoView().click()
-    cy.get('#your-tasks-rows-per-page').click()
+    cy.get('#your-tasks-table-pagination').click()
     cy.get('div[role=option]').contains('40').click()
 
     // Output
     cy.reload()
-    cy.get('#your-tasks-after-table')
-      .contains('Sorting: Name (asc)')
-      .should('exist')
+    cy.contains('Priority').should('not.exist')
   })
 })

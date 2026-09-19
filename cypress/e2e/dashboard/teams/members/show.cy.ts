@@ -9,7 +9,7 @@ describe('Team member show page', () => {
     cy.visit('/dashboard')
     cy.get('#to-current-team').click()
     cy.get(
-      '#members-table>tbody>tr:nth-child(1) a[data-action=resource]'
+      '#members-table tbody>tr:nth-child(1) a[data-action=resource]'
     ).click()
 
     cy.get('#permission-admin').should('exist')
@@ -21,7 +21,7 @@ describe('Team member show page', () => {
     cy.visit('/dashboard')
     cy.get('#to-current-team').click()
     cy.get(
-      '#members-table>tbody>tr:nth-child(2) a[data-action=resource]'
+      '#members-table tbody>tr:nth-child(2) a[data-action=resource]'
     ).click()
 
     cy.get('#update-member-permissions-form').then(($form) => {

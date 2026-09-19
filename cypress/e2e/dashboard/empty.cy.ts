@@ -63,7 +63,7 @@ describe('Teams index page', () => {
     cy.get('#to-projects').click()
 
     cy.get(
-      '#projects-table>tbody>tr:first-child a[data-action="resource"]'
+      '#projects-table tbody>tr:first-child a[data-action="resource"]'
     ).click()
 
     // Open drawer

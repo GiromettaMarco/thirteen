@@ -40,7 +40,7 @@ describe('Teams show page', () => {
 
   it('may reach the team member page from the actions menu', function () {
     cy.get(
-      '#members-table>tbody>tr:first-child button[data-action="open-actions"]'
+      '#members-table tbody>tr:first-child button[data-action="open-actions"]'
     ).click()
     cy.get('a[data-action="show"]').click()
 
@@ -49,7 +49,7 @@ describe('Teams show page', () => {
 
   it('may remove a team member from the team page', function () {
     cy.get(
-      '#members-table>tbody>tr:nth-child(2) button[data-action="open-actions"]'
+      '#members-table tbody>tr:nth-child(2) button[data-action="open-actions"]'
     ).click()
     cy.get('button[data-action="open-delete-dialog"]').click()
     cy.get('#destroy-dialog-form').then(($form) => {
