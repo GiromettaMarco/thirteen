@@ -136,7 +136,7 @@ function EmptyFiller({ canCreate = false }: { canCreate?: boolean }) {
 //#region ProjectsTable
 export function ProjectsTable({
   canEdit = false,
-  id = 'project-table',
+  id = 'projects-table',
   projects,
   storage,
   teamId,
