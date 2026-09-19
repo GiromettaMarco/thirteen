@@ -41,7 +41,7 @@ export default function TeamsShow({
   return (
     <DashboardLayout
       breadcrumbs={breadcrumbs}
-      button={<UpdateTeamDrawer team={team} />}
+      button={team.pivot.can_edit_team && <UpdateTeamDrawer team={team} />}
       title={team.name}
     >
       <Head title={team.name} />
