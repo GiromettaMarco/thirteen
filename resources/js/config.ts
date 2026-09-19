@@ -9,3 +9,7 @@ export const COOKIE_SIDEBAR: string =
 
 export const AUTH_PASSWORD_TIMEOUT: number =
   import.meta.env.VITE_AUTH_PASSWORD_TIMEOUT ?? 10800
+
+export const supportedAppearance = ['dark', 'light', 'system']
+export const supportedLocales = ['en', 'it']
+export const supportedThemes = ['dark', 'light']

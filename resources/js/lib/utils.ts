@@ -2,7 +2,14 @@ import type { CheckedState } from '@gmcode/react-ui'
 import type { Locale as DateFnsLocale } from 'date-fns'
 import { format as originalFormat } from 'date-fns'
 import { it } from 'date-fns/locale'
-import type { AnyItem, TaskPriority } from '@/types'
+import { supportedAppearance, supportedLocales } from '@/config'
+import type {
+  AnyItem,
+  Appearance,
+  Locale as AppLocale,
+  SSRProps,
+  TaskPriority
+} from '@/types'
 
 /**
  * Default values for a table view.
@@ -79,6 +86,42 @@ export function isAnyItem(input: unknown): input is AnyItem {
     ['string', 'number'].includes(typeof input.id) &&
     (!('name' in input) || typeof input.name === 'string')
   )
+}
+
+export function isAppearance(input: unknown): input is Appearance {
+  return typeof input === 'string' && supportedAppearance.includes(input)
+}
+
+export function isLocale(input: unknown): input is AppLocale {
+  return typeof input === 'string' && supportedLocales.includes(input)
+}
+
+export function getSSRProps(input: unknown): SSRProps {
+  const ssrProps: SSRProps = {
+    appearance: 'system',
+    locale: 'en'
+  }
+
+  // Type guard
+  if (
+    isObject(input) &&
+    'initialPage' in input &&
+    isObject(input.initialPage) &&
+    'props' in input.initialPage &&
+    isObject(input.initialPage.props)
+  ) {
+    const props = input.initialPage.props
+
+    if ('appearance' in props && isAppearance(props.appearance)) {
+      ssrProps.appearance = props.appearance
+    }
+
+    if ('locale' in props && isLocale(props.locale)) {
+      ssrProps.locale = props.locale
+    }
+  }
+
+  return ssrProps
 }
 
 //#region Sorting

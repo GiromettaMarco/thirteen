@@ -1,22 +1,21 @@
 import { createInertiaApp } from '@inertiajs/react'
 import AppContainer from '@/app-container'
 import { APP_NAME } from '@/config'
-import type { Appearance, Locale } from '@/types'
+import { getSSRProps } from '@/lib/utils'
 
 void createInertiaApp({
   progress: {
     color: '#4B5563'
   },
-  // strictMode: true,
+  strictMode: import.meta.env.DEV,
   title: (title) => (title ? `${title} - ${APP_NAME}` : APP_NAME),
   withApp(app) {
-    // oxlint-disable-next-line typescript/no-explicit-any
-    const props = (app.props as any).initialPage.props
+    const { appearance, locale } = getSSRProps(app.props)
 
     return (
       <AppContainer
-        appearance={props.appearance as Appearance}
-        locale={props.locale as Locale}
+        appearance={appearance}
+        locale={locale}
       >
         {app}
       </AppContainer>

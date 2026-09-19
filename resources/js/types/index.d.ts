@@ -12,6 +12,11 @@ export type Theme = 'dark' | 'light'
 
 export type Locale = 'en' | 'it'
 
+export interface SSRProps {
+  appearance: Appearance
+  locale: Locale
+}
+
 export interface WithTimestamps {
   created_at: string
   updated_at: string
