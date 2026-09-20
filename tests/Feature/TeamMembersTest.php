@@ -36,7 +36,7 @@ it('may add and update team members', function () {
         ->first();
 
     expect($membership)->not()->toBeNull();
-    expect($membership->admin)->toBe(0);
+    expect($membership->admin)->toBe(false);
 
     actingAs($user)
         ->put(
@@ -56,7 +56,7 @@ it('may add and update team members', function () {
 
     $membership->refresh();
 
-    expect($membership->admin)->toBe(1);
+    expect($membership->admin)->toBe(true);
 });
 
 it('may remove members from a team', function () {
