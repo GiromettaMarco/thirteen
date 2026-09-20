@@ -1,4 +1,4 @@
-import { flash, Toaster } from '@gmcode/react-ui'
+import { cn, flash, Toaster } from '@gmcode/react-ui'
 import { router } from '@inertiajs/react'
 import { useContext, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -22,13 +22,21 @@ export default function FlashNotifications() {
     <Toaster
       closeButton={true}
       containerAriaLabel={t(($) => $.notifications)}
+      // duration={500000}
+      hotkey={['ctrlKey', 'altKey', 'KeyT']}
       position="bottom-center"
       theme={theme}
       toastOptions={{
+        classNames: {
+          closeButton:
+            'focus-visible:border-ring! focus-visible:outline-none! focus-visible:ring-2! focus-visible:ring-ring/50!',
+          toast: cn(
+            'outline-none! focus-visible:border-ring! focus-visible:ring-3! focus-visible:ring-ring/50!',
+            'group-focus-visible:ring-3! group-focus-visible:ring-ring/50!'
+          )
+        },
         closeButtonAriaLabel: t(($) => $.actions.close)
       }}
-      // duration={500000}
-      // richColors={true}
     />
   )
 }
