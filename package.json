@@ -68,5 +68,5 @@
   "nyc": {
     "report-dir": "reports/cypress"
   },
-  "packageManager": "pnpm@11.24.0"
+  "packageManager": "pnpm@12.5.1"
 }
