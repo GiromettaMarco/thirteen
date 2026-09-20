@@ -19,7 +19,7 @@ describe('Register Page', () => {
 
     cy.get('#logout').click()
 
-    cy.url().should('include', '/')
+    cy.url().should('match', /\/$/)
 
     cy.visit('/register')
     cy.get('#register-form').then(($form) => {

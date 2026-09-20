@@ -3,8 +3,6 @@ import registerCodeCoverageTasks from '@cypress/code-coverage/task'
 import { defineConfig } from 'cypress'
 
 export default defineConfig({
-  allowCypressEnv: false,
-
   // component: {
   //   devServer: {
   //     bundler: 'vite',
