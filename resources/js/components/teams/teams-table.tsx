@@ -184,8 +184,6 @@ function EmptyFiller() {
 }
 
 //#region TeamsTable
-// @TODO add canEdit
-
 export function TeamsTable({
   id = 'teams-table',
   storage,
