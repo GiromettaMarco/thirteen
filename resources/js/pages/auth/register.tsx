@@ -18,11 +18,7 @@ import {
   NameFieldPreset
 } from '@/components/auth/fields'
 import { TextLink } from '@/components/text-link'
-import {
-  HybridTooltip,
-  HybridTooltipContent,
-  HybridTooltipTrigger
-} from '@/components/ui/hybrid-tooltip'
+import { HybridTooltip } from '@/components/ui/hybrid-tooltip'
 import { PasswordRequirements } from '@/components/ui/password-requirements'
 import { usePasswordCheck } from '@/hooks/use-password-check'
 import AuthLayout from '@/layouts/auth-layout'
@@ -78,8 +74,9 @@ export default function Register() {
                           check(event.target.value)
                         }}
                       />
-                      <HybridTooltip>
-                        <HybridTooltipTrigger asChild>
+                      <HybridTooltip
+                        asChild
+                        trigger={
                           <InputGroupAddon align="inline-end">
                             <InputGroupButton>
                               <Info
@@ -91,13 +88,9 @@ export default function Register() {
                               />
                             </InputGroupButton>
                           </InputGroupAddon>
-                        </HybridTooltipTrigger>
-                        <HybridTooltipContent
-                          className="px-4 py-2.5"
-                          variant="popover"
-                        >
-                          <PasswordRequirements report={report} />
-                        </HybridTooltipContent>
+                        }
+                      >
+                        <PasswordRequirements report={report} />
                       </HybridTooltip>
                     </InputGroup>
                     <ErrorMonitor error={fieldState.error} />

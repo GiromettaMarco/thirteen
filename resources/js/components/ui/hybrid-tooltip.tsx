@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@gmcode/react-ui'
-import { useContext, type ComponentProps } from 'react'
+import type { PropsWithChildren, ReactNode } from 'react'
 import {
   Popover,
   PopoverContent,
@@ -12,60 +12,54 @@ import {
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
-import { AppContext } from '@/providers/app-context-provider'
+import { useIsTouch } from '@/hooks/use-touch'
 
-export function HybridTooltip(
-  props: ComponentProps<typeof Popover> & ComponentProps<typeof Tooltip>
-) {
-  const { isTouch } = useContext(AppContext)
+export function HybridTooltip({
+  asChild,
+  children,
+  contentClassName,
+  trigger,
+  triggerClassName
+}: PropsWithChildren<{
+  asChild?: boolean
+  contentClassName?: string
+  trigger: ReactNode
+  triggerClassName?: string
+}>) {
+  const isTouch = useIsTouch()
 
-  return isTouch ? <Popover {...props} /> : <Tooltip {...props} />
-}
+  if (isTouch) {
+    return (
+      <Popover>
+        <PopoverTrigger
+          asChild={asChild}
+          className={triggerClassName}
+        >
+          {trigger}
+        </PopoverTrigger>
+        <PopoverContent
+          className={cn('w-auto px-4 py-2.5 text-sm', contentClassName)}
+        >
+          {children}
+        </PopoverContent>
+      </Popover>
+    )
+  }
 
-export function HybridTooltipTrigger(
-  props: ComponentProps<typeof PopoverTrigger> &
-    ComponentProps<typeof TooltipTrigger>
-) {
-  const { isTouch } = useContext(AppContext)
-
-  return isTouch ? <PopoverTrigger {...props} /> : <TooltipTrigger {...props} />
-}
-
-export function HybridTooltipContent({
-  className,
-  ...props
-}: ComponentProps<typeof PopoverContent> &
-  ComponentProps<typeof TooltipContent>) {
-  const { isTouch } = useContext(AppContext)
-
-  return isTouch ? (
-    <PopoverContent
-      className={cn('w-auto text-sm', className)}
-      {...props}
-    />
-  ) : (
-    <TooltipContent
-      className={className}
-      {...props}
-    />
-  )
-}
-
-export function HybridTooltipPreset({
-  className,
-  content,
-  trigger
-}: {
-  className?: string
-  content: string
-  trigger: string
-}) {
   return (
-    <HybridTooltip>
-      <HybridTooltipTrigger className={className}>
+    <Tooltip>
+      <TooltipTrigger
+        asChild={asChild}
+        className={triggerClassName}
+      >
         {trigger}
-      </HybridTooltipTrigger>
-      <HybridTooltipContent>{content}</HybridTooltipContent>
-    </HybridTooltip>
+      </TooltipTrigger>
+      <TooltipContent
+        className={cn('px-4 py-2.5', contentClassName)}
+        variant="popover"
+      >
+        {children}
+      </TooltipContent>
+    </Tooltip>
   )
 }
