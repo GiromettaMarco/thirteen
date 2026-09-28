@@ -38,9 +38,12 @@
   ],
   "cSpell.words": [
     "analyse",
+    "Assertable",
     "autodocs",
     "baselined",
+    "cmdk",
     "COVEREDSTATEMENTS",
+    "debouncer",
     "disconnetti",
     "Dispatchable",
     "endforeach",
@@ -60,6 +63,7 @@
     "nums",
     "oklch",
     "phpstan",
+    "reactuses",
     "rgba",
     "Segoe",
     "shivammathur",
@@ -184,10 +188,10 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "explicit"
   },
-  "Laravel.pint.runOnSave": true,
 
-  // Disable laravel test runner integration
-  "Laravel.testRunner.enabled": false,
+  // Laravel
+  "Laravel.pint.runOnSave": true,
+  "Laravel.phpCommand": ["php"],
 
   // File nesting
   "explorer.fileNesting.enabled": true,
