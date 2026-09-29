@@ -140,47 +140,55 @@ export default defineConfig({
     cache: true,
     tasks: {
       build: {
-        command: 'vp build',
-        input: [
-          'resources/css/**',
-          'resources/fonts/**',
-          'resources/js/**',
-          'pnpm-lock.yaml'
-        ]
+        cache: {
+          input: [
+            'resources/css/**',
+            'resources/fonts/**',
+            'resources/js/**',
+            'pnpm-lock.yaml'
+          ]
+        },
+        command: 'vp build'
       },
       'build:e2e': {
-        command: 'cross-env E2E=true vp build',
-        input: [
-          'resources/css/**',
-          'resources/fonts/**',
-          'resources/js/**',
-          'pnpm-lock.yaml',
-          'vite.config.ts'
-        ]
+        cache: {
+          input: [
+            'resources/css/**',
+            'resources/fonts/**',
+            'resources/js/**',
+            'pnpm-lock.yaml',
+            'vite.config.ts'
+          ]
+        },
+        command: 'cross-env E2E=true vp build'
       },
       'build:ssr': {
+        cache: {
+          input: [
+            'resources/css/**',
+            'resources/fonts/**',
+            'resources/js/**',
+            'pnpm-lock.yaml',
+            'vite.config.ts'
+          ]
+        },
         command: 'vp build --ssr',
-        dependsOn: ['build'],
-        input: [
-          'resources/css/**',
-          'resources/fonts/**',
-          'resources/js/**',
-          'pnpm-lock.yaml',
-          'vite.config.ts'
-        ]
+        dependsOn: ['build']
       },
       e2e: {
+        cache: {
+          input: ['cypress/**', 'public/**', 'vite.config.ts'],
+          output: [
+            '.nyc_output/**',
+            'docs/.vscode/ts-coverage.svg',
+            'reports/cypress/**'
+          ]
+        },
         command: [
           'start-server-and-test "composer run e2e" 8000 "cypress run --e2e --browser chrome"',
           'bin/ts-coverage'
         ],
-        dependsOn: ['build:e2e'],
-        input: ['cypress/**', 'public/**', 'vite.config.ts'],
-        output: [
-          '.nyc_output/**',
-          'docs/.vscode/ts-coverage.svg',
-          'reports/cypress/**'
-        ]
+        dependsOn: ['build:e2e']
       },
       'e2e:ui': {
         cache: false,
