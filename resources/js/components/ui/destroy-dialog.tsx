@@ -1,5 +1,6 @@
-import { Form, Submit, type Method } from '@gmcode/forms'
+import { Form, Submit } from '@gmcode/forms'
 import { Button, Infobox } from '@gmcode/react-ui'
+import type { Method } from '@inertiajs/core'
 import type { Dispatch, PropsWithChildren, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
 import {

@@ -1,4 +1,4 @@
-import { InputRule, Schema } from '@gmcode/forms'
+import { InputRule, Schema } from '@gmcode/forms/tsv'
 import { name } from '@/schemas/misc'
 
 export const updateProfileSchema = new Schema({

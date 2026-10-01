@@ -1,11 +1,5 @@
-import {
-  CheckboxField,
-  ErrorMonitor,
-  Form,
-  Submit,
-  useTsvResolver,
-  type InferSchema
-} from '@gmcode/forms'
+import { CheckboxField, ErrorMonitor, Form, Submit } from '@gmcode/forms'
+import { useTsvResolver, type InferSchema } from '@gmcode/forms/hookform'
 import {
   Button,
   cn,

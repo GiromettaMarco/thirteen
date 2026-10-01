@@ -183,14 +183,14 @@ importers:
   .:
     dependencies:
       '@gmcode/forms':
-        specifier: ^0.2.2
-        version: 0.2.2(@gmcode/tsv-core@0.2.3)(@inertiajs/core@3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)))(@inertiajs/react@3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@standard-schema/spec@1.1.0)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(@typescript/typescript6@6.0.2)(ajv@8.20.0)(joi@18.2.9)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
-      '@gmcode/react-ui':
         specifier: ^0.4.1
-        version: 0.4.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+        version: 0.4.1(@gmcode/tsv-core@0.2.4)(@inertiajs/core@3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)))(@inertiajs/react@3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@standard-schema/spec@1.1.0)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(ajv@8.20.0)(i18next@26.4.2(@typescript/typescript6@6.0.2))(joi@18.2.9)(react-dom@19.3.0(react@19.3.0))(react-i18next@17.0.14(@typescript/typescript6@6.0.2)(i18next@26.4.2(@typescript/typescript6@6.0.2))(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)
+      '@gmcode/react-ui':
+        specifier: ^0.4.3
+        version: 0.4.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@gmcode/tsv-advanced':
-        specifier: ^0.1.8
-        version: 0.1.8
+        specifier: ^0.1.9
+        version: 0.1.9
       '@inertiajs/react':
         specifier: ^3.7.1
         version: 3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -923,34 +923,44 @@ packages:
   '@floating-ui/utils@0.2.12':
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
-  '@gmcode/forms@0.2.2':
-    resolution: {integrity: sha512-CPiTzeVEV9txG3q1ToO50e7cpMJ9iz5JyH3gMvvqK1cDuv/abz6PGfxcS162wjCcS4irWP+RCdJOLwpOr93yYg==}
+  '@gmcode/forms@0.4.1':
+    resolution: {integrity: sha512-/AQiBi39yYsjff+kkuuKRHcbnojDi9HP98NsPLxDIoj3wNC/GAl7PH7Wpk8AU/JZO4EYafVFJ3YV7J6TeqyfXw==}
+    peerDependencies:
+      '@inertiajs/core': ^3.5.0
+      '@inertiajs/react': ^3.5.0
+      i18next: ^26.3.4
+      react: ^19.2.7
+      react-dom: ^19.2.7
+      react-i18next: ^17.0.8
+
+  '@gmcode/inertia-hook-form@0.0.4':
+    resolution: {integrity: sha512-QLBpFfG1s09OgSDCWOVG+yyajC3VzLr6/lUhzFZtyeVwSiF+u6yJqgIQ9EVw1e1G26cd8Pz5AoUO11yMQN6pLw==}
     peerDependencies:
       '@inertiajs/core': ^3.5.0
       '@inertiajs/react': ^3.5.0
       react: ^19.2.7
       react-dom: ^19.2.7
 
-  '@gmcode/react-ui@0.4.1':
-    resolution: {integrity: sha512-cLt0uXfBgt+8c8YdYMeTiy5LLR61csK7vU7TiUnIZgUm/kunOOjB3PMmIKmmN4+DcVnMie0HBQwBP2X2xcWBdg==}
+  '@gmcode/react-ui@0.4.3':
+    resolution: {integrity: sha512-LwSltzd5LxvDynD7zMhMiq9JSemmtOsvYSLnVyzjgQLH75l2bd+NZ5S+bAe7My+jp2J3DnoLQfqYJuNE+GPLrA==}
     peerDependencies:
       react: ^19.2.7
       react-dom: ^19.2.7
 
-  '@gmcode/tsv-advanced@0.1.8':
-    resolution: {integrity: sha512-emX+1T1XKgqwZQ4oEzOKj66MFXB2UX6yVCLY+muF+mNtaRkNprKO+M0IPrIhAtCLj3waOv969oKWk0ObeX/wAw==}
+  '@gmcode/tsv-advanced@0.1.9':
+    resolution: {integrity: sha512-XLv2rjS7RpDNh3hlWokNHEQiS5Obzc75kbgnTa3OdFiyPZEtbJ2x8cMlPVXiZmeXPTwy9NQltuwh46PocLfoAg==}
 
-  '@gmcode/tsv-core@0.2.3':
-    resolution: {integrity: sha512-1pzwT5WfktGA5c9GidCW/etV45ILWj953wjFRzlrh40Sw4ZcefuOVDRTZy3KJnu8xi5HLWtrYZ+qN3UDZrdu1w==}
+  '@gmcode/tsv-core@0.2.4':
+    resolution: {integrity: sha512-T03C7hAhrLvx52hEAyEDJpADCeaEP3t49IbUxHPbp8mM8GrSVqQZ69M5FyZapyRXkvvok+xcTQIpE5CTGljLqQ==}
 
-  '@gmcode/tsv-hookform@0.1.8':
-    resolution: {integrity: sha512-UoqoU5i7+DcOP+AQSTMCAf3nlxbKMD8vfSRJIOOF8FZaiKuY333sYe4i9PBrrMEuJCzApsv5akRLUeI58iXrsg==}
+  '@gmcode/tsv-hookform@0.1.9':
+    resolution: {integrity: sha512-p7P7K9CMgYMRn1iB0hBThrzG2iIccGtrlJxvGPCGvZ6ItbIfoCw1ARg7UxNNnpYguWUPRsVUu8V3aHDj8ba6AA==}
     peerDependencies:
-      '@gmcode/tsv-core': 0.2.3
+      '@gmcode/tsv-core': 0.2.4
       react-hook-form: ^7.71.2
 
-  '@gmcode/tsv-input@0.3.3':
-    resolution: {integrity: sha512-Qtci98KD4Y8FEA5h6wAFfXwMjAXKQHnV+7pTD1Ry5EXth2klHufH6e29VB97rKnk9Rhyah8w1qzOsHYU/3qQKQ==}
+  '@gmcode/tsv-input@0.4.1':
+    resolution: {integrity: sha512-yMCPWHyJr9GMhY2eqIExfH7t4DichYqzVN8qGcEfLZJGa1STkgxitB4Z6ZxgdVXxPkSB0cH881Q+LKM52GV3FQ==}
 
   '@hapi/address@5.1.1':
     resolution: {integrity: sha512-A+po2d/dVoY7cYajycYI43ZbYMXukuopIsqCjh5QzsBCipDtdofHntljDlpccMjIfTy6UOkg+5KPriwYch2bXA==}
@@ -6417,11 +6427,11 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
-  '@gmcode/forms@0.2.2(@gmcode/tsv-core@0.2.3)(@inertiajs/core@3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)))(@inertiajs/react@3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@standard-schema/spec@1.1.0)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(@typescript/typescript6@6.0.2)(ajv@8.20.0)(joi@18.2.9)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
+  '@gmcode/forms@0.4.1(@gmcode/tsv-core@0.2.4)(@inertiajs/core@3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)))(@inertiajs/react@3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@standard-schema/spec@1.1.0)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(ajv@8.20.0)(i18next@26.4.2(@typescript/typescript6@6.0.2))(joi@18.2.9)(react-dom@19.3.0(react@19.3.0))(react-i18next@17.0.14(@typescript/typescript6@6.0.2)(i18next@26.4.2(@typescript/typescript6@6.0.2))(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)':
     dependencies:
-      '@gmcode/react-ui': 0.4.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
-      '@gmcode/tsv-hookform': 0.1.8(@gmcode/tsv-core@0.2.3)(@standard-schema/spec@1.1.0)(ajv@8.20.0)(joi@18.2.9)(react-hook-form@7.88.0(react@19.3.0))
-      '@gmcode/tsv-input': 0.3.3
+      '@gmcode/inertia-hook-form': 0.0.4(@gmcode/tsv-core@0.2.4)(@inertiajs/core@3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)))(@inertiajs/react@3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@standard-schema/spec@1.1.0)(ajv@8.20.0)(joi@18.2.9)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@gmcode/react-ui': 0.4.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@gmcode/tsv-hookform': 0.1.9(@gmcode/tsv-core@0.2.4)(@standard-schema/spec@1.1.0)(ajv@8.20.0)(joi@18.2.9)(react-hook-form@7.88.0(react@19.3.0))
       '@inertiajs/core': 3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))
       '@inertiajs/react': 3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       i18next: 26.4.2(@typescript/typescript6@6.0.2)
@@ -6455,16 +6465,50 @@ snapshots:
       - io-ts
       - joi
       - nope-validator
-      - react-native
       - superstruct
       - typanion
-      - typescript
       - valibot
       - vest
       - yup
       - zod
 
-  '@gmcode/react-ui@0.4.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
+  '@gmcode/inertia-hook-form@0.0.4(@gmcode/tsv-core@0.2.4)(@inertiajs/core@3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)))(@inertiajs/react@3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@standard-schema/spec@1.1.0)(ajv@8.20.0)(joi@18.2.9)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
+    dependencies:
+      '@gmcode/tsv-hookform': 0.1.9(@gmcode/tsv-core@0.2.4)(@standard-schema/spec@1.1.0)(ajv@8.20.0)(joi@18.2.9)(react-hook-form@7.88.0(react@19.3.0))
+      '@gmcode/tsv-input': 0.4.1
+      '@inertiajs/core': 3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))
+      '@inertiajs/react': 3.7.1(axios@1.20.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      react: 19.3.0
+      react-dom: 19.3.0(react@19.3.0)
+      react-hook-form: 7.88.0(react@19.3.0)
+    transitivePeerDependencies:
+      - '@gmcode/tsv-core'
+      - '@sinclair/typebox'
+      - '@standard-schema/spec'
+      - '@typeschema/main'
+      - '@vinejs/vine'
+      - ajv
+      - ajv-errors
+      - ajv-formats
+      - arktype
+      - ata-validator
+      - class-transformer
+      - class-validator
+      - computed-types
+      - effect
+      - fluentvalidation-ts
+      - fp-ts
+      - io-ts
+      - joi
+      - nope-validator
+      - superstruct
+      - typanion
+      - valibot
+      - vest
+      - yup
+      - zod
+
+  '@gmcode/react-ui@0.4.3(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
       class-variance-authority: 0.7.1
       clsx: 2.1.1
@@ -6480,15 +6524,15 @@ snapshots:
       - '@types/react'
       - '@types/react-dom'
 
-  '@gmcode/tsv-advanced@0.1.8':
+  '@gmcode/tsv-advanced@0.1.9':
     dependencies:
-      '@gmcode/tsv-core': 0.2.3
+      '@gmcode/tsv-core': 0.2.4
 
-  '@gmcode/tsv-core@0.2.3': {}
+  '@gmcode/tsv-core@0.2.4': {}
 
-  '@gmcode/tsv-hookform@0.1.8(@gmcode/tsv-core@0.2.3)(@standard-schema/spec@1.1.0)(ajv@8.20.0)(joi@18.2.9)(react-hook-form@7.88.0(react@19.3.0))':
+  '@gmcode/tsv-hookform@0.1.9(@gmcode/tsv-core@0.2.4)(@standard-schema/spec@1.1.0)(ajv@8.20.0)(joi@18.2.9)(react-hook-form@7.88.0(react@19.3.0))':
     dependencies:
-      '@gmcode/tsv-core': 0.2.3
+      '@gmcode/tsv-core': 0.2.4
       '@hookform/resolvers': 5.9.1(@standard-schema/spec@1.1.0)(ajv@8.20.0)(joi@18.2.9)(react-hook-form@7.88.0(react@19.3.0))
       react-hook-form: 7.88.0(react@19.3.0)
     transitivePeerDependencies:
@@ -6517,9 +6561,9 @@ snapshots:
       - yup
       - zod
 
-  '@gmcode/tsv-input@0.3.3':
+  '@gmcode/tsv-input@0.4.1':
     dependencies:
-      '@gmcode/tsv-core': 0.2.3
+      '@gmcode/tsv-core': 0.2.4
 
   '@hapi/address@5.1.1':
     dependencies:

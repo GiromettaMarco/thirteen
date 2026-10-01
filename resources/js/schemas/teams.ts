@@ -1,4 +1,4 @@
-import { InputCheckboxRule, InputRule, Schema } from '@gmcode/forms'
+import { InputCheckboxRule, InputRule, Schema } from '@gmcode/forms/tsv'
 import { name } from '@/schemas/misc'
 
 export const createTeamSchema = new Schema({

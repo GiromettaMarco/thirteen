@@ -12,9 +12,9 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "@gmcode/forms": "^0.2.2",
-    "@gmcode/react-ui": "^0.4.1",
-    "@gmcode/tsv-advanced": "^0.1.8",
+    "@gmcode/forms": "^0.4.1",
+    "@gmcode/react-ui": "^0.4.3",
+    "@gmcode/tsv-advanced": "^0.1.9",
     "@inertiajs/react": "^3.7.1",
     "@inertiajs/vite": "^3.7.1",
     "@tailwindcss/vite": "^4.3.3",

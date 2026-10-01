@@ -19,6 +19,7 @@ peerDependencyRules:
     vitest: '*'
 minimumReleaseAgeExclude:
   - '@gmcode/forms'
+  - '@gmcode/inertia-hook-form'
   - '@gmcode/react-ui'
   - '@gmcode/tsv-advanced'
   - '@gmcode/tsv-core'

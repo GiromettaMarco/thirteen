@@ -4,7 +4,7 @@ import {
   InputTextRule,
   Message,
   Schema
-} from '@gmcode/forms'
+} from '@gmcode/forms/tsv'
 import { email, name } from '@/schemas/misc'
 
 //#region Fields

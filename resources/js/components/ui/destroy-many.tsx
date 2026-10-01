@@ -1,5 +1,6 @@
-import { Form, Submit, type Method } from '@gmcode/forms'
+import { Form, Submit } from '@gmcode/forms'
 import { Button, Infobox } from '@gmcode/react-ui'
+import type { Method } from '@inertiajs/core'
 import type { Table } from '@tanstack/react-table'
 import { Trash2 } from 'lucide-react'
 import { useState, type PropsWithChildren } from 'react'

@@ -1,4 +1,4 @@
-import { InputRule, Schema } from '@gmcode/forms'
+import { InputRule, Schema } from '@gmcode/forms/tsv'
 import { description, name } from '@/schemas/misc'
 
 const deadline = new InputRule({ optional: true })

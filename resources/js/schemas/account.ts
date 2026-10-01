@@ -1,4 +1,4 @@
-import { Schema } from '@gmcode/forms'
+import { Schema } from '@gmcode/forms/tsv'
 import {
   current_password,
   new_password,

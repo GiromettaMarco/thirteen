@@ -1,4 +1,4 @@
-import { InputNumberRule, InputSelectRule, Schema } from '@gmcode/forms'
+import { InputNumberRule, InputSelectRule, Schema } from '@gmcode/forms/tsv'
 import { description, name } from '@/schemas/misc'
 
 const label = new InputSelectRule({

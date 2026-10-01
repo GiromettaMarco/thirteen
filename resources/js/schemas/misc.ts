@@ -3,7 +3,7 @@ import {
   InputNumberRule,
   InputTextRule,
   Schema
-} from '@gmcode/forms'
+} from '@gmcode/forms/tsv'
 import { ArrayRule } from '@gmcode/tsv-advanced'
 
 export const name = new InputTextRule({
