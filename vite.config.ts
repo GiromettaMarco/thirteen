@@ -197,7 +197,7 @@ export default defineConfig({
         dependsOn: ['build:e2e']
       },
       ready: {
-        command: ['vp check', 'vpr test', 'vpr build:ssr']
+        command: ['vp check', 'vpr e2e', 'vpr build:ssr']
       }
     }
   },
