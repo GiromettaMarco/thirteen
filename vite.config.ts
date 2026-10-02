@@ -196,7 +196,7 @@ export default defineConfig({
         },
         command: [
           'start-server-and-test "composer run e2e" 8000 "cypress run --e2e --browser chrome"',
-          'bin/ts-coverage'
+          './bin/ts-coverage'
         ],
         dependsOn: ['build:e2e']
       },
@@ -228,14 +228,14 @@ export default defineConfig({
         command: [
           'php artisan config:clear --ansi',
           './vendor/bin/pest --parallel --no-tia',
-          'bin/php-coverage'
+          './bin/php-coverage'
         ]
       },
       setup: {
         cache: false,
         command: [
           'composer install --no-interaction --prefer-dist --optimize-autoloader',
-          'bin/copy-env',
+          './bin/copy-env',
           'php artisan key:generate',
           'vp install',
           'vpr build'
