@@ -41,46 +41,10 @@
     }
   },
   "scripts": {
-    "setup": [
-      "@composer install --no-interaction --prefer-dist --optimize-autoloader",
-      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-      "@php artisan key:generate",
-      "@php artisan migrate --seed --force",
-      "vp install",
-      "vpr build"
-    ],
-    "dev": [
-      "Composer\\Config::disableProcessTimeout",
-      "vpx concurrently -c \"#93c5fd,#c4b5fd,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"vp dev\" --names='server,queue,vite'"
-    ],
-    "dev:ssr": [
-      "vpr build:ssr",
-      "Composer\\Config::disableProcessTimeout",
-      "vpx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan inertia:start-ssr\" --names=server,queue,logs,ssr --kill-others"
-    ],
     "e2e": [
       "@php artisan config:clear --ansi",
       "Composer\\Config::disableProcessTimeout",
       "@php artisan serve --silent --env=testing"
-    ],
-    "test": [
-      "@php artisan config:clear --ansi",
-      "./vendor/bin/pest --parallel --no-tia",
-      "bin/php-coverage"
-    ],
-    "test:cache": [
-      "@php artisan config:clear --ansi",
-      "./vendor/bin/pest --parallel"
-    ],
-    "format": [
-      "pint --parallel"
-    ],
-    "lint": [
-      "phpstan analyse"
-    ],
-    "check": [
-      "@format",
-      "@lint"
     ],
     "post-autoload-dump": [
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
@@ -102,15 +66,7 @@
     ]
   },
   "scripts-descriptions": {
-    "setup": "Install the application",
-    "dev": "Start php and vite dev servers",
-    "dev:ssr": "Start the php dev server and start the app with SSR enabled",
-    "e2e": "Start the php server for e2e tests",
-    "test": "Run http tests and generate a coverage badge",
-    "test:cache": "Run only tests with changes",
-    "format": "Format php code",
-    "lint": "Run static analysis",
-    "check": "Format php code and run static analysis"
+    "e2e": "Start the php server for e2e tests"
   },
   "extra": {
     "laravel": {

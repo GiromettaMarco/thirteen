@@ -175,6 +175,16 @@ export default defineConfig({
         command: 'vp build --ssr',
         dependsOn: ['build']
       },
+      dev: {
+        cache: false,
+        command: 'php artisan dev'
+      },
+      'dev:ssr': {
+        cache: false,
+        command:
+          'vpx concurrently -c "#93c5fd,#c4b5fd,#fdba74" "php artisan serve" "php artisan queue:listen --tries=1 --timeout=0" "php artisan inertia:start-ssr" --names=server,queue,ssr --kill-others',
+        dependsOn: ['build:ssr']
+      },
       e2e: {
         cache: {
           input: ['cypress/**', 'public/**', 'vite.config.ts'],
@@ -196,8 +206,40 @@ export default defineConfig({
           'start-server-and-test "composer run e2e" 8000 "cypress open --e2e --browser chrome"',
         dependsOn: ['build:e2e']
       },
-      ready: {
-        command: ['vp check', 'vpr e2e', 'vpr build:ssr']
+      'php:check': {
+        command: ['vpr php:fmt', 'vpr php:lint']
+      },
+      'php:fmt': {
+        command: './vendor/bin/pint --parallel'
+      },
+      'php:lint': {
+        cache: false,
+        command: './vendor/bin/phpstan analyse'
+      },
+      'php:test': {
+        cache: false,
+        command: [
+          'php artisan config:clear --ansi',
+          './vendor/bin/pest --parallel'
+        ]
+      },
+      'php:test-force': {
+        cache: false,
+        command: [
+          'php artisan config:clear --ansi',
+          './vendor/bin/pest --parallel --no-tia',
+          'bin/php-coverage'
+        ]
+      },
+      setup: {
+        cache: false,
+        command: [
+          'composer install --no-interaction --prefer-dist --optimize-autoloader',
+          'bin/copy-env',
+          'php artisan key:generate',
+          'vp install',
+          'vpr build'
+        ]
       }
     }
   },

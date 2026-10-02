@@ -1,5 +1,5 @@
 php artisan wayfinder:generate
 vp check
-composer run lint
+vpr php:lint
 vp build
-composer run test
+vpr php:test-force

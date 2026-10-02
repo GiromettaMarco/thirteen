@@ -32,7 +32,7 @@ jobs:
         run: php artisan wayfinder:generate
 
       - name: Check Backend
-        run: composer run check
+        run: vpr php:check
 
       - name: Check Frontend
         run: vp check --fix

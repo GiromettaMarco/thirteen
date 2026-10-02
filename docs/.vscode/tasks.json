@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "command": "composer run dev",
+      "command": "vpr dev",
       "detail": "Start the development server.",
       "label": "$(debug-alt-small) Dev",
       "type": "shell",
@@ -17,7 +17,7 @@
       }
     },
     {
-      "command": "composer run dev:ssr",
+      "command": "vpr dev:ssr",
       "detail": "Start the development server with SSR.",
       "label": "$(play) Dev:SSR",
       "type": "shell",
@@ -43,9 +43,9 @@
       "type": "shell"
     },
     {
-      "command": "composer run test:cache",
-      "detail": "Run PHP unit tests with Pest.",
-      "label": "$(beaker) Unit Tests",
+      "command": "vpr php:test",
+      "detail": "Run PHP tests with Pest.",
+      "label": "$(beaker) PHP Tests",
       "options": {
         "statusbar": {
           "color": "#22C1D6",

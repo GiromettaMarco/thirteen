@@ -6,6 +6,7 @@ use Carbon\CarbonImmutable;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\DevCommands;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -36,6 +37,16 @@ class AppServiceProvider extends ServiceProvider
         $this->configureDefaults();
         $this->configureRateLimiting();
         $this->configureRoutePatterns();
+
+        $this->configureDevCommands();
+    }
+
+    /**
+     * Customize the processes that the "php artisan dev" command runs.
+     */
+    protected function configureDevCommands(): void
+    {
+        DevCommands::register('vp dev', 'vite');
     }
 
     /**
