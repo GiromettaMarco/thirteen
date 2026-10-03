@@ -1,7 +1,7 @@
+# Thirteen
+
 [![PHP Coverage](docs/php-coverage.svg)](https://github.com/GiromettaMarco/thirteen/actions/workflows/tests.yml)
 [![TS Coverage](docs/ts-coverage.svg)](https://github.com/GiromettaMarco/thirteen/actions/workflows/tests.yml)
-
-# Thirteen
 
 Laravel 13 boilerplate with:
 
@@ -9,11 +9,12 @@ Laravel 13 boilerplate with:
 - Inertia
 - pnpm
 - Vite+
-- i18next
 - Tailwind CSS
 - Shadcn
 - Radix UI
+- i18next
 - Tanstack Table 9
+- React Hook Form
 - Pest 5
 - Cypress
 
