@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts'
 import {
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig
@@ -78,6 +80,21 @@ export function MemberTasksChart({ tasksCount }: { tasksCount: TasksCount }) {
           width="auto"
         />
         <ChartTooltip content={<ChartTooltipContent />} />
+        <ChartLegend
+          content={<ChartLegendContent />}
+          itemSorter={(item) => {
+            switch (item.dataKey) {
+              case 'low':
+                return 0
+              case 'medium':
+                return 1
+              case 'high':
+                return 2
+              default:
+                return 3
+            }
+          }}
+        />
         <Bar
           dataKey="low"
           fill="var(--color-low)"

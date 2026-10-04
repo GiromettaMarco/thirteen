@@ -78,7 +78,10 @@ export default function Register() {
                         asChild
                         trigger={
                           <InputGroupAddon align="inline-end">
-                            <InputGroupButton>
+                            <InputGroupButton
+                              aria-label={t(($) => $.pages.auth.register.rules)}
+                              data-action="show-rules"
+                            >
                               <Info
                                 className={cn('size-4', {
                                   'text-success-foreground': report.level === 5,

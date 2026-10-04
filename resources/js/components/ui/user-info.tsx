@@ -35,8 +35,18 @@ export function UserInfo({
       </Avatar>
 
       <div className="grid flex-1 text-left text-sm leading-tight">
-        <span className="truncate font-medium">{name}</span>
-        <span className="truncate text-xs text-muted-foreground">{email}</span>
+        <span
+          className="truncate font-medium"
+          data-slot="user-name"
+        >
+          {name}
+        </span>
+        <span
+          className="truncate text-xs text-muted-foreground"
+          data-slot="user-email"
+        >
+          {email}
+        </span>
       </div>
 
       {dots && <EllipsisVertical className="ml-auto size-4" />}

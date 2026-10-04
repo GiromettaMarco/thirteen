@@ -155,6 +155,7 @@ export default {
         h1: 'Create an account',
         loginCTA: 'Already have an account? <a>Log in</a>',
         p: 'Enter your details below to create your account',
+        rules: 'Password rules',
         submit: 'Create account',
         title: 'Register'
       },
