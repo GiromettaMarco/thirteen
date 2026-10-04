@@ -11,69 +11,6 @@ import type {
   TaskPriority
 } from '@/types'
 
-/**
- * Default values for a table view.
- */
-export const viewDefaults = {
-  filters: [],
-  pagination: { pageIndex: 0, pageSize: 10 },
-  sorting: [],
-  visibility: {}
-}
-
-/**
- * Fake network delay.
- *
- * @param ms Delay in milliseconds
- * @returns Promise resolved after ms
- */
-export function delay(ms: number = 300) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
-
-/**
- * Additional supported locales for date-fns.
- */
-export const dateLocales: {
-  [key: string]: DateFnsLocale
-} = { it }
-
-/**
- * Wrapper for the date-fns format function, with short codes for locale.
- *
- * @see https://date-fns.org/docs/format
- *
- * @param date The date to format
- * @param locale Locale short code (between the supported ones)
- * @param formatStr Format pattern
- * @returns The formatted date string
- */
-export function format(
-  date: string | number | Date,
-  locale: string,
-  formatStr: string = 'PPP'
-) {
-  return originalFormat(date, formatStr, {
-    locale: dateLocales[locale]
-  })
-}
-
-/**
- * Filler for functions declared in a react context provider.
- */
-export function missingFn() {
-  console.error('This function must be used within its own context provider.')
-}
-
-/**
- * Format date for database insert.
- *
- * @param date A date object
- */
-export function formatDateForDB(date: Date) {
-  return `${date.getFullYear()}-${(date.getMonth() + 1 + '').padStart(2, '0')}-${(date.getDate() + '').padStart(2, '0')}`
-}
-
 //#region Type Guards
 export function isObject(input: unknown): input is object {
   return typeof input === 'object' && input !== null && !Array.isArray(input)
@@ -124,19 +61,78 @@ export function getSSRProps(input: unknown): SSRProps {
   return ssrProps
 }
 
-//#region Sorting
-export function sortBoolean(a: boolean, b: boolean) {
-  return a === b ? 0 : a === true ? 1 : -1
+//#region Cookie
+/**
+ * Set a cookie client-side with default values.
+ *
+ * @param name The cookie name
+ * @param value The cookie value
+ * @param days Days before expiring (default: 365)
+ * @returns The saved cookie string
+ */
+export function setClientCookie(
+  name: string,
+  value: string | number | boolean,
+  days = 365
+): string {
+  const maxAge = days * 24 * 60 * 60
+
+  return (document.cookie = `${name}=${value};path=/;max-age=${maxAge};SameSite=Lax`)
 }
 
-export function sortName(a = '', b = '') {
-  return a > b ? 1 : a < b ? -1 : 0
+/**
+ * Delete a client-side cookie.
+ *
+ * @param name
+ * @returns The string used to delete the cookie
+ */
+export function deleteClientCookie(name: string): string {
+  return setClientCookie(name, '', 0)
+}
+
+//#region Tables
+/**
+ * Default values for a table view.
+ */
+export const viewDefaults = {
+  filters: [],
+  pagination: { pageIndex: 0, pageSize: 10 },
+  sorting: [],
+  visibility: {}
 }
 
 export function sortPriority(priorityA: TaskPriority, priorityB: TaskPriority) {
   const a = priorityA === 'high' ? 3 : priorityA === 'medium' ? 2 : 1
   const b = priorityB === 'high' ? 3 : priorityB === 'medium' ? 2 : 1
   return a > b ? 1 : a < b ? -1 : 0
+}
+
+//#region Date
+/**
+ * Additional supported locales for date-fns.
+ */
+export const dateLocales: {
+  [key: string]: DateFnsLocale
+} = { it }
+
+/**
+ * Wrapper for the date-fns format function, with short codes for locale.
+ *
+ * @see https://date-fns.org/docs/format
+ *
+ * @param date The date to format
+ * @param locale Locale short code (between the supported ones)
+ * @param formatStr Format pattern
+ * @returns The formatted date string
+ */
+export function format(
+  date: string | number | Date,
+  locale: string,
+  formatStr: string = 'PPP'
+) {
+  return originalFormat(date, formatStr, {
+    locale: dateLocales[locale]
+  })
 }
 
 //#region Checkbox
@@ -150,4 +146,12 @@ export function getCheckedState(checked: CheckedState | undefined) {
     : checked
       ? 'checked'
       : 'unchecked'
+}
+
+//#region Misc
+/**
+ * Filler for functions declared in a react context provider.
+ */
+export function missingFn() {
+  console.error('This function must be used within its own context provider.')
 }

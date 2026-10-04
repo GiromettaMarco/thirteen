@@ -16,7 +16,7 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 import { COOKIE_LOCALE } from '@/config'
-import { setClientCookie } from '@/lib/cookie'
+import { setClientCookie } from '@/lib/utils'
 import type { Locale } from '@/types'
 
 async function changeLocale(i18n: i18n, locale: Locale) {
