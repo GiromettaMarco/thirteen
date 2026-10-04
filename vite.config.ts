@@ -123,7 +123,6 @@ export default defineConfig({
           ],
           extension: ['.ts', '.tsx'],
           forceBuildInstrument: true,
-          include: 'resources/js/*',
           requireEnv: false
         })
       : undefined,
@@ -177,7 +176,8 @@ export default defineConfig({
       },
       dev: {
         cache: false,
-        command: 'php artisan dev'
+        command:
+          'vpx concurrently -c "#93c5fd,#c4b5fd,#fdba74" "php artisan serve" "php artisan queue:listen --tries=1" "vp dev" --names=\'server,queue,vite\''
       },
       'dev:ssr': {
         cache: false,
@@ -188,22 +188,21 @@ export default defineConfig({
       e2e: {
         cache: {
           input: ['cypress/**', 'public/**', 'vite.config.ts'],
-          output: [
-            '.nyc_output/**',
-            'docs/.vscode/ts-coverage.svg',
-            'reports/cypress/**'
-          ]
+          output: ['docs/.vscode/ts-coverage.svg', 'reports/cypress/**']
         },
         command: [
           'start-server-and-test "composer run e2e" 8000 "cypress run --e2e --browser chrome"',
+          'rimraf .nyc_output',
           './bin/ts-coverage'
         ],
         dependsOn: ['build:e2e']
       },
       'e2e:ui': {
         cache: false,
-        command:
+        command: [
           'start-server-and-test "composer run e2e" 8000 "cypress open --e2e --browser chrome"',
+          'rimraf .nyc_output'
+        ],
         dependsOn: ['build:e2e']
       },
       'php:check': {
