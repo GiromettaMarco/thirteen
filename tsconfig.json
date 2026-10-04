@@ -24,7 +24,7 @@
     "noImplicitAny": true,
 
     /* Completeness */
-    "types": ["cypress", "node"],
+    "types": ["cypress", "cypress-real-events", "node"],
     "skipLibCheck": false,
     "paths": {
       "@/*": ["./resources/js/*"]

@@ -31,5 +31,10 @@ describe('Settings page', () => {
     cy.get('#appearance-dark').click()
 
     cy.get('html[class=dark]').should('exist')
+
+    cy.get('#select-appearance').click()
+    cy.get('#appearance-light').click()
+
+    cy.get('html[class=dark]').should('not.exist')
   })
 })

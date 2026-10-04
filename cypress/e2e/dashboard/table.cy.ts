@@ -23,7 +23,7 @@ describe('Dashboard index page', () => {
     cy.viewport(1920, 1080)
 
     // Initial state
-    cy.contains('Priority').should('exist')
+    cy.contains('Date created').should('exist')
 
     // Filters
     cy.get('button[data-action="filter-label"]').click()
@@ -31,12 +31,12 @@ describe('Dashboard index page', () => {
 
     // Columns visibility
     cy.get('button[data-slot="columns-visibility"]').click()
-    cy.get('div[data-action="toggle-priority-visibility"]')
+    cy.get('div[data-action="toggle-created_at-visibility"]')
       .click()
       .type('{esc}')
 
     // Sorting
-    cy.get('button[data-action="sort-name"]').click()
+    cy.get('button[data-action="sort-priority"]').click()
     cy.get('button[data-action="sort-ascending"]').click()
 
     // Pagination
@@ -45,6 +45,6 @@ describe('Dashboard index page', () => {
 
     // Output
     cy.reload()
-    cy.contains('Priority').should('not.exist')
+    cy.contains('Date created').should('not.exist')
   })
 })

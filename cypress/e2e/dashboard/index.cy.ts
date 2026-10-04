@@ -22,10 +22,49 @@ describe('Dashboard index page', () => {
   it('may open the mobile menu', function () {
     cy.viewport('iphone-6')
 
+    cy.get('#open-user-menu').should('not.exist')
+
     cy.get('#toggle-sidebar').click()
 
-    cy.get('#open-user-menu').should('contain', 'Alice Admin')
+    cy.get('#open-user-menu').should('be.visible')
   })
+
+  it('may save the sidebar state', function () {
+    // Default (open)
+    cy.get('#open-user-menu *[data-slot="user-name"]').should('be.visible')
+
+    // Closed
+    cy.get('#toggle-sidebar').click()
+    cy.get('#open-user-menu *[data-slot="user-name"]').should('not.be.visible')
+    cy.reload()
+    cy.get('#open-user-menu *[data-slot="user-name"]').should('not.be.visible')
+
+    // Open
+    cy.get('#toggle-sidebar').click()
+    cy.get('#open-user-menu *[data-slot="user-name"]').should('be.visible')
+    cy.reload()
+    cy.get('#open-user-menu *[data-slot="user-name"]').should('be.visible')
+  })
+
+  it(
+    'may control the sidebar with a keyboard shortcut',
+    // @NOTE Real events are supported only by chrome.
+    { browser: 'chrome' },
+    function () {
+      // Default (open)
+      cy.get('#open-user-menu *[data-slot="user-name"]').should('be.visible')
+
+      // Closed
+      cy.get('#main').realPress(['Control', 'b'])
+      cy.get('#open-user-menu *[data-slot="user-name"]').should(
+        'not.be.visible'
+      )
+
+      // Open
+      cy.get('#main').realPress(['Control', 'b'])
+      cy.get('#open-user-menu *[data-slot="user-name"]').should('be.visible')
+    }
+  )
 
   it('may reach the projects page', function () {
     cy.get('#to-projects').click()

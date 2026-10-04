@@ -13,6 +13,8 @@ describe('Team member show page', () => {
     ).click()
 
     cy.get('#permission-admin').should('exist')
+
+    cy.get('.recharts-surface').first().click('center')
   })
 
   it('may change a team member permissions', function () {

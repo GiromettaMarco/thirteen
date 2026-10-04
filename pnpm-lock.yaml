@@ -291,6 +291,9 @@ importers:
       cypress:
         specifier: ^16.1.0
         version: 16.1.0
+      cypress-real-events:
+        specifier: ^1.15.1
+        version: 1.15.1(cypress@16.1.0)
       eslint-plugin-perfectionist:
         specifier: ^5.11.1
         version: 5.11.1(@typescript/typescript6@6.0.2)(eslint@10.11.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)
@@ -3578,6 +3581,11 @@ packages:
 
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
+
+  cypress-real-events@1.15.1:
+    resolution: {integrity: sha512-BiTyqYcNHiIFWfSLRn3H+TgTvpnTGOKfl4Brz51yeSGKMxBbD60wtRQw31nII00yQ67Xg3C18mU8lqUxDN3OUA==}
+    peerDependencies:
+      cypress: ^4.x || ^5.x || ^6.x || ^7.x || ^8.x || ^9.x || ^10.x || ^11.x || ^12.x || ^13.x || ^14.x || ^15.x || ^16.x
 
   cypress@16.1.0:
     resolution: {integrity: sha512-t8suSUVzQyHI7v6KhhA07M9ChftdfqVZNLCekhguIb+2f0fCmI8WAih5L0oGH7K6slapNduGy5zpJ+17LmSXkQ==}
@@ -8752,6 +8760,10 @@ snapshots:
       which: 2.0.2
 
   csstype@3.2.3: {}
+
+  cypress-real-events@1.15.1(cypress@16.1.0):
+    dependencies:
+      cypress: 16.1.0
 
   cypress@16.1.0:
     dependencies:
