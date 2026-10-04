@@ -36,6 +36,7 @@ Laravel 13 boilerplate with:
 
 | Command            | Purpose                                         |
 | ------------------ | ----------------------------------------------- |
+| vpr                | Task selection                                  |
 | vpr setup          | Install the application                         |
 | vpr dev            | Start the development server                    |
 | vpr dev:ssr        | Start the development server with SSR           |
