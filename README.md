@@ -47,9 +47,8 @@ Laravel 13 boilerplate with:
 | vpr e2e:ui         | Start the Cypress UI for E2E tests              |
 | vpr php:test       | Run PHP tests with cache enabled                |
 | vpr php:test-force | Run all PHP tests and generate a coverage badge |
-| vpr php:fmt        | Format PHP code                                 |
-| vpr php:lint       | Run PHP static analysis                         |
-| vpr php:check      | Format php code and run static analysis         |
+| vpr check          | Check code format, linting and typing           |
+| vpr check:fix      | Check code and run autofixes                    |
 
 ## Visual Studio Code
 

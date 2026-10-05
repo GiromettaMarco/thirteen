@@ -31,11 +31,8 @@ jobs:
       - name: Generate Wayfinder Routes
         run: php artisan wayfinder:generate
 
-      - name: Check Backend
-        run: vpr php:check
-
-      - name: Check Frontend
-        run: vp check --fix
+      - name: Check Code
+        run: vpr check:fix
 
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7

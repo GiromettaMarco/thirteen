@@ -174,6 +174,20 @@ export default defineConfig({
         command: 'vp build --ssr',
         dependsOn: ['build']
       },
+      check: {
+        command: [
+          'vp check',
+          './vendor/bin/pint --parallel --test',
+          './vendor/bin/phpstan analyse'
+        ]
+      },
+      'check:fix': {
+        command: [
+          'vp check --fix',
+          './vendor/bin/pint --parallel',
+          './vendor/bin/phpstan analyse'
+        ]
+      },
       dev: {
         cache: false,
         command:
@@ -204,16 +218,6 @@ export default defineConfig({
           'rimraf .nyc_output'
         ],
         dependsOn: ['build:e2e']
-      },
-      'php:check': {
-        command: ['vpr php:fmt', 'vpr php:lint']
-      },
-      'php:fmt': {
-        command: './vendor/bin/pint --parallel'
-      },
-      'php:lint': {
-        cache: false,
-        command: './vendor/bin/phpstan analyse'
       },
       'php:test': {
         cache: false,
