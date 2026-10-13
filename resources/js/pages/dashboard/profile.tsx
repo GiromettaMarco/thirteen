@@ -150,7 +150,9 @@ export default function Profile({
   // i18n
   const { i18n, t } = useTranslation()
 
-  const joined = differenceInCalendarDays(new Date(), profile.created_at)
+  const [today] = useState(() => new Date())
+
+  const joined = differenceInCalendarDays(today, profile.created_at)
 
   return (
     <DashboardLayout

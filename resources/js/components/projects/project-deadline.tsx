@@ -1,5 +1,6 @@
 import { cn } from '@gmcode/react-ui'
 import { differenceInCalendarDays } from 'date-fns'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { format } from '@/lib/utils'
 
@@ -12,6 +13,8 @@ export function ProjectDeadline({
 }) {
   // i18n
   const { i18n, t } = useTranslation()
+
+  const [today] = useState(() => new Date())
 
   // Nothing to print
   if (!deadline) {
@@ -28,7 +31,7 @@ export function ProjectDeadline({
   }
 
   const deadlineCountdown = parsedDeadline
-    ? differenceInCalendarDays(parsedDeadline, new Date())
+    ? differenceInCalendarDays(parsedDeadline, today)
     : 0
 
   return (

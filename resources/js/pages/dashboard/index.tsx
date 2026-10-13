@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react'
 import { differenceInCalendarDays } from 'date-fns'
 import { OctagonX, SquareCheckBig, TriangleAlert } from 'lucide-react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AssignedTasksTable } from '@/components/dashboard/assigned-tasks-table'
 import { ProjectDeadline } from '@/components/projects/project-deadline'
@@ -39,10 +40,12 @@ function DeadlineCard({
   // i18n
   const { i18n } = useTranslation()
 
+  const [today] = useState(() => new Date())
+
   const parsedDeadline = new Date(deadline ?? '')
 
   const deadlineCountdown = parsedDeadline
-    ? differenceInCalendarDays(parsedDeadline, new Date())
+    ? differenceInCalendarDays(parsedDeadline, today)
     : 0
 
   return (
