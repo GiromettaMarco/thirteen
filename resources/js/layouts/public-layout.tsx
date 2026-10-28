@@ -132,24 +132,32 @@ function PublicMenu() {
             <ul className="grid w-72 gap-4">
               <li>
                 <NavigationMenuLink asChild>
-                  <Link href="https://github.com/GiromettaMarco/thirteen/actions/workflows/tests.yml">
+                  <a
+                    href="https://github.com/GiromettaMarco/thirteen/actions/workflows/tests.yml"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
                     <div className="font-medium">
                       {t(($) => $.layouts.public.menu.http.title)}
                     </div>
                     <div className="text-muted-foreground">
                       {t(($) => $.layouts.public.menu.http.description)}
                     </div>
-                  </Link>
+                  </a>
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
-                  <Link href="#">
+                  <a
+                    href="https://github.com/GiromettaMarco/thirteen/tree/master/cypress"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
                     <div className="font-medium">
                       {t(($) => $.layouts.public.menu.e2e.title)}
                     </div>
                     <div className="text-muted-foreground">
                       {t(($) => $.layouts.public.menu.e2e.description)}
                     </div>
-                  </Link>
+                  </a>
                 </NavigationMenuLink>
               </li>
             </ul>
